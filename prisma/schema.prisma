@@ -1,0 +1,401 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+// ─── USERS & AUTH ────────────────────────────────────────────────────────────
+
+model User {
+  id        String   @id @default(cuid())
+  name      String
+  email     String   @unique
+  password  String
+  role      String   @default("RECEPTION") // ADMIN | RECEPTION | INSTRUCTOR
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  instructor Instructor?
+  auditLogs  AuditLog[]
+
+  @@index([email])
+}
+
+// ─── INSTRUCTOR ──────────────────────────────────────────────────────────────
+
+model Instructor {
+  id                 String  @id @default(cuid())
+  userId             String  @unique
+  user               User    @relation(fields: [userId], references: [id])
+  phone              String?
+  paymentModel       String  @default("HOURLY_RATE") // HOURLY_RATE | REVENUE_SHARE | SALARY_PLUS_BONUS
+  hourlyRate         Float?
+  hourlyRateCurrency String  @default("EUR")
+  revenueShare       Float?
+  monthlySalary      Float?
+  salaryCurrency     String  @default("EUR")
+  color              String  @default("#3B82F6")
+  isActive           Boolean @default(true)
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+
+  reservations Reservation[]
+  lessons      Lesson[]
+  earnings     InstructorEarning[]
+  payouts      InstructorPayout[]
+  hizmetler    Hizmet[]
+
+  @@index([userId])
+}
+
+// ─── STUDENT ─────────────────────────────────────────────────────────────────
+
+model Student {
+  id               String    @id @default(cuid())
+  firstName        String
+  lastName         String
+  email            String?
+  phone            String?
+  nationality      String?
+  language         String?
+  emergencyContact String?
+  emergencyPhone   String?
+  skillLevel       String    @default("BEGINNER") // BEGINNER | INTERMEDIATE | ADVANCED | INDEPENDENT
+  notes            String?
+  waiverSigned     Boolean   @default(false)
+  waiverSignedAt   DateTime?
+  isActive         Boolean   @default(true)
+  createdAt        DateTime  @default(now())
+  updatedAt        DateTime  @updatedAt
+
+  packagePurchases PackagePurchase[]
+  reservations     Reservation[]
+  lessons          Lesson[]
+  payments         Payment[]
+  hizmetler        Hizmet[]
+
+  @@index([lastName, firstName])
+  @@index([email])
+}
+
+// ─── LESSON PACKAGES ─────────────────────────────────────────────────────────
+
+model LessonPackage {
+  id           String   @id @default(cuid())
+  name         String
+  description  String?
+  lessonType   String   // PRIVATE | SEMI_PRIVATE | GROUP | EQUIPMENT_RENTAL | SUPERVISION
+  totalHours   Float
+  price        Float
+  currency     String   @default("EUR")
+  validityDays Int?
+  isActive     Boolean  @default(true)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  purchases PackagePurchase[]
+
+  @@index([isActive])
+}
+
+model PackagePurchase {
+  id             String        @id @default(cuid())
+  studentId      String
+  student        Student       @relation(fields: [studentId], references: [id])
+  packageId      String
+  package        LessonPackage @relation(fields: [packageId], references: [id])
+  totalHours     Float
+  remainingHours Float
+  purchasePrice  Float
+  currency       String        @default("EUR")
+  purchasedAt    DateTime      @default(now())
+  expiresAt      DateTime?
+  isActive       Boolean       @default(true)
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
+
+  payments Payment[]
+  lessons  Lesson[]
+
+  @@index([studentId])
+  @@index([packageId])
+}
+
+// ─── RESERVATIONS ────────────────────────────────────────────────────────────
+
+model Reservation {
+  id           String   @id @default(cuid())
+  studentId    String
+  student      Student  @relation(fields: [studentId], references: [id])
+  instructorId String
+  instructor   Instructor @relation(fields: [instructorId], references: [id])
+  lessonType   String   // PRIVATE | SEMI_PRIVATE | GROUP | EQUIPMENT_RENTAL | SUPERVISION
+  startTime    DateTime
+  endTime      DateTime
+  plannedHours Float
+  status       String   @default("PLANNED") // PLANNED | CHECKED_IN | COMPLETED | CANCELLED | NO_SHOW | WIND_CANCELLED
+  notes        String?
+  cancelReason String?
+  createdById  String?
+  isActive     Boolean  @default(true)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  lesson Lesson?
+
+  @@index([instructorId, startTime])
+  @@index([studentId])
+  @@index([startTime])
+  @@index([status])
+}
+
+// ─── LESSONS (COMPLETED/IN-PROGRESS) ─────────────────────────────────────────
+
+model Lesson {
+  id            String    @id @default(cuid())
+  reservationId String    @unique
+  reservation   Reservation @relation(fields: [reservationId], references: [id])
+  studentId     String
+  student       Student   @relation(fields: [studentId], references: [id])
+  instructorId  String
+  instructor    Instructor @relation(fields: [instructorId], references: [id])
+  purchaseId    String?
+  purchase      PackagePurchase? @relation(fields: [purchaseId], references: [id])
+
+  actualHours      Float?
+  checkInTime      DateTime
+  checkOutTime     DateTime?
+  kiteSize         String?
+  boardType        String?
+  harness          Boolean  @default(false)
+  wetsuit          Boolean  @default(false)
+  equipmentNotes   String?
+  instructorNotes  String?
+
+  instructorEarning InstructorEarning?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([instructorId])
+  @@index([studentId])
+  @@index([checkInTime])
+}
+
+// ─── PAYMENTS ────────────────────────────────────────────────────────────────
+
+model Payment {
+  id           String   @id @default(cuid())
+  studentId    String?
+  student      Student? @relation(fields: [studentId], references: [id])
+  purchaseId   String?
+  purchase     PackagePurchase? @relation(fields: [purchaseId], references: [id])
+  amount       Float
+  currency     String   @default("EUR")
+  method       String   // CASH | BANK_TRANSFER | CREDIT_CARD | OTHER
+  direction    String   @default("INCOMING") // INCOMING | OUTGOING
+  description  String?
+  recordedById String?
+  recordedAt   DateTime @default(now())
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  cashRegisterEntry CashRegisterEntry?
+
+  @@index([studentId])
+  @@index([recordedAt])
+}
+
+// ─── EXPENSES ────────────────────────────────────────────────────────────────
+
+model Expense {
+  id           String   @id @default(cuid())
+  category     String   // RENT | EQUIPMENT_PURCHASE | EQUIPMENT_REPAIR | FUEL | STAFF | FOOD | MARKETING | UTILITIES | INSURANCE | OTHER
+  amount       Float
+  currency     String   @default("EUR")
+  method       String   // CASH | BANK_TRANSFER | CREDIT_CARD | OTHER
+  description  String
+  receiptUrl   String?
+  expenseDate  DateTime
+  recordedById String?
+  isActive     Boolean  @default(true)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  cashRegisterEntry CashRegisterEntry?
+
+  @@index([expenseDate])
+  @@index([category])
+}
+
+// ─── INSTRUCTOR EARNINGS ─────────────────────────────────────────────────────
+
+model InstructorEarning {
+  id           String     @id @default(cuid())
+  instructorId String
+  instructor   Instructor @relation(fields: [instructorId], references: [id])
+  lessonId     String     @unique
+  lesson       Lesson     @relation(fields: [lessonId], references: [id])
+  amount       Float
+  currency     String     @default("EUR")
+  hours        Float
+  isPaid       Boolean    @default(false)
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+
+  @@index([instructorId])
+  @@index([isPaid])
+}
+
+model InstructorPayout {
+  id           String     @id @default(cuid())
+  instructorId String
+  instructor   Instructor @relation(fields: [instructorId], references: [id])
+  amount       Float
+  currency     String     @default("EUR")
+  method       String
+  periodStart  DateTime?
+  periodEnd    DateTime?
+  notes        String?
+  paidAt       DateTime   @default(now())
+  recordedById String?
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+
+  @@index([instructorId])
+}
+
+// ─── CASH REGISTER ───────────────────────────────────────────────────────────
+
+model CashAccount {
+  id          String   @id @default(cuid())
+  name        String
+  accountType String   @default("CASH") // CASH | BANK
+  currency    String   @default("EUR")
+  balance     Float    @default(0)
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  entries CashRegisterEntry[]
+
+  @@index([accountType, currency])
+}
+
+model CashRegisterEntry {
+  id           String      @id @default(cuid())
+  accountId    String
+  account      CashAccount @relation(fields: [accountId], references: [id])
+  entryType    String      // INCOME | EXPENSE | TRANSFER
+  amount       Float
+  currency     String      @default("EUR")
+  description  String
+  paymentId    String?     @unique
+  payment      Payment?    @relation(fields: [paymentId], references: [id])
+  expenseId    String?     @unique
+  expense      Expense?    @relation(fields: [expenseId], references: [id])
+  recordedById String?
+  recordedAt   DateTime    @default(now())
+  createdAt    DateTime    @default(now())
+
+  @@index([accountId])
+  @@index([recordedAt])
+}
+
+// ─── EQUIPMENT ───────────────────────────────────────────────────────────────
+
+model Equipment {
+  id        String   @id @default(cuid())
+  type      String   // KITE | BOARD | HARNESS | WETSUIT | BAR | OTHER
+  name      String
+  size      String?
+  brand     String?
+  status    String   @default("AVAILABLE") // AVAILABLE | IN_USE | REPAIR | RETIRED
+  notes     String?
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([type, status])
+}
+
+// ─── HİZMETLER ───────────────────────────────────────────────────────────────
+
+model HizmetSablonu {
+  id           String   @id @default(cuid())
+  category     String   // EGITIM | KIRALAMA
+  name         String
+  defaultPrice Float    @default(0)
+  halfDayPrice Float?
+  fullDayPrice Float?
+  currency     String   @default("EUR")
+  isActive     Boolean  @default(true)
+  sortOrder    Int      @default(0)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  @@index([category])
+}
+
+model Hizmet {
+  id                     String    @id @default(cuid())
+  category               String    // EGITIM | KIRALAMA | URUN
+  sablonId               String?
+  studentId              String?
+  student                Student?  @relation(fields: [studentId], references: [id])
+  instructorId           String?
+  instructor             Instructor? @relation(fields: [instructorId], references: [id])
+  title                  String
+  description            String?
+  amount                 Float     @default(0)
+  currency               String    @default("EUR")
+  paymentMethod          String?
+  instructorEarning      Float?
+  status                 String    @default("BEKLIYOR") // BEKLIYOR | DEVAM | TAMAMLANDI | IPTAL
+  scheduledAt            DateTime?
+  checkedInAt            DateTime?
+  checkedOutAt           DateTime?
+  notes                  String?
+  createdById            String?
+  isActive               Boolean   @default(true)
+  createdAt              DateTime  @default(now())
+  updatedAt              DateTime  @updatedAt
+
+  @@index([category])
+  @@index([studentId])
+  @@index([instructorId])
+  @@index([status])
+  @@index([scheduledAt])
+}
+
+// ─── AUDIT LOG ───────────────────────────────────────────────────────────────
+
+model AuditLog {
+  id        String   @id @default(cuid())
+  userId    String?
+  user      User?    @relation(fields: [userId], references: [id])
+  action    String
+  entity    String
+  entityId  String?
+  oldValues String?
+  newValues String?
+  ipAddress String?
+  createdAt DateTime @default(now())
+
+  @@index([entity, entityId])
+  @@index([userId])
+  @@index([createdAt])
+}
+
+// ─── SETTINGS ────────────────────────────────────────────────────────────────
+
+model Setting {
+  id        String   @id @default(cuid())
+  key       String   @unique
+  value     String
+  updatedAt DateTime @updatedAt
+}

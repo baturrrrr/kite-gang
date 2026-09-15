@@ -68,7 +68,19 @@ export default async function BugunPage() {
         ...(user.role === "INSTRUCTOR" ? { instructor: { userId: user.userId } } : {}),
       },
       include: {
-        student: { select: { firstName: true, lastName: true } },
+        student: {
+          select: {
+            firstName: true,
+            lastName: true,
+            // Check-in ve no-show, saati kalmış en eski paketi kullanır (bkz. actions/reservations.ts)
+            packagePurchases: {
+              where: { isActive: true, remainingHours: { gt: 0 } },
+              select: { id: true },
+              orderBy: { purchasedAt: "asc" },
+              take: 1,
+            },
+          },
+        },
         instructor: { include: { user: { select: { name: true } } } },
         lesson: true,
       },
@@ -197,7 +209,7 @@ export default async function BugunPage() {
                         {h.scheduledAt ? format(new Date(h.scheduledAt), "HH:mm") : "—"}
                       </div>
                       <div className="min-w-0">
-                        {h.studentId ? (
+                        {h.studentId && user.role !== "INSTRUCTOR" ? (
                           <Link
                             href={`/dashboard/musteriler/${h.studentId}`}
                             className="font-semibold text-gray-900 hover:text-blue-600"
@@ -205,7 +217,9 @@ export default async function BugunPage() {
                             {h.student?.firstName} {h.student?.lastName}
                           </Link>
                         ) : (
-                          <span className="font-semibold text-gray-900">Müşteri belirtilmedi</span>
+                          <span className="font-semibold text-gray-900">
+                            {h.student ? `${h.student.firstName} ${h.student.lastName}` : "Müşteri belirtilmedi"}
+                          </span>
                         )}
                         <p className="text-xs text-gray-500 truncate">
                           {h.title}
@@ -214,7 +228,9 @@ export default async function BugunPage() {
                       </div>
                     </div>
                     <div className="flex items-center gap-2 flex-shrink-0">
-                      <span className="text-sm font-semibold text-gray-700">{formatMoney(h.amount, h.currency)}</span>
+                      {user.role !== "INSTRUCTOR" && (
+                        <span className="text-sm font-semibold text-gray-700">{formatMoney(h.amount, h.currency)}</span>
+                      )}
                       <Badge className={HIZMET_STATUS_BADGE[h.status]}>{HIZMET_STATUS_LABEL[h.status]}</Badge>
                       {user.role !== "INSTRUCTOR" && h.studentId && (
                         <>
@@ -278,7 +294,11 @@ export default async function BugunPage() {
                   </p>
                   {res.status === "PLANNED" && (
                     <div className="mt-3">
-                      <CheckInButton reservationId={res.id} plannedHours={res.plannedHours} />
+                      <CheckInButton
+                        reservationId={res.id}
+                        purchaseId={res.student.packagePurchases[0]?.id}
+                        plannedHours={res.plannedHours}
+                      />
                     </div>
                   )}
                   {res.status === "CHECKED_IN" && res.lesson && (

@@ -118,6 +118,8 @@ export default async function ReservationsPage({
   const uniqueInstructors = new Set(reservations.map((r) => r.instructorId).filter(Boolean)).size;
 
   const isSingleDay = fromStr === toStr;
+  // Paket fiyatları okulun geliridir; eğitmen yalnızca kendi hakedişini Performansım'da görür.
+  const showPrices = user.role !== "INSTRUCTOR";
 
   return (
     <div className="space-y-6">
@@ -279,13 +281,14 @@ export default async function ReservationsPage({
                         <span className={`text-xs px-2.5 py-1 rounded-full border font-medium ${status.cls}`}>
                           {status.label}
                         </span>
-                        {price ? (
-                          <span className="text-base font-bold text-gray-900">
-                            {formatTRY(price.amount, price.currency, rates)}
-                          </span>
-                        ) : (
-                          <span className="text-sm text-gray-400">—</span>
-                        )}
+                        {showPrices &&
+                          (price ? (
+                            <span className="text-base font-bold text-gray-900">
+                              {formatTRY(price.amount, price.currency, rates)}
+                            </span>
+                          ) : (
+                            <span className="text-sm text-gray-400">—</span>
+                          ))}
                       </div>
                     </div>
                   </div>
@@ -297,7 +300,7 @@ export default async function ReservationsPage({
       ))}
 
       {/* Toplam gelir (aralık görünümünde) */}
-      {!isSingleDay && totalRevenue > 0 && (
+      {showPrices && !isSingleDay && totalRevenue > 0 && (
         <div className="bg-gray-900 text-white rounded-xl p-4 flex items-center justify-between">
           <span className="text-sm font-medium opacity-70">Toplam Tahminî Gelir</span>
           <span className="text-xl font-bold">{formatTRY(totalRevenue, "TRY", rates)}</span>

@@ -15,14 +15,8 @@ import { getExchangeRates } from "@/lib/exchange-rates";
 export default async function InstructorsPage() {
   const user = await requireAuth();
 
-  // INSTRUCTOR kendi profil sayfasına yönlendirilir, listeye erişemez
-  if (user.role === "INSTRUCTOR") {
-    if (user.instructorId) {
-      redirect(`/dashboard/egitmenler/${user.instructorId}`);
-    } else {
-      redirect("/dashboard");
-    }
-  }
+  // INSTRUCTOR listeye erişemez; kendi verisini eğitmen portalında görür
+  if (user.role === "INSTRUCTOR") redirect("/dashboard/performansim");
 
   const [instructors, egitimSablonlar, students] = await Promise.all([
     prisma.instructor.findMany({

@@ -1,4 +1,4 @@
-import { requireAuth } from "@/lib/auth";
+import { requireAdminOrReception } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -10,7 +10,7 @@ import { formatTRY } from "@/lib/currency";
 import { getExchangeRates } from "@/lib/exchange-rates";
 
 export default async function PaketlerPage() {
-  const user = await requireAuth();
+  const user = await requireAdminOrReception();
 
   const [packages, rates] = await Promise.all([
     prisma.lessonPackage.findMany({

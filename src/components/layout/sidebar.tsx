@@ -20,6 +20,7 @@ import {
   ConciergeBell,
   BarChart3,
   ShoppingBag,
+  Waves,
 } from "lucide-react";
 import { logout } from "@/app/actions/auth";
 import { useState } from "react";
@@ -44,6 +45,12 @@ const navGroups: NavGroup[] = [
         href: "/dashboard",
         icon: <LayoutDashboard className="w-[17px] h-[17px]" />,
         roles: ["ADMIN", "RECEPTION", "INSTRUCTOR"],
+      },
+      {
+        label: "Performansım",
+        href: "/dashboard/performansim",
+        icon: <TrendingUp className="w-[17px] h-[17px]" />,
+        roles: ["INSTRUCTOR"],
       },
     ],
   },
@@ -84,6 +91,12 @@ const navGroups: NavGroup[] = [
         href: "/dashboard/takvim",
         icon: <Calendar className="w-[17px] h-[17px]" />,
         roles: ["ADMIN", "RECEPTION"],
+      },
+      {
+        label: "Bugünkü Derslerim",
+        href: "/dashboard/operasyon",
+        icon: <Waves className="w-[17px] h-[17px]" />,
+        roles: ["INSTRUCTOR"],
       },
       {
         label: "Rezervasyonlar",

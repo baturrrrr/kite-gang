@@ -1,6 +1,6 @@
 import { requireAuth } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -13,8 +13,9 @@ import { InstructorEditForm } from "./edit-form";
 import { PayoutForm } from "./payout-form";
 import { AddDersDialog } from "../add-ders-dialog";
 import { InstructorExportButton } from "./export-button";
-import { toTRY, formatTRY } from "@/lib/currency";
+import { formatTRY } from "@/lib/currency";
 import { getExchangeRates } from "@/lib/exchange-rates";
+import { getInstructorBalance } from "@/lib/instructor-performance-data";
 
 export default async function InstructorDetailPage({
   params,
@@ -24,10 +25,8 @@ export default async function InstructorDetailPage({
   const user = await requireAuth();
   const { id } = await params;
 
-  // Instructors can only see their own page
-  if (user.role === "INSTRUCTOR" && user.instructorId !== id) {
-    notFound();
-  }
+  // Bu sayfa tüm müşteri listesini yükler ve ders ekleme sunar; eğitmen kendi verisini portalda görür
+  if (user.role === "INSTRUCTOR") redirect("/dashboard/performansim");
 
   const [instructor, egitimSablonlar, students, cashAccounts] = await Promise.all([
     prisma.instructor.findUnique({
@@ -83,28 +82,9 @@ export default async function InstructorDetailPage({
 
   const totalHours = instructor.lessons.reduce((sum, l) => sum + (l.actualHours ?? 0), 0);
 
-  // Farklı para birimlerindeki hakedişler TL'ye çevrilip tek bakiyede toplanır.
-  let earningsPaid = 0;
-  let earningsPending = 0;
-  for (const e of instructor.earnings) {
-    const tryAmount = toTRY(e.amount, e.currency, rates);
-    if (e.isPaid) earningsPaid += tryAmount;
-    else earningsPending += tryAmount;
-  }
-  const earningsTotal = earningsPaid + earningsPending;
-
-  // Hizmet bazlı hakedişler
-  let hizmetEarned = 0;
-  let hizmetSessions = 0;
-  for (const h of instructor.hizmetler) {
-    if (h.status === "TAMAMLANDI" && h.instructorEarning) {
-      hizmetEarned += toTRY(h.instructorEarning, h.currency, rates);
-      hizmetSessions += 1;
-    }
-  }
-
-  const totalPayouts = instructor.payouts.reduce((sum, p) => sum + toTRY(p.amount, p.currency, rates), 0);
-  const hizmetNet = hizmetEarned - totalPayouts;
+  // Eğitmen portalıyla aynı hesap. Önceden ödeme hem ders hakedişini "ödendi" yapıyor
+  // hem de hizmet hakedişinden ayrıca düşülüyordu; bekleyen bakiye eksik görünüyordu.
+  const balance = await getInstructorBalance(instructor.id, rates);
 
   const payoutCurrencies = [...new Set([
     ...instructor.earnings.map((e) => e.currency),
@@ -152,68 +132,44 @@ export default async function InstructorDetailPage({
         </div>
       </div>
 
-      {/* Bakiye Özeti */}
+      {/* Bakiye Özeti — eğitmen portalındaki "Hakediş Bakiyem" ile aynı rakamlar */}
       <Card>
         <CardContent className="pt-4 pb-4">
-          <p className="text-xs text-gray-500 mb-3 font-medium">Bakiye Özeti (Ödenen / Hak Edilen)</p>
+          <p className="text-xs text-gray-500 mb-3 font-medium">Bakiye Özeti (tüm zamanlar, ders + hizmet)</p>
           <div className="flex flex-wrap gap-6">
-            <div className="flex items-center gap-2 text-gray-500 text-xs">
-              <Clock className="w-3.5 h-3.5" />
+            <div className="flex items-center gap-2">
+              <Clock className="w-3.5 h-3.5 text-gray-400" />
               <div>
                 <p className="text-xs text-gray-500">Toplam Saat</p>
                 <p className="text-xl font-bold text-gray-900">{totalHours.toFixed(1)} saat</p>
               </div>
             </div>
-            {earningsTotal > 0 && (
-              <div className="flex items-center gap-2">
-                <Wallet className="w-3.5 h-3.5 text-gray-400" />
-                <div>
-                  <p className="text-xs text-gray-500">Bakiye</p>
-                  <p className="text-xl font-bold text-gray-900">
-                    ₺{earningsPaid.toFixed(2)} / ₺{earningsTotal.toFixed(2)}
-                  </p>
-                  {earningsPending > 0 && (
-                    <p className="text-xs text-orange-500">
-                      Bekleyen: ₺{earningsPending.toFixed(2)}
-                    </p>
-                  )}
-                </div>
+            <div className="flex items-center gap-2">
+              <TrendingUp className="w-3.5 h-3.5 text-green-500" />
+              <div>
+                <p className="text-xs text-gray-500">Hak Edilen</p>
+                <p className="text-xl font-bold text-gray-900">{formatTRY(balance.earnedTRY, "TRY", rates)}</p>
               </div>
-            )}
+            </div>
+            <div className="flex items-center gap-2">
+              <Wallet className="w-3.5 h-3.5 text-gray-400" />
+              <div>
+                <p className="text-xs text-gray-500">Ödenen</p>
+                <p className="text-xl font-bold text-gray-900">{formatTRY(balance.paidTRY, "TRY", rates)}</p>
+              </div>
+            </div>
+            <div>
+              <p className="text-xs text-gray-500">Bekleyen</p>
+              <p className={`text-xl font-bold ${balance.pendingTRY > 0 ? "text-orange-600" : "text-gray-900"}`}>
+                {formatTRY(balance.pendingTRY, "TRY", rates)}
+              </p>
+            </div>
           </div>
         </CardContent>
       </Card>
 
-      {/* Hizmet-based earning summary */}
-      {hizmetEarned > 0 && (
-        <Card>
-          <CardContent className="pt-4 pb-4">
-            <p className="text-xs text-gray-500 mb-3 font-medium">Hizmet Hakediş Özeti</p>
-            <div className="flex flex-wrap gap-6">
-              <div className="flex items-start gap-2">
-                <TrendingUp className="w-3.5 h-3.5 text-green-500 mt-1" />
-                <div>
-                  <p className="text-xs text-gray-500">{hizmetSessions} seans</p>
-                  <p className="text-xl font-bold text-gray-900">
-                    ₺{hizmetEarned.toFixed(2)}
-                  </p>
-                  {totalPayouts > 0 && (
-                    <p className="text-xs text-gray-500">
-                      Ödenen: ₺{totalPayouts.toFixed(2)} ·{" "}
-                      <span className={hizmetNet > 0 ? "text-orange-500" : "text-green-600"}>
-                        Kalan: ₺{hizmetNet.toFixed(2)}
-                      </span>
-                    </p>
-                  )}
-                </div>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-      )}
-
       {/* Payout form for admins */}
-      {user.role === "ADMIN" && (earningsTotal > 0 || hizmetEarned > 0) && (
+      {user.role === "ADMIN" && balance.earnedTRY > 0 && (
         <PayoutForm
           instructorId={id}
           currencies={payoutCurrencies}

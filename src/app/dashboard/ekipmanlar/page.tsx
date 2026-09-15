@@ -1,4 +1,4 @@
-import { requireAuth } from "@/lib/auth";
+import { requireAdminOrReception } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { EQUIPMENT_TYPES } from "@/lib/constants";
@@ -6,7 +6,7 @@ import { NewEquipmentForm } from "./new-equipment-form";
 import { EditEquipmentDialog } from "./edit-equipment-dialog";
 
 export default async function EquipmentPage() {
-  const user = await requireAuth();
+  const user = await requireAdminOrReception();
 
   const equipment = await prisma.equipment.findMany({
     where: { isActive: true },

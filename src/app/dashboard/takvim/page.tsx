@@ -138,7 +138,7 @@ export default async function TakvimPage({
               </p>
               <p className="text-[11px] text-muted-foreground/70 capitalize">
                 {format(selectedDate, "EEEE", { locale: tr })}
-                {isToday && <span className="ml-1 text-info font-semibold">· Bugün</span>}
+                {isToday && <span className="ml-1 text-primary font-semibold">· Bugün</span>}
               </p>
             </div>
             <Link
@@ -169,14 +169,14 @@ export default async function TakvimPage({
                   return (
                     <th
                       key={h}
-                      className={`min-w-[90px] border-r border-border last:border-r-0 ${isCurrent ? "bg-info/10" : ""}`}
+                      className={`min-w-[90px] border-r border-border last:border-r-0 ${isCurrent ? "bg-primary/[0.06]" : ""}`}
                     >
                       <div className="px-2 py-3 text-center">
-                        <span className={`text-[11px] font-semibold ${isCurrent ? "text-info" : "text-muted-foreground/70"}`}>
+                        <span className={`text-[11px] font-semibold ${isCurrent ? "text-primary" : "text-muted-foreground/70"}`}>
                           {h.toString().padStart(2, "0")}:00
                         </span>
                         {isCurrent && (
-                          <div className="w-1.5 h-1.5 rounded-full bg-info mx-auto mt-0.5" />
+                          <div className="w-1.5 h-1.5 rounded-full bg-primary mx-auto mt-0.5" />
                         )}
                       </div>
                     </th>
@@ -212,7 +212,7 @@ export default async function TakvimPage({
                         key={h}
                         className={`
                           border-r border-border last:border-r-0 p-1.5 align-top min-h-[68px] min-w-[90px]
-                          ${isCurrent ? "bg-info/50" : ""}
+                          ${isCurrent ? "bg-primary/[0.06]" : ""}
                         `}
                       >
                         {cellItems.map((hz) => {

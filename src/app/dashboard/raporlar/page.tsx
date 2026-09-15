@@ -142,7 +142,7 @@ export default async function ReportsPage({
           defaultValue={format(toDate, "yyyy-MM-dd")}
           className="border rounded-md px-3 py-1.5 text-sm"
         />
-        <button type="submit" className="bg-info text-background px-4 py-1.5 rounded-md text-sm">
+        <button type="submit" className="h-9 rounded-md bg-primary px-4 text-sm font-bold text-primary-foreground hover:bg-primary/90">
           Filtrele
         </button>
       </form>

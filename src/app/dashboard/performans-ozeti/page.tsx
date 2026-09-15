@@ -265,7 +265,7 @@ export default async function PerformansOzetiPage({
             <Link
               href={`/dashboard/performans-ozeti?period=gunluk&date=${format(anchorDate, "yyyy-MM-dd")}`}
               className={`px-3 py-1.5 text-sm font-medium transition-colors ${
-                period === "gunluk" ? "bg-info text-background" : "bg-card text-muted-foreground hover:bg-muted/40"
+                period === "gunluk" ? "bg-primary font-bold text-primary-foreground" : "bg-card text-muted-foreground hover:bg-muted/40"
               }`}
             >
               Günlük
@@ -273,7 +273,7 @@ export default async function PerformansOzetiPage({
             <Link
               href={`/dashboard/performans-ozeti?period=haftalik&date=${format(anchorDate, "yyyy-MM-dd")}`}
               className={`px-3 py-1.5 text-sm font-medium transition-colors border-l ${
-                period === "haftalik" ? "bg-info text-background" : "bg-card text-muted-foreground hover:bg-muted/40"
+                period === "haftalik" ? "bg-primary font-bold text-primary-foreground" : "bg-card text-muted-foreground hover:bg-muted/40"
               }`}
             >
               Haftalık
@@ -284,7 +284,7 @@ export default async function PerformansOzetiPage({
       </div>
 
       {/* Grand Totals */}
-      <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+      <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
         <Card>
           <CardContent className="pt-4 pb-4">
             <div className="flex items-center gap-2 text-muted-foreground text-xs mb-1">

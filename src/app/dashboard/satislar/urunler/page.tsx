@@ -9,7 +9,7 @@ import { Search, ShoppingCart, TrendingUp } from "lucide-react";
 import { PAYMENT_METHODS } from "@/lib/constants";
 import { format } from "date-fns";
 import { tr } from "date-fns/locale";
-import { toTRY, formatTRY } from "@/lib/currency";
+import { toTRY, formatTRY, convertAmount } from "@/lib/currency";
 import { getExchangeRates } from "@/lib/exchange-rates";
 
 const METHOD_COLORS: Record<string, string> = {
@@ -54,7 +54,7 @@ export default async function UrunSatislariPage({
       },
       include: {
         student: { select: { id: true, firstName: true, lastName: true, phone: true } },
-        payments: { select: { amount: true, method: true } },
+        payments: { select: { amount: true, currency: true, method: true } },
       },
       orderBy: { createdAt: "desc" },
     }),
@@ -137,7 +137,10 @@ export default async function UrunSatislariPage({
                 </thead>
                 <tbody className="divide-y">
                   {sales.map((sale) => {
-                    const paid = sale.payments.reduce((s, p) => s + p.amount, 0);
+                    const paid = sale.payments.reduce(
+                      (s, p) => s + convertAmount(p.amount, p.currency, sale.currency, rates),
+                      0
+                    );
                     const debt = sale.amount - paid;
                     const primaryPayment = sale.payments[0];
                     const isFullyPaid = debt <= 0.01;

@@ -1,7 +1,7 @@
 import { requireAuth } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { LESSON_TYPES } from "@/lib/constants";
-import { formatTRY } from "@/lib/currency";
+import { formatTRY, toTRY } from "@/lib/currency";
 import { getExchangeRates } from "@/lib/exchange-rates";
 import { format, isSameDay } from "date-fns";
 import { tr } from "date-fns/locale";
@@ -97,13 +97,18 @@ export default async function ReservationsPage({
     else days.push({ date: d, items: [res] });
   }
 
-  // Özet istatistikler
-  const totalRevenue = reservations.reduce((sum, res) => {
-    const rate = res.lesson?.purchase
-      ? res.lesson.purchase.purchasePrice / res.lesson.purchase.totalHours
-      : null;
+  // Paketin saatlik ücreti üzerinden, paketin kendi para biriminde ders tutarı
+  const lessonPrice = (res: (typeof reservations)[number]) => {
+    const purchase = res.lesson?.purchase;
+    if (!purchase) return null;
     const hours = res.lesson?.actualHours ?? res.plannedHours;
-    return sum + (rate ? rate * hours : 0);
+    return { amount: (purchase.purchasePrice / purchase.totalHours) * hours, currency: purchase.currency };
+  };
+
+  // Özet istatistikler — farklı para birimlerindeki tutarlar toplanmadan önce TL'ye çevrilir
+  const totalRevenue = reservations.reduce((sum, res) => {
+    const price = lessonPrice(res);
+    return sum + (price ? toTRY(price.amount, price.currency, rates) : 0);
   }, 0);
 
   const completedCount = reservations.filter((r) => r.status === "COMPLETED").length;
@@ -218,12 +223,8 @@ export default async function ReservationsPage({
           <div className="space-y-2 pl-0">
             {items.map((res) => {
               const status = STATUS_BADGE[res.status] ?? STATUS_BADGE.PLANNED;
-              const hourlyRate = res.lesson?.purchase
-                ? res.lesson.purchase.purchasePrice / res.lesson.purchase.totalHours
-                : null;
               const hours = res.lesson?.actualHours ?? res.plannedHours;
-              const price = hourlyRate ? hourlyRate * hours : null;
-              const currency = res.lesson?.purchase?.currency ?? "TRY";
+              const price = lessonPrice(res);
               const instrColor = res.instructor?.color ?? "#9CA3AF";
 
               return (
@@ -280,7 +281,7 @@ export default async function ReservationsPage({
                         </span>
                         {price ? (
                           <span className="text-base font-bold text-gray-900">
-                            {formatTRY(price, currency, rates)}
+                            {formatTRY(price.amount, price.currency, rates)}
                           </span>
                         ) : (
                           <span className="text-sm text-gray-400">—</span>

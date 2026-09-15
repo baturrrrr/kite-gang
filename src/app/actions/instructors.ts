@@ -7,7 +7,7 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { z } from "zod";
 import bcrypt from "bcryptjs";
-import { updateCashAccount } from "./packages";
+import { updateCashAccount, prepareCashEntry } from "./packages";
 
 const instructorSchema = z.object({
   name: z.string().min(1, "Ad zorunlu"),
@@ -169,10 +169,11 @@ export async function recordInstructorPayout(
   if (!amount || amount <= 0) return { error: "Geçerli tutar girin" };
 
   if (cashAccountId) {
-    const account = await prisma.cashAccount.findUnique({ where: { id: cashAccountId } });
-    if (!account) return { error: "Kasa hesabı bulunamadı" };
-    if (account.balance < amount) {
-      return { error: `Kasa bakiyesi yetersiz. Mevcut: ${account.balance.toFixed(2)} ${account.currency}` };
+    // Hakediş EUR/USD olabilir, kasa TRY — bakiye karşılaştırması kasanın para biriminde yapılır.
+    const cash = await prepareCashEntry(cashAccountId, amount, currency);
+    if ("error" in cash) return { error: cash.error };
+    if (cash.account.balance < cash.converted.amount) {
+      return { error: `Kasa bakiyesi yetersiz. Mevcut: ${cash.account.balance.toFixed(2)} ${cash.account.currency}` };
     }
   }
 

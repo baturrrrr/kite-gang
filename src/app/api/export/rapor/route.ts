@@ -1,7 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getSession } from "@/lib/session";
+import { getCurrentUser } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { EXPENSE_CATEGORIES, PAYMENT_METHODS } from "@/lib/constants";
+import { convertAmount } from "@/lib/currency";
+import { getExchangeRates } from "@/lib/exchange-rates";
 
 function csvCell(value: string | number) {
   const str = String(value);
@@ -23,7 +25,7 @@ function toCsvResponse(header: string[], rows: (string | number)[][], filename: 
 }
 
 export async function GET(req: NextRequest) {
-  const session = await getSession();
+  const session = await getCurrentUser();
   if (!session || session.role !== "ADMIN") {
     return NextResponse.json({ error: "Yetkisiz" }, { status: 401 });
   }
@@ -123,18 +125,22 @@ export async function GET(req: NextRequest) {
   }
 
   if (type === "receivables") {
-    const packagePurchases = await prisma.packagePurchase.findMany({
-      where: { isActive: true },
-      include: { payments: true, student: { select: { firstName: true, lastName: true } }, package: { select: { name: true } } },
-      orderBy: { purchasedAt: "desc" },
-    });
+    const [packagePurchases, rates] = await Promise.all([
+      prisma.packagePurchase.findMany({
+        where: { isActive: true },
+        include: { payments: true, student: { select: { firstName: true, lastName: true } }, package: { select: { name: true } } },
+        orderBy: { purchasedAt: "desc" },
+      }),
+      getExchangeRates(),
+    ]);
     const rows = packagePurchases
       .map((pp) => {
-        const paid = pp.payments.reduce((sum, p) => sum + p.amount, 0);
+        // Ödemeler paketten farklı para biriminde alınmış olabilir.
+        const paid = pp.payments.reduce((sum, p) => sum + convertAmount(p.amount, p.currency, pp.currency, rates), 0);
         const owed = pp.purchasePrice - paid;
         return { pp, owed };
       })
-      .filter(({ owed }) => owed > 0)
+      .filter(({ owed }) => owed > 0.01)
       .map(({ pp, owed }) => [
         `${pp.student.firstName} ${pp.student.lastName}`,
         pp.package.name,

@@ -4,7 +4,8 @@ import path from "path";
 import { PrismaClient } from "../../src/generated/prisma/client";
 import { PrismaBetterSqlite3 } from "@prisma/adapter-better-sqlite3";
 
-const TEST_DB_PATH = path.resolve(__dirname, "../test.db");
+// Vitest test dosyalarını paralel worker'larda çalıştırır; ortak dosya birbirini silerdi.
+const TEST_DB_PATH = path.resolve(__dirname, `../test-${process.env.VITEST_POOL_ID ?? "0"}.db`);
 const MIGRATIONS_DIR = path.resolve(__dirname, "../../prisma/migrations");
 
 function readAllMigrationsSql(): string[] {

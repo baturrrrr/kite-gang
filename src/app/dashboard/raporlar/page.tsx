@@ -111,11 +111,12 @@ export default async function ReportsPage({
   // Pending receivables
   const receivables = packagePurchases
     .map((pp) => {
-      const paid = pp.payments.reduce((sum, p) => sum + p.amount, 0);
+      // Ödemeler paketten farklı para biriminde alınmış olabilir.
+      const paid = pp.payments.reduce((sum, p) => sum + convertAmount(p.amount, p.currency, pp.currency, rates), 0);
       const owed = pp.purchasePrice - paid;
       return { ...pp, owed };
     })
-    .filter((pp) => pp.owed > 0);
+    .filter((pp) => pp.owed > 0.01);
 
   return (
     <div className="space-y-6">

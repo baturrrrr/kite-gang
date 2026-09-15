@@ -2,7 +2,13 @@
 
 import { useEffect, useState } from "react";
 
-export type ExchangeRates = { TRY: 1; USD: number; EUR: number; updatedAt: string };
+export type ExchangeRates = {
+  TRY: 1;
+  USD: number;
+  EUR: number;
+  updatedAt: string;
+  source: "live" | "saved" | "unavailable";
+};
 
 let cache: ExchangeRates | null = null;
 let inFlight: Promise<ExchangeRates | null> | null = null;

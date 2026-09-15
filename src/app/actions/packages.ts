@@ -6,7 +6,7 @@ import { logAudit } from "@/lib/audit";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { z } from "zod";
-import { convertAmount } from "@/lib/currency";
+import { convertAmount, canConvert } from "@/lib/currency";
 import { getExchangeRates } from "@/lib/exchange-rates";
 
 const packageSchema = z.object({
@@ -132,6 +132,11 @@ export async function sellPackage(
     return { error: "Ödenen tutar, paket fiyatını geçemez" };
   }
 
+  if (parsed.data.paidAmount > 0 && parsed.data.cashAccountId) {
+    const cash = await prepareCashEntry(parsed.data.cashAccountId, parsed.data.paidAmount, parsed.data.currency);
+    if ("error" in cash) return { error: cash.error };
+  }
+
   const expiresAt = pkg.validityDays
     ? new Date(Date.now() + pkg.validityDays * 24 * 60 * 60 * 1000)
     : null;
@@ -212,6 +217,11 @@ export async function recordPayment(
 
   const { purchaseId, studentId, amount, currency, method, cashAccountId, description } = parsed.data;
 
+  if (cashAccountId) {
+    const cash = await prepareCashEntry(cashAccountId, amount, currency);
+    if ("error" in cash) return { error: cash.error };
+  }
+
   const payment = await prisma.payment.create({
     data: {
       studentId,
@@ -243,8 +253,27 @@ async function convertForAccount(
 ): Promise<{ amount: number; currency: string }> {
   if (currency === account.currency) return { amount, currency };
   const rates = await getExchangeRates();
+  // Kur yoksa convertAmount tutarı çevirmeden döndürür (100 EUR → ₺100); kasaya asla böyle yazılmamalı.
+  if (!canConvert(currency, account.currency, rates)) {
+    throw new Error(
+      "Kur bilgisi alınamadığı için farklı para birimindeki tutar kasaya işlenemedi. Aynı para biriminde bir kasa seçin veya biraz sonra tekrar deneyin."
+    );
+  }
   const converted = convertAmount(amount, currency, account.currency, rates);
   return { amount: converted, currency: account.currency };
+}
+
+// Ödeme/gider kaydı oluşturulmadan önce çağrılır: kayıt oluşup kasa güncellemesi
+// sonradan başarısız olursa ödeme ile kasa bakiyesi birbirini tutmaz.
+async function prepareCashEntry(accountId: string, amount: number, currency: string) {
+  const account = await prisma.cashAccount.findUnique({ where: { id: accountId } });
+  if (!account) return { error: "Kasa hesabı bulunamadı" };
+  try {
+    const converted = await convertForAccount(amount, currency, account);
+    return { account, converted };
+  } catch (err) {
+    return { error: err instanceof Error ? err.message : "Kasa işlemi hazırlanamadı" };
+  }
 }
 
 async function updateCashAccount(
@@ -292,4 +321,4 @@ async function updateCashAccount(
   ]);
 }
 
-export { updateCashAccount, convertForAccount };
+export { updateCashAccount, convertForAccount, prepareCashEntry };

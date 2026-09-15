@@ -4,7 +4,7 @@ import { prisma } from "@/lib/prisma";
 import { requireAdminOrReception } from "@/lib/auth";
 import { revalidatePath } from "next/cache";
 import { z } from "zod";
-import { updateCashAccount } from "./packages";
+import { updateCashAccount, prepareCashEntry } from "./packages";
 
 const odemeSchema = z.object({
   studentId: z.string().min(1),
@@ -34,6 +34,11 @@ export async function recordMusteriOdeme(
   };
   const parsed = odemeSchema.safeParse(raw);
   if (!parsed.success) return { fieldErrors: parsed.error.flatten().fieldErrors };
+
+  if (parsed.data.cashAccountId) {
+    const cash = await prepareCashEntry(parsed.data.cashAccountId, parsed.data.amount, parsed.data.currency);
+    if ("error" in cash) return { error: cash.error };
+  }
 
   // Alınan ödemenin tamamı kasaya yansır. Eğitmen hakedişi ayrı bir borç olarak
   // izlenir ve eğitmene fiilen ödeme yapıldığında (Hakediş Ödemesi Yap) kasadan düşülür.
@@ -93,6 +98,11 @@ export async function recordManuelGelir(
   };
   const parsed = manuelGelirSchema.safeParse(raw);
   if (!parsed.success) return { fieldErrors: parsed.error.flatten().fieldErrors };
+
+  if (parsed.data.cashAccountId) {
+    const cash = await prepareCashEntry(parsed.data.cashAccountId, parsed.data.amount, parsed.data.currency);
+    if ("error" in cash) return { error: cash.error };
+  }
 
   const payment = await prisma.payment.create({
     data: {

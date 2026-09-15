@@ -9,6 +9,11 @@ import { z } from "zod";
 
 const VALID_STATUSES = ["PLANNED", "CHECKED_IN", "COMPLETED", "CANCELLED", "NO_SHOW", "WIND_CANCELLED"] as const;
 
+// Paket saati yalnızca öğrencinin kendi, aktif ve saati kalmış paketinden düşülebilir.
+function usablePurchaseWhere(studentId: string) {
+  return { studentId, isActive: true, remainingHours: { gt: 0 } };
+}
+
 const reservationSchema = z.object({
   studentId: z.string().min(1, "Öğrenci seçin"),
   instructorId: z.string().optional(),
@@ -162,25 +167,45 @@ export async function cancelReservation(
 
   const reservation = await prisma.reservation.findUnique({ where: { id } });
   if (!reservation) return { error: "Rezervasyon bulunamadı" };
+  // Check-in sonrası ders kaydı, check-out sonrası hakediş oluşur; bunlar iptalle geri alınmaz.
+  if (reservation.status !== "PLANNED") {
+    return { error: "Yalnızca planlanmış rezervasyonlar iptal edilebilir" };
+  }
 
-  await prisma.$transaction(async (tx) => {
-    await tx.reservation.update({
+  // İş kuralı: no-show → paket saati düşülür, wind_cancelled → düşülmez.
+  // Gelmeyen öğrencinin ders kaydı hiç oluşmadığı için saat, kullanılabilir en eski paketinden düşülür.
+  const noShowPurchase =
+    status === "NO_SHOW" && reservation.lessonType !== "EQUIPMENT_RENTAL"
+      ? await prisma.packagePurchase.findFirst({
+          where: usablePurchaseWhere(reservation.studentId),
+          orderBy: { purchasedAt: "asc" },
+        })
+      : null;
+  const deductedHours = noShowPurchase
+    ? Math.min(reservation.plannedHours, noShowPurchase.remainingHours)
+    : 0;
+
+  await prisma.$transaction([
+    prisma.reservation.update({
       where: { id },
       data: { status, cancelReason: reason || null },
-    });
+    }),
+    ...(noShowPurchase
+      ? [
+          prisma.packagePurchase.update({
+            where: { id: noShowPurchase.id },
+            data: { remainingHours: { decrement: deductedHours } },
+          }),
+        ]
+      : []),
+  ]);
 
-    // İş kuralı: no-show → paket saati düşülür, wind_cancelled → düşülmez
-    if (status === "NO_SHOW") {
-      // Rezervasyona bağlı aktif paket satın alımını bul (lesson üzerinden veya öğrencinin paketi)
-      const lesson = await tx.lesson.findUnique({ where: { reservationId: id } });
-      const purchaseId = lesson?.purchaseId;
-      if (purchaseId) {
-        await tx.packagePurchase.update({
-          where: { id: purchaseId },
-          data: { remainingHours: { decrement: reservation.plannedHours } },
-        });
-      }
-    }
+  await logAudit({
+    userId: user.userId,
+    action: "CANCEL",
+    entity: "Reservation",
+    entityId: id,
+    newValues: { status, purchaseId: noShowPurchase?.id ?? null, deductedHours },
   });
 
   revalidatePath("/dashboard/operasyon");
@@ -217,6 +242,17 @@ export async function checkIn(
     return { error: "Bu rezervasyon size ait değil" };
   }
 
+  // Formdan gelen paket doğrulanmadan bağlanırsa check-out'ta başka müşterinin saati düşer.
+  // Ekipman kiralaması paket saatinden düşmez; operasyon ekranı yine de aktif paketi gönderir.
+  let lessonPurchaseId: string | null = null;
+  if (purchaseId && reservation.lessonType !== "EQUIPMENT_RENTAL") {
+    const purchase = await prisma.packagePurchase.findFirst({
+      where: { id: purchaseId, ...usablePurchaseWhere(reservation.studentId) },
+    });
+    if (!purchase) return { error: "Seçilen paket bu müşteriye ait değil veya kalan saati yok" };
+    lessonPurchaseId = purchase.id;
+  }
+
   await prisma.$transaction([
     prisma.reservation.update({
       where: { id: reservationId },
@@ -227,7 +263,7 @@ export async function checkIn(
         reservationId,
         studentId: reservation.studentId,
         instructorId: reservation.instructorId,
-        purchaseId: purchaseId || null,
+        purchaseId: lessonPurchaseId,
         checkInTime: new Date(),
         kiteSize: kiteSize || null,
         boardType: boardType || null,

@@ -8,6 +8,16 @@ export function convertAmount(amount: number, from: string, to: string, rates: R
   return (amount * fromRate) / toRate;
 }
 
+// convertAmount kur yoksa tutarı çevirmeden döndürür; kasaya yazılacak tutarlarda
+// bunun yerine önce bu kontrol yapılmalı.
+export function canConvert(from: string, to: string, rates: Rates | null): boolean {
+  if (from === to) return true;
+  if (!rates) return false;
+  const fromRate = from === "TRY" ? 1 : rates[from as "USD" | "EUR"];
+  const toRate = to === "TRY" ? 1 : rates[to as "USD" | "EUR"];
+  return Boolean(fromRate && toRate);
+}
+
 export function toTRY(amount: number, currency: string, rates: Rates | null): number {
   return convertAmount(amount, currency, "TRY", rates);
 }

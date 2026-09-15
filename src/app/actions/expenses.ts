@@ -5,7 +5,7 @@ import { requireAdmin } from "@/lib/auth";
 import { logAudit } from "@/lib/audit";
 import { revalidatePath } from "next/cache";
 import { z } from "zod";
-import { updateCashAccount, convertForAccount } from "./packages";
+import { updateCashAccount, prepareCashEntry } from "./packages";
 
 const expenseSchema = z.object({
   category: z.enum([
@@ -43,11 +43,10 @@ export async function createExpense(
 
   // Race-condition güvenli bakiye kontrolü: transaction içinde oku ve kontrol et
   if (parsed.data.cashAccountId) {
-    const account = await prisma.cashAccount.findUnique({ where: { id: parsed.data.cashAccountId } });
-    if (!account) return { error: "Kasa hesabı bulunamadı" };
-    const converted = await convertForAccount(parsed.data.amount, parsed.data.currency, account);
-    if (account.balance < converted.amount) {
-      return { error: `Kasa bakiyesi yetersiz. Mevcut: ${account.balance.toFixed(2)} ${account.currency}` };
+    const cash = await prepareCashEntry(parsed.data.cashAccountId, parsed.data.amount, parsed.data.currency);
+    if ("error" in cash) return { error: cash.error };
+    if (cash.account.balance < cash.converted.amount) {
+      return { error: `Kasa bakiyesi yetersiz. Mevcut: ${cash.account.balance.toFixed(2)} ${cash.account.currency}` };
     }
   }
 

@@ -9,7 +9,7 @@ import { Search, ShoppingBag, TrendingUp } from "lucide-react";
 import { PAYMENT_METHODS } from "@/lib/constants";
 import { format } from "date-fns";
 import { tr } from "date-fns/locale";
-import { toTRY, formatTRY } from "@/lib/currency";
+import { toTRY, formatTRY, convertAmount } from "@/lib/currency";
 import { getExchangeRates } from "@/lib/exchange-rates";
 
 const METHOD_COLORS: Record<string, string> = {
@@ -53,7 +53,7 @@ export default async function PaketSatislariPage({
       include: {
         student: { select: { id: true, firstName: true, lastName: true, phone: true } },
         package: { select: { name: true, lessonType: true } },
-        payments: { select: { amount: true, method: true, recordedAt: true } },
+        payments: { select: { amount: true, currency: true, method: true, recordedAt: true } },
       },
       orderBy: { purchasedAt: "desc" },
     }),
@@ -136,10 +136,13 @@ export default async function PaketSatislariPage({
                 </thead>
                 <tbody className="divide-y">
                   {purchases.map((purchase) => {
-                    const paid = purchase.payments.reduce((s, p) => s + p.amount, 0);
+                    const paid = purchase.payments.reduce(
+                      (s, p) => s + convertAmount(p.amount, p.currency, purchase.currency, rates),
+                      0
+                    );
                     const debt = purchase.purchasePrice - paid;
                     const primaryPayment = purchase.payments[0];
-                    const isFullyPaid = debt <= 0;
+                    const isFullyPaid = debt <= 0.01;
 
                     return (
                       <tr key={purchase.id} className="hover:bg-gray-50">

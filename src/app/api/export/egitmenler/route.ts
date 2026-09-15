@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getSession } from "@/lib/session";
+import { getCurrentUser } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { PAYMENT_MODELS, LESSON_TYPES } from "@/lib/constants";
 
@@ -23,7 +23,7 @@ function toCsvResponse(header: string[], rows: (string | number)[][], filename: 
 }
 
 export async function GET(req: NextRequest) {
-  const session = await getSession();
+  const session = await getCurrentUser();
   if (!session || session.role !== "ADMIN") {
     return NextResponse.json({ error: "Yetkisiz" }, { status: 401 });
   }

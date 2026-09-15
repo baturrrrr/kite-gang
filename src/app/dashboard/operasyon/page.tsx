@@ -4,6 +4,7 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { CheckInButton } from "./checkin-button";
 import { CheckOutDialog } from "./checkout-dialog";
+import { NoShowButton } from "./no-show-button";
 import { STATUS_COLORS, LESSON_TYPES, RESERVATION_STATUSES, CURRENCY_SYMBOLS } from "@/lib/constants";
 import { format } from "date-fns";
 import { tr } from "date-fns/locale";
@@ -32,6 +33,8 @@ export default async function OperationPage() {
           packagePurchases: {
             where: { isActive: true },
             select: { id: true, remainingHours: true, package: { select: { name: true } }, currency: true },
+            // Check-in ve no-show, saati kalmış en eski paketi kullanır (bkz. actions/reservations.ts)
+            orderBy: { purchasedAt: "asc" },
           },
         },
       },
@@ -44,6 +47,8 @@ export default async function OperationPage() {
   const planned = reservations.filter((r) => r.status === "PLANNED");
   const checkedIn = reservations.filter((r) => r.status === "CHECKED_IN");
   const completed = reservations.filter((r) => r.status === "COMPLETED");
+  const noShows = reservations.filter((r) => r.status === "NO_SHOW");
+  const canMarkNoShow = user.role !== "INSTRUCTOR";
 
   return (
     <div className="space-y-6">
@@ -115,7 +120,7 @@ export default async function OperationPage() {
           <h2 className="text-lg font-semibold text-gray-900 mb-3">Planlandı ({planned.length})</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
             {planned.map((res) => (
-              <ReservationCard key={res.id} res={res} showCheckIn />
+              <ReservationCard key={res.id} res={res} showCheckIn showNoShow={canMarkNoShow} />
             ))}
           </div>
         </div>
@@ -127,6 +132,18 @@ export default async function OperationPage() {
           <h2 className="text-lg font-semibold text-gray-900 mb-3 text-gray-500">Tamamlandı ({completed.length})</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3 opacity-70">
             {completed.map((res) => (
+              <ReservationCard key={res.id} res={res} />
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* No-show */}
+      {noShows.length > 0 && (
+        <div>
+          <h2 className="text-lg font-semibold mb-3 text-gray-500">Gelmedi ({noShows.length})</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3 opacity-70">
+            {noShows.map((res) => (
               <ReservationCard key={res.id} res={res} />
             ))}
           </div>
@@ -147,10 +164,12 @@ function ReservationCard({
   res,
   showCheckIn,
   showCheckOut,
+  showNoShow,
 }: {
   res: any;
   showCheckIn?: boolean;
   showCheckOut?: boolean;
+  showNoShow?: boolean;
 }) {
   const totalHours = res.student.packagePurchases.reduce(
     (sum: number, p: any) => sum + p.remainingHours,
@@ -200,12 +219,22 @@ function ReservationCard({
         </div>
 
         {showCheckIn && (
-          <div className="mt-3">
+          <div className="mt-3 space-y-2">
             <CheckInButton
               reservationId={res.id}
               purchaseId={activePurchase?.id}
               plannedHours={res.plannedHours}
             />
+            {showNoShow && (
+              <NoShowButton
+                reservationId={res.id}
+                studentName={`${res.student.firstName} ${res.student.lastName}`}
+                plannedHours={res.plannedHours}
+                isRental={res.lessonType === "EQUIPMENT_RENTAL"}
+                packageName={activePurchase?.package.name}
+                remainingHours={activePurchase?.remainingHours}
+              />
+            )}
           </div>
         )}
 

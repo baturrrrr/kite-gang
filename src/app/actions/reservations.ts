@@ -7,8 +7,6 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { z } from "zod";
 
-const VALID_STATUSES = ["PLANNED", "CHECKED_IN", "COMPLETED", "CANCELLED", "NO_SHOW", "WIND_CANCELLED"] as const;
-
 // Paket saati yalnızca öğrencinin kendi, aktif ve saati kalmış paketinden düşülebilir.
 function usablePurchaseWhere(studentId: string) {
   return { studentId, isActive: true, remainingHours: { gt: 0 } };
@@ -109,46 +107,6 @@ export async function createReservation(
   revalidatePath("/dashboard/rezervasyonlar");
   revalidatePath("/dashboard/operasyon");
   redirect("/dashboard/rezervasyonlar");
-}
-
-export async function updateReservationStatus(
-  reservationId: string,
-  status: string,
-  cancelReason?: string
-) {
-  const user = await requireAuth();
-
-  // Whitelist geçerli durumlar
-  if (!(VALID_STATUSES as readonly string[]).includes(status)) {
-    return { error: "Geçersiz durum" };
-  }
-
-  // INSTRUCTOR yalnızca kendi rezervasyonunu güncelleyebilir
-  if (user.role === "INSTRUCTOR") {
-    const reservation = await prisma.reservation.findUnique({
-      where: { id: reservationId },
-      include: { instructor: true },
-    });
-    if (!reservation || !reservation.instructor || reservation.instructor.userId !== user.userId) {
-      return { error: "Yetkisiz işlem" };
-    }
-  }
-
-  await prisma.reservation.update({
-    where: { id: reservationId },
-    data: { status, cancelReason: cancelReason || null },
-  });
-
-  await logAudit({
-    userId: user.userId,
-    action: "UPDATE_STATUS",
-    entity: "Reservation",
-    entityId: reservationId,
-    newValues: { status },
-  });
-
-  revalidatePath("/dashboard/operasyon");
-  revalidatePath("/dashboard/rezervasyonlar");
 }
 
 export async function cancelReservation(

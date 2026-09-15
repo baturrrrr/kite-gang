@@ -4,7 +4,7 @@ import { prisma } from "@/lib/prisma";
 import { requireAdminOrReception } from "@/lib/auth";
 import { revalidatePath } from "next/cache";
 import { z } from "zod";
-import { updateCashAccount, prepareCashEntry } from "./packages";
+import { updateCashAccount, prepareCashEntry } from "@/lib/cash";
 
 const odemeSchema = z.object({
   studentId: z.string().min(1),

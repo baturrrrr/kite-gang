@@ -5,7 +5,7 @@ import { requireAdmin } from "@/lib/auth";
 import { logAudit } from "@/lib/audit";
 import { revalidatePath } from "next/cache";
 import { z } from "zod";
-import { updateCashAccount, prepareCashEntry } from "./packages";
+import { updateCashAccount, prepareCashEntry } from "@/lib/cash";
 
 const expenseSchema = z.object({
   category: z.enum([

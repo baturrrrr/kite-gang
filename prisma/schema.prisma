@@ -7,100 +7,88 @@ datasource db {
   provider = "sqlite"
 }
 
-// ─── USERS & AUTH ────────────────────────────────────────────────────────────
-
 model User {
-  id        String   @id @default(cuid())
-  name      String
-  email     String   @unique
-  password  String
-  role      String   @default("RECEPTION") // ADMIN | RECEPTION | INSTRUCTOR
-  isActive  Boolean  @default(true)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  instructor Instructor?
+  id         String      @id @default(cuid())
+  name       String
+  email      String      @unique
+  password   String
+  role       String      @default("RECEPTION")
+  isActive   Boolean     @default(true)
+  createdAt  DateTime    @default(now())
+  updatedAt  DateTime    @updatedAt
   auditLogs  AuditLog[]
+  instructor Instructor?
 
   @@index([email])
 }
 
-// ─── INSTRUCTOR ──────────────────────────────────────────────────────────────
-
 model Instructor {
-  id                 String  @id @default(cuid())
-  userId             String  @unique
-  user               User    @relation(fields: [userId], references: [id])
+  id                 String              @id @default(cuid())
+  userId             String              @unique
   phone              String?
-  paymentModel       String  @default("HOURLY_RATE") // HOURLY_RATE | REVENUE_SHARE | SALARY_PLUS_BONUS
+  paymentModel       String              @default("HOURLY_RATE")
   hourlyRate         Float?
-  hourlyRateCurrency String  @default("TRY")
+  hourlyRateCurrency String              @default("TRY")
   revenueShare       Float?
   monthlySalary      Float?
-  salaryCurrency     String  @default("TRY")
-  color              String  @default("#3B82F6")
-  isActive           Boolean @default(true)
-  createdAt          DateTime @default(now())
-  updatedAt          DateTime @updatedAt
-
-  reservations Reservation[]
-  lessons      Lesson[]
-  earnings     InstructorEarning[]
-  payouts      InstructorPayout[]
-  hizmetler    Hizmet[]
+  salaryCurrency     String              @default("TRY")
+  color              String              @default("#3B82F6")
+  isActive           Boolean             @default(true)
+  createdAt          DateTime            @default(now())
+  updatedAt          DateTime            @updatedAt
+  hizmetler          Hizmet[]
+  user               User                @relation(fields: [userId], references: [id])
+  earnings           InstructorEarning[]
+  payouts            InstructorPayout[]
+  lessons            Lesson[]
+  reservations       Reservation[]
 
   @@index([userId])
 }
 
-// ─── STUDENT ─────────────────────────────────────────────────────────────────
-
 model Student {
-  id               String    @id @default(cuid())
+  id               String            @id @default(cuid())
   firstName        String
   lastName         String
   email            String?
   phone            String?
-  birthDate        DateTime?
-  weight           Float?
-  gender           String?   // MALE | FEMALE | OTHER
   nationality      String?
   language         String?
   emergencyContact String?
   emergencyPhone   String?
-  skillLevel       String    @default("BEGINNER") // BEGINNER | INTERMEDIATE | ADVANCED | INDEPENDENT
+  skillLevel       String            @default("BEGINNER")
   notes            String?
-  waiverSigned     Boolean   @default(false)
+  waiverSigned     Boolean           @default(false)
   waiverSignedAt   DateTime?
-  isActive         Boolean   @default(true)
-  createdAt        DateTime  @default(now())
-  updatedAt        DateTime  @updatedAt
-
-  packagePurchases PackagePurchase[]
-  reservations     Reservation[]
-  lessons          Lesson[]
-  payments         Payment[]
+  isActive         Boolean           @default(true)
+  createdAt        DateTime          @default(now())
+  updatedAt        DateTime          @updatedAt
+  birthDate        DateTime?
+  gender           String?
+  weight           Float?
   hizmetler        Hizmet[]
+  lessons          Lesson[]
+  packagePurchases PackagePurchase[]
+  payments         Payment[]
+  reservations     Reservation[]
 
   @@index([lastName, firstName])
   @@index([email])
 }
 
-// ─── LESSON PACKAGES ─────────────────────────────────────────────────────────
-
 model LessonPackage {
-  id           String   @id @default(cuid())
+  id           String            @id @default(cuid())
   name         String
   description  String?
-  lessonType   String   // PRIVATE | SEMI_PRIVATE | GROUP | EQUIPMENT_RENTAL | SUPERVISION
+  lessonType   String
   totalHours   Float
   price        Float
-  currency     String   @default("TRY")
+  currency     String            @default("TRY")
   validityDays Int?
-  isActive     Boolean  @default(true)
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
-
-  purchases PackagePurchase[]
+  isActive     Boolean           @default(true)
+  createdAt    DateTime          @default(now())
+  updatedAt    DateTime          @updatedAt
+  purchases    PackagePurchase[]
 
   @@index([isActive])
 }
@@ -108,9 +96,7 @@ model LessonPackage {
 model PackagePurchase {
   id             String        @id @default(cuid())
   studentId      String
-  student        Student       @relation(fields: [studentId], references: [id])
   packageId      String
-  package        LessonPackage @relation(fields: [packageId], references: [id])
   totalHours     Float
   remainingHours Float
   purchasePrice  Float
@@ -120,39 +106,37 @@ model PackagePurchase {
   isActive       Boolean       @default(true)
   createdAt      DateTime      @default(now())
   updatedAt      DateTime      @updatedAt
-
-  payments Payment[]
-  lessons  Lesson[]
+  lessons        Lesson[]
+  package        LessonPackage @relation(fields: [packageId], references: [id])
+  student        Student       @relation(fields: [studentId], references: [id])
+  payments       Payment[]
 
   @@index([studentId])
   @@index([packageId])
 }
 
-// ─── RESERVATIONS ────────────────────────────────────────────────────────────
-
 model Reservation {
-  id           String   @id @default(cuid())
-  studentId    String
-  student      Student  @relation(fields: [studentId], references: [id])
-  instructorId String?  // EQUIPMENT_RENTAL için gerekli değil
-  instructor   Instructor? @relation(fields: [instructorId], references: [id])
-  lessonType   String   // PRIVATE | SEMI_PRIVATE | GROUP | EQUIPMENT_RENTAL | SUPERVISION
-  equipmentId  String?  // EQUIPMENT_RENTAL: kiralanan ekipman
-  equipment    Equipment? @relation(fields: [equipmentId], references: [id])
-  rentalAmount   Float?  // EQUIPMENT_RENTAL: müşteriden alınan kiralama ücreti
+  id             String      @id @default(cuid())
+  studentId      String
+  instructorId   String?
+  lessonType     String
+  equipmentId    String?
+  rentalAmount   Float?
   rentalCurrency String?
-  startTime    DateTime
-  endTime      DateTime
-  plannedHours Float
-  status       String   @default("PLANNED") // PLANNED | CHECKED_IN | COMPLETED | CANCELLED | NO_SHOW | WIND_CANCELLED
-  notes        String?
-  cancelReason String?
-  createdById  String?
-  isActive     Boolean  @default(true)
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
-
-  lesson Lesson?
+  startTime      DateTime
+  endTime        DateTime
+  plannedHours   Float
+  status         String      @default("PLANNED")
+  notes          String?
+  cancelReason   String?
+  createdById    String?
+  isActive       Boolean     @default(true)
+  createdAt      DateTime    @default(now())
+  updatedAt      DateTime    @updatedAt
+  lesson         Lesson?
+  equipment      Equipment?  @relation(fields: [equipmentId], references: [id])
+  instructor     Instructor? @relation(fields: [instructorId], references: [id])
+  student        Student     @relation(fields: [studentId], references: [id])
 
   @@index([instructorId, startTime])
   @@index([studentId])
@@ -161,207 +145,182 @@ model Reservation {
   @@index([equipmentId])
 }
 
-// ─── LESSONS (COMPLETED/IN-PROGRESS) ─────────────────────────────────────────
-
 model Lesson {
-  id            String    @id @default(cuid())
-  reservationId String    @unique
-  reservation   Reservation @relation(fields: [reservationId], references: [id])
-  studentId     String
-  student       Student   @relation(fields: [studentId], references: [id])
-  instructorId  String?
-  instructor    Instructor? @relation(fields: [instructorId], references: [id])
-  purchaseId    String?
-  purchase      PackagePurchase? @relation(fields: [purchaseId], references: [id])
-
-  actualHours      Float?
-  checkInTime      DateTime
-  checkOutTime     DateTime?
-  kiteSize         String?
-  boardType        String?
-  harness          Boolean  @default(false)
-  wetsuit          Boolean  @default(false)
-  equipmentNotes   String?
-  instructorNotes  String?
-
+  id                String             @id @default(cuid())
+  reservationId     String             @unique
+  studentId         String
+  instructorId      String?
+  purchaseId        String?
+  actualHours       Float?
+  checkInTime       DateTime
+  checkOutTime      DateTime?
+  kiteSize          String?
+  boardType         String?
+  harness           Boolean            @default(false)
+  wetsuit           Boolean            @default(false)
+  equipmentNotes    String?
+  instructorNotes   String?
+  createdAt         DateTime           @default(now())
+  updatedAt         DateTime           @updatedAt
   instructorEarning InstructorEarning?
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  purchase          PackagePurchase?   @relation(fields: [purchaseId], references: [id])
+  instructor        Instructor?        @relation(fields: [instructorId], references: [id])
+  student           Student            @relation(fields: [studentId], references: [id])
+  reservation       Reservation        @relation(fields: [reservationId], references: [id])
 
   @@index([instructorId])
   @@index([studentId])
   @@index([checkInTime])
 }
 
-// ─── PAYMENTS ────────────────────────────────────────────────────────────────
-
 model Payment {
-  id           String   @id @default(cuid())
-  studentId    String?
-  student      Student? @relation(fields: [studentId], references: [id])
-  purchaseId   String?
-  purchase     PackagePurchase? @relation(fields: [purchaseId], references: [id])
-  hizmetId     String?
-  hizmet       Hizmet?  @relation(fields: [hizmetId], references: [id])
-  amount       Float
-  // Kasaya fiilen yansıyan tutar. Boşsa (null) amount ile aynı kabul edilir.
-  // Eski kayıtlarda (bu alan eklenmeden önce) eğitmen hakedişi düşülmüş net
-  // tutar olabilir — güncel ödeme akışında her zaman amount ile eşittir.
-  kasaAmount   Float?
-  currency     String   @default("TRY")
-  method       String   // CASH | BANK_TRANSFER | CREDIT_CARD | OTHER
-  direction    String   @default("INCOMING") // INCOMING | OUTGOING
-  description  String?
-  recordedById String?
-  recordedAt   DateTime @default(now())
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
-
+  id                String             @id @default(cuid())
+  studentId         String?
+  purchaseId        String?
+  hizmetId          String?
+  amount            Float
+  kasaAmount        Float?
+  currency          String             @default("TRY")
+  method            String
+  direction         String             @default("INCOMING")
+  description       String?
+  recordedById      String?
+  recordedAt        DateTime           @default(now())
+  createdAt         DateTime           @default(now())
+  updatedAt         DateTime           @updatedAt
   cashRegisterEntry CashRegisterEntry?
+  hizmet            Hizmet?            @relation(fields: [hizmetId], references: [id])
+  purchase          PackagePurchase?   @relation(fields: [purchaseId], references: [id])
+  student           Student?           @relation(fields: [studentId], references: [id])
 
   @@index([studentId])
   @@index([recordedAt])
   @@index([hizmetId])
 }
 
-// ─── EXPENSES ────────────────────────────────────────────────────────────────
-
 model Expense {
-  id           String   @id @default(cuid())
-  category     String   // RENT | EQUIPMENT_PURCHASE | EQUIPMENT_REPAIR | FUEL | STAFF | FOOD | MARKETING | UTILITIES | INSURANCE | OTHER
-  amount       Float
-  currency     String   @default("TRY")
-  method       String   // CASH | BANK_TRANSFER | CREDIT_CARD | OTHER
-  description  String
-  receiptUrl   String?
-  expenseDate  DateTime
-  recordedById String?
-  isActive     Boolean  @default(true)
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
-
+  id                String             @id @default(cuid())
+  category          String
+  amount            Float
+  currency          String             @default("TRY")
+  method            String
+  description       String
+  receiptUrl        String?
+  expenseDate       DateTime
+  recordedById      String?
+  isActive          Boolean            @default(true)
+  createdAt         DateTime           @default(now())
+  updatedAt         DateTime           @updatedAt
   cashRegisterEntry CashRegisterEntry?
 
   @@index([expenseDate])
   @@index([category])
 }
 
-// ─── INSTRUCTOR EARNINGS ─────────────────────────────────────────────────────
-
 model InstructorEarning {
   id           String     @id @default(cuid())
   instructorId String
-  instructor   Instructor @relation(fields: [instructorId], references: [id])
   lessonId     String     @unique
-  lesson       Lesson     @relation(fields: [lessonId], references: [id])
   amount       Float
   currency     String     @default("TRY")
   hours        Float
   isPaid       Boolean    @default(false)
   createdAt    DateTime   @default(now())
   updatedAt    DateTime   @updatedAt
+  lesson       Lesson     @relation(fields: [lessonId], references: [id])
+  instructor   Instructor @relation(fields: [instructorId], references: [id])
 
   @@index([instructorId])
   @@index([isPaid])
 }
 
 model InstructorPayout {
-  id           String     @id @default(cuid())
-  instructorId String
-  instructor   Instructor @relation(fields: [instructorId], references: [id])
-  amount       Float
-  currency     String     @default("TRY")
-  method       String
-  periodStart  DateTime?
-  periodEnd    DateTime?
-  notes        String?
-  paidAt       DateTime   @default(now())
-  recordedById String?
-  createdAt    DateTime   @default(now())
-  updatedAt    DateTime   @updatedAt
-
+  id                String             @id @default(cuid())
+  instructorId      String
+  amount            Float
+  currency          String             @default("TRY")
+  method            String
+  periodStart       DateTime?
+  periodEnd         DateTime?
+  notes             String?
+  paidAt            DateTime           @default(now())
+  recordedById      String?
+  createdAt         DateTime           @default(now())
+  updatedAt         DateTime           @updatedAt
   cashRegisterEntry CashRegisterEntry?
+  instructor        Instructor         @relation(fields: [instructorId], references: [id])
 
   @@index([instructorId])
 }
 
-// ─── CASH REGISTER ───────────────────────────────────────────────────────────
-
 model CashAccount {
-  id          String   @id @default(cuid())
+  id          String              @id @default(cuid())
   name        String
-  accountType String   @default("CASH") // CASH | BANK
-  currency    String   @default("TRY")
-  balance     Float    @default(0)
-  isActive    Boolean  @default(true)
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-
-  entries CashRegisterEntry[]
+  accountType String              @default("CASH")
+  currency    String              @default("TRY")
+  balance     Float               @default(0)
+  isActive    Boolean             @default(true)
+  createdAt   DateTime            @default(now())
+  updatedAt   DateTime            @updatedAt
+  entries     CashRegisterEntry[]
 
   @@index([accountType, currency])
 }
 
 model CashRegisterEntry {
-  id           String      @id @default(cuid())
+  id           String            @id @default(cuid())
   accountId    String
-  account      CashAccount @relation(fields: [accountId], references: [id])
-  entryType    String      // INCOME | EXPENSE | TRANSFER
+  entryType    String
   amount       Float
-  currency     String      @default("TRY")
+  currency     String            @default("TRY")
   description  String
-  paymentId    String?     @unique
-  payment      Payment?    @relation(fields: [paymentId], references: [id])
-  expenseId    String?     @unique
-  expense      Expense?    @relation(fields: [expenseId], references: [id])
-  payoutId     String?     @unique
-  payout       InstructorPayout? @relation(fields: [payoutId], references: [id])
+  paymentId    String?           @unique
+  expenseId    String?           @unique
+  payoutId     String?           @unique
   recordedById String?
-  recordedAt   DateTime    @default(now())
-  createdAt    DateTime    @default(now())
+  recordedAt   DateTime          @default(now())
+  createdAt    DateTime          @default(now())
+  payout       InstructorPayout? @relation(fields: [payoutId], references: [id])
+  expense      Expense?          @relation(fields: [expenseId], references: [id])
+  payment      Payment?          @relation(fields: [paymentId], references: [id])
+  account      CashAccount       @relation(fields: [accountId], references: [id])
 
   @@index([accountId])
   @@index([recordedAt])
 }
 
-// ─── EQUIPMENT ───────────────────────────────────────────────────────────────
-
 model Equipment {
-  id        String   @id @default(cuid())
-  type      String   // KITE | BOARD | HARNESS | WETSUIT | BAR | OTHER
-  name      String
-  size      String?
-  brand     String?
-  status    String   @default("AVAILABLE") // AVAILABLE | IN_USE | REPAIR | RETIRED
-  notes     String?
-  isActive  Boolean  @default(true)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
+  id           String        @id @default(cuid())
+  type         String
+  name         String
+  size         String?
+  brand        String?
+  quantity     Int           @default(1)
+  status       String        @default("AVAILABLE")
+  notes        String?
+  isActive     Boolean       @default(true)
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
   hizmetler    Hizmet[]
   reservations Reservation[]
 
   @@index([type, status])
 }
 
-// ─── HİZMETLER ───────────────────────────────────────────────────────────────
-
 model HizmetSablonu {
-  id               String   @id @default(cuid())
-  category         String   // EGITIM | KIRALAMA | URUN | UYELIK
+  id               String        @id @default(cuid())
+  category         String
   name             String
-  subCategory      String?  // Serbest metin alt kategori etiketi (ör. "Kitesurf")
-  requiredPeople   Int?     // Gerekli kişi sayısı
+  subCategory      String?
+  requiredPeople   Int?
   description      String?
-  onlineVisibility String   @default("LISTED") // LISTED | PARTNER_ONLY | HIDDEN
-  validityDays     Int?     // UYELIK: üyelik geçerlilik süresi (gün)
-  isActive         Boolean  @default(true)
-  sortOrder        Int      @default(0)
-  createdAt        DateTime @default(now())
-  updatedAt        DateTime @updatedAt
-
-  fiyatlar HizmetFiyat[]
+  onlineVisibility String        @default("LISTED")
+  validityDays     Int?
+  isActive         Boolean       @default(true)
+  sortOrder        Int           @default(0)
+  createdAt        DateTime      @default(now())
+  updatedAt        DateTime      @updatedAt
+  fiyatlar         HizmetFiyat[]
 
   @@index([category])
 }
@@ -369,43 +328,43 @@ model HizmetSablonu {
 model HizmetFiyat {
   id          String        @id @default(cuid())
   sablonId    String
-  sablon      HizmetSablonu @relation(fields: [sablonId], references: [id], onDelete: Cascade)
-  zamanBirimi String        // SABIT | SAATLIK | YARIM_GUN | TAM_GUN
+  zamanBirimi String
   currency    String
   price       Float
   createdAt   DateTime      @default(now())
+  sablon      HizmetSablonu @relation(fields: [sablonId], references: [id], onDelete: Cascade)
 
   @@index([sablonId])
 }
 
 model Hizmet {
-  id                     String    @id @default(cuid())
-  category               String    // EGITIM | KIRALAMA | URUN | UYELIK
-  sablonId               String?
-  studentId              String?
-  student                Student?  @relation(fields: [studentId], references: [id])
-  instructorId           String?
-  instructor             Instructor? @relation(fields: [instructorId], references: [id])
-  equipmentId            String?
-  equipment              Equipment? @relation(fields: [equipmentId], references: [id])
-  title                  String
-  description            String?
-  amount                 Float     @default(0)
-  currency               String    @default("TRY")
-  quantity               Int?      // URUN: satılan adet
-  paymentMethod          String?
-  instructorEarning      Float?
-  status                 String    @default("BEKLIYOR") // BEKLIYOR | DEVAM | TAMAMLANDI | IPTAL
-  scheduledAt            DateTime?
-  checkedInAt            DateTime?
-  checkedOutAt           DateTime?
-  notes                  String?
-  createdById            String?
-  isActive               Boolean   @default(true)
-  createdAt              DateTime  @default(now())
-  updatedAt              DateTime  @updatedAt
-
-  payments Payment[]
+  id                String      @id @default(cuid())
+  category          String
+  sablonId          String?
+  studentId         String?
+  instructorId      String?
+  equipmentId       String?
+  title             String
+  description       String?
+  amount            Float       @default(0)
+  currency          String      @default("TRY")
+  quantity          Int?
+  durationHours     Float?      // Hizmet süresi (saat) — saatlik fiyat hesabı için
+  paymentMethod     String?
+  instructorEarning Float?
+  status            String      @default("BEKLIYOR")
+  scheduledAt       DateTime?
+  checkedInAt       DateTime?
+  checkedOutAt      DateTime?
+  notes             String?
+  createdById       String?
+  isActive          Boolean     @default(true)
+  createdAt         DateTime    @default(now())
+  updatedAt         DateTime    @updatedAt
+  equipment         Equipment?  @relation(fields: [equipmentId], references: [id])
+  instructor        Instructor? @relation(fields: [instructorId], references: [id])
+  student           Student?    @relation(fields: [studentId], references: [id])
+  payments          Payment[]
 
   @@index([category])
   @@index([studentId])
@@ -415,12 +374,9 @@ model Hizmet {
   @@index([scheduledAt])
 }
 
-// ─── AUDIT LOG ───────────────────────────────────────────────────────────────
-
 model AuditLog {
   id        String   @id @default(cuid())
   userId    String?
-  user      User?    @relation(fields: [userId], references: [id])
   action    String
   entity    String
   entityId  String?
@@ -428,13 +384,12 @@ model AuditLog {
   newValues String?
   ipAddress String?
   createdAt DateTime @default(now())
+  user      User?    @relation(fields: [userId], references: [id])
 
   @@index([entity, entityId])
   @@index([userId])
   @@index([createdAt])
 }
-
-// ─── SETTINGS ────────────────────────────────────────────────────────────────
 
 model Setting {
   id        String   @id @default(cuid())

@@ -4,24 +4,18 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
   Waves,
-  GraduationCap,
   CalendarDays,
   Timer,
   ShoppingCart,
   Package,
-  IdCard,
-  Settings,
 } from "lucide-react";
 
 const TABS = [
   { href: "/dashboard/hizmetler/seanslar", label: "Seanslar", icon: Waves },
-  { href: "/dashboard/hizmetler/dersler", label: "Dersler", icon: GraduationCap },
   { href: "/dashboard/hizmetler/etkinlikler", label: "Etkinlikler", icon: CalendarDays },
   { href: "/dashboard/hizmetler/kiralamalar", label: "Kiralamalar", icon: Timer },
   { href: "/dashboard/hizmetler/urunler", label: "Ürünler", icon: ShoppingCart },
   { href: "/dashboard/hizmetler/paketler", label: "Paketler", icon: Package },
-  { href: "/dashboard/hizmetler/uyelikler", label: "Üyelikler", icon: IdCard },
-  { href: "/dashboard/hizmetler/ayarlar", label: "Hizmet Ayarları", icon: Settings },
 ];
 
 export function HizmetTabs() {

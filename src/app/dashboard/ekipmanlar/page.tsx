@@ -3,6 +3,7 @@ import { prisma } from "@/lib/prisma";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { EQUIPMENT_TYPES } from "@/lib/constants";
 import { NewEquipmentForm } from "./new-equipment-form";
+import { EditEquipmentDialog } from "./edit-equipment-dialog";
 
 export default async function EquipmentPage() {
   const user = await requireAuth();
@@ -28,7 +29,6 @@ export default async function EquipmentPage() {
         {user.role !== "INSTRUCTOR" && <NewEquipmentForm />}
       </div>
 
-      {/* Equipment by Type */}
       {Object.entries(byType).map(([type, items]) => (
         <Card key={type}>
           <CardHeader>
@@ -41,10 +41,12 @@ export default async function EquipmentPage() {
               <table className="w-full text-sm">
                 <thead>
                   <tr className="border-b bg-gray-50">
-                    <th className="text-left px-3 py-2 font-medium text-gray-600">Ad</th>
                     <th className="text-left px-3 py-2 font-medium text-gray-600">Marka</th>
+                    <th className="text-left px-3 py-2 font-medium text-gray-600">Model</th>
                     <th className="text-left px-3 py-2 font-medium text-gray-600">Boyut</th>
+                    <th className="text-left px-3 py-2 font-medium text-gray-600">Adet</th>
                     <th className="text-left px-3 py-2 font-medium text-gray-600">Notlar</th>
+                    {user.role !== "INSTRUCTOR" && <th className="px-3 py-2" />}
                   </tr>
                 </thead>
                 <tbody className="divide-y">
@@ -53,7 +55,13 @@ export default async function EquipmentPage() {
                       <td className="px-3 py-2 font-medium">{item.name}</td>
                       <td className="px-3 py-2 text-gray-500">{item.brand ?? "—"}</td>
                       <td className="px-3 py-2 text-gray-500">{item.size ?? "—"}</td>
+                      <td className="px-3 py-2 text-gray-500">{item.quantity}</td>
                       <td className="px-3 py-2 text-gray-400 text-xs">{item.notes ?? "—"}</td>
+                      {user.role !== "INSTRUCTOR" && (
+                        <td className="px-3 py-2 text-right">
+                          <EditEquipmentDialog equipment={item} />
+                        </td>
+                      )}
                     </tr>
                   ))}
                 </tbody>

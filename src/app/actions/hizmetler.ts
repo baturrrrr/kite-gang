@@ -231,6 +231,73 @@ export async function updateHizmetStatus(
   return {};
 }
 
+const updateHizmetSchema = z.object({
+  title: z.string().min(1, "Başlık zorunlu"),
+  instructorId: z.string().optional(),
+  amount: z.coerce.number().min(0),
+  currency: z.enum(["EUR", "USD", "TRY"]),
+  durationHours: z.coerce.number().min(0).optional(),
+  instructorEarning: z.coerce.number().min(0).optional(),
+  scheduledAt: z.string().optional(),
+  notes: z.string().optional(),
+  status: z.enum(["BEKLIYOR", "DEVAM", "TAMAMLANDI", "IPTAL"]),
+  paymentMethod: z.string().optional(),
+});
+
+export type UpdateHizmetState = { error?: string };
+
+export async function updateHizmet(
+  id: string,
+  studentId: string,
+  _prev: UpdateHizmetState,
+  formData: FormData
+): Promise<UpdateHizmetState> {
+  const user = await requireAdminOrReception();
+
+  const raw = {
+    title: formData.get("title") as string,
+    instructorId: (formData.get("instructorId") as string) || undefined,
+    amount: formData.get("amount") as string,
+    currency: formData.get("currency") as string,
+    durationHours: (formData.get("durationHours") as string) || undefined,
+    instructorEarning: (formData.get("instructorEarning") as string) || undefined,
+    scheduledAt: (formData.get("scheduledAt") as string) || undefined,
+    notes: (formData.get("notes") as string) || undefined,
+    status: formData.get("status") as string,
+    paymentMethod: (formData.get("paymentMethod") as string) || undefined,
+  };
+
+  const parsed = updateHizmetSchema.safeParse(raw);
+  if (!parsed.success) return { error: parsed.error.issues[0].message };
+
+  const updateData: Record<string, unknown> = {
+    title: parsed.data.title,
+    instructorId: parsed.data.instructorId || null,
+    amount: parsed.data.amount,
+    currency: parsed.data.currency,
+    durationHours: parsed.data.durationHours ?? null,
+    instructorEarning: parsed.data.instructorEarning ?? null,
+    scheduledAt: parsed.data.scheduledAt ? new Date(parsed.data.scheduledAt) : null,
+    notes: parsed.data.notes || null,
+    status: parsed.data.status,
+    paymentMethod: parsed.data.paymentMethod || null,
+  };
+
+  if (parsed.data.status === "DEVAM") updateData.checkedInAt = new Date();
+  if (parsed.data.status === "TAMAMLANDI") updateData.checkedOutAt = new Date();
+
+  await prisma.hizmet.update({ where: { id }, data: updateData });
+  await logAudit({
+    userId: user.userId,
+    action: "UPDATE",
+    entity: "Hizmet",
+    entityId: id,
+    newValues: { studentId, status: parsed.data.status },
+  });
+  revalidatePath(`/dashboard/musteriler/${studentId}`);
+  return {};
+}
+
 export async function deleteHizmet(id: string, studentId: string): Promise<{ error?: string }> {
   const user = await requireAdminOrReception();
   await prisma.hizmet.update({ where: { id }, data: { isActive: false } });

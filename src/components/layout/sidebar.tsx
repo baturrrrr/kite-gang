@@ -9,7 +9,6 @@ import {
   UserCheck,
   Calendar,
   CalendarDays,
-  CheckSquare,
   Wallet,
   TrendingUp,
   Wrench,
@@ -20,7 +19,6 @@ import {
   ChevronRight,
   ConciergeBell,
   BarChart3,
-  Sun,
   ShoppingBag,
 } from "lucide-react";
 import { logout } from "@/app/actions/auth";
@@ -45,12 +43,6 @@ const navGroups: NavGroup[] = [
         label: "Dashboard",
         href: "/dashboard",
         icon: <LayoutDashboard className="w-[17px] h-[17px]" />,
-        roles: ["ADMIN", "RECEPTION", "INSTRUCTOR"],
-      },
-      {
-        label: "Bugün",
-        href: "/dashboard/bugun",
-        icon: <Sun className="w-[17px] h-[17px]" />,
         roles: ["ADMIN", "RECEPTION", "INSTRUCTOR"],
       },
     ],
@@ -97,12 +89,6 @@ const navGroups: NavGroup[] = [
         label: "Rezervasyonlar",
         href: "/dashboard/rezervasyonlar",
         icon: <CalendarDays className="w-[17px] h-[17px]" />,
-        roles: ["ADMIN", "RECEPTION", "INSTRUCTOR"],
-      },
-      {
-        label: "Günlük Operasyon",
-        href: "/dashboard/operasyon",
-        icon: <CheckSquare className="w-[17px] h-[17px]" />,
         roles: ["ADMIN", "RECEPTION", "INSTRUCTOR"],
       },
     ],

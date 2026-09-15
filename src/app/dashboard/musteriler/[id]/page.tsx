@@ -16,13 +16,11 @@ import {
   CreditCard,
   GraduationCap,
   Wrench,
-  ShoppingBag,
   ConciergeBell,
   TrendingDown,
   TrendingUp,
   Wallet,
   PackageCheck,
-  CalendarDays,
   Cake,
   Weight,
 } from "lucide-react";
@@ -31,35 +29,11 @@ import { format } from "date-fns";
 import { tr } from "date-fns/locale";
 import { StudentEditForm } from "./edit-form";
 import { AssignHizmetDialog } from "./assign-hizmet-dialog";
-import { HizmetRowActions } from "./hizmet-row-actions";
+import { HizmetDetailDialog } from "./hizmet-detail-dialog";
 import { OdemeDialog } from "./odeme-dialog";
 import { formatTRY, toTRY } from "@/lib/currency";
 import { getExchangeRates } from "@/lib/exchange-rates";
 
-const CAT_ICON: Record<string, any> = {
-  EGITIM: GraduationCap,
-  KIRALAMA: Wrench,
-  URUN: ShoppingBag,
-  ETKINLIK: CalendarDays,
-};
-const CAT_LABEL: Record<string, string> = {
-  EGITIM: "Eğitim",
-  KIRALAMA: "Kiralama",
-  URUN: "Ürün",
-  ETKINLIK: "Etkinlik",
-};
-const STATUS_STYLE: Record<string, string> = {
-  BEKLIYOR:   "bg-yellow-100 text-yellow-700 border-yellow-200",
-  DEVAM:      "bg-blue-100 text-blue-700 border-blue-200",
-  TAMAMLANDI: "bg-green-100 text-green-700 border-green-200",
-  IPTAL:      "bg-red-100 text-red-500 border-red-200",
-};
-const STATUS_LABEL: Record<string, string> = {
-  BEKLIYOR: "Bekliyor",
-  DEVAM: "Devam Ediyor",
-  TAMAMLANDI: "Tamamlandı",
-  IPTAL: "İptal",
-};
 
 export default async function MusteriDetailPage({
   params,
@@ -312,52 +286,38 @@ export default async function MusteriDetailPage({
                 />
               </div>
             </CardHeader>
-            <CardContent>
+            <CardContent className="p-0">
               {student.hizmetler.length === 0 ? (
-                <p className="text-sm text-gray-400 text-center py-4">Henüz hizmet eklenmemiş</p>
+                <p className="text-sm text-gray-400 text-center py-6">Henüz hizmet eklenmemiş</p>
               ) : (
-                <div className="divide-y">
-                  {student.hizmetler.map((h) => {
-                    const Icon = CAT_ICON[h.category] ?? ConciergeBell;
-                    return (
-                      <div key={h.id} className="py-3 flex items-center gap-3">
-                        <div className="p-1.5 rounded-md bg-gray-100 text-gray-500 flex-shrink-0">
-                          <Icon className="w-3.5 h-3.5" />
-                        </div>
-                        <div className="flex-1 min-w-0">
-                          <p className="text-sm font-medium text-gray-900">{h.title}</p>
-                          <div className="flex items-center gap-2 mt-0.5 text-xs text-gray-500">
-                            <span>{CAT_LABEL[h.category]}</span>
-                            {h.instructor && <span>· {h.instructor.user.name}</span>}
-                            {h.scheduledAt && (
-                              <span>· {format(new Date(h.scheduledAt), "d MMM HH:mm", { locale: tr })}</span>
-                            )}
-                            {h.checkedInAt && (
-                              <span className="text-blue-500">
-                                · Giriş: {format(new Date(h.checkedInAt), "HH:mm")}
-                              </span>
-                            )}
-                            {h.checkedOutAt && (
-                              <span className="text-green-600">
-                                · Çıkış: {format(new Date(h.checkedOutAt), "HH:mm")}
-                              </span>
-                            )}
-                          </div>
-                        </div>
-                        <div className="text-right flex-shrink-0">
-                          {h.amount > 0 && (
-                            <p className="text-sm font-semibold text-gray-900">{formatTRY(h.amount, h.currency, rates)}</p>
-                          )}
-                        </div>
-                        <div className="flex items-center gap-2 flex-shrink-0">
-                          <Badge variant="outline" className={`text-xs ${STATUS_STYLE[h.status] ?? ""}`}>
-                            {STATUS_LABEL[h.status] ?? h.status}
-                          </Badge>
-                          <HizmetRowActions id={h.id} studentId={student.id} status={h.status} />
-                        </div>
-                      </div>
-                    );
-                  })}
+                <div>
+                  {/* Tablo başlığı */}
+                  <div
+                    style={{
+                      display: "grid",
+                      gridTemplateColumns: "36px 1fr auto auto auto",
+                      alignItems: "center",
+                      gap: 12,
+                      padding: "8px 16px",
+                      borderBottom: "1px solid #f3f4f6",
+                      background: "#f9fafb",
+                    }}
+                  >
+                    <div />
+                    <span style={{ fontSize: 11, fontWeight: 600, color: "#9ca3af", textTransform: "uppercase", letterSpacing: "0.08em" }}>Hizmet</span>
+                    <span style={{ fontSize: 11, fontWeight: 600, color: "#9ca3af", textTransform: "uppercase", letterSpacing: "0.08em" }}>Kategori</span>
+                    <span style={{ fontSize: 11, fontWeight: 600, color: "#9ca3af", textTransform: "uppercase", letterSpacing: "0.08em" }}>Durum</span>
+                    <span style={{ fontSize: 11, fontWeight: 600, color: "#9ca3af", textTransform: "uppercase", letterSpacing: "0.08em", textAlign: "right" }}>Tutar</span>
+                  </div>
+                  {/* Satırlar */}
+                  {student.hizmetler.map((h) => (
+                    <HizmetDetailDialog
+                      key={h.id}
+                      hizmet={h}
+                      studentId={student.id}
+                      instructors={instructors}
+                    />
+                  ))}
                 </div>
               )}
             </CardContent>

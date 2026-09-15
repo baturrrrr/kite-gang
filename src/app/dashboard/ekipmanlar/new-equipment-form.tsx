@@ -51,14 +51,14 @@ export function NewEquipmentForm() {
           </div>
 
           <div className="space-y-1.5">
-            <Label htmlFor="name">Ad *</Label>
-            <Input id="name" name="name" required placeholder="12m Cabrinha Switchblade" />
+            <Label htmlFor="name">Marka *</Label>
+            <Input id="name" name="name" required placeholder="Cabrinha, North, Duotone..." />
           </div>
 
           <div className="grid grid-cols-2 gap-3">
             <div className="space-y-1.5">
-              <Label>Marka</Label>
-              <Input name="brand" placeholder="Cabrinha, North..." />
+              <Label>Model</Label>
+              <Input name="brand" placeholder="Switchblade, Dice..." />
             </div>
             <div className="space-y-1.5">
               <Label>Boyut</Label>
@@ -66,9 +66,15 @@ export function NewEquipmentForm() {
             </div>
           </div>
 
-          <div className="space-y-1.5">
-            <Label>Notlar</Label>
-            <Input name="notes" placeholder="Ekstra bilgi..." />
+          <div className="grid grid-cols-2 gap-3">
+            <div className="space-y-1.5">
+              <Label htmlFor="quantity">Adet *</Label>
+              <Input id="quantity" name="quantity" type="number" min={1} defaultValue={1} required />
+            </div>
+            <div className="space-y-1.5">
+              <Label>Notlar</Label>
+              <Input name="notes" placeholder="Ekstra bilgi..." />
+            </div>
           </div>
 
           <div className="flex gap-2 justify-end">

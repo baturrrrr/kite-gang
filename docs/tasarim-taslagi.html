@@ -1,0 +1,713 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kite Gang Corner Arayüz Taslağı</title>
+
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&amp;family=Manrope:wght@400;500;600;700;800&amp;display=swap">
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; background: #0B0D10; color: #F3F5F2; font-family: 'Manrope', 'Segoe UI', system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+    a { color: #D7FF3F; text-decoration: none; }
+    a:hover { color: #E9FF99; }
+    h1, h2, h3, p { margin: 0; }
+    .d { font-family: 'Barlow Condensed', 'Arial Narrow', 'Roboto Condensed', sans-serif; text-transform: uppercase; }
+    .n { font-family: 'Barlow Condensed', 'Arial Narrow', 'Roboto Condensed', sans-serif; font-variant-numeric: tabular-nums; }
+    .lbl { font-size: 11px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: #8A929C; }
+    .card { background: #14181D; border: 1px solid #232930; border-radius: 12px; }
+    .pill { display: inline-flex; align-items: center; gap: 6px; height: 24px; padding: 0 10px; border-radius: 999px; font-size: 12px; font-weight: 700; white-space: nowrap; }
+    .p-lime { background: rgba(215, 255, 63, 0.12); color: #D7FF3F; }
+    .p-red { background: rgba(255, 122, 102, 0.14); color: #FF7A66; }
+    .p-amber { background: rgba(255, 196, 107, 0.14); color: #FFC46B; }
+    .p-cyan { background: rgba(111, 220, 255, 0.14); color: #6FDCFF; }
+    .p-gray { background: #1B2027; color: #AEB5BE; }
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; height: 40px; padding: 0 16px; border-radius: 8px; font-size: 14px; font-weight: 800; border: 1px solid transparent; white-space: nowrap; }
+    .btn-lime { background: #D7FF3F; color: #0B0D10; }
+    .btn-ghost { background: transparent; color: #F3F5F2; border-color: #2C333B; }
+    .icon-btn { display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 8px; border: 1px solid #2C333B; color: #F3F5F2; background: #14181D; }
+    .muted { color: #8A929C; }
+    .th { font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #5C646E; }
+
+  </style>
+
+<style>
+  html, body { background: #1f2328 !important; }
+  .wrap { max-width: 1500px; margin: 0 auto; padding: 32px 24px 80px; font-family: 'Manrope', system-ui, sans-serif; color: #F3F5F2; }
+  .wrap > h1 { font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; text-transform: uppercase; font-size: 44px; font-weight: 800; margin: 0 0 6px; }
+  .wrap > p { color: #8A929C; margin: 0 0 32px; font-size: 14px; max-width: 820px; line-height: 1.5; }
+  .shot { margin-bottom: 40px; }
+  .shot h2 { font-size: 13px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #8A929C; margin: 0 0 10px; }
+  .frame { overflow: hidden; border-radius: 12px; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.45); background: #0B0D10; }
+  .inner { transform-origin: top left; }
+  .mobiles { display: flex; flex-wrap: wrap; gap: 32px; align-items: flex-start; }
+  .mobiles .frame { border-radius: 28px; border: 6px solid #2a2f35; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Kite Gang Corner — arayüz taslağı</h1>
+  <p>Cesur spor markası yönü: koyu zemin, elektrik yeşili vurgu, Barlow Condensed başlıklar. Grafik, bugünkü dersler, bugün gelir ve rüzgar değerleri örnek veridir; müşteri, kasa ve hakediş rakamları geliştirme veritabanından alınmıştır.</p>
+  <section class="shot desktop"><h2>Dashboard — masaüstü</h2><div class="frame" data-w="1440"><div class="inner">
+<div style="width: 1440px; height: 960px; display: flex; background: #0B0D10; overflow: hidden">
+  <aside style="width: 248px; height: 960px; flex-shrink: 0; background: #08090B; border-right: 1px solid #15191E; display: flex; flex-direction: column">
+    <div style="height: 76px; display: flex; align-items: center; padding: 0 22px"><div style="display: flex; align-items: center; gap: 10px">
+      <div style="width: 36px; height: 36px; border-radius: 8px; background: #D7FF3F; display: flex; align-items: center; justify-content: center"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#0B0D10" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; "><path d="M17.7 7.7a2.5 2.5 0 1 1 1.8 4.3H2"></path><path d="M9.6 4.6A2 2 0 1 1 11 8H2"></path><path d="M12.6 19.4A2 2 0 1 0 14 16H2"></path></svg></div>
+      <div style="display: flex; flex-direction: column; line-height: 1">
+        <span class="d" lang="en" style="font-size: 20px; font-weight: 800; letter-spacing: 0.02em">Kite Gang</span>
+        <span style="font-size: 9px; font-weight: 800; letter-spacing: 0.34em; color: #D7FF3F; margin-top: 3px">CORNER</span>
+      </div>
+    </div></div>
+    <nav style="flex: 1; display: flex; flex-direction: column; gap: 20px; padding: 12px 14px 0 24px"><div style="display: flex; flex-direction: column; gap: 2px"><div style="position: relative; display: flex; align-items: center; gap: 12px; height: 38px; padding: 0 12px; border-radius: 8px; font-size: 14px; font-weight: 700; color: #F3F5F2; background: #161B21"><span style="position: absolute; left: -12px; top: 9px; width: 3px; height: 20px; border-radius: 0 3px 3px 0; background: #D7FF3F"></span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#D7FF3F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; "><rect x="3" y="3" width="7" height="9" rx="1"></rect><rect x="14" y="3" width="7" height="5" rx="1"></rect><rect x="14" y="12" width="7" height="9" rx="1"></rect><rect x="3" y="16" width="7" height="5" rx="1"></rect></svg><span>Dashboard</span></div></div><div style="display: flex; flex-direction: column; gap: 2px"><div class="lbl" style="font-size: 10px; color: #4E565F; padding: 0 12px; margin-bottom: 6px">Yönetim</div><div style="position: relative; display: flex; align-items: center; gap: 12px; height: 38px; padding: 0 12px; border-radius: 8px; font-size: 14px; font-weight: 600; color: #9AA2AB; background: transparent"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#6B737D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; "><path d="M22 10 12 5 2 10l10 5 10-5Z"></path><path d="M6 12v5c3 3 9 3 12 0v-5"></path><path d="M22 10v6"></path></svg><span>Hizmetler</span></div><div style="position: relative; display: flex; align-items: center; gap: 12px; height: 38px; padding: 0 12px; border-radius: 8px; font-size: 14px; font-weight: 600; color: #9AA2AB; background: transparent"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#6B737D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; "><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M22 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg><span>Müşteriler</span></div><div style="position: relative; display: flex; align-items: center; gap: 12px; height: 38px; padding: 0 12px; border-radius: 8px; font-size: 14px; font-weight: 600; color: #9AA2AB; background: transparent"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#6B737D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; "><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="m16 11 2 2 4-4"></path></svg><span>Eğitmenler</span></div><div style="position: relative; display: flex; align-items: center; gap: 12px; height: 38px; padding: 0 12px; border-radius: 8px; font-size: 14px; font-weight: 600; color: #9AA2AB; background: transparent"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#6B737D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; "><path d="M3 3v18h18"></path><path d="M18 17V9"></path><path d="M13 17V5"></path><path d="M8 17v-3"></path></svg><span>Performans Özeti</span></div></div><div style="display: flex; flex-direction: column; gap: 2px"><div class="lbl" style="font-size: 10px; color: #4E565F; padding: 0 12px; margin-bottom: 6px">Planlama</div><div style="position: relative; display: flex; align-items: center; gap: 12px; height: 38px; padding: 0 12px; border-radius: 8px; font-size: 14px; font-weight: 600; color: #9AA2AB; background: transparent"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#6B737D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; "><rect x="3" y="4" width="18" height="18" rx="2"></rect><path d="M16 2v4"></path><path d="M8 2v4"></path><path d="M3 10h18"></path></svg><span>Takvim</span></div><div style="position: relative; display: flex; align-items: center; gap: 12px; height: 38px; padding: 0 12px; border-radius: 8px; font-size: 14px; font-weight: 600; color: #9AA2AB; background: transparent"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#6B737D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; "><rect x="3" y="4" width="18" height="18" rx="2"></rect><path d="M16 2v4"></path><path d="M8 2v4"></path><path d="M3 10h18"></path><path d="M8 14h.01"></path><path d="M12 14h.01"></path><path d="M16 14h.01"></path><path d="M8 18h.01"></path><path d="M12 18h.01"></path></svg><span>Rezervasyonlar</span></div></div><div style="display: flex; flex-direction: column; gap: 2px"><div class="lbl" style="font-size: 10px; color: #4E565F; padding: 0 12px; margin-bottom: 6px">Finans</div><div style="position: relative; display: flex; align-items: center; gap: 12px; height: 38px; padding: 0 12px; border-radius: 8px; font-size: 14px; font-weight: 600; color: #9AA2AB; background: transparent"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#6B737D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; "><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"></path><path d="M3 6h18"></path><path d="M16 10a4 4 0 0 1-8 0"></path></svg><span>Satışlar</span></div><div style="position: relative; display: flex; align-items: center; gap: 12px; height: 38px; padding: 0 12px; border-radius: 8px; font-size: 14px; font-weight: 600; color: #9AA2AB; background: transparent"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#6B737D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; "><path d="M19 7V4a1 1 0 0 0-1-1H5a2 2 0 0 0 0 4h15a1 1 0 0 1 1 1v4h-3a2 2 0 0 0 0 4h3a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1"></path><path d="M3 5v14a2 2 0 0 0 2 2h15a1 1 0 0 0 1-1v-4"></path></svg><span>Kasa & Ödemeler</span></div><div style="position: relative; display: flex; align-items: center; gap: 12px; height: 38px; padding: 0 12px; border-radius: 8px; font-size: 14px; font-weight: 600; color: #9AA2AB; background: transparent"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#6B737D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; "><path d="M22 7 13.5 15.5 8.5 10.5 2 17"></path><path d="M16 7h6v6"></path></svg><span>Raporlar</span></div></div><div style="display: flex; flex-direction: column; gap: 2px"><div class="lbl" style="font-size: 10px; color: #4E565F; padding: 0 12px; margin-bottom: 6px">Diğer</div><div style="position: relative; display: flex; align-items: center; gap: 12px; height: 38px; padding: 0 12px; border-radius: 8px; font-size: 14px; font-weight: 600; color: #9AA2AB; background: transparent"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#6B737D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; "><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76Z"></path></svg><span>Ekipmanlar</span></div><div style="position: relative; display: flex; align-items: center; gap: 12px; height: 38px; padding: 0 12px; border-radius: 8px; font-size: 14px; font-weight: 600; color: #9AA2AB; background: transparent"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#6B737D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; "><path d="M4 21v-7"></path><path d="M4 10V3"></path><path d="M12 21v-9"></path><path d="M12 8V3"></path><path d="M20 21v-5"></path><path d="M20 12V3"></path><path d="M1 14h6"></path><path d="M9 8h6"></path><path d="M17 16h6"></path></svg><span>Ayarlar</span></div></div></nav>
+    <div style="margin: 14px; padding: 12px; border-radius: 10px; background: #111418; display: flex; align-items: center; gap: 10px">
+      <div style="width: 34px; height: 34px; border-radius: 999px; background: rgba(215, 255, 63, 0.14); color: #D7FF3F; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 800">AK</div>
+      <div style="flex: 1; display: flex; flex-direction: column; gap: 2px">
+        <span style="font-size: 13px; font-weight: 700">Admin Kullanıcı</span>
+        <span style="font-size: 11px; color: #8A929C">Admin</span>
+      </div>
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#6B737D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; "><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><path d="m16 17 5-5-5-5"></path><path d="M21 12H9"></path></svg>
+    </div>
+  </aside>
+  <main style="flex: 1; height: 960px; overflow: hidden; padding: 30px 36px; display: flex; flex-direction: column; gap: 22px; background: radial-gradient(900px 360px at 92% -8%, rgba(215, 255, 63, 0.06), transparent 70%), #0B0D10">
+    <div style="display: flex; align-items: flex-end; justify-content: space-between; gap: 24px">
+      <div style="display: flex; flex-direction: column; gap: 8px">
+        <div style="display: flex; align-items: center; gap: 8px"><span style="width: 8px; height: 8px; border-radius: 2px; background: #D7FF3F"></span><span class="lbl" style="color: #D7FF3F">15 Eylül 2026 · Salı</span></div>
+        <div style="display: flex; align-items: baseline; gap: 14px"><h1 class="d" style="font-size: 56px; line-height: 0.92; font-weight: 800; letter-spacing: 0.005em">Hoş geldin, Admin</h1></div>
+      </div>
+      <div style="display: flex; align-items: center; gap: 10px"><div style="width: 260px; height: 40px; border-radius: 8px; background: #14181D; border: 1px solid #2C333B; display: flex; align-items: center; gap: 10px; padding: 0 12px; color: #5C646E; font-size: 14px"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#5C646E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; "><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"></path></svg><span>Müşteri, rezervasyon ara</span></div><span class="icon-btn"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; "><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"></path><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"></path></svg></span><span class="btn btn-lime"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0B0D10" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; "><path d="M5 12h14"></path><path d="M12 5v14"></path></svg>Yeni Rezervasyon</span></div>
+    </div>
+    <div style="display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 14px">
+      <div style="border-radius: 12px; background: #D7FF3F; color: #0B0D10; padding: 18px 18px 16px; display: flex; flex-direction: column; gap: 14px">
+        <div style="display: flex; align-items: center; justify-content: space-between"><span class="lbl" style="color: rgba(11, 13, 16, 0.62)">Bugün gelir</span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0B0D10" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; "><path d="M22 7 13.5 15.5 8.5 10.5 2 17"></path><path d="M16 7h6v6"></path></svg></div>
+        <div style="display: flex; flex-direction: column; gap: 4px">
+          <span class="n" style="font-size: 42px; line-height: 1; font-weight: 800">₺4.493,09</span>
+          <span style="font-size: 12px; font-weight: 600; color: rgba(11, 13, 16, 0.7)">2 tahsilat · kasaya işlendi</span>
+        </div>
+      </div>
+      <div class="card" style="padding: 18px 18px 16px; display: flex; flex-direction: column; gap: 14px">
+        <div style="display: flex; align-items: center; justify-content: space-between"><span class="lbl">Müşteriler</span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#6B737D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; "><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M22 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg></div>
+        <div style="display: flex; flex-direction: column; gap: 4px">
+          <span class="n" style="font-size: 42px; line-height: 1; font-weight: 700">11</span>
+          <span style="font-size: 12px; color: #8A929C">Bu ay 4 ders</span>
+        </div>
+      </div>
+      <div class="card" style="padding: 18px 18px 16px; display: flex; flex-direction: column; gap: 14px">
+        <div style="display: flex; align-items: center; justify-content: space-between"><span class="lbl">Bugün seans</span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#6B737D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; "><rect x="3" y="4" width="18" height="18" rx="2"></rect><path d="M16 2v4"></path><path d="M8 2v4"></path><path d="M3 10h18"></path></svg></div>
+        <div style="display: flex; flex-direction: column; gap: 4px">
+          <span class="n" style="font-size: 42px; line-height: 1; font-weight: 700">4</span>
+          <span style="font-size: 12px; color: #8A929C">1 suda · 3 planlandı</span>
+        </div>
+      </div>
+      <div class="card" style="padding: 18px 18px 16px; display: flex; flex-direction: column; gap: 14px">
+        <div style="display: flex; align-items: center; justify-content: space-between"><span class="lbl">Kasa</span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#6B737D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; "><path d="M19 7V4a1 1 0 0 0-1-1H5a2 2 0 0 0 0 4h15a1 1 0 0 1 1 1v4h-3a2 2 0 0 0 0 4h3a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1"></path><path d="M3 5v14a2 2 0 0 0 2 2h15a1 1 0 0 0 1-1v-4"></path></svg></div>
+        <div style="display: flex; flex-direction: column; gap: 4px">
+          <span class="n" style="font-size: 42px; line-height: 1; font-weight: 700">₺1,03M</span>
+          <span style="font-size: 12px; color: #8A929C">3 hesap · TL karşılığı</span>
+        </div>
+      </div>
+      <div class="card" style="padding: 18px 18px 16px; display: flex; flex-direction: column; gap: 14px">
+        <div style="display: flex; align-items: center; justify-content: space-between"><span class="lbl">Rüzgar</span><span class="pill p-lime" style="height: 22px">İdeal</span></div>
+        <div style="display: flex; align-items: baseline; gap: 6px">
+          <span class="n" style="font-size: 42px; line-height: 1; font-weight: 700">16</span><span class="d" style="font-size: 16px; font-weight: 700; color: #8A929C">kn</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#D7FF3F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; margin-left: 6px; transform: rotate(210deg)"><path d="m3 11 19-9-9 19-2-8-8-2Z"></path></svg>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 6px">
+          <div style="position: relative; height: 6px; display: flex; gap: 3px">
+            <span style="flex: 10; border-radius: 3px; background: #2A3038"></span>
+            <span style="flex: 15; border-radius: 3px; background: rgba(215, 255, 63, 0.45)"></span>
+            <span style="flex: 10; border-radius: 3px; background: #2A3038"></span>
+            <span style="position: absolute; left: calc(45.7% - 5px); top: -3px; width: 10px; height: 12px; border-radius: 3px; background: #D7FF3F; box-shadow: 0 0 0 2px #14181D"></span>
+          </div>
+          <span style="font-size: 12px; color: #8A929C">GGB · 21 kn hamle · 24°C</span>
+        </div>
+      </div>
+    </div>
+    <div style="flex: 1; display: flex; gap: 14px; min-height: 0">
+      <div class="card" style="flex: 1; padding: 22px 24px; display: flex; flex-direction: column; gap: 18px">
+        <div style="display: flex; align-items: flex-start; justify-content: space-between">
+          <div style="display: flex; flex-direction: column; gap: 8px">
+            <span class="lbl">Son 30 gün · Gelir</span>
+            <div style="display: flex; align-items: center; gap: 12px">
+              <span class="n" style="font-size: 40px; line-height: 1; font-weight: 700">₺224.620,00</span>
+              <span class="pill p-lime"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#D7FF3F" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; "><path d="M7 17 17 7"></path><path d="M7 7h10v10"></path></svg>%14</span>
+              <span style="font-size: 13px; color: #8A929C">önceki 30 güne göre</span>
+            </div>
+          </div>
+          <div style="display: flex; padding: 3px; border-radius: 8px; background: #0B0D10; border: 1px solid #232930">
+            <span style="padding: 6px 12px; font-size: 12px; font-weight: 700; color: #8A929C">7G</span>
+            <span style="padding: 6px 12px; font-size: 12px; font-weight: 800; color: #0B0D10; background: #D7FF3F; border-radius: 6px">30G</span>
+            <span style="padding: 6px 12px; font-size: 12px; font-weight: 700; color: #8A929C">90G</span>
+          </div>
+        </div>
+        <div style="display: flex; gap: 0">
+          <div style="position: relative; width: 44px; height: 410px"><span class="n" style="position: absolute; right: 10px; bottom: -7px; font-size: 13px; color: #5C646E">0</span><span class="n" style="position: absolute; right: 10px; bottom: 130px; font-size: 13px; color: #5C646E">5B</span><span class="n" style="position: absolute; right: 10px; bottom: 266px; font-size: 13px; color: #5C646E">10B</span><span class="n" style="position: absolute; right: 10px; bottom: 403px; font-size: 13px; color: #5C646E">15B</span></div>
+          <div style="flex: 1; display: flex; flex-direction: column; gap: 10px">
+            <div style="position: relative; height: 410px; display: flex; gap: 6px; border-bottom: 1px solid #2C333B"><div style="position: absolute; left: 0; right: 0; bottom: 137px; border-top: 1px dashed #242A31"></div><div style="position: absolute; left: 0; right: 0; bottom: 273px; border-top: 1px dashed #242A31"></div><div style="position: absolute; left: 0; right: 0; bottom: 410px; border-top: 1px dashed #242A31"></div><div style="position: relative; flex: 1; height: 410px; display: flex; align-items: flex-end"><div style="width: 100%; height: 115px; border-radius: 4px 4px 0 0; background: rgba(215, 255, 63, 0.62)"></div></div><div style="position: relative; flex: 1; height: 410px; display: flex; align-items: flex-end"><div style="width: 100%; height: 186px; border-radius: 4px 4px 0 0; background: rgba(215, 255, 63, 0.62)"></div></div><div style="position: relative; flex: 1; height: 410px; display: flex; align-items: flex-end"><div style="width: 100%; height: 85px; border-radius: 4px 4px 0 0; background: rgba(215, 255, 63, 0.62)"></div></div><div style="position: relative; flex: 1; height: 410px; display: flex; align-items: flex-end"><div style="width: 100%; height: 202px; border-radius: 4px 4px 0 0; background: rgba(215, 255, 63, 0.62)"></div></div><div style="position: relative; flex: 1; height: 410px; display: flex; align-items: flex-end"><div style="width: 100%; height: 262px; border-radius: 4px 4px 0 0; background: rgba(215, 255, 63, 0.62)"></div></div><div style="position: relative; flex: 1; height: 410px; display: flex; align-items: flex-end"><div style="width: 100%; height: 350px; border-radius: 4px 4px 0 0; background: rgba(215, 255, 63, 0.62)"></div></div><div style="position: relative; flex: 1; height: 410px; display: flex; align-items: flex-end"><div style="width: 100%; height: 306px; border-radius: 4px 4px 0 0; background: rgba(215, 255, 63, 0.62)"></div></div><div style="position: relative; flex: 1; height: 410px; display: flex; align-items: flex-end"><div style="width: 100%; height: 145px; border-radius: 4px 4px 0 0; background: rgba(215, 255, 63, 0.62)"></div></div><div style="position: relative; flex: 1; height: 410px; display: flex; align-items: flex-end"><div style="width: 100%; height: 131px; border-radius: 4px 4px 0 0; background: rgba(215, 255, 63, 0.62)"></div></div><div style="position: relative; flex: 1; height: 410px; display: flex; align-items: flex-end"><div style="width: 100%; height: 167px; border-radius: 4px 4px 0 0; background: rgba(215, 255, 63, 0.62)"></div></div><div style="position: relative; flex: 1; height: 410px; display: flex; align-items: flex-end"><div style="width: 100%; height: 243px; border-radius: 4px 4px 0 0; background: rgba(215, 255, 63, 0.62)"></div></div><div style="position: relative; flex: 1; height: 410px; display: flex; align-items: flex-end"><div style="width: 100%; height: 210px; border-radius: 4px 4px 0 0; background: rgba(215, 255, 63, 0.62)"></div></div><div style="position: relative; flex: 1; height: 410px; display: flex; align-items: flex-end"><div style="width: 100%; height: 372px; border-radius: 4px 4px 0 0; background: rgba(215, 255, 63, 0.62)"></div></div><div style="position: relative; flex: 1; height: 410px; display: flex; align-items: flex-end"><div style="width: 100%; height: 331px; border-radius: 4px 4px 0 0; background: rgba(215, 255, 63, 0.62)"></div></div><div style="position: relative; flex: 1; height: 410px; display: flex; align-items: flex-end"><div style="width: 100%; height: 120px; border-radius: 4px 4px 0 0; background: rgba(215, 255, 63, 0.62)"></div></div><div style="position: relative; flex: 1; height: 410px; display: flex; align-items: flex-end"><div style="width: 100%; height: 161px; border-radius: 4px 4px 0 0; background: rgba(215, 255, 63, 0.62)"></div></div><div style="position: relative; flex: 1; height: 410px; display: flex; align-items: flex-end"><div style="width: 100%; height: 197px; border-radius: 4px 4px 0 0; background: rgba(215, 255, 63, 0.62)"></div></div><div style="position: relative; flex: 1; height: 410px; display: flex; align-items: flex-end"><div style="width: 100%; height: 180px; border-radius: 4px 4px 0 0; background: rgba(215, 255, 63, 0.62)"></div></div><div style="position: relative; flex: 1; height: 410px; display: flex; align-items: flex-end"><div style="width: 100%; height: 268px; border-radius: 4px 4px 0 0; background: rgba(215, 255, 63, 0.62)"></div></div><div style="position: relative; flex: 1; height: 410px; display: flex; align-items: flex-end"><span class="n" style="position: absolute; bottom: 396px; left: 50%; transform: translateX(-50%); font-size: 15px; font-weight: 700; color: #F3F5F2; white-space: nowrap">₺14.200</span><div style="width: 100%; height: 388px; border-radius: 4px 4px 0 0; background: #D7FF3F"></div></div><div style="position: relative; flex: 1; height: 410px; display: flex; align-items: flex-end"><div style="width: 100%; height: 284px; border-radius: 4px 4px 0 0; background: rgba(215, 255, 63, 0.62)"></div></div><div style="position: relative; flex: 1; height: 410px; display: flex; align-items: flex-end"><div style="width: 100%; height: 104px; border-radius: 4px 4px 0 0; background: rgba(215, 255, 63, 0.62)"></div></div><div style="position: relative; flex: 1; height: 410px; display: flex; align-items: flex-end"><div style="width: 100%; height: 139px; border-radius: 4px 4px 0 0; background: rgba(215, 255, 63, 0.62)"></div></div><div style="position: relative; flex: 1; height: 410px; display: flex; align-items: flex-end"><div style="width: 100%; height: 189px; border-radius: 4px 4px 0 0; background: rgba(215, 255, 63, 0.62)"></div></div><div style="position: relative; flex: 1; height: 410px; display: flex; align-items: flex-end"><div style="width: 100%; height: 227px; border-radius: 4px 4px 0 0; background: rgba(215, 255, 63, 0.62)"></div></div><div style="position: relative; flex: 1; height: 410px; display: flex; align-items: flex-end"><div style="width: 100%; height: 216px; border-radius: 4px 4px 0 0; background: rgba(215, 255, 63, 0.62)"></div></div><div style="position: relative; flex: 1; height: 410px; display: flex; align-items: flex-end"><div style="width: 100%; height: 317px; border-radius: 4px 4px 0 0; background: rgba(215, 255, 63, 0.62)"></div></div><div style="position: relative; flex: 1; height: 410px; display: flex; align-items: flex-end"><div style="width: 100%; height: 249px; border-radius: 4px 4px 0 0; background: rgba(215, 255, 63, 0.62)"></div></div><div style="position: relative; flex: 1; height: 410px; display: flex; align-items: flex-end"><div style="width: 100%; height: 175px; border-radius: 4px 4px 0 0; background: rgba(215, 255, 63, 0.62)"></div></div><div style="position: relative; flex: 1; height: 410px; display: flex; align-items: flex-end"><div style="width: 100%; height: 123px; border-radius: 4px 4px 0 0; background: #D7FF3F"></div></div></div>
+            <div style="display: flex; gap: 6px"><span style="flex: 1; font-size: 11px; color: #5C646E; white-space: nowrap">17 Ağu</span><span style="flex: 1; font-size: 11px; color: #5C646E; white-space: nowrap"></span><span style="flex: 1; font-size: 11px; color: #5C646E; white-space: nowrap"></span><span style="flex: 1; font-size: 11px; color: #5C646E; white-space: nowrap"></span><span style="flex: 1; font-size: 11px; color: #5C646E; white-space: nowrap"></span><span style="flex: 1; font-size: 11px; color: #5C646E; white-space: nowrap"></span><span style="flex: 1; font-size: 11px; color: #5C646E; white-space: nowrap"></span><span style="flex: 1; font-size: 11px; color: #5C646E; white-space: nowrap">24 Ağu</span><span style="flex: 1; font-size: 11px; color: #5C646E; white-space: nowrap"></span><span style="flex: 1; font-size: 11px; color: #5C646E; white-space: nowrap"></span><span style="flex: 1; font-size: 11px; color: #5C646E; white-space: nowrap"></span><span style="flex: 1; font-size: 11px; color: #5C646E; white-space: nowrap"></span><span style="flex: 1; font-size: 11px; color: #5C646E; white-space: nowrap"></span><span style="flex: 1; font-size: 11px; color: #5C646E; white-space: nowrap"></span><span style="flex: 1; font-size: 11px; color: #5C646E; white-space: nowrap">31 Ağu</span><span style="flex: 1; font-size: 11px; color: #5C646E; white-space: nowrap"></span><span style="flex: 1; font-size: 11px; color: #5C646E; white-space: nowrap"></span><span style="flex: 1; font-size: 11px; color: #5C646E; white-space: nowrap"></span><span style="flex: 1; font-size: 11px; color: #5C646E; white-space: nowrap"></span><span style="flex: 1; font-size: 11px; color: #5C646E; white-space: nowrap"></span><span style="flex: 1; font-size: 11px; color: #5C646E; white-space: nowrap"></span><span style="flex: 1; font-size: 11px; color: #5C646E; white-space: nowrap">7 Eyl</span><span style="flex: 1; font-size: 11px; color: #5C646E; white-space: nowrap"></span><span style="flex: 1; font-size: 11px; color: #5C646E; white-space: nowrap"></span><span style="flex: 1; font-size: 11px; color: #5C646E; white-space: nowrap"></span><span style="flex: 1; font-size: 11px; color: #5C646E; white-space: nowrap"></span><span style="flex: 1; font-size: 11px; color: #5C646E; white-space: nowrap"></span><span style="flex: 1; font-size: 11px; color: #5C646E; white-space: nowrap"></span><span style="flex: 1; font-size: 11px; color: #5C646E; white-space: nowrap"></span><span style="flex: 1; font-size: 11px; color: #5C646E; white-space: nowrap">15 Eyl</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="card" style="width: 420px; padding: 22px 24px 8px; display: flex; flex-direction: column">
+        <div style="display: flex; align-items: center; justify-content: space-between; padding-bottom: 14px">
+          <div style="display: flex; align-items: center; gap: 10px"><span class="d" style="font-size: 24px; font-weight: 800">Bugünkü dersler</span><span class="pill p-gray">4</span></div>
+          <a href="#" style="display: flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 700">Operasyon<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#D7FF3F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; "><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg></a>
+        </div>
+        <div style="display: flex; align-items: center; gap: 14px; padding: 13px 0; border-top: 1px solid #232930">
+            <div style="width: 56px; display: flex; flex-direction: column; line-height: 1">
+              <span class="n" style="font-size: 22px; font-weight: 700">09:00</span>
+              <span class="n" style="font-size: 13px; color: #5C646E; margin-top: 3px">11:00</span>
+            </div>
+            <div style="flex: 1; display: flex; flex-direction: column; gap: 4px">
+              <span style="font-size: 15px; font-weight: 700">John Smith</span>
+              <span style="display: flex; align-items: center; gap: 6px; font-size: 12px; color: #8A929C"><span style="width: 7px; height: 7px; border-radius: 999px; background: #4F8BFF"></span>Ahmet Kaya · Özel Ders</span>
+            </div>
+            <span class="pill p-cyan">Suda</span>
+          </div><div style="display: flex; align-items: center; gap: 14px; padding: 13px 0; border-top: 1px solid #232930">
+            <div style="width: 56px; display: flex; flex-direction: column; line-height: 1">
+              <span class="n" style="font-size: 22px; font-weight: 700">11:30</span>
+              <span class="n" style="font-size: 13px; color: #5C646E; margin-top: 3px">13:30</span>
+            </div>
+            <div style="flex: 1; display: flex; flex-direction: column; gap: 4px">
+              <span style="font-size: 15px; font-weight: 700">Maria Garcia</span>
+              <span style="display: flex; align-items: center; gap: 6px; font-size: 12px; color: #8A929C"><span style="width: 7px; height: 7px; border-radius: 999px; background: #3DD68C"></span>Fatma Demir · Yarı Özel</span>
+            </div>
+            <span class="pill p-gray">Planlandı</span>
+          </div><div style="display: flex; align-items: center; gap: 14px; padding: 13px 0; border-top: 1px solid #232930">
+            <div style="width: 56px; display: flex; flex-direction: column; line-height: 1">
+              <span class="n" style="font-size: 22px; font-weight: 700">14:00</span>
+              <span class="n" style="font-size: 13px; color: #5C646E; margin-top: 3px">15:00</span>
+            </div>
+            <div style="flex: 1; display: flex; flex-direction: column; gap: 4px">
+              <span style="font-size: 15px; font-weight: 700">Hans Müller</span>
+              <span style="display: flex; align-items: center; gap: 6px; font-size: 12px; color: #8A929C"><span style="width: 7px; height: 7px; border-radius: 999px; background: #4F8BFF"></span>Ahmet Kaya · Özel Ders</span>
+            </div>
+            <span class="pill p-gray">Planlandı</span>
+          </div><div style="display: flex; align-items: center; gap: 14px; padding: 13px 0; border-top: 1px solid #232930">
+            <div style="width: 56px; display: flex; flex-direction: column; line-height: 1">
+              <span class="n" style="font-size: 22px; font-weight: 700">16:30</span>
+              <span class="n" style="font-size: 13px; color: #5C646E; margin-top: 3px">18:00</span>
+            </div>
+            <div style="flex: 1; display: flex; flex-direction: column; gap: 4px">
+              <span style="font-size: 15px; font-weight: 700">Luca Rossi</span>
+              <span style="display: flex; align-items: center; gap: 6px; font-size: 12px; color: #8A929C"><span style="width: 7px; height: 7px; border-radius: 999px; background: #FFA24C"></span>Mehmet Arslan · Grup Dersi</span>
+            </div>
+            <span class="pill p-gray">Planlandı</span>
+          </div>
+      </div>
+    </div>
+  </main>
+</div>
+</div></div></section><section class="shot desktop"><h2>Müşteriler — masaüstü</h2><div class="frame" data-w="1440"><div class="inner">
+<div style="width: 1440px; height: 960px; display: flex; background: #0B0D10; overflow: hidden">
+  <aside style="width: 248px; height: 960px; flex-shrink: 0; background: #08090B; border-right: 1px solid #15191E; display: flex; flex-direction: column">
+    <div style="height: 76px; display: flex; align-items: center; padding: 0 22px"><div style="display: flex; align-items: center; gap: 10px">
+      <div style="width: 36px; height: 36px; border-radius: 8px; background: #D7FF3F; display: flex; align-items: center; justify-content: center"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#0B0D10" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; "><path d="M17.7 7.7a2.5 2.5 0 1 1 1.8 4.3H2"></path><path d="M9.6 4.6A2 2 0 1 1 11 8H2"></path><path d="M12.6 19.4A2 2 0 1 0 14 16H2"></path></svg></div>
+      <div style="display: flex; flex-direction: column; line-height: 1">
+        <span class="d" lang="en" style="font-size: 20px; font-weight: 800; letter-spacing: 0.02em">Kite Gang</span>
+        <span style="font-size: 9px; font-weight: 800; letter-spacing: 0.34em; color: #D7FF3F; margin-top: 3px">CORNER</span>
+      </div>
+    </div></div>
+    <nav style="flex: 1; display: flex; flex-direction: column; gap: 20px; padding: 12px 14px 0 24px"><div style="display: flex; flex-direction: column; gap: 2px"><div style="position: relative; display: flex; align-items: center; gap: 12px; height: 38px; padding: 0 12px; border-radius: 8px; font-size: 14px; font-weight: 600; color: #9AA2AB; background: transparent"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#6B737D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; "><rect x="3" y="3" width="7" height="9" rx="1"></rect><rect x="14" y="3" width="7" height="5" rx="1"></rect><rect x="14" y="12" width="7" height="9" rx="1"></rect><rect x="3" y="16" width="7" height="5" rx="1"></rect></svg><span>Dashboard</span></div></div><div style="display: flex; flex-direction: column; gap: 2px"><div class="lbl" style="font-size: 10px; color: #4E565F; padding: 0 12px; margin-bottom: 6px">Yönetim</div><div style="position: relative; display: flex; align-items: center; gap: 12px; height: 38px; padding: 0 12px; border-radius: 8px; font-size: 14px; font-weight: 600; color: #9AA2AB; background: transparent"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#6B737D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; "><path d="M22 10 12 5 2 10l10 5 10-5Z"></path><path d="M6 12v5c3 3 9 3 12 0v-5"></path><path d="M22 10v6"></path></svg><span>Hizmetler</span></div><div style="position: relative; display: flex; align-items: center; gap: 12px; height: 38px; padding: 0 12px; border-radius: 8px; font-size: 14px; font-weight: 700; color: #F3F5F2; background: #161B21"><span style="position: absolute; left: -12px; top: 9px; width: 3px; height: 20px; border-radius: 0 3px 3px 0; background: #D7FF3F"></span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#D7FF3F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; "><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M22 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg><span>Müşteriler</span></div><div style="position: relative; display: flex; align-items: center; gap: 12px; height: 38px; padding: 0 12px; border-radius: 8px; font-size: 14px; font-weight: 600; color: #9AA2AB; background: transparent"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#6B737D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; "><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="m16 11 2 2 4-4"></path></svg><span>Eğitmenler</span></div><div style="position: relative; display: flex; align-items: center; gap: 12px; height: 38px; padding: 0 12px; border-radius: 8px; font-size: 14px; font-weight: 600; color: #9AA2AB; background: transparent"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#6B737D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; "><path d="M3 3v18h18"></path><path d="M18 17V9"></path><path d="M13 17V5"></path><path d="M8 17v-3"></path></svg><span>Performans Özeti</span></div></div><div style="display: flex; flex-direction: column; gap: 2px"><div class="lbl" style="font-size: 10px; color: #4E565F; padding: 0 12px; margin-bottom: 6px">Planlama</div><div style="position: relative; display: flex; align-items: center; gap: 12px; height: 38px; padding: 0 12px; border-radius: 8px; font-size: 14px; font-weight: 600; color: #9AA2AB; background: transparent"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#6B737D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; "><rect x="3" y="4" width="18" height="18" rx="2"></rect><path d="M16 2v4"></path><path d="M8 2v4"></path><path d="M3 10h18"></path></svg><span>Takvim</span></div><div style="position: relative; display: flex; align-items: center; gap: 12px; height: 38px; padding: 0 12px; border-radius: 8px; font-size: 14px; font-weight: 600; color: #9AA2AB; background: transparent"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#6B737D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; "><rect x="3" y="4" width="18" height="18" rx="2"></rect><path d="M16 2v4"></path><path d="M8 2v4"></path><path d="M3 10h18"></path><path d="M8 14h.01"></path><path d="M12 14h.01"></path><path d="M16 14h.01"></path><path d="M8 18h.01"></path><path d="M12 18h.01"></path></svg><span>Rezervasyonlar</span></div></div><div style="display: flex; flex-direction: column; gap: 2px"><div class="lbl" style="font-size: 10px; color: #4E565F; padding: 0 12px; margin-bottom: 6px">Finans</div><div style="position: relative; display: flex; align-items: center; gap: 12px; height: 38px; padding: 0 12px; border-radius: 8px; font-size: 14px; font-weight: 600; color: #9AA2AB; background: transparent"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#6B737D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; "><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"></path><path d="M3 6h18"></path><path d="M16 10a4 4 0 0 1-8 0"></path></svg><span>Satışlar</span></div><div style="position: relative; display: flex; align-items: center; gap: 12px; height: 38px; padding: 0 12px; border-radius: 8px; font-size: 14px; font-weight: 600; color: #9AA2AB; background: transparent"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#6B737D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; "><path d="M19 7V4a1 1 0 0 0-1-1H5a2 2 0 0 0 0 4h15a1 1 0 0 1 1 1v4h-3a2 2 0 0 0 0 4h3a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1"></path><path d="M3 5v14a2 2 0 0 0 2 2h15a1 1 0 0 0 1-1v-4"></path></svg><span>Kasa & Ödemeler</span></div><div style="position: relative; display: flex; align-items: center; gap: 12px; height: 38px; padding: 0 12px; border-radius: 8px; font-size: 14px; font-weight: 600; color: #9AA2AB; background: transparent"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#6B737D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; "><path d="M22 7 13.5 15.5 8.5 10.5 2 17"></path><path d="M16 7h6v6"></path></svg><span>Raporlar</span></div></div><div style="display: flex; flex-direction: column; gap: 2px"><div class="lbl" style="font-size: 10px; color: #4E565F; padding: 0 12px; margin-bottom: 6px">Diğer</div><div style="position: relative; display: flex; align-items: center; gap: 12px; height: 38px; padding: 0 12px; border-radius: 8px; font-size: 14px; font-weight: 600; color: #9AA2AB; background: transparent"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#6B737D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; "><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76Z"></path></svg><span>Ekipmanlar</span></div><div style="position: relative; display: flex; align-items: center; gap: 12px; height: 38px; padding: 0 12px; border-radius: 8px; font-size: 14px; font-weight: 600; color: #9AA2AB; background: transparent"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#6B737D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; "><path d="M4 21v-7"></path><path d="M4 10V3"></path><path d="M12 21v-9"></path><path d="M12 8V3"></path><path d="M20 21v-5"></path><path d="M20 12V3"></path><path d="M1 14h6"></path><path d="M9 8h6"></path><path d="M17 16h6"></path></svg><span>Ayarlar</span></div></div></nav>
+    <div style="margin: 14px; padding: 12px; border-radius: 10px; background: #111418; display: flex; align-items: center; gap: 10px">
+      <div style="width: 34px; height: 34px; border-radius: 999px; background: rgba(215, 255, 63, 0.14); color: #D7FF3F; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 800">AK</div>
+      <div style="flex: 1; display: flex; flex-direction: column; gap: 2px">
+        <span style="font-size: 13px; font-weight: 700">Admin Kullanıcı</span>
+        <span style="font-size: 11px; color: #8A929C">Admin</span>
+      </div>
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#6B737D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; "><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><path d="m16 17 5-5-5-5"></path><path d="M21 12H9"></path></svg>
+    </div>
+  </aside>
+  <main style="flex: 1; height: 960px; overflow: hidden; padding: 30px 36px; display: flex; flex-direction: column; gap: 22px; background: radial-gradient(900px 360px at 92% -8%, rgba(215, 255, 63, 0.06), transparent 70%), #0B0D10">
+    <div style="display: flex; align-items: flex-end; justify-content: space-between; gap: 24px">
+      <div style="display: flex; flex-direction: column; gap: 8px">
+        <div style="display: flex; align-items: center; gap: 8px"><span style="width: 8px; height: 8px; border-radius: 2px; background: #D7FF3F"></span><span class="lbl" style="color: #D7FF3F">Yönetim</span></div>
+        <div style="display: flex; align-items: baseline; gap: 14px"><h1 class="d" style="font-size: 56px; line-height: 0.92; font-weight: 800; letter-spacing: 0.005em">Müşteriler</h1><span class="n" style="font-size: 32px; font-weight: 700; color: #5C646E">11</span></div>
+      </div>
+      <div style="display: flex; align-items: center; gap: 10px"><span class="btn btn-ghost">Dışa aktar</span><span class="btn btn-lime"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0B0D10" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; "><path d="M5 12h14"></path><path d="M12 5v14"></path></svg>Yeni Müşteri</span></div>
+    </div>
+    <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px">
+      <div class="card" style="padding: 16px 18px; display: flex; align-items: center; justify-content: space-between"><div style="display: flex; flex-direction: column; gap: 6px"><span class="lbl">Aktif müşteri</span><span class="n" style="font-size: 34px; line-height: 1; font-weight: 700">11</span></div><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#4E565F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; "><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M22 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg></div>
+      <div class="card" style="padding: 16px 18px; display: flex; align-items: center; justify-content: space-between"><div style="display: flex; flex-direction: column; gap: 6px"><span class="lbl">Açık borç · 3 müşteri</span><span class="n" style="font-size: 34px; line-height: 1; font-weight: 700; color: #FF7A66">₺51.930,90</span></div><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#4E565F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; "><path d="M19 7V4a1 1 0 0 0-1-1H5a2 2 0 0 0 0 4h15a1 1 0 0 1 1 1v4h-3a2 2 0 0 0 0 4h3a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1"></path><path d="M3 5v14a2 2 0 0 0 2 2h15a1 1 0 0 0 1-1v-4"></path></svg></div>
+      <div class="card" style="padding: 16px 18px; display: flex; align-items: center; justify-content: space-between"><div style="display: flex; flex-direction: column; gap: 6px"><span class="lbl">Aktif paket</span><span class="n" style="font-size: 34px; line-height: 1; font-weight: 700">2</span></div><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#4E565F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; "><path d="m7.5 4.27 9 5.15"></path><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"></path><path d="m3.3 7 8.7 5 8.7-5"></path><path d="M12 22V12"></path></svg></div>
+    </div>
+    <div style="display: flex; align-items: center; gap: 10px">
+      <div style="flex: 1; height: 44px; border-radius: 8px; background: #14181D; border: 1px solid #2C333B; display: flex; align-items: center; gap: 10px; padding: 0 14px; color: #5C646E; font-size: 14px"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#5C646E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; "><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"></path></svg>Ad, soyad, telefon veya e-posta ara</div>
+      <div style="height: 44px; border-radius: 8px; background: #14181D; border: 1px solid #2C333B; display: flex; align-items: center; gap: 10px; padding: 0 14px; font-size: 14px; font-weight: 600">Tüm seviyeler<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#8A929C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; "><path d="m6 9 6 6 6-6"></path></svg></div>
+      <div style="height: 44px; display: flex; padding: 4px; border-radius: 8px; background: #14181D; border: 1px solid #2C333B">
+        <span style="display: flex; align-items: center; padding: 0 14px; border-radius: 6px; background: #D7FF3F; color: #0B0D10; font-size: 13px; font-weight: 800">Tümü</span>
+        <span style="display: flex; align-items: center; padding: 0 14px; font-size: 13px; font-weight: 700; color: #8A929C">Borç yok</span>
+        <span style="display: flex; align-items: center; padding: 0 14px; font-size: 13px; font-weight: 700; color: #8A929C">Borç var</span>
+      </div>
+    </div>
+    <div class="card" style="flex: 1; overflow: hidden; display: flex; flex-direction: column">
+      <div style="display: grid; grid-template-columns: 2.2fr 1.5fr 1fr 0.9fr 1.3fr 28px; gap: 16px; padding: 0 20px; height: 44px; align-items: center">
+        <span class="th">Müşteri</span><span class="th">İletişim</span><span class="th">Son hizmet</span><span class="th">Durum</span><span class="th" style="text-align: right">Ödenen / Borç</span><span></span>
+      </div>
+      <div style="display: grid; grid-template-columns: 2.2fr 1.5fr 1fr 0.9fr 1.3fr 28px; align-items: center; gap: 16px; padding: 0 20px; height: 66px; border-top: 1px solid #232930">
+          <div style="display: flex; align-items: center; gap: 12px">
+            <div style="width: 38px; height: 38px; border-radius: 999px; background: #1B2027; border: 1px solid #2C333B; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 800; color: #C9CFD6">AA</div>
+            <div style="display: flex; flex-direction: column; gap: 5px"><span style="font-size: 15px; font-weight: 700">Arda Arslan</span><div style="display: flex; gap: 6px"><span class="pill p-gray" style="height: 20px; font-size: 11px">Başlangıç</span><span class="pill p-lime" style="height: 20px; font-size: 11px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; "><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"></path><path d="M14 2v4a2 2 0 0 0 2 2h4"></path><path d="m9 15 2 2 4-4"></path></svg>Feragatname</span></div></div>
+          </div>
+          <span style="font-size: 13px; color: #8A929C">arda.arslan@example.com</span>
+          <span style="font-size: 13px; color: #8A929C">1 Eyl 2026</span>
+          <span><span class="pill p-red">Borç var</span></span>
+          <div style="text-align: right"><span class="n" style="font-size: 18px; font-weight: 600">₺0,00</span><span style="color: #5C646E"> / </span><span class="n" style="font-size: 18px; font-weight: 700; color: #FF7A66">₺7.000,00</span></div>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#5C646E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; "><path d="m9 18 6-6-6-6"></path></svg>
+        </div><div style="display: grid; grid-template-columns: 2.2fr 1.5fr 1fr 0.9fr 1.3fr 28px; align-items: center; gap: 16px; padding: 0 20px; height: 66px; border-top: 1px solid #232930">
+          <div style="display: flex; align-items: center; gap: 12px">
+            <div style="width: 38px; height: 38px; border-radius: 999px; background: #1B2027; border: 1px solid #2C333B; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 800; color: #C9CFD6">SD</div>
+            <div style="display: flex; flex-direction: column; gap: 5px"><span style="font-size: 15px; font-weight: 700">Sophie Dubois</span><div style="display: flex; gap: 6px"><span class="pill p-gray" style="height: 20px; font-size: 11px">Başlangıç</span><span class="pill p-amber" style="height: 20px; font-size: 11px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; "><circle cx="12" cy="12" r="10"></circle><path d="M12 6v6l4 2"></path></svg>Feragatname bekliyor</span></div></div>
+          </div>
+          <span style="font-size: 13px; color: #8A929C">sophie.dubois@example.com</span>
+          <span style="font-size: 13px; color: #8A929C">—</span>
+          <span><span class="pill p-gray">Hizmet yok</span></span>
+          <div style="text-align: right"><span style="color: #5C646E">—</span></div>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#5C646E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; "><path d="m9 18 6-6-6-6"></path></svg>
+        </div><div style="display: grid; grid-template-columns: 2.2fr 1.5fr 1fr 0.9fr 1.3fr 28px; align-items: center; gap: 16px; padding: 0 20px; height: 66px; border-top: 1px solid #232930">
+          <div style="display: flex; align-items: center; gap: 12px">
+            <div style="width: 38px; height: 38px; border-radius: 999px; background: #1B2027; border: 1px solid #2C333B; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 800; color: #C9CFD6">MG</div>
+            <div style="display: flex; flex-direction: column; gap: 5px"><span style="font-size: 15px; font-weight: 700">Maria Garcia</span><div style="display: flex; gap: 6px"><span class="pill p-gray" style="height: 20px; font-size: 11px">Orta</span><span class="pill p-lime" style="height: 20px; font-size: 11px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; "><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"></path><path d="M14 2v4a2 2 0 0 0 2 2h4"></path><path d="m9 15 2 2 4-4"></path></svg>Feragatname</span><span class="pill p-cyan" style="height: 20px; font-size: 11px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; "><path d="m7.5 4.27 9 5.15"></path><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"></path><path d="m3.3 7 8.7 5 8.7-5"></path><path d="M12 22V12"></path></svg>3 sa paket</span></div></div>
+          </div>
+          <span style="font-size: 13px; color: #8A929C">+34 600 000 000</span>
+          <span style="font-size: 13px; color: #8A929C">30 Ağu 2026</span>
+          <span><span class="pill p-red">Borç var</span></span>
+          <div style="text-align: right"><span class="n" style="font-size: 18px; font-weight: 600">₺5.616,36</span><span style="color: #5C646E"> / </span><span class="n" style="font-size: 18px; font-weight: 700; color: #FF7A66">₺25.273,62</span></div>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#5C646E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; "><path d="m9 18 6-6-6-6"></path></svg>
+        </div><div style="display: grid; grid-template-columns: 2.2fr 1.5fr 1fr 0.9fr 1.3fr 28px; align-items: center; gap: 16px; padding: 0 20px; height: 66px; border-top: 1px solid #232930">
+          <div style="display: flex; align-items: center; gap: 12px">
+            <div style="width: 38px; height: 38px; border-radius: 999px; background: #1B2027; border: 1px solid #2C333B; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 800; color: #C9CFD6">TJ</div>
+            <div style="display: flex; flex-direction: column; gap: 5px"><span style="font-size: 15px; font-weight: 700">Tom Johnson</span><div style="display: flex; gap: 6px"><span class="pill p-gray" style="height: 20px; font-size: 11px">Orta</span></div></div>
+          </div>
+          <span style="font-size: 13px; color: #8A929C">tom.johnson@example.com</span>
+          <span style="font-size: 13px; color: #8A929C">—</span>
+          <span><span class="pill p-gray">Hizmet yok</span></span>
+          <div style="text-align: right"><span style="color: #5C646E">—</span></div>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#5C646E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; "><path d="m9 18 6-6-6-6"></path></svg>
+        </div><div style="display: grid; grid-template-columns: 2.2fr 1.5fr 1fr 0.9fr 1.3fr 28px; align-items: center; gap: 16px; padding: 0 20px; height: 66px; border-top: 1px solid #232930">
+          <div style="display: flex; align-items: center; gap: 12px">
+            <div style="width: 38px; height: 38px; border-radius: 999px; background: #1B2027; border: 1px solid #2C333B; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 800; color: #C9CFD6">AK</div>
+            <div style="display: flex; flex-direction: column; gap: 5px"><span style="font-size: 15px; font-weight: 700">Anna Kowalski</span><div style="display: flex; gap: 6px"><span class="pill p-gray" style="height: 20px; font-size: 11px">Başlangıç</span><span class="pill p-lime" style="height: 20px; font-size: 11px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; "><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"></path><path d="M14 2v4a2 2 0 0 0 2 2h4"></path><path d="m9 15 2 2 4-4"></path></svg>Feragatname</span></div></div>
+          </div>
+          <span style="font-size: 13px; color: #8A929C">anna.kowalski@example.com</span>
+          <span style="font-size: 13px; color: #8A929C">30 Ağu 2026</span>
+          <span><span class="pill p-red">Borç var</span></span>
+          <div style="text-align: right"><span class="n" style="font-size: 18px; font-weight: 600">₺0,00</span><span style="color: #5C646E"> / </span><span class="n" style="font-size: 18px; font-weight: 700; color: #FF7A66">₺19.657,28</span></div>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#5C646E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; "><path d="m9 18 6-6-6-6"></path></svg>
+        </div><div style="display: grid; grid-template-columns: 2.2fr 1.5fr 1fr 0.9fr 1.3fr 28px; align-items: center; gap: 16px; padding: 0 20px; height: 66px; border-top: 1px solid #232930">
+          <div style="display: flex; align-items: center; gap: 12px">
+            <div style="width: 38px; height: 38px; border-radius: 999px; background: #1B2027; border: 1px solid #2C333B; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 800; color: #C9CFD6">JS</div>
+            <div style="display: flex; flex-direction: column; gap: 5px"><span style="font-size: 15px; font-weight: 700">John Smith</span><div style="display: flex; gap: 6px"><span class="pill p-gray" style="height: 20px; font-size: 11px">Başlangıç</span><span class="pill p-lime" style="height: 20px; font-size: 11px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; "><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"></path><path d="M14 2v4a2 2 0 0 0 2 2h4"></path><path d="m9 15 2 2 4-4"></path></svg>Feragatname</span><span class="pill p-cyan" style="height: 20px; font-size: 11px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; "><path d="m7.5 4.27 9 5.15"></path><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"></path><path d="m3.3 7 8.7 5 8.7-5"></path><path d="M12 22V12"></path></svg>8 sa paket</span></div></div>
+          </div>
+          <span style="font-size: 13px; color: #8A929C">john.smith@example.com</span>
+          <span style="font-size: 13px; color: #8A929C">30 Ağu 2026</span>
+          <span><span class="pill p-lime">Ödendi</span></span>
+          <div style="text-align: right"><span class="n" style="font-size: 18px; font-weight: 600">₺23.588,71</span></div>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#5C646E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; "><path d="m9 18 6-6-6-6"></path></svg>
+        </div><div style="display: grid; grid-template-columns: 2.2fr 1.5fr 1fr 0.9fr 1.3fr 28px; align-items: center; gap: 16px; padding: 0 20px; height: 66px; border-top: 1px solid #232930">
+          <div style="display: flex; align-items: center; gap: 12px">
+            <div style="width: 38px; height: 38px; border-radius: 999px; background: #1B2027; border: 1px solid #2C333B; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 800; color: #C9CFD6">HM</div>
+            <div style="display: flex; flex-direction: column; gap: 5px"><span style="font-size: 15px; font-weight: 700">Hans Müller</span><div style="display: flex; gap: 6px"><span class="pill p-gray" style="height: 20px; font-size: 11px">İleri</span><span class="pill p-lime" style="height: 20px; font-size: 11px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; "><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"></path><path d="M14 2v4a2 2 0 0 0 2 2h4"></path><path d="m9 15 2 2 4-4"></path></svg>Feragatname</span></div></div>
+          </div>
+          <span style="font-size: 13px; color: #8A929C">hans.muller@example.com</span>
+          <span style="font-size: 13px; color: #8A929C">30 Ağu 2026</span>
+          <span><span class="pill p-lime">Ödendi</span></span>
+          <div style="text-align: right"><span class="n" style="font-size: 18px; font-weight: 600">₺4.493,09</span></div>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#5C646E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; "><path d="m9 18 6-6-6-6"></path></svg>
+        </div>
+      <div style="margin-top: auto; display: flex; align-items: center; justify-content: space-between; padding: 12px 20px; border-top: 1px solid #232930; font-size: 13px; color: #8A929C">
+        <span>11 müşteriden 7'si gösteriliyor</span>
+        <div style="display: flex; gap: 6px"><span class="icon-btn" style="width: 32px; height: 32px"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; "><path d="m15 18-6-6 6-6"></path></svg></span><span class="icon-btn" style="width: 32px; height: 32px"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; "><path d="m9 18 6-6-6-6"></path></svg></span></div>
+      </div>
+    </div>
+  </main>
+</div>
+</div></div></section><section class="shot desktop"><h2>Kasa & Muhasebe — masaüstü</h2><div class="frame" data-w="1440"><div class="inner">
+<div style="width: 1440px; height: 960px; display: flex; background: #0B0D10; overflow: hidden">
+  <aside style="width: 248px; height: 960px; flex-shrink: 0; background: #08090B; border-right: 1px solid #15191E; display: flex; flex-direction: column">
+    <div style="height: 76px; display: flex; align-items: center; padding: 0 22px"><div style="display: flex; align-items: center; gap: 10px">
+      <div style="width: 36px; height: 36px; border-radius: 8px; background: #D7FF3F; display: flex; align-items: center; justify-content: center"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#0B0D10" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; "><path d="M17.7 7.7a2.5 2.5 0 1 1 1.8 4.3H2"></path><path d="M9.6 4.6A2 2 0 1 1 11 8H2"></path><path d="M12.6 19.4A2 2 0 1 0 14 16H2"></path></svg></div>
+      <div style="display: flex; flex-direction: column; line-height: 1">
+        <span class="d" lang="en" style="font-size: 20px; font-weight: 800; letter-spacing: 0.02em">Kite Gang</span>
+        <span style="font-size: 9px; font-weight: 800; letter-spacing: 0.34em; color: #D7FF3F; margin-top: 3px">CORNER</span>
+      </div>
+    </div></div>
+    <nav style="flex: 1; display: flex; flex-direction: column; gap: 20px; padding: 12px 14px 0 24px"><div style="display: flex; flex-direction: column; gap: 2px"><div style="position: relative; display: flex; align-items: center; gap: 12px; height: 38px; padding: 0 12px; border-radius: 8px; font-size: 14px; font-weight: 600; color: #9AA2AB; background: transparent"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#6B737D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; "><rect x="3" y="3" width="7" height="9" rx="1"></rect><rect x="14" y="3" width="7" height="5" rx="1"></rect><rect x="14" y="12" width="7" height="9" rx="1"></rect><rect x="3" y="16" width="7" height="5" rx="1"></rect></svg><span>Dashboard</span></div></div><div style="display: flex; flex-direction: column; gap: 2px"><div class="lbl" style="font-size: 10px; color: #4E565F; padding: 0 12px; margin-bottom: 6px">Yönetim</div><div style="position: relative; display: flex; align-items: center; gap: 12px; height: 38px; padding: 0 12px; border-radius: 8px; font-size: 14px; font-weight: 600; color: #9AA2AB; background: transparent"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#6B737D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; "><path d="M22 10 12 5 2 10l10 5 10-5Z"></path><path d="M6 12v5c3 3 9 3 12 0v-5"></path><path d="M22 10v6"></path></svg><span>Hizmetler</span></div><div style="position: relative; display: flex; align-items: center; gap: 12px; height: 38px; padding: 0 12px; border-radius: 8px; font-size: 14px; font-weight: 600; color: #9AA2AB; background: transparent"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#6B737D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; "><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M22 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg><span>Müşteriler</span></div><div style="position: relative; display: flex; align-items: center; gap: 12px; height: 38px; padding: 0 12px; border-radius: 8px; font-size: 14px; font-weight: 600; color: #9AA2AB; background: transparent"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#6B737D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; "><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="m16 11 2 2 4-4"></path></svg><span>Eğitmenler</span></div><div style="position: relative; display: flex; align-items: center; gap: 12px; height: 38px; padding: 0 12px; border-radius: 8px; font-size: 14px; font-weight: 600; color: #9AA2AB; background: transparent"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#6B737D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; "><path d="M3 3v18h18"></path><path d="M18 17V9"></path><path d="M13 17V5"></path><path d="M8 17v-3"></path></svg><span>Performans Özeti</span></div></div><div style="display: flex; flex-direction: column; gap: 2px"><div class="lbl" style="font-size: 10px; color: #4E565F; padding: 0 12px; margin-bottom: 6px">Planlama</div><div style="position: relative; display: flex; align-items: center; gap: 12px; height: 38px; padding: 0 12px; border-radius: 8px; font-size: 14px; font-weight: 600; color: #9AA2AB; background: transparent"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#6B737D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; "><rect x="3" y="4" width="18" height="18" rx="2"></rect><path d="M16 2v4"></path><path d="M8 2v4"></path><path d="M3 10h18"></path></svg><span>Takvim</span></div><div style="position: relative; display: flex; align-items: center; gap: 12px; height: 38px; padding: 0 12px; border-radius: 8px; font-size: 14px; font-weight: 600; color: #9AA2AB; background: transparent"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#6B737D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; "><rect x="3" y="4" width="18" height="18" rx="2"></rect><path d="M16 2v4"></path><path d="M8 2v4"></path><path d="M3 10h18"></path><path d="M8 14h.01"></path><path d="M12 14h.01"></path><path d="M16 14h.01"></path><path d="M8 18h.01"></path><path d="M12 18h.01"></path></svg><span>Rezervasyonlar</span></div></div><div style="display: flex; flex-direction: column; gap: 2px"><div class="lbl" style="font-size: 10px; color: #4E565F; padding: 0 12px; margin-bottom: 6px">Finans</div><div style="position: relative; display: flex; align-items: center; gap: 12px; height: 38px; padding: 0 12px; border-radius: 8px; font-size: 14px; font-weight: 600; color: #9AA2AB; background: transparent"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#6B737D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; "><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"></path><path d="M3 6h18"></path><path d="M16 10a4 4 0 0 1-8 0"></path></svg><span>Satışlar</span></div><div style="position: relative; display: flex; align-items: center; gap: 12px; height: 38px; padding: 0 12px; border-radius: 8px; font-size: 14px; font-weight: 700; color: #F3F5F2; background: #161B21"><span style="position: absolute; left: -12px; top: 9px; width: 3px; height: 20px; border-radius: 0 3px 3px 0; background: #D7FF3F"></span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#D7FF3F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; "><path d="M19 7V4a1 1 0 0 0-1-1H5a2 2 0 0 0 0 4h15a1 1 0 0 1 1 1v4h-3a2 2 0 0 0 0 4h3a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1"></path><path d="M3 5v14a2 2 0 0 0 2 2h15a1 1 0 0 0 1-1v-4"></path></svg><span>Kasa & Ödemeler</span></div><div style="position: relative; display: flex; align-items: center; gap: 12px; height: 38px; padding: 0 12px; border-radius: 8px; font-size: 14px; font-weight: 600; color: #9AA2AB; background: transparent"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#6B737D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; "><path d="M22 7 13.5 15.5 8.5 10.5 2 17"></path><path d="M16 7h6v6"></path></svg><span>Raporlar</span></div></div><div style="display: flex; flex-direction: column; gap: 2px"><div class="lbl" style="font-size: 10px; color: #4E565F; padding: 0 12px; margin-bottom: 6px">Diğer</div><div style="position: relative; display: flex; align-items: center; gap: 12px; height: 38px; padding: 0 12px; border-radius: 8px; font-size: 14px; font-weight: 600; color: #9AA2AB; background: transparent"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#6B737D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; "><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76Z"></path></svg><span>Ekipmanlar</span></div><div style="position: relative; display: flex; align-items: center; gap: 12px; height: 38px; padding: 0 12px; border-radius: 8px; font-size: 14px; font-weight: 600; color: #9AA2AB; background: transparent"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#6B737D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; "><path d="M4 21v-7"></path><path d="M4 10V3"></path><path d="M12 21v-9"></path><path d="M12 8V3"></path><path d="M20 21v-5"></path><path d="M20 12V3"></path><path d="M1 14h6"></path><path d="M9 8h6"></path><path d="M17 16h6"></path></svg><span>Ayarlar</span></div></div></nav>
+    <div style="margin: 14px; padding: 12px; border-radius: 10px; background: #111418; display: flex; align-items: center; gap: 10px">
+      <div style="width: 34px; height: 34px; border-radius: 999px; background: rgba(215, 255, 63, 0.14); color: #D7FF3F; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 800">AK</div>
+      <div style="flex: 1; display: flex; flex-direction: column; gap: 2px">
+        <span style="font-size: 13px; font-weight: 700">Admin Kullanıcı</span>
+        <span style="font-size: 11px; color: #8A929C">Admin</span>
+      </div>
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#6B737D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; "><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><path d="m16 17 5-5-5-5"></path><path d="M21 12H9"></path></svg>
+    </div>
+  </aside>
+  <main style="flex: 1; height: 960px; overflow: hidden; padding: 30px 36px; display: flex; flex-direction: column; gap: 22px; background: radial-gradient(900px 360px at 92% -8%, rgba(215, 255, 63, 0.06), transparent 70%), #0B0D10">
+    <div style="display: flex; align-items: flex-end; justify-content: space-between; gap: 24px">
+      <div style="display: flex; flex-direction: column; gap: 8px">
+        <div style="display: flex; align-items: center; gap: 8px"><span style="width: 8px; height: 8px; border-radius: 2px; background: #D7FF3F"></span><span class="lbl" style="color: #D7FF3F">Finans</span></div>
+        <div style="display: flex; align-items: baseline; gap: 14px"><h1 class="d" style="font-size: 56px; line-height: 0.92; font-weight: 800; letter-spacing: 0.005em">Kasa & Muhasebe</h1></div>
+      </div>
+      <div style="display: flex; align-items: center; gap: 10px"><div style="display: flex; align-items: center; gap: 4px; margin-right: 6px"><span class="icon-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; "><path d="m15 18-6-6 6-6"></path></svg></span><span class="d" style="min-width: 128px; text-align: center; font-size: 18px; font-weight: 700">Ağustos 2026</span><span class="icon-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; "><path d="m9 18 6-6-6-6"></path></svg></span></div><span class="btn btn-ghost"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; "><path d="M5 12h14"></path><path d="M12 5v14"></path></svg>Kasa</span><span class="btn btn-ghost" style="color: #D7FF3F"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#D7FF3F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; "><path d="M5 12h14"></path><path d="M12 5v14"></path></svg>Gelir</span><span class="btn btn-ghost" style="color: #FF7A66"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#FF7A66" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; "><path d="M5 12h14"></path><path d="M12 5v14"></path></svg>Gider</span></div>
+    </div>
+    <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px">
+      <div class="card" style="padding: 18px 20px; display: flex; flex-direction: column; gap: 12px">
+        <div style="display: flex; align-items: center; justify-content: space-between"><span class="lbl">Bu ay gelir</span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#D7FF3F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; "><path d="M22 7 13.5 15.5 8.5 10.5 2 17"></path><path d="M16 7h6v6"></path></svg></div>
+        <span class="n" style="font-size: 46px; line-height: 1; font-weight: 700; color: #D7FF3F">₺33.698,16</span>
+        <span style="font-size: 12px; color: #8A929C">3 tahsilat</span>
+      </div>
+      <div class="card" style="padding: 18px 20px; display: flex; flex-direction: column; gap: 12px">
+        <div style="display: flex; align-items: center; justify-content: space-between"><span class="lbl">Bu ay gider</span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#FF7A66" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; "><path d="M22 17 13.5 8.5 8.5 13.5 2 7"></path><path d="M16 17h6v-6"></path></svg></div>
+        <span class="n" style="font-size: 46px; line-height: 1; font-weight: 700; color: #FF7A66">₺16.006,63</span>
+        <span style="font-size: 12px; color: #8A929C">2 gider kalemi</span>
+      </div>
+      <div class="card" style="padding: 18px 20px; display: flex; flex-direction: column; gap: 12px">
+        <div style="display: flex; align-items: center; justify-content: space-between"><span class="lbl">Net</span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#F3F5F2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; "><path d="M19 7V4a1 1 0 0 0-1-1H5a2 2 0 0 0 0 4h15a1 1 0 0 1 1 1v4h-3a2 2 0 0 0 0 4h3a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1"></path><path d="M3 5v14a2 2 0 0 0 2 2h15a1 1 0 0 0 1-1v-4"></path></svg></div>
+        <span class="n" style="font-size: 46px; line-height: 1; font-weight: 700; color: #F3F5F2">₺17.691,53</span>
+        <span style="font-size: 12px; color: #8A929C">Gelir − gider</span>
+      </div>
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 10px">
+      <span class="lbl">Kasa hesapları · TL karşılığı</span>
+      <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px">
+        <div class="card" style="padding: 16px 18px; display: flex; align-items: center; gap: 14px">
+        <div style="width: 44px; height: 44px; border-radius: 10px; background: #1B2027; display: flex; align-items: center; justify-content: center"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#C9CFD6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; "><path d="M3 21h18"></path><path d="M5 21V10"></path><path d="M19 21V10"></path><path d="M9 21V10"></path><path d="M15 21V10"></path><path d="M12 3 3 8h18Z"></path></svg></div>
+        <div style="flex: 1; display: flex; flex-direction: column; gap: 4px">
+          <div style="display: flex; align-items: center; gap: 8px"><span style="font-size: 14px; font-weight: 700">Banka EUR</span><span class="pill p-gray" style="height: 20px; font-size: 11px">Banka</span></div>
+          <span class="n" style="font-size: 26px; line-height: 1; font-weight: 700">₺842.454,00</span>
+        </div>
+        <span class="n" style="align-self: flex-end; font-size: 14px; color: #5C646E">€15.000,00</span>
+      </div>
+        <div class="card" style="padding: 16px 18px; display: flex; align-items: center; gap: 14px">
+        <div style="width: 44px; height: 44px; border-radius: 10px; background: #1B2027; display: flex; align-items: center; justify-content: center"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#C9CFD6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; "><rect x="2" y="6" width="20" height="12" rx="2"></rect><circle cx="12" cy="12" r="2"></circle><path d="M6 12h.01"></path><path d="M18 12h.01"></path></svg></div>
+        <div style="flex: 1; display: flex; flex-direction: column; gap: 4px">
+          <div style="display: flex; align-items: center; gap: 8px"><span style="font-size: 14px; font-weight: 700">Nakit Kasa EUR</span><span class="pill p-gray" style="height: 20px; font-size: 11px">Nakit</span></div>
+          <span class="n" style="font-size: 26px; line-height: 1; font-weight: 700">₺140.409,00</span>
+        </div>
+        <span class="n" style="align-self: flex-end; font-size: 14px; color: #5C646E">€2.500,00</span>
+      </div>
+        <div class="card" style="padding: 16px 18px; display: flex; align-items: center; gap: 14px">
+        <div style="width: 44px; height: 44px; border-radius: 10px; background: #1B2027; display: flex; align-items: center; justify-content: center"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#C9CFD6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; "><rect x="2" y="6" width="20" height="12" rx="2"></rect><circle cx="12" cy="12" r="2"></circle><path d="M6 12h.01"></path><path d="M18 12h.01"></path></svg></div>
+        <div style="flex: 1; display: flex; flex-direction: column; gap: 4px">
+          <div style="display: flex; align-items: center; gap: 8px"><span style="font-size: 14px; font-weight: 700">Nakit Kasa TRY</span><span class="pill p-gray" style="height: 20px; font-size: 11px">Nakit</span></div>
+          <span class="n" style="font-size: 26px; line-height: 1; font-weight: 700">₺50.000,00</span>
+        </div>
+        <span class="n" style="align-self: flex-end; font-size: 14px; color: #5C646E"></span>
+      </div>
+      </div>
+    </div>
+    <div class="card" style="flex: 1; overflow: hidden; display: flex; flex-direction: column">
+      <div style="display: flex; align-items: center; gap: 24px; padding: 0 20px; height: 50px; border-bottom: 1px solid #232930">
+        <span style="height: 50px; display: flex; align-items: center; font-size: 14px; font-weight: 800; box-shadow: inset 0 -2px 0 #D7FF3F">Tüm işlemler</span>
+        <span style="font-size: 14px; font-weight: 700; color: #8A929C">Gelirler</span>
+        <span style="font-size: 14px; font-weight: 700; color: #8A929C">Giderler</span>
+      </div>
+      <div style="display: grid; grid-template-columns: 1fr 0.7fr 1.3fr 1.8fr 1fr 1.1fr; gap: 16px; align-items: center; height: 38px; padding: 0 20px">
+        <span class="th">Tarih</span><span class="th">Tür</span><span class="th">Başlık</span><span class="th">Açıklama</span><span class="th">Yöntem</span><span class="th" style="text-align: right">Tutar</span>
+      </div>
+      <div style="display: grid; grid-template-columns: 1fr 0.7fr 1.3fr 1.8fr 1fr 1.1fr; gap: 16px; align-items: center; height: 50px; padding: 0 20px; border-top: 1px solid #232930">
+          <span style="font-size: 13px; color: #8A929C">1 Eyl 2026</span>
+          <span><span class="pill p-red" style="height: 22px">Gider</span></span>
+          <span style="font-size: 14px; font-weight: 700">Yemek</span>
+          <span style="font-size: 13px; color: #8A929C">Oses Döner</span>
+          <span><span class="pill p-gray" style="height: 22px">Nakit</span></span>
+          <span class="n" style="text-align: right; font-size: 19px; font-weight: 700; color: #FF7A66">−₺3.000,00</span>
+        </div><div style="display: grid; grid-template-columns: 1fr 0.7fr 1.3fr 1.8fr 1fr 1.1fr; gap: 16px; align-items: center; height: 50px; padding: 0 20px; border-top: 1px solid #232930">
+          <span style="font-size: 13px; color: #8A929C">30 Ağu 2026</span>
+          <span><span class="pill p-lime" style="height: 22px">Gelir</span></span>
+          <span style="font-size: 14px; font-weight: 700">Hans Müller</span>
+          <span style="font-size: 13px; color: #8A929C">Özel ders ödemesi</span>
+          <span><span class="pill p-gray" style="height: 22px">Havale/EFT</span></span>
+          <span class="n" style="text-align: right; font-size: 19px; font-weight: 700; color: #D7FF3F">+₺4.493,09</span>
+        </div><div style="display: grid; grid-template-columns: 1fr 0.7fr 1.3fr 1.8fr 1fr 1.1fr; gap: 16px; align-items: center; height: 50px; padding: 0 20px; border-top: 1px solid #232930">
+          <span style="font-size: 13px; color: #8A929C">30 Ağu 2026</span>
+          <span><span class="pill p-lime" style="height: 22px">Gelir</span></span>
+          <span style="font-size: 14px; font-weight: 700">Maria Garcia</span>
+          <span style="font-size: 13px; color: #8A929C">Yarı özel paket – ilk ödeme</span>
+          <span><span class="pill p-gray" style="height: 22px">Nakit</span></span>
+          <span class="n" style="text-align: right; font-size: 19px; font-weight: 700; color: #D7FF3F">+₺5.616,36</span>
+        </div><div style="display: grid; grid-template-columns: 1fr 0.7fr 1.3fr 1.8fr 1fr 1.1fr; gap: 16px; align-items: center; height: 50px; padding: 0 20px; border-top: 1px solid #232930">
+          <span style="font-size: 13px; color: #8A929C">30 Ağu 2026</span>
+          <span><span class="pill p-lime" style="height: 22px">Gelir</span></span>
+          <span style="font-size: 14px; font-weight: 700">John Smith</span>
+          <span style="font-size: 13px; color: #8A929C">Başlangıç paketi ödemesi</span>
+          <span><span class="pill p-gray" style="height: 22px">Kredi kartı</span></span>
+          <span class="n" style="text-align: right; font-size: 19px; font-weight: 700; color: #D7FF3F">+₺23.588,71</span>
+        </div><div style="display: grid; grid-template-columns: 1fr 0.7fr 1.3fr 1.8fr 1fr 1.1fr; gap: 16px; align-items: center; height: 50px; padding: 0 20px; border-top: 1px solid #232930">
+          <span style="font-size: 13px; color: #8A929C">28 Ağu 2026</span>
+          <span><span class="pill p-red" style="height: 22px">Gider</span></span>
+          <span style="font-size: 14px; font-weight: 700">Ekipman tamiri</span>
+          <span style="font-size: 13px; color: #8A929C">Duotone Evo 14m tamir</span>
+          <span><span class="pill p-gray" style="height: 22px">Nakit</span></span>
+          <span class="n" style="text-align: right; font-size: 19px; font-weight: 700; color: #FF7A66">−₺4.773,91</span>
+        </div><div style="display: grid; grid-template-columns: 1fr 0.7fr 1.3fr 1.8fr 1fr 1.1fr; gap: 16px; align-items: center; height: 50px; padding: 0 20px; border-top: 1px solid #232930">
+          <span style="font-size: 13px; color: #8A929C">27 Ağu 2026</span>
+          <span><span class="pill p-red" style="height: 22px">Gider</span></span>
+          <span style="font-size: 14px; font-weight: 700">Yakıt</span>
+          <span style="font-size: 13px; color: #8A929C">Bot yakıtı</span>
+          <span><span class="pill p-gray" style="height: 22px">Nakit</span></span>
+          <span class="n" style="text-align: right; font-size: 19px; font-weight: 700; color: #FF7A66">−₺11.232,72</span>
+        </div>
+    </div>
+  </main>
+</div>
+</div></div></section>
+  <div class="mobiles"><section class="shot mobile"><h2>Dashboard — mobil (admin)</h2><div class="frame" data-w="390"><div class="inner">
+<div style="position: relative; width: 390px; height: 1000px; background: radial-gradient(420px 260px at 100% 0%, rgba(215, 255, 63, 0.07), transparent 70%), #0B0D10; overflow: hidden">
+  <div style="height: 64px; padding: 0 16px; display: flex; align-items: center; justify-content: space-between">
+    <span class="icon-btn" style="width: 44px; height: 44px"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; "><path d="M4 6h16"></path><path d="M4 12h16"></path><path d="M4 18h16"></path></svg></span>
+    <div style="display: flex; align-items: center; gap: 10px">
+      <div style="width: 30px; height: 30px; border-radius: 8px; background: #D7FF3F; display: flex; align-items: center; justify-content: center"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0B0D10" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; "><path d="M17.7 7.7a2.5 2.5 0 1 1 1.8 4.3H2"></path><path d="M9.6 4.6A2 2 0 1 1 11 8H2"></path><path d="M12.6 19.4A2 2 0 1 0 14 16H2"></path></svg></div>
+      <div style="display: flex; flex-direction: column; line-height: 1">
+        <span class="d" lang="en" style="font-size: 17px; font-weight: 800; letter-spacing: 0.02em">Kite Gang</span>
+        <span style="font-size: 9px; font-weight: 800; letter-spacing: 0.34em; color: #D7FF3F; margin-top: 3px">CORNER</span>
+      </div>
+    </div>
+    <span class="icon-btn" style="width: 44px; height: 44px"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; "><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"></path><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"></path></svg></span>
+  </div>
+  <div style="padding: 8px 16px 110px; display: flex; flex-direction: column; gap: 14px">
+    <div style="display: flex; flex-direction: column; gap: 6px; padding: 4px 0 2px">
+      <div style="display: flex; align-items: center; gap: 8px"><span style="width: 7px; height: 7px; border-radius: 2px; background: #D7FF3F"></span><span class="lbl" style="color: #D7FF3F">15 Eylül 2026 · Salı</span></div>
+      <h1 class="d" style="font-size: 40px; line-height: 0.95; font-weight: 800">Hoş geldin, Admin</h1>
+    </div>
+    <div style="border-radius: 14px; background: #D7FF3F; color: #0B0D10; padding: 16px; display: flex; flex-direction: column; gap: 10px">
+      <div style="display: flex; align-items: center; justify-content: space-between"><span class="lbl" style="color: rgba(11, 13, 16, 0.62)">Bugün gelir</span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0B0D10" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; "><path d="M22 7 13.5 15.5 8.5 10.5 2 17"></path><path d="M16 7h6v6"></path></svg></div>
+      <span class="n" style="font-size: 44px; line-height: 1; font-weight: 800">₺4.493,09</span>
+      <span style="font-size: 12px; font-weight: 600; color: rgba(11, 13, 16, 0.7)">2 tahsilat · kasaya işlendi</span>
+    </div>
+    <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px">
+      <div class="card" style="padding: 14px; display: flex; flex-direction: column; gap: 8px">
+        <span class="lbl" style="font-size: 10px">Müşteriler</span>
+        <span class="n" style="font-size: 32px; line-height: 1; font-weight: 700; color: #F3F5F2">11</span>
+        <span style="font-size: 11px; color: #8A929C">Bu ay 4 ders</span>
+      </div>
+      <div class="card" style="padding: 14px; display: flex; flex-direction: column; gap: 8px">
+        <span class="lbl" style="font-size: 10px">Bugün seans</span>
+        <span class="n" style="font-size: 32px; line-height: 1; font-weight: 700; color: #F3F5F2">4</span>
+        <span style="font-size: 11px; color: #8A929C">1 suda · 3 planlandı</span>
+      </div>
+      <div class="card" style="padding: 14px; display: flex; flex-direction: column; gap: 8px">
+        <span class="lbl" style="font-size: 10px">Kasa</span>
+        <span class="n" style="font-size: 32px; line-height: 1; font-weight: 700; color: #F3F5F2">₺1,03M</span>
+        <span style="font-size: 11px; color: #8A929C">3 hesap</span>
+      </div>
+      <div class="card" style="padding: 14px; display: flex; flex-direction: column; gap: 8px">
+        <div style="display: flex; align-items: center; justify-content: space-between"><span class="lbl" style="font-size: 10px">Rüzgar</span><span class="pill p-lime" style="height: 20px; font-size: 10px">İdeal</span></div>
+        <div style="display: flex; align-items: baseline; gap: 5px"><span class="n" style="font-size: 32px; line-height: 1; font-weight: 700">16</span><span class="d" style="font-size: 14px; font-weight: 700; color: #8A929C">kn</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#D7FF3F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; margin-left: 4px; transform: rotate(210deg)"><path d="m3 11 19-9-9 19-2-8-8-2Z"></path></svg></div>
+        <span style="font-size: 11px; color: #8A929C">GGB · 21 kn hamle</span>
+      </div>
+    </div>
+    <div style="display: flex; align-items: center; justify-content: space-between; padding-top: 8px">
+      <span class="d" style="font-size: 24px; font-weight: 800">Bugünkü dersler</span>
+      <a href="#" style="display: flex; align-items: center; gap: 4px; font-size: 13px; font-weight: 700; min-height: 44px">Tümü<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#D7FF3F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; "><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg></a>
+    </div>
+    <div class="card" style="padding: 14px; display: flex; align-items: center; gap: 14px">
+        <div style="width: 54px; height: 54px; border-radius: 10px; background: #1B2027; display: flex; flex-direction: column; align-items: center; justify-content: center; line-height: 1">
+          <span class="n" style="font-size: 20px; font-weight: 700">09:00</span><span class="n" style="font-size: 12px; color: #5C646E; margin-top: 3px">11:00</span>
+        </div>
+        <div style="flex: 1; display: flex; flex-direction: column; gap: 5px">
+          <span style="font-size: 15px; font-weight: 700">John Smith</span>
+          <span style="display: flex; align-items: center; gap: 6px; font-size: 12px; color: #8A929C"><span style="width: 7px; height: 7px; border-radius: 999px; background: #4F8BFF"></span>Ahmet Kaya · Özel Ders</span>
+        </div>
+        <span class="pill p-cyan">Suda</span>
+      </div><div class="card" style="padding: 14px; display: flex; align-items: center; gap: 14px">
+        <div style="width: 54px; height: 54px; border-radius: 10px; background: #1B2027; display: flex; flex-direction: column; align-items: center; justify-content: center; line-height: 1">
+          <span class="n" style="font-size: 20px; font-weight: 700">11:30</span><span class="n" style="font-size: 12px; color: #5C646E; margin-top: 3px">13:30</span>
+        </div>
+        <div style="flex: 1; display: flex; flex-direction: column; gap: 5px">
+          <span style="font-size: 15px; font-weight: 700">Maria Garcia</span>
+          <span style="display: flex; align-items: center; gap: 6px; font-size: 12px; color: #8A929C"><span style="width: 7px; height: 7px; border-radius: 999px; background: #3DD68C"></span>Fatma Demir · Yarı Özel</span>
+        </div>
+        <span class="pill p-gray">Planlandı</span>
+      </div><div class="card" style="padding: 14px; display: flex; align-items: center; gap: 14px">
+        <div style="width: 54px; height: 54px; border-radius: 10px; background: #1B2027; display: flex; flex-direction: column; align-items: center; justify-content: center; line-height: 1">
+          <span class="n" style="font-size: 20px; font-weight: 700">14:00</span><span class="n" style="font-size: 12px; color: #5C646E; margin-top: 3px">15:00</span>
+        </div>
+        <div style="flex: 1; display: flex; flex-direction: column; gap: 5px">
+          <span style="font-size: 15px; font-weight: 700">Hans Müller</span>
+          <span style="display: flex; align-items: center; gap: 6px; font-size: 12px; color: #8A929C"><span style="width: 7px; height: 7px; border-radius: 999px; background: #4F8BFF"></span>Ahmet Kaya · Özel Ders</span>
+        </div>
+        <span class="pill p-gray">Planlandı</span>
+      </div>
+  </div>
+  <nav style="position: absolute; left: 0; right: 0; bottom: 0; height: 84px; padding: 6px 8px 22px; background: #08090B; border-top: 1px solid #1A1F25; display: flex; align-items: center"><div style="flex: 1; height: 56px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; color: #D7FF3F"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; "><path d="M3 9.5 12 3l9 6.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1Z"></path></svg><span style="font-size: 10px; font-weight: 800">Ana sayfa</span></div><div style="flex: 1; height: 56px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; color: #6B737D"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; "><rect x="3" y="4" width="18" height="18" rx="2"></rect><path d="M16 2v4"></path><path d="M8 2v4"></path><path d="M3 10h18"></path></svg><span style="font-size: 10px; font-weight: 600">Takvim</span></div><div style="flex: 1; display: flex; justify-content: center"><div style="width: 52px; height: 52px; margin-top: -18px; border-radius: 999px; background: #D7FF3F; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 0 5px #08090B"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0B0D10" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; "><path d="M5 12h14"></path><path d="M12 5v14"></path></svg></div></div><div style="flex: 1; height: 56px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; color: #6B737D"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; "><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M22 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg><span style="font-size: 10px; font-weight: 600">Müşteriler</span></div><div style="flex: 1; height: 56px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; color: #6B737D"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; "><path d="M19 7V4a1 1 0 0 0-1-1H5a2 2 0 0 0 0 4h15a1 1 0 0 1 1 1v4h-3a2 2 0 0 0 0 4h3a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1"></path><path d="M3 5v14a2 2 0 0 0 2 2h15a1 1 0 0 0 1-1v-4"></path></svg><span style="font-size: 10px; font-weight: 600">Kasa</span></div></nav>
+</div>
+</div></div></section><section class="shot mobile"><h2>Performansım — mobil (eğitmen)</h2><div class="frame" data-w="390"><div class="inner">
+<div style="position: relative; width: 390px; height: 1120px; background: radial-gradient(420px 260px at 100% 0%, rgba(215, 255, 63, 0.07), transparent 70%), #0B0D10; overflow: hidden">
+  <div style="height: 64px; padding: 0 16px; display: flex; align-items: center; justify-content: space-between">
+    <span class="icon-btn" style="width: 44px; height: 44px"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; "><path d="M4 6h16"></path><path d="M4 12h16"></path><path d="M4 18h16"></path></svg></span>
+    <div style="display: flex; align-items: center; gap: 10px">
+      <div style="width: 30px; height: 30px; border-radius: 8px; background: #D7FF3F; display: flex; align-items: center; justify-content: center"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0B0D10" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; "><path d="M17.7 7.7a2.5 2.5 0 1 1 1.8 4.3H2"></path><path d="M9.6 4.6A2 2 0 1 1 11 8H2"></path><path d="M12.6 19.4A2 2 0 1 0 14 16H2"></path></svg></div>
+      <div style="display: flex; flex-direction: column; line-height: 1">
+        <span class="d" lang="en" style="font-size: 17px; font-weight: 800; letter-spacing: 0.02em">Kite Gang</span>
+        <span style="font-size: 9px; font-weight: 800; letter-spacing: 0.34em; color: #D7FF3F; margin-top: 3px">CORNER</span>
+      </div>
+    </div>
+    <span class="icon-btn" style="width: 44px; height: 44px"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; "><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"></path><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"></path></svg></span>
+  </div>
+  <div style="padding: 8px 16px 110px; display: flex; flex-direction: column; gap: 14px">
+    <div style="display: flex; flex-direction: column; gap: 6px; padding: 4px 0 2px">
+      <div style="display: flex; align-items: center; gap: 8px"><span style="width: 7px; height: 7px; border-radius: 2px; background: #D7FF3F"></span><span class="lbl" style="color: #D7FF3F">Eğitmen portalı</span></div>
+      <h1 class="d" style="font-size: 40px; line-height: 0.95; font-weight: 800">Performansım</h1>
+    </div>
+    <div style="display: flex; align-items: center; gap: 8px">
+      <span class="icon-btn" style="width: 44px; height: 44px"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; "><path d="m15 18-6-6 6-6"></path></svg></span>
+      <div class="card" style="flex: 1; height: 44px; display: flex; align-items: center; justify-content: center"><span class="d" style="font-size: 18px; font-weight: 700">Eylül 2026</span></div>
+      <span class="icon-btn" style="width: 44px; height: 44px; color: #3A4149"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; "><path d="m9 18 6-6-6-6"></path></svg></span>
+    </div>
+    <div class="card" style="padding: 18px 16px; display: flex; flex-direction: column; gap: 14px">
+      <div style="display: flex; align-items: center; justify-content: space-between"><span class="lbl">Bekleyen hakediş</span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#6B737D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; "><path d="M19 7V4a1 1 0 0 0-1-1H5a2 2 0 0 0 0 4h15a1 1 0 0 1 1 1v4h-3a2 2 0 0 0 0 4h3a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1"></path><path d="M3 5v14a2 2 0 0 0 2 2h15a1 1 0 0 0 1-1v-4"></path></svg></div>
+      <span class="n" style="font-size: 50px; line-height: 1; font-weight: 800; color: #D7FF3F">₺5.308,18</span>
+      <div style="display: flex; flex-direction: column; gap: 8px">
+        <div style="height: 8px; border-radius: 4px; background: #262C33; overflow: hidden"><div style="width: 34.6%; height: 8px; border-radius: 4px; background: #E6EAE3"></div></div>
+        <div style="display: flex; justify-content: space-between; font-size: 12px">
+          <span style="color: #8A929C">Ödenen <span class="n" style="font-size: 15px; font-weight: 700; color: #F3F5F2">₺2.808,18</span></span>
+          <span style="color: #8A929C">Hak edilen <span class="n" style="font-size: 15px; font-weight: 700; color: #F3F5F2">₺8.116,36</span></span>
+        </div>
+      </div>
+    </div>
+    <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px">
+      <div class="card" style="padding: 14px; display: flex; flex-direction: column; gap: 8px">
+        <span class="lbl" style="font-size: 10px">Ders</span>
+        <span class="n" style="font-size: 32px; line-height: 1; font-weight: 700; color: #F3F5F2">2</span>
+        <span style="font-size: 11px; color: #8A929C">Tamamlanan</span>
+      </div>
+      <div class="card" style="padding: 14px; display: flex; flex-direction: column; gap: 8px">
+        <span class="lbl" style="font-size: 10px">Toplam saat</span>
+        <span class="n" style="font-size: 32px; line-height: 1; font-weight: 700; color: #F3F5F2">3,5</span>
+        <span style="font-size: 11px; color: #8A929C">Suda geçen süre</span>
+      </div>
+      <div class="card" style="padding: 14px; display: flex; flex-direction: column; gap: 8px">
+        <span class="lbl" style="font-size: 10px">Öğrenci</span>
+        <span class="n" style="font-size: 32px; line-height: 1; font-weight: 700; color: #F3F5F2">1</span>
+        <span style="font-size: 11px; color: #8A929C">Farklı öğrenci</span>
+      </div>
+      <div class="card" style="padding: 14px; display: flex; flex-direction: column; gap: 8px">
+        <span class="lbl" style="font-size: 10px">Bu ay hakediş</span>
+        <span class="n" style="font-size: 32px; line-height: 1; font-weight: 700; color: #D7FF3F">₺2.500</span>
+        <span style="font-size: 11px; color: #8A929C">TL karşılığı</span>
+      </div>
+    </div>
+    <span class="d" style="font-size: 24px; font-weight: 800; padding-top: 8px">Ders geçmişi</span>
+    <div class="card" style="padding: 14px; display: flex; align-items: center; gap: 14px">
+        <div style="width: 48px; height: 52px; border-radius: 10px; background: #1B2027; display: flex; flex-direction: column; align-items: center; justify-content: center; line-height: 1">
+          <span class="n" style="font-size: 22px; font-weight: 700">01</span><span class="d" style="font-size: 11px; font-weight: 700; color: #5C646E; margin-top: 2px">Eyl</span>
+        </div>
+        <div style="flex: 1; display: flex; flex-direction: column; gap: 5px">
+          <span style="font-size: 15px; font-weight: 700">Arda Arslan</span>
+          <span style="font-size: 12px; color: #8A929C">Özel Ders · 2 sa</span>
+        </div>
+        <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 3px">
+          <span class="n" style="font-size: 20px; font-weight: 700">₺1.500,00</span>
+          <span style="font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #5C646E">hakediş</span>
+        </div>
+      </div><div class="card" style="padding: 14px; display: flex; align-items: center; gap: 14px">
+        <div style="width: 48px; height: 52px; border-radius: 10px; background: #1B2027; display: flex; flex-direction: column; align-items: center; justify-content: center; line-height: 1">
+          <span class="n" style="font-size: 22px; font-weight: 700">01</span><span class="d" style="font-size: 11px; font-weight: 700; color: #5C646E; margin-top: 2px">Eyl</span>
+        </div>
+        <div style="flex: 1; display: flex; flex-direction: column; gap: 5px">
+          <span style="font-size: 15px; font-weight: 700">Arda Arslan</span>
+          <span style="font-size: 12px; color: #8A929C">Özel Ders · 1,5 sa</span>
+        </div>
+        <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 3px">
+          <span class="n" style="font-size: 20px; font-weight: 700">₺1.000,00</span>
+          <span style="font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #5C646E">hakediş</span>
+        </div>
+      </div>
+    <div class="card" style="padding: 14px; display: flex; align-items: center; justify-content: space-between">
+      <div style="display: flex; flex-direction: column; gap: 5px"><span class="lbl" style="font-size: 10px">Son ödeme</span><span style="font-size: 13px; color: #8A929C">1 Eyl 2026 · Nakit</span></div>
+      <span class="n" style="font-size: 22px; font-weight: 700">₺2.808,18</span>
+    </div>
+  </div>
+  <nav style="position: absolute; left: 0; right: 0; bottom: 0; height: 84px; padding: 6px 8px 22px; background: #08090B; border-top: 1px solid #1A1F25; display: flex; align-items: center"><div style="flex: 1; height: 56px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; color: #6B737D"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; "><path d="M3 9.5 12 3l9 6.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1Z"></path></svg><span style="font-size: 10px; font-weight: 600">Ana sayfa</span></div><div style="flex: 1; height: 56px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; color: #D7FF3F"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; "><path d="M22 7 13.5 15.5 8.5 10.5 2 17"></path><path d="M16 7h6v6"></path></svg><span style="font-size: 10px; font-weight: 800">Performansım</span></div><div style="flex: 1; height: 56px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; color: #6B737D"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; "><path d="M2 6c.6.5 1.2 1 2.5 1C7 7 7 5 9.5 5c2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"></path><path d="M2 12c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"></path><path d="M2 18c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"></path></svg><span style="font-size: 10px; font-weight: 600">Derslerim</span></div><div style="flex: 1; height: 56px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; color: #6B737D"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; "><rect x="3" y="4" width="18" height="18" rx="2"></rect><path d="M16 2v4"></path><path d="M8 2v4"></path><path d="M3 10h18"></path><path d="M8 14h.01"></path><path d="M12 14h.01"></path><path d="M16 14h.01"></path><path d="M8 18h.01"></path><path d="M12 18h.01"></path></svg><span style="font-size: 10px; font-weight: 600">Program</span></div></nav>
+</div>
+</div></div></section><section class="shot mobile"><h2>Operasyon — mobil (resepsiyon)</h2><div class="frame" data-w="390"><div class="inner">
+<div style="position: relative; width: 390px; height: 1260px; background: radial-gradient(420px 260px at 100% 0%, rgba(215, 255, 63, 0.07), transparent 70%), #0B0D10; overflow: hidden">
+  <div style="height: 64px; padding: 0 16px; display: flex; align-items: center; justify-content: space-between">
+    <span class="icon-btn" style="width: 44px; height: 44px"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; "><path d="M4 6h16"></path><path d="M4 12h16"></path><path d="M4 18h16"></path></svg></span>
+    <div style="display: flex; align-items: center; gap: 10px">
+      <div style="width: 30px; height: 30px; border-radius: 8px; background: #D7FF3F; display: flex; align-items: center; justify-content: center"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0B0D10" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; "><path d="M17.7 7.7a2.5 2.5 0 1 1 1.8 4.3H2"></path><path d="M9.6 4.6A2 2 0 1 1 11 8H2"></path><path d="M12.6 19.4A2 2 0 1 0 14 16H2"></path></svg></div>
+      <div style="display: flex; flex-direction: column; line-height: 1">
+        <span class="d" lang="en" style="font-size: 17px; font-weight: 800; letter-spacing: 0.02em">Kite Gang</span>
+        <span style="font-size: 9px; font-weight: 800; letter-spacing: 0.34em; color: #D7FF3F; margin-top: 3px">CORNER</span>
+      </div>
+    </div>
+    <span class="icon-btn" style="width: 44px; height: 44px"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; "><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"></path><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"></path></svg></span>
+  </div>
+  <div style="padding: 8px 16px 110px; display: flex; flex-direction: column; gap: 14px">
+    <div style="display: flex; flex-direction: column; gap: 6px; padding: 4px 0 2px">
+      <div style="display: flex; align-items: center; gap: 8px"><span style="width: 7px; height: 7px; border-radius: 2px; background: #D7FF3F"></span><span class="lbl" style="color: #D7FF3F">15 Eylül 2026 · Salı</span></div>
+      <h1 class="d" style="font-size: 40px; line-height: 0.95; font-weight: 800">Operasyon</h1>
+    </div>
+    <div style="display: flex; align-items: center; gap: 8px">
+      <span class="pill p-lime" style="height: 30px; font-size: 13px"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#D7FF3F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; "><path d="M17.7 7.7a2.5 2.5 0 1 1 1.8 4.3H2"></path><path d="M9.6 4.6A2 2 0 1 1 11 8H2"></path><path d="M12.6 19.4A2 2 0 1 0 14 16H2"></path></svg>16 kn · İdeal</span>
+      <span class="pill p-gray" style="height: 30px; font-size: 13px">GGB · 21 kn hamle</span>
+    </div>
+    <div class="card" style="padding: 5px; display: flex; gap: 4px">
+      <div style="flex: 1; padding: 10px 12px; border-radius: 10px; background: transparent; display: flex; flex-direction: column; gap: 4px"><span class="n" style="font-size: 26px; line-height: 1; font-weight: 700; color: #F3F5F2">2</span><span style="font-size: 11px; font-weight: 700; color: #8A929C">Planlandı</span></div><div style="flex: 1; padding: 10px 12px; border-radius: 10px; background: #1B2027; display: flex; flex-direction: column; gap: 4px"><span class="n" style="font-size: 26px; line-height: 1; font-weight: 700; color: #6FDCFF">1</span><span style="font-size: 11px; font-weight: 700; color: #8A929C">Suda</span></div><div style="flex: 1; padding: 10px 12px; border-radius: 10px; background: transparent; display: flex; flex-direction: column; gap: 4px"><span class="n" style="font-size: 26px; line-height: 1; font-weight: 700; color: #F3F5F2">1</span><span style="font-size: 11px; font-weight: 700; color: #8A929C">Tamamlandı</span></div>
+    </div>
+    <span class="d" style="font-size: 22px; font-weight: 800; padding-top: 6px; display: flex; align-items: center; gap: 8px"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#6FDCFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; "><path d="M2 6c.6.5 1.2 1 2.5 1C7 7 7 5 9.5 5c2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"></path><path d="M2 12c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"></path><path d="M2 18c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"></path></svg>Şu an suda</span>
+    <div class="card" style="padding: 16px; display: flex; flex-direction: column; gap: 12px">
+        <div style="display: flex; align-items: center; justify-content: space-between">
+          <div style="display: flex; align-items: baseline; gap: 6px"><span class="n" style="font-size: 26px; line-height: 1; font-weight: 700">09:00</span><span class="n" style="font-size: 15px; color: #5C646E">– 11:00</span></div>
+          <span class="pill p-cyan">Suda</span>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 7px">
+          <span style="font-size: 18px; font-weight: 800">John Smith</span>
+          <span style="display: flex; align-items: center; gap: 8px; font-size: 13px; color: #8A929C"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#6B737D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; "><path d="M22 10 12 5 2 10l10 5 10-5Z"></path><path d="M6 12v5c3 3 9 3 12 0v-5"></path><path d="M22 10v6"></path></svg>Özel Ders</span>
+          <span style="display: flex; align-items: center; gap: 8px; font-size: 13px; color: #8A929C"><span style="width: 15px; display: flex; justify-content: center"><span style="width: 8px; height: 8px; border-radius: 999px; background: #4F8BFF"></span></span>Ahmet Kaya</span>
+          <span style="display: flex; align-items: center; gap: 8px; font-size: 13px; color: #8A929C"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#6B737D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; "><path d="m7.5 4.27 9 5.15"></path><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"></path><path d="m3.3 7 8.7 5 8.7-5"></path><path d="M12 22V12"></path></svg>Kalan 8,0 sa · Başlangıç Paketi</span>
+        </div>
+        <div style="display: flex; gap: 8px"><span class="btn btn-lime" style="flex: 1; height: 48px; font-size: 15px"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#0B0D10" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; "><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><path d="m16 17 5-5-5-5"></path><path d="M21 12H9"></path></svg>Check-out yap</span></div>
+      </div>
+    <span class="d" style="font-size: 22px; font-weight: 800; padding-top: 6px">Planlandı</span>
+    <div class="card" style="padding: 16px; display: flex; flex-direction: column; gap: 12px">
+        <div style="display: flex; align-items: center; justify-content: space-between">
+          <div style="display: flex; align-items: baseline; gap: 6px"><span class="n" style="font-size: 26px; line-height: 1; font-weight: 700">11:30</span><span class="n" style="font-size: 15px; color: #5C646E">– 13:30</span></div>
+          <span class="pill p-gray">Planlandı</span>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 7px">
+          <span style="font-size: 18px; font-weight: 800">Maria Garcia</span>
+          <span style="display: flex; align-items: center; gap: 8px; font-size: 13px; color: #8A929C"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#6B737D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; "><path d="M22 10 12 5 2 10l10 5 10-5Z"></path><path d="M6 12v5c3 3 9 3 12 0v-5"></path><path d="M22 10v6"></path></svg>Yarı Özel</span>
+          <span style="display: flex; align-items: center; gap: 8px; font-size: 13px; color: #8A929C"><span style="width: 15px; display: flex; justify-content: center"><span style="width: 8px; height: 8px; border-radius: 999px; background: #3DD68C"></span></span>Fatma Demir</span>
+          <span style="display: flex; align-items: center; gap: 8px; font-size: 13px; color: #8A929C"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#6B737D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; "><path d="m7.5 4.27 9 5.15"></path><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"></path><path d="m3.3 7 8.7 5 8.7-5"></path><path d="M12 22V12"></path></svg>Kalan 3,0 sa · Yarı Özel Paket</span>
+        </div>
+        <div style="display: flex; gap: 8px"><span class="btn btn-lime" style="flex: 1.4; height: 48px; font-size: 15px"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#0B0D10" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; "><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"></path><path d="m10 17 5-5-5-5"></path><path d="M15 12H3"></path></svg>Check-in</span><span class="btn btn-ghost" style="flex: 1; height: 48px; font-size: 15px; color: #FF7A66; border-color: rgba(255, 122, 102, 0.4)"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#FF7A66" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; "><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="m17 8 5 5"></path><path d="m22 8-5 5"></path></svg>Gelmedi</span></div>
+      </div>
+    <div class="card" style="padding: 16px; display: flex; flex-direction: column; gap: 12px">
+        <div style="display: flex; align-items: center; justify-content: space-between">
+          <div style="display: flex; align-items: baseline; gap: 6px"><span class="n" style="font-size: 26px; line-height: 1; font-weight: 700">14:00</span><span class="n" style="font-size: 15px; color: #5C646E">– 15:00</span></div>
+          <span class="pill p-gray">Planlandı</span>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 7px">
+          <span style="font-size: 18px; font-weight: 800">Hans Müller</span>
+          <span style="display: flex; align-items: center; gap: 8px; font-size: 13px; color: #8A929C"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#6B737D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; "><path d="M22 10 12 5 2 10l10 5 10-5Z"></path><path d="M6 12v5c3 3 9 3 12 0v-5"></path><path d="M22 10v6"></path></svg>Özel Ders</span>
+          <span style="display: flex; align-items: center; gap: 8px; font-size: 13px; color: #8A929C"><span style="width: 15px; display: flex; justify-content: center"><span style="width: 8px; height: 8px; border-radius: 999px; background: #4F8BFF"></span></span>Ahmet Kaya</span>
+          <span style="display: flex; align-items: center; gap: 8px; font-size: 13px; color: #8A929C"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#6B737D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; "><path d="m7.5 4.27 9 5.15"></path><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"></path><path d="m3.3 7 8.7 5 8.7-5"></path><path d="M12 22V12"></path></svg>Paket yok · ders sonrası tahsilat</span>
+        </div>
+        <div style="display: flex; gap: 8px"><span class="btn btn-lime" style="flex: 1.4; height: 48px; font-size: 15px"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#0B0D10" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; "><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"></path><path d="m10 17 5-5-5-5"></path><path d="M15 12H3"></path></svg>Check-in</span><span class="btn btn-ghost" style="flex: 1; height: 48px; font-size: 15px; color: #FF7A66; border-color: rgba(255, 122, 102, 0.4)"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#FF7A66" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; "><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="m17 8 5 5"></path><path d="m22 8-5 5"></path></svg>Gelmedi</span></div>
+      </div>
+  </div>
+  <nav style="position: absolute; left: 0; right: 0; bottom: 0; height: 84px; padding: 6px 8px 22px; background: #08090B; border-top: 1px solid #1A1F25; display: flex; align-items: center"><div style="flex: 1; height: 56px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; color: #6B737D"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; "><path d="M3 9.5 12 3l9 6.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1Z"></path></svg><span style="font-size: 10px; font-weight: 600">Ana sayfa</span></div><div style="flex: 1; height: 56px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; color: #D7FF3F"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; "><rect x="3" y="4" width="18" height="18" rx="2"></rect><path d="M16 2v4"></path><path d="M8 2v4"></path><path d="M3 10h18"></path></svg><span style="font-size: 10px; font-weight: 800">Takvim</span></div><div style="flex: 1; display: flex; justify-content: center"><div style="width: 52px; height: 52px; margin-top: -18px; border-radius: 999px; background: #D7FF3F; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 0 5px #08090B"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0B0D10" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; "><path d="M5 12h14"></path><path d="M12 5v14"></path></svg></div></div><div style="flex: 1; height: 56px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; color: #6B737D"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; "><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M22 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg><span style="font-size: 10px; font-weight: 600">Müşteriler</span></div><div style="flex: 1; height: 56px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; color: #6B737D"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; "><path d="M19 7V4a1 1 0 0 0-1-1H5a2 2 0 0 0 0 4h15a1 1 0 0 1 1 1v4h-3a2 2 0 0 0 0 4h3a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1"></path><path d="M3 5v14a2 2 0 0 0 2 2h15a1 1 0 0 0 1-1v-4"></path></svg><span style="font-size: 10px; font-weight: 600">Kasa</span></div></nav>
+</div>
+</div></div></section></div>
+</div>
+<script>
+  function fit() {
+    document.querySelectorAll('.frame').forEach(function (frame) {
+      var w = Number(frame.dataset.w);
+      var inner = frame.querySelector('.inner');
+      var child = inner.firstElementChild;
+      var avail = frame.parentElement.clientWidth;
+      if (frame.closest('.mobiles')) avail = Math.min(390, avail);
+      var scale = Math.min(1, avail / w);
+      inner.style.transform = 'scale(' + scale + ')';
+      frame.style.width = (w * scale) + 'px';
+      frame.style.height = (child.offsetHeight * scale) + 'px';
+    });
+  }
+  window.addEventListener('resize', fit);
+  window.addEventListener('load', fit);
+  fit();
+</script>
+</body>
+</html>

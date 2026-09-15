@@ -57,7 +57,7 @@ export function EditEquipmentDialog({ equipment }: { equipment: Equipment }) {
   return (
     <>
       <DropdownMenu>
-        <DropdownMenuTrigger className={cn("inline-flex items-center justify-center h-7 w-7 rounded-md text-gray-400 hover:text-gray-700 hover:bg-gray-100 transition-colors")}>
+        <DropdownMenuTrigger className={cn("inline-flex items-center justify-center h-7 w-7 rounded-md text-muted-foreground/70 hover:text-foreground/85 hover:bg-muted transition-colors")}>
           <MoreHorizontal className="w-4 h-4" />
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end">
@@ -80,11 +80,11 @@ export function EditEquipmentDialog({ equipment }: { equipment: Equipment }) {
             <DialogTitle>Ekipmanı Düzenle</DialogTitle>
           </DialogHeader>
           <form action={formAction} className="space-y-4">
-            {state.error && <p className="text-sm text-red-500">{state.error}</p>}
+            {state.error && <p className="text-sm text-destructive">{state.error}</p>}
 
             <div className="space-y-1.5">
               <Label>Tip *</Label>
-              <select name="type" defaultValue={equipment.type} className="w-full border rounded-md px-3 py-2 text-sm bg-white" required>
+              <select name="type" defaultValue={equipment.type} className="w-full border rounded-md px-3 py-2 text-sm bg-card" required>
                 {Object.entries(EQUIPMENT_TYPES).map(([v, l]) => (
                   <option key={v} value={v}>{l}</option>
                 ))}
@@ -134,7 +134,7 @@ export function EditEquipmentDialog({ equipment }: { equipment: Equipment }) {
           <DialogHeader>
             <DialogTitle>Ekipmanı Sil</DialogTitle>
           </DialogHeader>
-          <p className="text-sm text-gray-600">
+          <p className="text-sm text-muted-foreground">
             <span className="font-semibold">{equipment.name}</span> ekipmanını silmek istediğinize emin misiniz? Bu işlem geri alınamaz.
           </p>
           <div className="flex gap-2 justify-end mt-2">

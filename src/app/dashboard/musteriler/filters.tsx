@@ -49,7 +49,7 @@ export function MusterilerFilters({
   return (
     <div className="flex gap-3 flex-wrap items-center">
       <div className="relative flex-1 min-w-48">
-        <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+        <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground/70" />
         <Input
           value={searchValue}
           onChange={(e) => setSearchValue(e.target.value)}
@@ -61,7 +61,7 @@ export function MusterilerFilters({
       <select
         value={seviye}
         onChange={(e) => pushParams({ seviye: e.target.value })}
-        className="border rounded-md px-3 py-2 text-sm bg-white"
+        className="border rounded-md px-3 py-2 text-sm bg-card"
       >
         <option value="">Tüm Seviyeler</option>
         {Object.entries(SKILL_LEVELS).map(([value, label]) => (
@@ -70,8 +70,8 @@ export function MusterilerFilters({
       </select>
 
       <div className="flex items-center gap-2">
-        <span className="text-xs font-medium text-gray-500 uppercase tracking-wide">Bakiye Durumu</span>
-        <div className="flex items-center gap-0.5 bg-gray-100 rounded-lg p-0.5">
+        <span className="text-xs font-medium text-muted-foreground uppercase tracking-wide">Bakiye Durumu</span>
+        <div className="flex items-center gap-0.5 bg-muted rounded-lg p-0.5">
           {DURUM_OPTIONS.map((opt) => {
             const active = durum === opt.value;
             return (
@@ -81,8 +81,8 @@ export function MusterilerFilters({
                 onClick={() => pushParams({ durum: opt.value })}
                 className={`px-3 py-1.5 rounded-md text-xs font-medium transition-colors ${
                   active
-                    ? "bg-white text-gray-900 shadow-sm"
-                    : "text-gray-500 hover:text-gray-700"
+                    ? "bg-card text-foreground shadow-sm"
+                    : "text-muted-foreground hover:text-foreground/85"
                 }`}
               >
                 {opt.label}

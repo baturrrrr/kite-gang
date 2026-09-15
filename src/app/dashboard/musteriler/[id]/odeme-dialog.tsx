@@ -88,14 +88,14 @@ export function OdemeDialog({
           <input type="hidden" name="hizmetId" value={hizmetId} />
 
           {state.fieldErrors && (
-            <p className="text-sm text-red-500">{Object.values(state.fieldErrors).flat()[0]}</p>
+            <p className="text-sm text-destructive">{Object.values(state.fieldErrors).flat()[0]}</p>
           )}
 
           {hizmetler.length > 0 && (
             <div className="space-y-1.5">
               <Label>Hangi Ders / Hizmet İçin</Label>
               <select
-                className="w-full border rounded-md px-3 py-2 text-sm bg-white"
+                className="w-full border rounded-md px-3 py-2 text-sm bg-card"
                 value={hizmetId}
                 onChange={(e) => handleHizmetChange(e.target.value)}
               >
@@ -117,7 +117,7 @@ export function OdemeDialog({
             </div>
             <div className="space-y-1.5">
               <Label>Para Birimi</Label>
-              <select name="currency" className="w-full border rounded-md px-3 py-2 text-sm bg-white" value={currency} onChange={(e) => handleCurrencyChange(e.target.value)}>
+              <select name="currency" className="w-full border rounded-md px-3 py-2 text-sm bg-card" value={currency} onChange={(e) => handleCurrencyChange(e.target.value)}>
                 {CURRENCIES.map((c) => <option key={c} value={c}>{c}</option>)}
               </select>
             </div>
@@ -125,7 +125,7 @@ export function OdemeDialog({
 
           <div className="space-y-1.5">
             <Label>Ödeme Yöntemi *</Label>
-            <select name="method" className="w-full border rounded-md px-3 py-2 text-sm bg-white" required>
+            <select name="method" className="w-full border rounded-md px-3 py-2 text-sm bg-card" required>
               {Object.entries(PAYMENT_METHODS).map(([v, l]) => (
                 <option key={v} value={v}>{l}</option>
               ))}
@@ -135,7 +135,7 @@ export function OdemeDialog({
           {cashAccounts.length > 0 && (
             <div className="space-y-1.5">
               <Label>Kasa Hesabı *</Label>
-              <select name="cashAccountId" className="w-full border rounded-md px-3 py-2 text-sm bg-white" required>
+              <select name="cashAccountId" className="w-full border rounded-md px-3 py-2 text-sm bg-card" required>
                 {cashAccounts.map((acc) => (
                   <option key={acc.id} value={acc.id}>
                     {acc.name} ({acc.currency})

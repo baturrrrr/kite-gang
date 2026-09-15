@@ -11,12 +11,12 @@ import { toast } from "sonner";
 type Student = { id: string; firstName: string; lastName: string };
 
 const AVATAR_COLORS = [
-  "bg-amber-100 text-amber-700",
-  "bg-blue-100 text-blue-700",
-  "bg-emerald-100 text-emerald-700",
-  "bg-violet-100 text-violet-700",
-  "bg-rose-100 text-rose-700",
-  "bg-teal-100 text-teal-700",
+  "bg-warning/15 text-warning",
+  "bg-info/15 text-info",
+  "bg-success/15 text-success",
+  "bg-info/15 text-info",
+  "bg-destructive/15 text-destructive",
+  "bg-info/15 text-info",
 ];
 
 function initialsOf(first: string, last: string) {
@@ -101,16 +101,16 @@ export function StudentSelect({
 
   if (showNew) {
     return (
-      <div className="space-y-3 border rounded-xl p-4 bg-gray-50">
+      <div className="space-y-3 border rounded-xl p-4 bg-muted/40">
         <div className="flex items-center justify-between">
           <Label className="flex items-center gap-1.5">
             <UserPlus className="w-3.5 h-3.5" /> Yeni Müşteri
           </Label>
-          <button type="button" onClick={() => setShowNew(false)} className="text-xs text-blue-600 hover:underline">
+          <button type="button" onClick={() => setShowNew(false)} className="text-xs text-info hover:underline">
             ← Listeden seç
           </button>
         </div>
-        {error && <p className="text-sm text-red-500">{error}</p>}
+        {error && <p className="text-sm text-destructive">{error}</p>}
         <div className="grid grid-cols-2 gap-2">
           <Input placeholder="Ad *" value={firstName} onChange={(e) => setFirstName(e.target.value)} />
           <Input placeholder="Soyad *" value={lastName} onChange={(e) => setLastName(e.target.value)} />
@@ -138,17 +138,17 @@ export function StudentSelect({
       <div className="space-y-1.5">
         <Label>{label}</Label>
         <input type="hidden" name={name} value={value} required={required} />
-        <div className="flex items-center justify-between gap-3 border rounded-xl px-3.5 py-2.5 bg-white">
+        <div className="flex items-center justify-between gap-3 border rounded-xl px-3.5 py-2.5 bg-card">
           <div className="flex items-center gap-3 min-w-0">
             <div className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-semibold flex-shrink-0 ${colorFor(selected.id)}`}>
               {initialsOf(selected.firstName, selected.lastName)}
             </div>
-            <p className="font-medium text-gray-900 truncate">{selected.firstName} {selected.lastName}</p>
+            <p className="font-medium text-foreground truncate">{selected.firstName} {selected.lastName}</p>
           </div>
           <button
             type="button"
             onClick={() => setPicking(true)}
-            className="text-xs font-medium text-blue-600 hover:underline flex-shrink-0"
+            className="text-xs font-medium text-info hover:underline flex-shrink-0"
           >
             Değiştir
           </button>
@@ -161,10 +161,10 @@ export function StudentSelect({
     <div className="space-y-1.5">
       <Label>{label}</Label>
       <div className="relative">
-        <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 pointer-events-none" />
+        <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground/70 pointer-events-none" />
         <select
           name={name}
-          className="w-full border rounded-md pl-9 pr-3 py-2 text-sm bg-white"
+          className="w-full border rounded-md pl-9 pr-3 py-2 text-sm bg-card"
           required={required}
           value={value}
           onChange={(e) => handleSelectChange(e.target.value)}

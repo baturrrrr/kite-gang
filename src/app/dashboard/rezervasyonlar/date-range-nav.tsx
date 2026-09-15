@@ -60,21 +60,21 @@ export function DateRangeNav({ from, to }: { from: string; to: string }) {
       <div className="space-y-3">
         <div className="flex flex-wrap gap-4 items-end">
           <div>
-            <p className="text-xs text-gray-400 mb-1">Başlangıç</p>
+            <p className="text-xs text-muted-foreground/70 mb-1">Başlangıç</p>
             <input
               ref={fromRef}
               type="date"
               defaultValue={from}
-              className="border border-gray-200 rounded-lg px-3 py-2 text-sm text-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-900"
+              className="border border-border rounded-lg px-3 py-2 text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-border"
             />
           </div>
           <div>
-            <p className="text-xs text-gray-400 mb-1">Bitiş</p>
+            <p className="text-xs text-muted-foreground/70 mb-1">Bitiş</p>
             <input
               ref={toRef}
               type="date"
               defaultValue={to}
-              className="border border-gray-200 rounded-lg px-3 py-2 text-sm text-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-900"
+              className="border border-border rounded-lg px-3 py-2 text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-border"
             />
           </div>
         </div>

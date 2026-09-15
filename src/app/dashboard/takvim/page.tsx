@@ -10,16 +10,16 @@ import { LESSON_TYPES } from "@/lib/constants";
 const HOURS = Array.from({ length: 13 }, (_, i) => i + 8); // 08–20
 
 const STATUS_CONFIG: Record<string, { dot: string; label: string }> = {
-  BEKLIYOR:   { dot: "bg-amber-400",  label: "Bekliyor" },
-  DEVAM:      { dot: "bg-blue-500",   label: "Devam" },
-  TAMAMLANDI: { dot: "bg-emerald-500",label: "Tamam" },
-  IPTAL:      { dot: "bg-red-400",    label: "İptal" },
+  BEKLIYOR:   { dot: "bg-warning/40",  label: "Bekliyor" },
+  DEVAM:      { dot: "bg-info",   label: "Devam" },
+  TAMAMLANDI: { dot: "bg-success",label: "Tamam" },
+  IPTAL:      { dot: "bg-destructive/40",    label: "İptal" },
   // Rezervasyon (eski sistem) durumları
-  PLANNED:        { dot: "bg-amber-400",  label: "Planlandı" },
-  CHECKED_IN:     { dot: "bg-blue-500",   label: "Suda" },
-  COMPLETED:      { dot: "bg-emerald-500",label: "Tamam" },
-  NO_SHOW:        { dot: "bg-red-400",    label: "Gelmedi" },
-  WIND_CANCELLED: { dot: "bg-gray-400",   label: "Rüzgar İptali" },
+  PLANNED:        { dot: "bg-warning/40",  label: "Planlandı" },
+  CHECKED_IN:     { dot: "bg-info",   label: "Suda" },
+  COMPLETED:      { dot: "bg-success",label: "Tamam" },
+  NO_SHOW:        { dot: "bg-destructive/40",    label: "Gelmedi" },
+  WIND_CANCELLED: { dot: "bg-muted-foreground/30",   label: "Rüzgar İptali" },
 };
 
 type CalendarItem = {
@@ -113,8 +113,8 @@ export default async function TakvimPage({
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-xl font-bold text-slate-900">Takvim</h1>
-          <p className="text-sm text-slate-500 mt-0.5">
+          <h1 className="text-xl font-bold text-foreground">Takvim</h1>
+          <p className="text-sm text-muted-foreground mt-0.5">
             {items.length > 0 ? `${items.length} seans planlanmış` : "Bu gün için seans yok"}
           </p>
         </div>
@@ -125,25 +125,25 @@ export default async function TakvimPage({
               <Button variant="outline" size="sm">Bugün</Button>
             </Link>
           )}
-          <div className="flex items-center bg-white border border-slate-200 rounded-lg overflow-hidden shadow-sm">
+          <div className="flex items-center bg-card border border-border rounded-lg overflow-hidden shadow-sm">
             <Link
               href={`/dashboard/takvim?tarih=${prevDate}`}
-              className="flex items-center justify-center w-9 h-9 text-slate-400 hover:text-slate-700 hover:bg-slate-50 border-r border-slate-100 transition-colors"
+              className="flex items-center justify-center w-9 h-9 text-muted-foreground/70 hover:text-foreground/85 hover:bg-muted/40 border-r border-border transition-colors"
             >
               <ChevronLeft className="w-4 h-4" />
             </Link>
             <div className="px-4 py-2 min-w-[180px] text-center">
-              <p className="text-sm font-semibold text-slate-800">
+              <p className="text-sm font-semibold text-foreground">
                 {format(selectedDate, "d MMMM yyyy", { locale: tr })}
               </p>
-              <p className="text-[11px] text-slate-400 capitalize">
+              <p className="text-[11px] text-muted-foreground/70 capitalize">
                 {format(selectedDate, "EEEE", { locale: tr })}
-                {isToday && <span className="ml-1 text-blue-600 font-semibold">· Bugün</span>}
+                {isToday && <span className="ml-1 text-info font-semibold">· Bugün</span>}
               </p>
             </div>
             <Link
               href={`/dashboard/takvim?tarih=${nextDate}`}
-              className="flex items-center justify-center w-9 h-9 text-slate-400 hover:text-slate-700 hover:bg-slate-50 border-l border-slate-100 transition-colors"
+              className="flex items-center justify-center w-9 h-9 text-muted-foreground/70 hover:text-foreground/85 hover:bg-muted/40 border-l border-border transition-colors"
             >
               <ChevronRight className="w-4 h-4" />
             </Link>
@@ -152,15 +152,15 @@ export default async function TakvimPage({
       </div>
 
       {/* Calendar table */}
-      <div className="bg-white rounded-xl border border-slate-200 overflow-hidden shadow-sm">
+      <div className="bg-card rounded-xl border border-border overflow-hidden shadow-sm">
         <div className="overflow-x-auto">
           <table className="min-w-full border-collapse">
             <thead>
-              <tr className="bg-slate-50 border-b border-slate-200">
+              <tr className="bg-muted/40 border-b border-border">
                 {/* Instructor header */}
-                <th className="sticky left-0 z-20 bg-slate-50 w-[150px] min-w-[150px] border-r border-slate-200">
+                <th className="sticky left-0 z-20 bg-muted/40 w-[150px] min-w-[150px] border-r border-border">
                   <div className="px-4 py-3 text-left">
-                    <span className="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Eğitmen</span>
+                    <span className="text-[11px] font-semibold text-muted-foreground/70 uppercase tracking-wider">Eğitmen</span>
                   </div>
                 </th>
                 {/* Hour headers */}
@@ -169,14 +169,14 @@ export default async function TakvimPage({
                   return (
                     <th
                       key={h}
-                      className={`min-w-[90px] border-r border-slate-100 last:border-r-0 ${isCurrent ? "bg-blue-50" : ""}`}
+                      className={`min-w-[90px] border-r border-border last:border-r-0 ${isCurrent ? "bg-info/10" : ""}`}
                     >
                       <div className="px-2 py-3 text-center">
-                        <span className={`text-[11px] font-semibold ${isCurrent ? "text-blue-600" : "text-slate-400"}`}>
+                        <span className={`text-[11px] font-semibold ${isCurrent ? "text-info" : "text-muted-foreground/70"}`}>
                           {h.toString().padStart(2, "0")}:00
                         </span>
                         {isCurrent && (
-                          <div className="w-1.5 h-1.5 rounded-full bg-blue-500 mx-auto mt-0.5" />
+                          <div className="w-1.5 h-1.5 rounded-full bg-info mx-auto mt-0.5" />
                         )}
                       </div>
                     </th>
@@ -184,11 +184,11 @@ export default async function TakvimPage({
                 })}
               </tr>
             </thead>
-            <tbody className="divide-y divide-slate-100">
+            <tbody className="divide-y divide-border">
               {instructors.map((inst) => (
-                <tr key={inst.id} className="hover:bg-slate-50/50 transition-colors">
+                <tr key={inst.id} className="hover:bg-muted/40 transition-colors">
                   {/* Instructor cell */}
-                  <td className="sticky left-0 z-10 bg-white border-r border-slate-200 hover:bg-slate-50/50">
+                  <td className="sticky left-0 z-10 bg-card border-r border-border hover:bg-muted/40">
                     <div className="px-4 py-3 flex items-center gap-2.5">
                       <div
                         className="w-7 h-7 rounded-full flex items-center justify-center text-white text-[11px] font-bold flex-shrink-0"
@@ -196,7 +196,7 @@ export default async function TakvimPage({
                       >
                         {inst.user.name.charAt(0)}
                       </div>
-                      <p className="text-[13px] font-semibold text-slate-700 truncate">
+                      <p className="text-[13px] font-semibold text-foreground/85 truncate">
                         {inst.user.name.split(" ")[0]}
                       </p>
                     </div>
@@ -211,12 +211,12 @@ export default async function TakvimPage({
                       <td
                         key={h}
                         className={`
-                          border-r border-slate-100 last:border-r-0 p-1.5 align-top min-h-[68px] min-w-[90px]
-                          ${isCurrent ? "bg-blue-50/50" : ""}
+                          border-r border-border last:border-r-0 p-1.5 align-top min-h-[68px] min-w-[90px]
+                          ${isCurrent ? "bg-info/50" : ""}
                         `}
                       >
                         {cellItems.map((hz) => {
-                          const cfg = STATUS_CONFIG[hz.status] ?? { dot: "bg-gray-300", label: hz.status };
+                          const cfg = STATUS_CONFIG[hz.status] ?? { dot: "bg-muted-foreground/30", label: hz.status };
                           return (
                             <div
                               key={hz.id}
@@ -233,13 +233,13 @@ export default async function TakvimPage({
                                 {hz.title}
                               </p>
                               {hz.student && (
-                                <p className="text-[10px] text-slate-500 truncate mt-0.5">
+                                <p className="text-[10px] text-muted-foreground truncate mt-0.5">
                                   {hz.student.firstName} {hz.student.lastName}
                                 </p>
                               )}
                               <div className="flex items-center gap-1 mt-1">
                                 <div className={`w-1.5 h-1.5 rounded-full ${cfg.dot}`} />
-                                <span className="text-[10px] text-slate-400">
+                                <span className="text-[10px] text-muted-foreground/70">
                                   {hz.scheduledAt ? format(new Date(hz.scheduledAt), "HH:mm") : cfg.label}
                                 </span>
                               </div>
@@ -255,8 +255,8 @@ export default async function TakvimPage({
               {instructors.length === 0 && (
                 <tr>
                   <td colSpan={HOURS.length + 1} className="text-center py-16">
-                    <CalendarDays className="w-8 h-8 text-slate-200 mx-auto mb-2" />
-                    <p className="text-sm text-slate-400 font-medium">Kayıtlı eğitmen bulunamadı</p>
+                    <CalendarDays className="w-8 h-8 text-muted-foreground/50 mx-auto mb-2" />
+                    <p className="text-sm text-muted-foreground/70 font-medium">Kayıtlı eğitmen bulunamadı</p>
                   </td>
                 </tr>
               )}
@@ -267,28 +267,28 @@ export default async function TakvimPage({
 
       {/* Unassigned */}
       {unassigned.length > 0 && (
-        <div className="bg-white rounded-xl border border-slate-200 p-5">
-          <p className="text-[11px] font-semibold text-slate-400 uppercase tracking-wider mb-3">
+        <div className="bg-card rounded-xl border border-border p-5">
+          <p className="text-[11px] font-semibold text-muted-foreground/70 uppercase tracking-wider mb-3">
             Eğitmensiz / Saatsiz Seanslar
           </p>
           <div className="space-y-2">
             {unassigned.map((hz) => {
-              const cfg = STATUS_CONFIG[hz.status] ?? { dot: "bg-gray-300", label: hz.status };
+              const cfg = STATUS_CONFIG[hz.status] ?? { dot: "bg-muted-foreground/30", label: hz.status };
               return (
-                <div key={hz.id} className="flex items-center gap-3 p-3 rounded-lg bg-slate-50 border border-slate-100">
-                  <span className="text-[11px] font-mono text-slate-400 w-10 text-center">
+                <div key={hz.id} className="flex items-center gap-3 p-3 rounded-lg bg-muted/40 border border-border">
+                  <span className="text-[11px] font-mono text-muted-foreground/70 w-10 text-center">
                     {hz.scheduledAt ? format(new Date(hz.scheduledAt), "HH:mm") : "—"}
                   </span>
                   <div className="flex-1 min-w-0">
-                    <p className="text-sm font-semibold text-slate-800">{hz.title}</p>
+                    <p className="text-sm font-semibold text-foreground">{hz.title}</p>
                     {hz.student && (
-                      <p className="text-xs text-slate-500">
+                      <p className="text-xs text-muted-foreground">
                         {hz.student.firstName} {hz.student.lastName}
                       </p>
                     )}
                   </div>
                   <div className={`w-2 h-2 rounded-full ${cfg.dot}`} />
-                  <span className="text-xs text-slate-400">{cfg.label}</span>
+                  <span className="text-xs text-muted-foreground/70">{cfg.label}</span>
                 </div>
               );
             })}
@@ -298,12 +298,12 @@ export default async function TakvimPage({
 
       {/* Empty state */}
       {items.length === 0 && instructors.length > 0 && (
-        <div className="bg-white rounded-xl border border-slate-200 text-center py-14">
-          <div className="w-12 h-12 rounded-xl bg-slate-50 border border-slate-200 flex items-center justify-center mx-auto mb-3">
-            <CalendarDays className="w-6 h-6 text-slate-300" />
+        <div className="bg-card rounded-xl border border-border text-center py-14">
+          <div className="w-12 h-12 rounded-xl bg-muted/40 border border-border flex items-center justify-center mx-auto mb-3">
+            <CalendarDays className="w-6 h-6 text-muted-foreground/50" />
           </div>
-          <p className="text-sm font-semibold text-slate-600">Bu gün için planlanmış seans yok</p>
-          <p className="text-xs text-slate-400 mt-1.5">
+          <p className="text-sm font-semibold text-muted-foreground">Bu gün için planlanmış seans yok</p>
+          <p className="text-xs text-muted-foreground/70 mt-1.5">
             Müşteri profilinden hizmet ekleyip tarih ve saat belirleyin
           </p>
         </div>

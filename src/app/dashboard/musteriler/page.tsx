@@ -26,11 +26,11 @@ import { toTRY } from "@/lib/currency";
 import { getExchangeRates } from "@/lib/exchange-rates";
 
 const AVATAR_COLORS = [
-  "bg-amber-100 text-amber-700",
-  "bg-blue-100 text-blue-700",
-  "bg-emerald-100 text-emerald-700",
-  "bg-violet-100 text-violet-700",
-  "bg-rose-100 text-rose-700",
+  "bg-warning/15 text-warning",
+  "bg-info/15 text-info",
+  "bg-success/15 text-success",
+  "bg-info/15 text-info",
+  "bg-destructive/15 text-destructive",
 ];
 
 export default async function MusterilerPage({
@@ -129,51 +129,51 @@ export default async function MusterilerPage({
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900">Müşteriler</h1>
-          <p className="text-gray-500 text-sm mt-1">{filtered.length} müşteri</p>
+          <h1 className="text-2xl font-bold text-foreground">Müşteriler</h1>
+          <p className="text-muted-foreground text-sm mt-1">{filtered.length} müşteri</p>
         </div>
         <NewStudentSheet />
       </div>
 
       {/* Stats */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <div className="bg-white rounded-xl border p-5 flex items-end justify-between">
+        <div className="bg-card rounded-xl border p-5 flex items-end justify-between">
           <div>
             <div className="flex items-center gap-2 mb-3">
-              <div className="w-8 h-8 rounded-lg bg-gray-100 flex items-center justify-center">
-                <Users className="w-4 h-4 text-gray-600" />
+              <div className="w-8 h-8 rounded-lg bg-muted flex items-center justify-center">
+                <Users className="w-4 h-4 text-muted-foreground" />
               </div>
-              <span className="text-sm font-medium text-gray-700">Toplam Müşteri</span>
+              <span className="text-sm font-medium text-foreground/85">Toplam Müşteri</span>
             </div>
-            <p className="text-3xl font-bold text-gray-900">{totalStudents}</p>
+            <p className="text-3xl font-bold text-foreground">{totalStudents}</p>
           </div>
-          <span className="text-xs text-gray-400">Tüm müşteri profilleri</span>
+          <span className="text-xs text-muted-foreground/70">Tüm müşteri profilleri</span>
         </div>
 
-        <div className="bg-white rounded-xl border p-5 flex items-end justify-between">
+        <div className="bg-card rounded-xl border p-5 flex items-end justify-between">
           <div>
             <div className="flex items-center gap-2 mb-3">
-              <div className="w-8 h-8 rounded-lg bg-violet-100 flex items-center justify-center">
-                <UserPlus className="w-4 h-4 text-violet-600" />
+              <div className="w-8 h-8 rounded-lg bg-info/15 flex items-center justify-center">
+                <UserPlus className="w-4 h-4 text-info" />
               </div>
-              <span className="text-sm font-medium text-gray-700">Yeni Müşteriler</span>
+              <span className="text-sm font-medium text-foreground/85">Yeni Müşteriler</span>
             </div>
-            <p className="text-3xl font-bold text-gray-900">{newStudents}</p>
+            <p className="text-3xl font-bold text-foreground">{newStudents}</p>
           </div>
-          <Badge variant="outline" className="text-xs bg-gray-50 text-gray-500 border-gray-200">
+          <Badge variant="outline" className="text-xs bg-muted/40 text-muted-foreground border-border">
             Son 7 gün
           </Badge>
         </div>
 
-        <div className="bg-white rounded-xl border p-5 flex items-end justify-between">
+        <div className="bg-card rounded-xl border p-5 flex items-end justify-between">
           <div>
             <div className="flex items-center gap-2 mb-3">
-              <div className="w-8 h-8 rounded-lg bg-blue-100 flex items-center justify-center">
-                <CalendarCheck className="w-4 h-4 text-blue-600" />
+              <div className="w-8 h-8 rounded-lg bg-info/15 flex items-center justify-center">
+                <CalendarCheck className="w-4 h-4 text-info" />
               </div>
-              <span className="text-sm font-medium text-gray-700">Bugün Rezervasyonu Olanlar</span>
+              <span className="text-sm font-medium text-foreground/85">Bugün Rezervasyonu Olanlar</span>
             </div>
-            <p className="text-3xl font-bold text-gray-900">{todayReservationStudents.length}</p>
+            <p className="text-3xl font-bold text-foreground">{todayReservationStudents.length}</p>
           </div>
           {todayReservationStudents.length > 0 && (
             <AvatarGroup>
@@ -202,7 +202,7 @@ export default async function MusterilerPage({
         </CardHeader>
         <CardContent className="p-0">
           {filtered.length === 0 ? (
-            <div className="text-center py-12 text-gray-400">
+            <div className="text-center py-12 text-muted-foreground/70">
               <Search className="w-8 h-8 mx-auto mb-2 opacity-50" />
               <p>Müşteri bulunamadı</p>
             </div>
@@ -210,12 +210,12 @@ export default async function MusterilerPage({
             <div className="overflow-x-auto">
               <table className="w-full text-sm">
                 <thead>
-                  <tr className="border-b bg-gray-50">
-                    <th className="text-left px-4 py-3 font-medium text-gray-600">Müşteri</th>
-                    <th className="text-left px-4 py-3 font-medium text-gray-600">İletişim</th>
-                    <th className="text-left px-4 py-3 font-medium text-gray-600">Son Hizmet</th>
-                    <th className="text-left px-4 py-3 font-medium text-gray-600">Ödeme Durumu</th>
-                    <th className="text-right px-4 py-3 font-medium text-gray-600">Ödenen / Borç</th>
+                  <tr className="border-b bg-muted/40">
+                    <th className="text-left px-4 py-3 font-medium text-muted-foreground">Müşteri</th>
+                    <th className="text-left px-4 py-3 font-medium text-muted-foreground">İletişim</th>
+                    <th className="text-left px-4 py-3 font-medium text-muted-foreground">Son Hizmet</th>
+                    <th className="text-left px-4 py-3 font-medium text-muted-foreground">Ödeme Durumu</th>
+                    <th className="text-right px-4 py-3 font-medium text-muted-foreground">Ödenen / Borç</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y">
@@ -226,7 +226,7 @@ export default async function MusterilerPage({
                     return (
                       <CustomerRow key={student.id} href={`/dashboard/musteriler/${student.id}`}>
                         <td className="px-4 py-3">
-                          <div className="font-medium text-gray-900">
+                          <div className="font-medium text-foreground">
                             {student.firstName} {student.lastName}
                           </div>
                           <div className="flex items-center gap-2 mt-0.5">
@@ -234,45 +234,45 @@ export default async function MusterilerPage({
                               {SKILL_LEVELS[student.skillLevel as keyof typeof SKILL_LEVELS]}
                             </Badge>
                             {student.waiverSigned ? (
-                              <span className="flex items-center gap-1 text-green-600 text-xs">
+                              <span className="flex items-center gap-1 text-success text-xs">
                                 <UserCheck className="w-3 h-3" /> Feragatname
                               </span>
                             ) : (
-                              <span className="flex items-center gap-1 text-orange-500 text-xs">
+                              <span className="flex items-center gap-1 text-warning text-xs">
                                 <AlertCircle className="w-3 h-3" /> Bekliyor
                               </span>
                             )}
                             {student.packageHoursLeft > 0 && (
-                              <Badge variant="outline" className="text-xs bg-violet-100 text-violet-700 border-violet-200">
+                              <Badge variant="outline" className="text-xs bg-info/15 text-info border-info/30">
                                 {student.packageHoursLeft % 1 === 0 ? student.packageHoursLeft : student.packageHoursLeft.toFixed(1)} sa paket
                               </Badge>
                             )}
                           </div>
                         </td>
-                        <td className="px-4 py-3 text-gray-600 text-sm">
+                        <td className="px-4 py-3 text-muted-foreground text-sm">
                           {student.phone ?? "—"}
                           {student.email && (
-                            <div className="text-xs text-gray-400">{student.email}</div>
+                            <div className="text-xs text-muted-foreground/70">{student.email}</div>
                           )}
                         </td>
-                        <td className="px-4 py-3 text-sm text-gray-500">
+                        <td className="px-4 py-3 text-sm text-muted-foreground">
                           {student.lastService
                             ? format(new Date(student.lastService), "d MMM yyyy", { locale: tr })
                             : "—"}
                         </td>
                         <td className="px-4 py-3">
                           {student.totalCharged === 0 ? (
-                            <span className="text-gray-400 text-xs">Hizmet yok</span>
+                            <span className="text-muted-foreground/70 text-xs">Hizmet yok</span>
                           ) : hasDebt ? (
-                            <Badge variant="outline" className="bg-red-100 text-red-700 border-red-200">
+                            <Badge variant="outline" className="bg-destructive/15 text-destructive border-destructive/30">
                               Borç Var
                             </Badge>
                           ) : hasSurplus ? (
-                            <Badge variant="outline" className="bg-blue-100 text-blue-700 border-blue-200">
+                            <Badge variant="outline" className="bg-info/15 text-info border-info/30">
                               Fazla Ödeme
                             </Badge>
                           ) : (
-                            <Badge variant="outline" className="bg-green-100 text-green-700 border-green-200">
+                            <Badge variant="outline" className="bg-success/15 text-success border-success/30">
                               Ödenmiş
                             </Badge>
                           )}
@@ -280,16 +280,16 @@ export default async function MusterilerPage({
                         <td className="px-4 py-3 text-right">
                           {student.totalCharged > 0 ? (
                             <div>
-                              <span className="text-green-600 font-medium">
+                              <span className="text-success font-medium">
                                 ₺{student.totalPaid.toFixed(2)}
                               </span>
-                              <span className="text-gray-400 mx-1">/</span>
-                              <span className={hasDebt ? "text-red-600 font-semibold" : "text-gray-700"}>
+                              <span className="text-muted-foreground/70 mx-1">/</span>
+                              <span className={hasDebt ? "text-destructive font-semibold" : "text-foreground/85"}>
                                 ₺{student.totalCharged.toFixed(2)}
                               </span>
                             </div>
                           ) : (
-                            <span className="text-gray-400">—</span>
+                            <span className="text-muted-foreground/70">—</span>
                           )}
                         </td>
                       </CustomerRow>

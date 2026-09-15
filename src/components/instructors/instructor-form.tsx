@@ -75,10 +75,10 @@ export function InstructorForm({ action, instructor, title, isNew }: InstructorF
         <CardHeader><CardTitle>{title}</CardTitle></CardHeader>
         <CardContent className="space-y-5">
           {state.error && (
-            <p className="text-sm text-red-500 bg-red-50 px-3 py-2 rounded">{state.error}</p>
+            <p className="text-sm text-destructive bg-destructive/10 px-3 py-2 rounded">{state.error}</p>
           )}
           {state.fieldErrors && (
-            <p className="text-sm text-red-500 bg-red-50 px-3 py-2 rounded">
+            <p className="text-sm text-destructive bg-destructive/10 px-3 py-2 rounded">
               {Object.values(state.fieldErrors).flat()[0]}
             </p>
           )}
@@ -112,7 +112,7 @@ export function InstructorForm({ action, instructor, title, isNew }: InstructorF
                   key={c}
                   type="button"
                   className={`w-8 h-8 rounded-full border-2 transition-all ${
-                    color === c ? "border-gray-900 scale-110" : "border-transparent"
+                    color === c ? "border-border scale-110" : "border-transparent"
                   }`}
                   style={{ backgroundColor: c }}
                   onClick={() => setColor(c)}
@@ -123,12 +123,12 @@ export function InstructorForm({ action, instructor, title, isNew }: InstructorF
 
           {/* Payment Model */}
           <div className="space-y-3 border-t pt-4">
-            <h3 className="text-sm font-semibold text-gray-700">Ödeme Modeli</h3>
+            <h3 className="text-sm font-semibold text-foreground/85">Ödeme Modeli</h3>
             <div className="space-y-1.5">
               <Label>Model</Label>
               <select
                 name="paymentModel"
-                className="w-full border rounded-md px-3 py-2 text-sm bg-white"
+                className="w-full border rounded-md px-3 py-2 text-sm bg-card"
                 value={paymentModel}
                 onChange={(e) => setPaymentModel(e.target.value)}
               >
@@ -146,7 +146,7 @@ export function InstructorForm({ action, instructor, title, isNew }: InstructorF
                 </div>
                 <div className="space-y-1.5">
                   <Label>Para Birimi</Label>
-                  <select name="hourlyRateCurrency" className="w-full border rounded-md px-3 py-2 text-sm bg-white" value={hourlyRateCurrency} onChange={(e) => handleHourlyRateCurrencyChange(e.target.value)}>
+                  <select name="hourlyRateCurrency" className="w-full border rounded-md px-3 py-2 text-sm bg-card" value={hourlyRateCurrency} onChange={(e) => handleHourlyRateCurrencyChange(e.target.value)}>
                     {CURRENCIES.map((c) => <option key={c} value={c}>{c}</option>)}
                   </select>
                 </div>
@@ -168,7 +168,7 @@ export function InstructorForm({ action, instructor, title, isNew }: InstructorF
                 </div>
                 <div className="space-y-1.5">
                   <Label>Para Birimi</Label>
-                  <select name="salaryCurrency" className="w-full border rounded-md px-3 py-2 text-sm bg-white" value={salaryCurrency} onChange={(e) => handleSalaryCurrencyChange(e.target.value)}>
+                  <select name="salaryCurrency" className="w-full border rounded-md px-3 py-2 text-sm bg-card" value={salaryCurrency} onChange={(e) => handleSalaryCurrencyChange(e.target.value)}>
                     {CURRENCIES.map((c) => <option key={c} value={c}>{c}</option>)}
                   </select>
                 </div>
@@ -181,7 +181,7 @@ export function InstructorForm({ action, instructor, title, isNew }: InstructorF
               <Button
                 type="button"
                 variant="ghost"
-                className="text-red-500 hover:bg-red-50"
+                className="text-destructive hover:bg-destructive/10"
                 onClick={handleDelete}
                 disabled={isDeleting}
               >

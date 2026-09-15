@@ -71,7 +71,7 @@ export function EditPackageDialog({
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       {showTrigger && (
-        <DialogTrigger render={<button className="text-gray-400 hover:text-gray-700 transition-colors" title="Düzenle" />}>
+        <DialogTrigger render={<button className="text-muted-foreground/70 hover:text-foreground/85 transition-colors" title="Düzenle" />}>
           <Pencil className="w-4 h-4" />
         </DialogTrigger>
       )}
@@ -80,9 +80,9 @@ export function EditPackageDialog({
           <DialogTitle>Paketi Düzenle</DialogTitle>
         </DialogHeader>
         <form action={formAction} className="space-y-4">
-          {state.error && <p className="text-sm text-red-500">{state.error}</p>}
+          {state.error && <p className="text-sm text-destructive">{state.error}</p>}
           {state.fieldErrors && (
-            <p className="text-sm text-red-500">{Object.values(state.fieldErrors).flat()[0]}</p>
+            <p className="text-sm text-destructive">{Object.values(state.fieldErrors).flat()[0]}</p>
           )}
           <div className="space-y-1.5">
             <Label htmlFor="name">Paket Adı *</Label>

@@ -14,7 +14,7 @@ export default async function SettingsPage() {
 
   return (
     <div className="max-w-3xl space-y-6">
-      <h1 className="text-2xl font-bold text-gray-900">Ayarlar</h1>
+      <h1 className="text-2xl font-bold text-foreground">Ayarlar</h1>
 
       <Card>
         <CardHeader>
@@ -29,7 +29,7 @@ export default async function SettingsPage() {
         <CardHeader>
           <CardTitle className="text-base">Sistem Bilgisi</CardTitle>
         </CardHeader>
-        <CardContent className="text-sm text-gray-600 space-y-2">
+        <CardContent className="text-sm text-muted-foreground space-y-2">
           <p>KiteSurf Okulu Yönetim Sistemi</p>
           <p>Veritabanı: SQLite (Prisma ORM)</p>
           <p>PostgreSQL'e geçiş için DATABASE_URL&apos;yi güncelleyin ve şemayı migrate edin.</p>

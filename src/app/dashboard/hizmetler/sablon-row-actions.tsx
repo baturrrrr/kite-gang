@@ -44,7 +44,7 @@ export function SablonRowActions({ sablon }: { sablon: Sablon }) {
     <>
       <DropdownMenu>
         <DropdownMenuTrigger render={<Button variant="ghost" size="icon-sm" />}>
-          <MoreVertical className="w-4 h-4 text-gray-500" />
+          <MoreVertical className="w-4 h-4 text-muted-foreground" />
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end">
           <DropdownMenuItem onClick={() => setEditOpen(true)}>

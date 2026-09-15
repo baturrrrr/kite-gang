@@ -45,7 +45,7 @@ export function HizmetRowActions({ id, studentId, status }: { id: string; studen
         </Button>
       )}
       {status !== "TAMAMLANDI" && status !== "IPTAL" && (
-        <Button size="sm" variant="ghost" className="text-red-400 hover:text-red-600 hover:bg-red-50" disabled={isPending} onClick={cancel}>
+        <Button size="sm" variant="ghost" className="text-destructive hover:text-destructive hover:bg-destructive/10" disabled={isPending} onClick={cancel}>
           İptal
         </Button>
       )}

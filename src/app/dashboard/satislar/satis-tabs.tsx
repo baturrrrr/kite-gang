@@ -24,8 +24,8 @@ export function SatisTabs() {
               href={tab.href}
               className={`flex items-center gap-1.5 px-3.5 py-2.5 text-sm font-medium border-b-2 whitespace-nowrap transition-colors ${
                 active
-                  ? "border-gray-900 text-gray-900"
-                  : "border-transparent text-gray-500 hover:text-gray-700"
+                  ? "border-border text-foreground"
+                  : "border-transparent text-muted-foreground hover:text-foreground/85"
               }`}
             >
               <Icon className="w-4 h-4" />

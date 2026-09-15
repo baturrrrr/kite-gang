@@ -55,7 +55,7 @@ export function FiyatRowsEditor({
         {rows.map((row, idx) => (
           <div key={idx} className="flex items-center gap-2">
             <select
-              className="w-24 flex-shrink-0 border rounded-md px-1.5 py-2 text-xs bg-white"
+              className="w-24 flex-shrink-0 border rounded-md px-1.5 py-2 text-xs bg-card"
               value={row.zamanBirimi}
               onChange={(e) => updateRow(idx, { zamanBirimi: e.target.value })}
             >
@@ -64,7 +64,7 @@ export function FiyatRowsEditor({
               ))}
             </select>
             <select
-              className="w-16 flex-shrink-0 border rounded-md px-1.5 py-2 text-xs bg-white"
+              className="w-16 flex-shrink-0 border rounded-md px-1.5 py-2 text-xs bg-card"
               value={row.currency}
               onChange={(e) => updateRowCurrency(idx, e.target.value)}
             >
@@ -85,7 +85,7 @@ export function FiyatRowsEditor({
               onClick={() => removeRow(idx)}
               disabled={rows.length <= 1}
             >
-              <Trash2 className="w-3.5 h-3.5 text-red-500" />
+              <Trash2 className="w-3.5 h-3.5 text-destructive" />
             </Button>
           </div>
         ))}

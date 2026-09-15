@@ -50,14 +50,14 @@ export function SellPackageForm({ studentId, packages, cashAccounts }: SellPacka
           <input type="hidden" name="studentId" value={studentId} />
 
           {state.error && (
-            <p className="text-sm text-red-500 bg-red-50 px-3 py-2 rounded">{state.error}</p>
+            <p className="text-sm text-destructive bg-destructive/10 px-3 py-2 rounded">{state.error}</p>
           )}
 
           <div className="space-y-1.5">
             <Label>Paket *</Label>
             <select
               name="packageId"
-              className="w-full border rounded-md px-3 py-2 text-sm bg-white"
+              className="w-full border rounded-md px-3 py-2 text-sm bg-card"
               required
               onChange={(e) => {
                 const pkg = packages.find((p) => p.id === e.target.value);
@@ -73,9 +73,9 @@ export function SellPackageForm({ studentId, packages, cashAccounts }: SellPacka
           </div>
 
           {selectedPkg && (
-            <div className="bg-blue-50 border border-blue-100 rounded-lg p-3 text-sm">
-              <p className="font-medium text-blue-900">{selectedPkg.name}</p>
-              <p className="text-blue-600">
+            <div className="bg-info/10 border border-info/30 rounded-lg p-3 text-sm">
+              <p className="font-medium text-info">{selectedPkg.name}</p>
+              <p className="text-info">
                 {selectedPkg.totalHours} saat • ₺{convertAmount(selectedPkg.price, selectedPkg.currency, "TRY", rates).toFixed(2)}
               </p>
             </div>
@@ -99,7 +99,7 @@ export function SellPackageForm({ studentId, packages, cashAccounts }: SellPacka
               <Label>Para Birimi</Label>
               <select
                 name="currency"
-                className="w-full border rounded-md px-3 py-2 text-sm bg-white"
+                className="w-full border rounded-md px-3 py-2 text-sm bg-card"
                 value={currency}
                 onChange={(e) => handleCurrencyChange(e.target.value)}
               >
@@ -109,7 +109,7 @@ export function SellPackageForm({ studentId, packages, cashAccounts }: SellPacka
           </div>
 
           <div className="border-t pt-4 space-y-3">
-            <h3 className="text-sm font-semibold text-gray-700">İlk Ödeme (Opsiyonel)</h3>
+            <h3 className="text-sm font-semibold text-foreground/85">İlk Ödeme (Opsiyonel)</h3>
             <div className="grid grid-cols-2 gap-3">
               <div className="space-y-1.5">
                 <Label htmlFor="paidAmount">Ödenen Tutar</Label>
@@ -126,7 +126,7 @@ export function SellPackageForm({ studentId, packages, cashAccounts }: SellPacka
               </div>
               <div className="space-y-1.5">
                 <Label>Ödeme Yöntemi</Label>
-                <select name="paymentMethod" className="w-full border rounded-md px-3 py-2 text-sm bg-white">
+                <select name="paymentMethod" className="w-full border rounded-md px-3 py-2 text-sm bg-card">
                   {Object.entries(PAYMENT_METHODS).map(([v, l]) => (
                     <option key={v} value={v}>{l}</option>
                   ))}
@@ -136,7 +136,7 @@ export function SellPackageForm({ studentId, packages, cashAccounts }: SellPacka
             {cashAccounts.length > 0 && (
               <div className="space-y-1.5">
                 <Label>Kasa Hesabı *</Label>
-                <select name="cashAccountId" className="w-full border rounded-md px-3 py-2 text-sm bg-white" required>
+                <select name="cashAccountId" className="w-full border rounded-md px-3 py-2 text-sm bg-card" required>
                   {cashAccounts.map((acc) => (
                     <option key={acc.id} value={acc.id}>
                       {acc.name} ({acc.currency})

@@ -20,8 +20,8 @@ interface StudentFormProps {
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <div className="space-y-2">
-      <h3 className="text-sm font-semibold text-gray-700">{title}</h3>
-      <div className="border rounded-xl bg-white p-4">{children}</div>
+      <h3 className="text-sm font-semibold text-foreground/85">{title}</h3>
+      <div className="border rounded-xl bg-card p-4">{children}</div>
     </div>
   );
 }
@@ -37,9 +37,9 @@ export function StudentForm({ action, student, title, cancelHref = "/dashboard/m
 
   return (
     <form action={formAction} className="space-y-5">
-      {title && <h2 className="text-lg font-bold text-gray-900">{title}</h2>}
+      {title && <h2 className="text-lg font-bold text-foreground">{title}</h2>}
       {state.error && (
-        <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-md text-sm">
+        <div className="bg-destructive/10 border border-destructive/30 text-destructive px-4 py-3 rounded-md text-sm">
           {state.error}
         </div>
       )}
@@ -55,7 +55,7 @@ export function StudentForm({ action, student, title, cancelHref = "/dashboard/m
               required
             />
             {state.fieldErrors?.firstName && (
-              <p className="text-xs text-red-500">{state.fieldErrors.firstName[0]}</p>
+              <p className="text-xs text-destructive">{state.fieldErrors.firstName[0]}</p>
             )}
           </div>
           <div className="space-y-1.5">
@@ -93,7 +93,7 @@ export function StudentForm({ action, student, title, cancelHref = "/dashboard/m
             <select
               id="gender"
               name="gender"
-              className="w-full border rounded-md px-3 py-2 text-sm bg-white"
+              className="w-full border rounded-md px-3 py-2 text-sm bg-card"
               defaultValue={student?.gender ?? ""}
             >
               <option value="">Bir seçenek seçin</option>
@@ -126,7 +126,7 @@ export function StudentForm({ action, student, title, cancelHref = "/dashboard/m
             <select
               id="nationality"
               name="nationality"
-              className="w-full border rounded-md px-3 py-2 text-sm bg-white"
+              className="w-full border rounded-md px-3 py-2 text-sm bg-card"
               defaultValue={student?.nationality ?? ""}
             >
               <option value="">Ülke seçin</option>
@@ -144,7 +144,7 @@ export function StudentForm({ action, student, title, cancelHref = "/dashboard/m
             <select
               id="language"
               name="language"
-              className="w-full border rounded-md px-3 py-2 text-sm bg-white"
+              className="w-full border rounded-md px-3 py-2 text-sm bg-card"
               defaultValue={student?.language ?? ""}
             >
               <option value="">Dil seçin</option>
@@ -199,7 +199,7 @@ export function StudentForm({ action, student, title, cancelHref = "/dashboard/m
               name="notes"
               defaultValue={student?.notes ?? ""}
               rows={3}
-              className="w-full border rounded-md px-3 py-2 text-sm bg-white resize-none"
+              className="w-full border rounded-md px-3 py-2 text-sm bg-card resize-none"
               placeholder="Öğrenci hakkında notlar..."
             />
           </div>

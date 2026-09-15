@@ -42,7 +42,7 @@ export function NewExpenseForm({ cashAccounts }: { cashAccounts: { id: string; n
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger render={<Button variant="outline" className="border-red-200 text-red-700 hover:bg-red-50" />}>
+      <DialogTrigger render={<Button variant="outline" className="border-destructive/30 text-destructive hover:bg-destructive/10" />}>
         <TrendingDown className="w-4 h-4 mr-2" />
         Gider Ekle
       </DialogTrigger>
@@ -52,12 +52,12 @@ export function NewExpenseForm({ cashAccounts }: { cashAccounts: { id: string; n
         </DialogHeader>
         <form action={formAction} className="space-y-4">
           {state.error && (
-            <p className="text-sm text-red-500">{state.error}</p>
+            <p className="text-sm text-destructive">{state.error}</p>
           )}
 
           <div className="space-y-1.5">
             <Label>Kategori *</Label>
-            <select name="category" className="w-full border rounded-md px-3 py-2 text-sm bg-white" required>
+            <select name="category" className="w-full border rounded-md px-3 py-2 text-sm bg-card" required>
               {Object.entries(EXPENSE_CATEGORIES).map(([v, l]) => (
                 <option key={v} value={v}>{l}</option>
               ))}
@@ -76,7 +76,7 @@ export function NewExpenseForm({ cashAccounts }: { cashAccounts: { id: string; n
             </div>
             <div className="space-y-1.5">
               <Label>Para Birimi</Label>
-              <select name="currency" className="w-full border rounded-md px-3 py-2 text-sm bg-white" value={currency} onChange={(e) => handleCurrencyChange(e.target.value)}>
+              <select name="currency" className="w-full border rounded-md px-3 py-2 text-sm bg-card" value={currency} onChange={(e) => handleCurrencyChange(e.target.value)}>
                 {CURRENCIES.map((c) => <option key={c} value={c}>{c}</option>)}
               </select>
             </div>
@@ -85,7 +85,7 @@ export function NewExpenseForm({ cashAccounts }: { cashAccounts: { id: string; n
           <div className="grid grid-cols-2 gap-3">
             <div className="space-y-1.5">
               <Label>Ödeme Yöntemi</Label>
-              <select name="method" className="w-full border rounded-md px-3 py-2 text-sm bg-white">
+              <select name="method" className="w-full border rounded-md px-3 py-2 text-sm bg-card">
                 {Object.entries(PAYMENT_METHODS).map(([v, l]) => (
                   <option key={v} value={v}>{l}</option>
                 ))}
@@ -100,7 +100,7 @@ export function NewExpenseForm({ cashAccounts }: { cashAccounts: { id: string; n
           {cashAccounts.length > 0 && (
             <div className="space-y-1.5">
               <Label>Kasadan Düş</Label>
-              <select name="cashAccountId" className="w-full border rounded-md px-3 py-2 text-sm bg-white">
+              <select name="cashAccountId" className="w-full border rounded-md px-3 py-2 text-sm bg-card">
                 <option value="">Kasa güncellenmesi (yok)</option>
                 {cashAccounts.map((acc) => (
                   <option key={acc.id} value={acc.id}>
@@ -113,7 +113,7 @@ export function NewExpenseForm({ cashAccounts }: { cashAccounts: { id: string; n
 
           <div className="flex gap-2 justify-end">
             <Button type="button" variant="outline" onClick={() => setOpen(false)}>İptal</Button>
-            <Button type="submit" disabled={isPending} className="bg-red-600 hover:bg-red-700 text-white">
+            <Button type="submit" disabled={isPending} className="bg-destructive hover:bg-destructive text-background">
               {isPending ? "Kaydediliyor..." : "Gider Kaydet"}
             </Button>
           </div>

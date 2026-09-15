@@ -24,7 +24,7 @@ export function CustomerRow({
   return (
     <tr
       onClick={handleClick}
-      className={`cursor-pointer hover:bg-gray-50 ${className ?? ""}`}
+      className={`cursor-pointer hover:bg-muted/40 ${className ?? ""}`}
     >
       {children}
     </tr>

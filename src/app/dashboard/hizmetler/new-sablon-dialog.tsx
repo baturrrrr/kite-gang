@@ -54,7 +54,7 @@ export function NewSablonDialog({
           <input type="hidden" name="fiyatlarJson" value={JSON.stringify(rows)} />
 
           {state.fieldErrors && (
-            <p className="text-sm text-red-500">{Object.values(state.fieldErrors).flat()[0]}</p>
+            <p className="text-sm text-destructive">{Object.values(state.fieldErrors).flat()[0]}</p>
           )}
 
           <div className="space-y-1.5">
@@ -83,7 +83,7 @@ export function NewSablonDialog({
             <select
               name="onlineVisibility"
               defaultValue="LISTED"
-              className="w-full border rounded-md px-3 py-2 text-sm bg-white"
+              className="w-full border rounded-md px-3 py-2 text-sm bg-card"
             >
               <option value="LISTED">Online listelenir</option>
               <option value="PARTNER_ONLY">Yalnızca Partner Paneli</option>

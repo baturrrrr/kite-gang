@@ -10,7 +10,7 @@ export function UserManagement({ users }: { users: any[] }) {
         <div key={u.id} className="py-3 flex justify-between items-center">
           <div>
             <p className="font-medium text-sm">{u.name}</p>
-            <p className="text-xs text-gray-500">{u.email}</p>
+            <p className="text-xs text-muted-foreground">{u.email}</p>
           </div>
           <Badge variant={u.role === "ADMIN" ? "default" : "secondary"}>
             {ROLE_LABELS[u.role as keyof typeof ROLE_LABELS]}

@@ -22,8 +22,15 @@ export function toTRY(amount: number, currency: string, rates: Rates | null): nu
   return convertAmount(amount, currency, "TRY", rates);
 }
 
+const trNumber = new Intl.NumberFormat("tr-TR", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+
+// ₺842.454,00 · −₺3.000,00 (eksi işareti sembolün önünde)
+export function formatTL(amount: number): string {
+  return `${amount < 0 ? "−" : ""}₺${trNumber.format(Math.abs(amount))}`;
+}
+
 // Uygulama genelinde tutarlar tutarlılık için TL'ye çevrilerek gösterilir;
 // orijinal işlem para birimi veritabanında korunur, sadece ekran gösterimi TL'dir.
 export function formatTRY(amount: number, currency: string, rates: Rates | null): string {
-  return `₺${toTRY(amount, currency, rates).toFixed(2)}`;
+  return formatTL(toTRY(amount, currency, rates));
 }

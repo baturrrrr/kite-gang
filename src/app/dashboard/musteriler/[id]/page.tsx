@@ -145,7 +145,7 @@ export default async function MusteriDetailPage({
           </Button>
         </Link>
         <div className="flex-1">
-          <h1 className="text-2xl font-bold text-gray-900">
+          <h1 className="text-2xl font-bold text-foreground">
             {student.firstName} {student.lastName}
           </h1>
           <div className="flex items-center gap-2 mt-1">
@@ -153,11 +153,11 @@ export default async function MusteriDetailPage({
               {SKILL_LEVELS[student.skillLevel as keyof typeof SKILL_LEVELS]}
             </Badge>
             {student.waiverSigned ? (
-              <span className="flex items-center gap-1 text-green-600 text-xs">
+              <span className="flex items-center gap-1 text-success text-xs">
                 <UserCheck className="w-3.5 h-3.5" /> Feragatname İmzalı
               </span>
             ) : (
-              <span className="flex items-center gap-1 text-orange-500 text-xs">
+              <span className="flex items-center gap-1 text-warning text-xs">
                 <AlertCircle className="w-3.5 h-3.5" /> Feragatname Bekleniyor
               </span>
             )}
@@ -170,13 +170,13 @@ export default async function MusteriDetailPage({
       <div className="grid grid-cols-3 gap-4">
         <Card>
           <CardContent className="pt-4 pb-4">
-            <div className="flex items-center gap-2 text-gray-500 text-xs mb-1">
-              <TrendingDown className="w-3.5 h-3.5 text-red-400" /> Toplam Borç
+            <div className="flex items-center gap-2 text-muted-foreground text-xs mb-1">
+              <TrendingDown className="w-3.5 h-3.5 text-destructive" /> Toplam Borç
             </div>
-            <p className="text-2xl font-bold text-gray-900">
+            <p className="text-2xl font-bold text-foreground">
               ₺{totalCharged.toFixed(2)}
             </p>
-            <p className="text-xs text-gray-400 mt-0.5">
+            <p className="text-xs text-muted-foreground/70 mt-0.5">
               {student.hizmetler.filter(h => h.status !== "IPTAL").length} hizmet
               {student.packagePurchases.length > 0 && `, ${student.packagePurchases.length} paket`}
             </p>
@@ -184,30 +184,30 @@ export default async function MusteriDetailPage({
         </Card>
         <Card>
           <CardContent className="pt-4 pb-4">
-            <div className="flex items-center gap-2 text-gray-500 text-xs mb-1">
-              <TrendingUp className="w-3.5 h-3.5 text-green-500" /> Toplam Ödenen
+            <div className="flex items-center gap-2 text-muted-foreground text-xs mb-1">
+              <TrendingUp className="w-3.5 h-3.5 text-success" /> Toplam Ödenen
             </div>
-            <p className="text-2xl font-bold text-gray-900">
+            <p className="text-2xl font-bold text-foreground">
               ₺{totalPaid.toFixed(2)}
             </p>
-            <p className="text-xs text-gray-400 mt-0.5">{student.payments.filter(p => p.direction === "INCOMING").length} ödeme</p>
+            <p className="text-xs text-muted-foreground/70 mt-0.5">{student.payments.filter(p => p.direction === "INCOMING").length} ödeme</p>
           </CardContent>
         </Card>
-        <Card className={netBalance < -0.01 ? "border-red-200 bg-red-50" : netBalance > 0.01 ? "border-blue-200 bg-blue-50" : ""}>
+        <Card className={netBalance < -0.01 ? "border-destructive/30 bg-destructive/10" : netBalance > 0.01 ? "border-info/30 bg-info/10" : ""}>
           <CardContent className="pt-4 pb-4">
-            <div className="flex items-center gap-2 text-gray-500 text-xs mb-1">
+            <div className="flex items-center gap-2 text-muted-foreground text-xs mb-1">
               <Wallet className="w-3.5 h-3.5" /> Net Bakiye
             </div>
-            <p className={`text-2xl font-bold ${netBalance < -0.01 ? "text-red-600" : netBalance > 0.01 ? "text-blue-600" : "text-green-600"}`}>
+            <p className={`text-2xl font-bold ${netBalance < -0.01 ? "text-destructive" : netBalance > 0.01 ? "text-info" : "text-success"}`}>
               {netBalance >= 0 ? "+" : ""}₺{netBalance.toFixed(2)}
             </p>
             <p className="text-xs mt-0.5">
               {netBalance < -0.01 ? (
-                <span className="text-red-500">Borç var</span>
+                <span className="text-destructive">Borç var</span>
               ) : netBalance > 0.01 ? (
-                <span className="text-blue-500">Fazla ödeme</span>
+                <span className="text-info">Fazla ödeme</span>
               ) : (
-                <span className="text-green-500">Hesap kapalı</span>
+                <span className="text-success">Hesap kapalı</span>
               )}
             </p>
           </CardContent>
@@ -222,30 +222,30 @@ export default async function MusteriDetailPage({
           </CardHeader>
           <CardContent className="space-y-3 text-sm">
             {student.phone && (
-              <div className="flex items-center gap-2 text-gray-600">
-                <Phone className="w-4 h-4 text-gray-400" /> {student.phone}
+              <div className="flex items-center gap-2 text-muted-foreground">
+                <Phone className="w-4 h-4 text-muted-foreground/70" /> {student.phone}
               </div>
             )}
             {student.email && (
-              <div className="flex items-center gap-2 text-gray-600">
-                <Mail className="w-4 h-4 text-gray-400" /> {student.email}
+              <div className="flex items-center gap-2 text-muted-foreground">
+                <Mail className="w-4 h-4 text-muted-foreground/70" /> {student.email}
               </div>
             )}
             {student.nationality && (
-              <div className="flex items-center gap-2 text-gray-600">
-                <Globe className="w-4 h-4 text-gray-400" /> {student.nationality}
+              <div className="flex items-center gap-2 text-muted-foreground">
+                <Globe className="w-4 h-4 text-muted-foreground/70" /> {student.nationality}
                 {student.language && ` • ${student.language}`}
               </div>
             )}
             {student.birthDate && (
-              <div className="flex items-center gap-2 text-gray-600">
-                <Cake className="w-4 h-4 text-gray-400" />
+              <div className="flex items-center gap-2 text-muted-foreground">
+                <Cake className="w-4 h-4 text-muted-foreground/70" />
                 {format(new Date(student.birthDate), "d MMM yyyy", { locale: tr })}
               </div>
             )}
             {(student.weight || student.gender) && (
-              <div className="flex items-center gap-2 text-gray-600">
-                <Weight className="w-4 h-4 text-gray-400" />
+              <div className="flex items-center gap-2 text-muted-foreground">
+                <Weight className="w-4 h-4 text-muted-foreground/70" />
                 {student.weight ? `${student.weight} kg` : ""}
                 {student.weight && student.gender ? " · " : ""}
                 {student.gender ? GENDER_OPTIONS[student.gender as keyof typeof GENDER_OPTIONS] : ""}
@@ -253,17 +253,17 @@ export default async function MusteriDetailPage({
             )}
             {student.emergencyContact && (
               <div className="mt-3 pt-3 border-t">
-                <p className="text-xs text-gray-400 mb-1">Acil Durum</p>
+                <p className="text-xs text-muted-foreground/70 mb-1">Acil Durum</p>
                 <p className="font-medium">{student.emergencyContact}</p>
                 {student.emergencyPhone && (
-                  <p className="text-gray-500">{student.emergencyPhone}</p>
+                  <p className="text-muted-foreground">{student.emergencyPhone}</p>
                 )}
               </div>
             )}
             {student.notes && (
               <div className="mt-3 pt-3 border-t">
-                <p className="text-xs text-gray-400 mb-1">Notlar</p>
-                <p className="text-gray-600">{student.notes}</p>
+                <p className="text-xs text-muted-foreground/70 mb-1">Notlar</p>
+                <p className="text-muted-foreground">{student.notes}</p>
               </div>
             )}
           </CardContent>
@@ -275,7 +275,7 @@ export default async function MusteriDetailPage({
             <CardHeader>
               <div className="flex items-center justify-between">
                 <CardTitle className="text-base flex items-center gap-2">
-                  <ConciergeBell className="w-4 h-4 text-blue-500" />
+                  <ConciergeBell className="w-4 h-4 text-info" />
                   Hizmetler
                 </CardTitle>
                 <AssignHizmetDialog
@@ -288,7 +288,7 @@ export default async function MusteriDetailPage({
             </CardHeader>
             <CardContent className="p-0">
               {student.hizmetler.length === 0 ? (
-                <p className="text-sm text-gray-400 text-center py-6">Henüz hizmet eklenmemiş</p>
+                <p className="text-sm text-muted-foreground/70 text-center py-6">Henüz hizmet eklenmemiş</p>
               ) : (
                 <div>
                   {/* Tablo başlığı */}
@@ -328,7 +328,7 @@ export default async function MusteriDetailPage({
             <Card>
               <CardHeader>
                 <CardTitle className="text-base flex items-center gap-2">
-                  <PackageCheck className="w-4 h-4 text-violet-500" />
+                  <PackageCheck className="w-4 h-4 text-info" />
                   Paket Hakları
                 </CardTitle>
               </CardHeader>
@@ -345,27 +345,27 @@ export default async function MusteriDetailPage({
                     return (
                       <div key={purchase.id} className="py-3">
                         <div className="flex items-center justify-between gap-3 mb-1.5">
-                          <p className="text-sm font-medium text-gray-900">{purchase.package.name}</p>
+                          <p className="text-sm font-medium text-foreground">{purchase.package.name}</p>
                           <Badge
                             variant="outline"
                             className={`text-xs ${
                               isExpired
-                                ? "bg-gray-100 text-gray-500 border-gray-200"
+                                ? "bg-muted text-muted-foreground border-border"
                                 : isDepleted
-                                ? "bg-red-100 text-red-600 border-red-200"
-                                : "bg-violet-100 text-violet-700 border-violet-200"
+                                ? "bg-destructive/15 text-destructive border-destructive/30"
+                                : "bg-info/15 text-info border-info/30"
                             }`}
                           >
                             {isExpired ? "Süresi Doldu" : isDepleted ? "Tükendi" : "Aktif"}
                           </Badge>
                         </div>
-                        <div className="w-full h-1.5 rounded-full bg-gray-100 overflow-hidden">
+                        <div className="w-full h-1.5 rounded-full bg-muted overflow-hidden">
                           <div
-                            className={`h-full rounded-full ${isExpired || isDepleted ? "bg-gray-300" : "bg-violet-500"}`}
+                            className={`h-full rounded-full ${isExpired || isDepleted ? "bg-muted-foreground/30" : "bg-info"}`}
                             style={{ width: `${pct}%` }}
                           />
                         </div>
-                        <div className="flex items-center justify-between mt-1.5 text-xs text-gray-500">
+                        <div className="flex items-center justify-between mt-1.5 text-xs text-muted-foreground">
                           <span>
                             {purchase.remainingHours.toFixed(1)} / {purchase.totalHours.toFixed(1)} saat kaldı
                           </span>
@@ -387,7 +387,7 @@ export default async function MusteriDetailPage({
             <Card>
               <CardHeader>
                 <CardTitle className="text-base flex items-center gap-2">
-                  <CreditCard className="w-4 h-4 text-green-600" />
+                  <CreditCard className="w-4 h-4 text-success" />
                   Ödeme Geçmişi
                 </CardTitle>
               </CardHeader>
@@ -399,16 +399,16 @@ export default async function MusteriDetailPage({
                       return (
                         <div key={pay.id} className="py-2.5 flex items-center justify-between">
                           <div>
-                            <p className="text-sm font-medium text-gray-900">
+                            <p className="text-sm font-medium text-foreground">
                               {formatTRY(pay.amount, pay.currency, rates)}
                             </p>
-                            <p className="text-xs text-gray-500">
+                            <p className="text-xs text-muted-foreground">
                               {format(new Date(pay.recordedAt), "d MMM yyyy HH:mm", { locale: tr })}
                               {pay.description && ` · ${pay.description}`}
                             </p>
                           </div>
                           <div className="flex items-center gap-2">
-                            <Badge variant="outline" className="text-xs bg-green-100 text-green-700 border-green-200">
+                            <Badge variant="outline" className="text-xs bg-success/15 text-success border-success/30">
                               {PAYMENT_METHODS[pay.method as keyof typeof PAYMENT_METHODS]}
                             </Badge>
                           </div>
@@ -425,7 +425,7 @@ export default async function MusteriDetailPage({
             <Card>
               <CardHeader>
                 <CardTitle className="text-base flex items-center gap-2">
-                  <GraduationCap className="w-4 h-4 text-green-600" />
+                  <GraduationCap className="w-4 h-4 text-success" />
                   Ders Geçmişi
                 </CardTitle>
               </CardHeader>
@@ -435,10 +435,10 @@ export default async function MusteriDetailPage({
                     <div key={lesson.id} className="py-3">
                       <div className="flex justify-between items-start">
                         <div>
-                          <p className="text-sm font-medium text-gray-900">
+                          <p className="text-sm font-medium text-foreground">
                             {lesson.instructor?.user.name ?? "Personel atanmadı"}
                           </p>
-                          <p className="text-xs text-gray-500 mt-0.5">
+                          <p className="text-xs text-muted-foreground mt-0.5">
                             {LESSON_TYPES[lesson.reservation.lessonType as keyof typeof LESSON_TYPES]}
                             {" · "}
                             {format(new Date(lesson.checkInTime), "d MMM yyyy HH:mm", { locale: tr })}
@@ -446,11 +446,11 @@ export default async function MusteriDetailPage({
                         </div>
                         <div>
                           {lesson.checkOutTime ? (
-                            <Badge variant="outline" className="bg-green-100 text-green-700 border-green-200 text-xs">
+                            <Badge variant="outline" className="bg-success/15 text-success border-success/30 text-xs">
                               {lesson.actualHours?.toFixed(1)} saat
                             </Badge>
                           ) : (
-                            <Badge variant="outline" className="bg-yellow-100 text-yellow-700 border-yellow-200 text-xs">
+                            <Badge variant="outline" className="bg-warning/15 text-warning border-warning/30 text-xs">
                               Devam ediyor
                             </Badge>
                           )}
@@ -468,7 +468,7 @@ export default async function MusteriDetailPage({
             <Card>
               <CardHeader>
                 <CardTitle className="text-base flex items-center gap-2">
-                  <Wrench className="w-4 h-4 text-orange-500" />
+                  <Wrench className="w-4 h-4 text-warning" />
                   Ekipman Kiralamaları
                 </CardTitle>
               </CardHeader>
@@ -482,21 +482,21 @@ export default async function MusteriDetailPage({
                             ? `${EQUIPMENT_TYPES[res.equipment.type as keyof typeof EQUIPMENT_TYPES] ?? res.equipment.type} — ${res.equipment.name}${res.equipment.size ? ` (${res.equipment.size})` : ""}`
                             : "Ekipman Kiralama"}
                           {res.rentalAmount != null && (
-                            <span className="text-gray-500 font-normal">
+                            <span className="text-muted-foreground font-normal">
                               {" · "}{formatTRY(res.rentalAmount, res.rentalCurrency ?? "TRY", rates)}
                             </span>
                           )}
                         </p>
-                        <p className="text-xs text-gray-500 mt-0.5">
+                        <p className="text-xs text-muted-foreground mt-0.5">
                           {format(new Date(res.startTime), "d MMM yyyy HH:mm", { locale: tr })}
                           {" · "}{res.plannedHours} saat
                           {res.instructor && ` · ${res.instructor.user.name}`}
                         </p>
                       </div>
                       <Badge variant="outline" className={
-                        res.status === "COMPLETED" ? "bg-green-100 text-green-700 border-green-200 text-xs"
-                        : res.status === "CHECKED_IN" ? "bg-yellow-100 text-yellow-700 border-yellow-200 text-xs"
-                        : "bg-gray-100 text-gray-600 border-gray-200 text-xs"
+                        res.status === "COMPLETED" ? "bg-success/15 text-success border-success/30 text-xs"
+                        : res.status === "CHECKED_IN" ? "bg-warning/15 text-warning border-warning/30 text-xs"
+                        : "bg-muted text-muted-foreground border-border text-xs"
                       }>
                         {res.status === "COMPLETED" ? "Tamamlandı"
                           : res.status === "CHECKED_IN" ? "Devam Ediyor"

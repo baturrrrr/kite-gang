@@ -13,10 +13,10 @@ import { toTRY, formatTRY, convertAmount } from "@/lib/currency";
 import { getExchangeRates } from "@/lib/exchange-rates";
 
 const METHOD_COLORS: Record<string, string> = {
-  CASH: "bg-green-100 text-green-700 border-green-200",
-  BANK_TRANSFER: "bg-blue-100 text-blue-700 border-blue-200",
-  CREDIT_CARD: "bg-purple-100 text-purple-700 border-purple-200",
-  OTHER: "bg-gray-100 text-gray-700 border-gray-200",
+  CASH: "bg-success/15 text-success border-success/30",
+  BANK_TRANSFER: "bg-info/15 text-info border-info/30",
+  CREDIT_CARD: "bg-info/15 text-info border-info/30",
+  OTHER: "bg-muted text-foreground/85 border-border",
 };
 
 export default async function UrunSatislariPage({
@@ -67,18 +67,18 @@ export default async function UrunSatislariPage({
 
   return (
     <div className="space-y-5">
-      <p className="text-gray-500 text-sm">{sales.length} satış</p>
+      <p className="text-muted-foreground text-sm">{sales.length} satış</p>
 
       {/* Summary card */}
       {sales.length > 0 && (
         <div className="flex gap-4 flex-wrap">
           <Card className="min-w-[160px]">
             <CardContent className="pt-3 pb-3">
-              <div className="flex items-center gap-2 text-gray-500 text-xs mb-1">
+              <div className="flex items-center gap-2 text-muted-foreground text-xs mb-1">
                 <TrendingUp className="w-3.5 h-3.5" />
                 Toplam Satış
               </div>
-              <p className="text-2xl font-bold text-gray-900">
+              <p className="text-2xl font-bold text-foreground">
                 ₺{totalTRY.toFixed(2)}
               </p>
             </CardContent>
@@ -89,11 +89,11 @@ export default async function UrunSatislariPage({
       {/* Filters */}
       <form className="flex gap-3 flex-wrap items-end">
         <div className="relative flex-1 min-w-48">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground/70" />
           <Input name="q" defaultValue={q} placeholder="Müşteri veya ürün ara" className="pl-9" />
         </div>
         <div className="flex items-center gap-2">
-          <label className="text-sm text-gray-600">Başlangıç</label>
+          <label className="text-sm text-muted-foreground">Başlangıç</label>
           <input
             type="date"
             name="from"
@@ -102,7 +102,7 @@ export default async function UrunSatislariPage({
           />
         </div>
         <div className="flex items-center gap-2">
-          <label className="text-sm text-gray-600">Bitiş</label>
+          <label className="text-sm text-muted-foreground">Bitiş</label>
           <input
             type="date"
             name="to"
@@ -117,7 +117,7 @@ export default async function UrunSatislariPage({
       <Card>
         <CardContent className="p-0">
           {sales.length === 0 ? (
-            <div className="text-center py-12 text-gray-400">
+            <div className="text-center py-12 text-muted-foreground/70">
               <ShoppingCart className="w-8 h-8 mx-auto mb-2 opacity-50" />
               <p>Bu dönemde ürün satışı bulunamadı</p>
             </div>
@@ -125,14 +125,14 @@ export default async function UrunSatislariPage({
             <div className="overflow-x-auto">
               <table className="w-full text-sm">
                 <thead>
-                  <tr className="border-b bg-gray-50">
-                    <th className="text-left px-4 py-3 font-medium text-gray-600">Tarih</th>
-                    <th className="text-left px-4 py-3 font-medium text-gray-600">Müşteri</th>
-                    <th className="text-left px-4 py-3 font-medium text-gray-600">Ürün</th>
-                    <th className="text-right px-4 py-3 font-medium text-gray-600">Adet</th>
-                    <th className="text-left px-4 py-3 font-medium text-gray-600">Ödeme Yöntemi</th>
-                    <th className="text-left px-4 py-3 font-medium text-gray-600">Durum</th>
-                    <th className="text-right px-4 py-3 font-medium text-gray-600">Tutar</th>
+                  <tr className="border-b bg-muted/40">
+                    <th className="text-left px-4 py-3 font-medium text-muted-foreground">Tarih</th>
+                    <th className="text-left px-4 py-3 font-medium text-muted-foreground">Müşteri</th>
+                    <th className="text-left px-4 py-3 font-medium text-muted-foreground">Ürün</th>
+                    <th className="text-right px-4 py-3 font-medium text-muted-foreground">Adet</th>
+                    <th className="text-left px-4 py-3 font-medium text-muted-foreground">Ödeme Yöntemi</th>
+                    <th className="text-left px-4 py-3 font-medium text-muted-foreground">Durum</th>
+                    <th className="text-right px-4 py-3 font-medium text-muted-foreground">Tutar</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y">
@@ -146,10 +146,10 @@ export default async function UrunSatislariPage({
                     const isFullyPaid = debt <= 0.01;
 
                     return (
-                      <tr key={sale.id} className="hover:bg-gray-50">
-                        <td className="px-4 py-3 text-gray-500">
+                      <tr key={sale.id} className="hover:bg-muted/40">
+                        <td className="px-4 py-3 text-muted-foreground">
                           <div>{format(new Date(sale.createdAt), "d MMM yyyy", { locale: tr })}</div>
-                          <div className="text-xs text-gray-400">
+                          <div className="text-xs text-muted-foreground/70">
                             {format(new Date(sale.createdAt), "HH:mm")}
                           </div>
                         </td>
@@ -158,20 +158,20 @@ export default async function UrunSatislariPage({
                             <>
                               <Link
                                 href={`/dashboard/musteriler/${sale.student.id}`}
-                                className="font-medium text-gray-900 hover:text-blue-600"
+                                className="font-medium text-foreground hover:text-info"
                               >
                                 {sale.student.firstName} {sale.student.lastName}
                               </Link>
                               {sale.student.phone && (
-                                <div className="text-xs text-gray-500">{sale.student.phone}</div>
+                                <div className="text-xs text-muted-foreground">{sale.student.phone}</div>
                               )}
                             </>
                           ) : (
-                            <span className="text-gray-400 text-xs">—</span>
+                            <span className="text-muted-foreground/70 text-xs">—</span>
                           )}
                         </td>
-                        <td className="px-4 py-3 font-medium text-gray-900">{sale.title}</td>
-                        <td className="px-4 py-3 text-right text-gray-700">{sale.quantity ?? 1}</td>
+                        <td className="px-4 py-3 font-medium text-foreground">{sale.title}</td>
+                        <td className="px-4 py-3 text-right text-foreground/85">{sale.quantity ?? 1}</td>
                         <td className="px-4 py-3">
                           {primaryPayment ? (
                             <Badge
@@ -181,29 +181,29 @@ export default async function UrunSatislariPage({
                               {PAYMENT_METHODS[primaryPayment.method as keyof typeof PAYMENT_METHODS]}
                             </Badge>
                           ) : (
-                            <span className="text-gray-400 text-xs">—</span>
+                            <span className="text-muted-foreground/70 text-xs">—</span>
                           )}
                         </td>
                         <td className="px-4 py-3">
                           {isFullyPaid ? (
-                            <Badge className="bg-green-100 text-green-700 border-green-200" variant="outline">
+                            <Badge className="bg-success/15 text-success border-success/30" variant="outline">
                               Ödenmiş
                             </Badge>
                           ) : (
                             <div>
-                              <Badge className="bg-red-100 text-red-700 border-red-200" variant="outline">
+                              <Badge className="bg-destructive/15 text-destructive border-destructive/30" variant="outline">
                                 Borç Var
                               </Badge>
-                              <div className="text-xs text-red-500 mt-0.5">
+                              <div className="text-xs text-destructive mt-0.5">
                                 -{formatMoney(debt, sale.currency)}
                               </div>
                             </div>
                           )}
                         </td>
-                        <td className="px-4 py-3 text-right font-semibold text-gray-900">
+                        <td className="px-4 py-3 text-right font-semibold text-foreground">
                           {formatMoney(sale.amount, sale.currency)}
                           {!isFullyPaid && (
-                            <div className="text-xs text-gray-400 font-normal">
+                            <div className="text-xs text-muted-foreground/70 font-normal">
                               Ödenen: {formatMoney(paid, sale.currency)}
                             </div>
                           )}

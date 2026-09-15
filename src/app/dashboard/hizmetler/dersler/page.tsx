@@ -9,12 +9,12 @@ import { tr } from "date-fns/locale";
 import { DerslerFilters } from "./dersler-filters";
 
 const AVATAR_COLORS = [
-  "bg-teal-100 text-teal-700",
-  "bg-lime-100 text-lime-700",
-  "bg-amber-100 text-amber-700",
-  "bg-blue-100 text-blue-700",
-  "bg-violet-100 text-violet-700",
-  "bg-rose-100 text-rose-700",
+  "bg-info/15 text-info",
+  "bg-success/15 text-success",
+  "bg-warning/15 text-warning",
+  "bg-info/15 text-info",
+  "bg-info/15 text-info",
+  "bg-destructive/15 text-destructive",
 ];
 
 function initialsOf(first: string, last: string) {
@@ -67,9 +67,9 @@ export default async function DerslerPage({
 
       <DerslerFilters q={q} durum={durum} />
 
-      <div className="bg-white rounded-xl border overflow-hidden">
+      <div className="bg-card rounded-xl border overflow-hidden">
         {lessons.length === 0 ? (
-          <div className="text-center py-12 text-gray-400">
+          <div className="text-center py-12 text-muted-foreground/70">
             <Search className="w-8 h-8 mx-auto mb-2 opacity-50" />
             <p>Kayıt bulunamadı</p>
           </div>
@@ -77,43 +77,43 @@ export default async function DerslerPage({
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
               <thead>
-                <tr className="border-b bg-gray-50">
-                  <th className="text-left px-4 py-3 font-medium text-gray-600">Öğrenci</th>
-                  <th className="text-left px-4 py-3 font-medium text-gray-600">Eğitmen</th>
-                  <th className="text-left px-4 py-3 font-medium text-gray-600">Ders Türü</th>
-                  <th className="text-left px-4 py-3 font-medium text-gray-600">Tarih</th>
-                  <th className="text-left px-4 py-3 font-medium text-gray-600">Süre</th>
-                  <th className="text-left px-4 py-3 font-medium text-gray-600">Durum</th>
+                <tr className="border-b bg-muted/40">
+                  <th className="text-left px-4 py-3 font-medium text-muted-foreground">Öğrenci</th>
+                  <th className="text-left px-4 py-3 font-medium text-muted-foreground">Eğitmen</th>
+                  <th className="text-left px-4 py-3 font-medium text-muted-foreground">Ders Türü</th>
+                  <th className="text-left px-4 py-3 font-medium text-muted-foreground">Tarih</th>
+                  <th className="text-left px-4 py-3 font-medium text-muted-foreground">Süre</th>
+                  <th className="text-left px-4 py-3 font-medium text-muted-foreground">Durum</th>
                 </tr>
               </thead>
               <tbody className="divide-y">
                 {lessons.map((l, idx) => (
-                  <tr key={l.id} className="hover:bg-gray-50">
+                  <tr key={l.id} className="hover:bg-muted/40">
                     <td className="px-4 py-3">
                       <div className="flex items-center gap-3">
                         <div className={`w-8 h-8 rounded-lg flex items-center justify-center text-xs font-semibold flex-shrink-0 ${AVATAR_COLORS[idx % AVATAR_COLORS.length]}`}>
                           {initialsOf(l.student.firstName, l.student.lastName)}
                         </div>
-                        <p className="font-medium text-gray-900">{l.student.firstName} {l.student.lastName}</p>
+                        <p className="font-medium text-foreground">{l.student.firstName} {l.student.lastName}</p>
                       </div>
                     </td>
-                    <td className="px-4 py-3 text-gray-600">{l.instructor?.user.name ?? "—"}</td>
-                    <td className="px-4 py-3 text-gray-600">
+                    <td className="px-4 py-3 text-muted-foreground">{l.instructor?.user.name ?? "—"}</td>
+                    <td className="px-4 py-3 text-muted-foreground">
                       {LESSON_TYPES[l.reservation.lessonType as keyof typeof LESSON_TYPES] ?? l.reservation.lessonType}
                     </td>
-                    <td className="px-4 py-3 text-gray-500">
+                    <td className="px-4 py-3 text-muted-foreground">
                       {format(new Date(l.checkInTime), "d MMM yyyy HH:mm", { locale: tr })}
                     </td>
-                    <td className="px-4 py-3 text-gray-600">
+                    <td className="px-4 py-3 text-muted-foreground">
                       {l.actualHours != null ? `${l.actualHours.toFixed(1)} saat` : "—"}
                     </td>
                     <td className="px-4 py-3">
                       {l.checkOutTime ? (
-                        <span className="inline-flex items-center gap-1 px-2 py-1 rounded-md text-xs font-medium bg-emerald-50 text-emerald-700">
+                        <span className="inline-flex items-center gap-1 px-2 py-1 rounded-md text-xs font-medium bg-success/10 text-success">
                           <CheckCircle2 className="w-3 h-3" /> Tamamlandı
                         </span>
                       ) : (
-                        <span className="inline-flex px-2 py-1 rounded-md text-xs font-medium bg-amber-50 text-amber-700">
+                        <span className="inline-flex px-2 py-1 rounded-md text-xs font-medium bg-warning/10 text-warning">
                           Devam Ediyor
                         </span>
                       )}
@@ -125,7 +125,7 @@ export default async function DerslerPage({
           </div>
         )}
         {lessons.length > 0 && (
-          <div className="flex items-center justify-end px-4 py-2.5 border-t text-xs text-gray-400">
+          <div className="flex items-center justify-end px-4 py-2.5 border-t text-xs text-muted-foreground/70">
             1–{lessons.length} / {lessons.length} kayıt
           </div>
         )}

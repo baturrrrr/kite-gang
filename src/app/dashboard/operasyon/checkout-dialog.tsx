@@ -35,7 +35,7 @@ export function CheckOutDialog({ lessonId, studentName, plannedHours }: CheckOut
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger render={<Button size="sm" className="w-full bg-green-600 hover:bg-green-700 text-white" />}>
+      <DialogTrigger render={<Button size="sm" className="w-full bg-success hover:bg-success text-background" />}>
         <LogOut className="w-4 h-4 mr-2" />
         Check-out Yap
       </DialogTrigger>
@@ -47,7 +47,7 @@ export function CheckOutDialog({ lessonId, studentName, plannedHours }: CheckOut
           <input type="hidden" name="lessonId" value={lessonId} />
 
           {state.error && (
-            <p className="text-sm text-red-500 bg-red-50 px-3 py-2 rounded">{state.error}</p>
+            <p className="text-sm text-destructive bg-destructive/10 px-3 py-2 rounded">{state.error}</p>
           )}
 
           <div className="space-y-1.5">
@@ -62,7 +62,7 @@ export function CheckOutDialog({ lessonId, studentName, plannedHours }: CheckOut
               defaultValue={plannedHours}
               required
             />
-            <p className="text-xs text-gray-500">Planlanan: {plannedHours} saat</p>
+            <p className="text-xs text-muted-foreground">Planlanan: {plannedHours} saat</p>
           </div>
 
           <div className="space-y-1.5">
@@ -76,13 +76,13 @@ export function CheckOutDialog({ lessonId, studentName, plannedHours }: CheckOut
             />
           </div>
 
-          <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-3 text-xs text-yellow-700">
+          <div className="bg-warning/10 border border-warning/30 rounded-lg p-3 text-xs text-warning">
             ⚠️ Check-out yapıldığında: ders süresi öğrencinin paket bakiyesinden düşülür ve eğitmenin hakedişi hesaplanır.
           </div>
 
           <div className="flex gap-2 justify-end">
             <Button type="button" variant="outline" onClick={() => setOpen(false)}>İptal</Button>
-            <Button type="submit" disabled={isPending} className="bg-green-600 hover:bg-green-700">
+            <Button type="submit" disabled={isPending} className="bg-success hover:bg-success">
               {isPending ? "İşleniyor..." : "Check-out Tamamla"}
             </Button>
           </div>

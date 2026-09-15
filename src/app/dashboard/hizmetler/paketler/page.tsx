@@ -24,7 +24,7 @@ export default async function PaketlerPage() {
   return (
     <div className="space-y-4">
       <div className="flex items-center justify-between">
-        <p className="text-gray-500 text-sm">{packages.length} aktif paket</p>
+        <p className="text-muted-foreground text-sm">{packages.length} aktif paket</p>
         {user.role === "ADMIN" && <NewPackageForm />}
       </div>
 
@@ -43,16 +43,16 @@ export default async function PaketlerPage() {
               </CardHeader>
               <CardContent className="space-y-2">
                 {pkg.description && (
-                  <p className="text-xs text-gray-500">{pkg.description}</p>
+                  <p className="text-xs text-muted-foreground">{pkg.description}</p>
                 )}
                 <div className="flex justify-between items-center">
                   <div>
-                    <p className="text-2xl font-bold text-gray-900">
+                    <p className="text-2xl font-bold text-foreground">
                       {formatTRY(pkg.price, pkg.currency, rates)}
                     </p>
-                    <p className="text-xs text-gray-500">{pkg.totalHours} saat</p>
+                    <p className="text-xs text-muted-foreground">{pkg.totalHours} saat</p>
                   </div>
-                  <div className="text-right text-xs text-gray-500">
+                  <div className="text-right text-xs text-muted-foreground">
                     {pkg.validityDays && <p>{pkg.validityDays} gün geçerli</p>}
                     <p className="mt-1">{pkg._count.purchases} satış</p>
                   </div>
@@ -64,7 +64,7 @@ export default async function PaketlerPage() {
       </div>
 
       {packages.length === 0 && (
-        <div className="text-center py-16 text-gray-400">
+        <div className="text-center py-16 text-muted-foreground/70">
           <Package className="w-8 h-8 mx-auto mb-2 opacity-50" />
           <p>Henüz paket eklenmemiş</p>
         </div>

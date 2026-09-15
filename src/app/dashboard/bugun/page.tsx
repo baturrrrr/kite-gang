@@ -16,16 +16,16 @@ import { toTRY, formatTRY } from "@/lib/currency";
 import { getExchangeRates } from "@/lib/exchange-rates";
 
 function windSuitability(speedKn: number): { label: string; className: string } {
-  if (speedKn < 10) return { label: "Zayıf", className: "text-gray-600 bg-gray-100" };
-  if (speedKn <= 25) return { label: "İdeal", className: "text-emerald-700 bg-emerald-100" };
-  return { label: "Kuvvetli", className: "text-amber-700 bg-amber-100" };
+  if (speedKn < 10) return { label: "Zayıf", className: "text-muted-foreground bg-muted" };
+  if (speedKn <= 25) return { label: "İdeal", className: "text-success bg-success/15" };
+  return { label: "Kuvvetli", className: "text-warning bg-warning/15" };
 }
 
 const HIZMET_STATUS_BADGE: Record<string, string> = {
-  BEKLIYOR: "bg-yellow-100 text-yellow-800",
-  DEVAM: "bg-blue-100 text-blue-800",
-  TAMAMLANDI: "bg-green-100 text-green-800",
-  IPTAL: "bg-gray-100 text-gray-600",
+  BEKLIYOR: "bg-warning/15 text-warning",
+  DEVAM: "bg-info/15 text-info",
+  TAMAMLANDI: "bg-success/15 text-success",
+  IPTAL: "bg-muted text-muted-foreground",
 };
 const HIZMET_STATUS_LABEL: Record<string, string> = {
   BEKLIYOR: "Bekliyor",
@@ -117,8 +117,8 @@ export default async function BugunPage() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-2xl font-bold text-gray-900">Bugün</h1>
-        <p className="text-gray-500 text-sm mt-1 capitalize">
+        <h1 className="text-2xl font-bold text-foreground">Bugün</h1>
+        <p className="text-muted-foreground text-sm mt-1 capitalize">
           {format(new Date(), "d MMMM yyyy, EEEE", { locale: tr })}
         </p>
       </div>
@@ -127,41 +127,41 @@ export default async function BugunPage() {
       <div className="grid grid-cols-2 sm:grid-cols-6 gap-3">
         <Card>
           <CardContent className="pt-3 pb-3">
-            <p className="text-xs text-gray-500">Toplam Seans</p>
-            <p className="text-2xl font-bold text-gray-900">{totalCount}</p>
+            <p className="text-xs text-muted-foreground">Toplam Seans</p>
+            <p className="text-2xl font-bold text-foreground">{totalCount}</p>
           </CardContent>
         </Card>
-        <Card className="border-yellow-200 bg-yellow-50">
+        <Card className="border-warning/30 bg-warning/10">
           <CardContent className="pt-3 pb-3">
-            <p className="text-xs text-yellow-700 font-medium">Bekliyor</p>
-            <p className="text-2xl font-bold text-yellow-800">{totalBekleyen}</p>
+            <p className="text-xs text-warning font-medium">Bekliyor</p>
+            <p className="text-2xl font-bold text-warning">{totalBekleyen}</p>
           </CardContent>
         </Card>
-        <Card className="border-blue-200 bg-blue-50">
+        <Card className="border-info/30 bg-info/10">
           <CardContent className="pt-3 pb-3">
-            <p className="text-xs text-blue-700 font-medium">Devam Ediyor</p>
-            <p className="text-2xl font-bold text-blue-800">{totalDevam}</p>
+            <p className="text-xs text-info font-medium">Devam Ediyor</p>
+            <p className="text-2xl font-bold text-info">{totalDevam}</p>
           </CardContent>
         </Card>
-        <Card className="border-green-200 bg-green-50">
+        <Card className="border-success/30 bg-success/10">
           <CardContent className="pt-3 pb-3">
-            <p className="text-xs text-green-700 font-medium">Tamamlandı</p>
-            <p className="text-2xl font-bold text-green-800">{totalTamam}</p>
+            <p className="text-xs text-success font-medium">Tamamlandı</p>
+            <p className="text-2xl font-bold text-success">{totalTamam}</p>
           </CardContent>
         </Card>
-        <Card className="border-sky-200 bg-gradient-to-br from-sky-50 to-cyan-50">
+        <Card className="border-info/30 bg-gradient-to-br from-info/10 to-info/10">
           <CardContent className="pt-3 pb-3">
-            <div className="flex items-center gap-1 text-xs text-sky-700 font-medium">
+            <div className="flex items-center gap-1 text-xs text-info font-medium">
               <Wind className="w-3.5 h-3.5" />
               Rüzgar
             </div>
             {wind ? (
               <>
                 <div className="flex items-baseline gap-1">
-                  <p className="text-2xl font-bold text-sky-900">{Math.round(wind.windSpeedKn)}</p>
-                  <span className="text-xs text-sky-600">kn</span>
+                  <p className="text-2xl font-bold text-info">{Math.round(wind.windSpeedKn)}</p>
+                  <span className="text-xs text-info">kn</span>
                   <Navigation
-                    className="w-3.5 h-3.5 text-sky-500 ml-0.5"
+                    className="w-3.5 h-3.5 text-info ml-0.5"
                     style={{ transform: `rotate(${wind.windDirectionDeg + 180}deg)` }}
                   />
                 </div>
@@ -172,18 +172,18 @@ export default async function BugunPage() {
                 </span>
               </>
             ) : (
-              <p className="text-sm text-sky-400 mt-1">—</p>
+              <p className="text-sm text-info mt-1">—</p>
             )}
           </CardContent>
         </Card>
         {user.role !== "INSTRUCTOR" && (
-          <Card className="border-emerald-200 bg-emerald-50">
+          <Card className="border-success/30 bg-success/10">
             <CardContent className="pt-3 pb-3">
-              <p className="text-xs text-emerald-700 font-medium">Bugünkü Gelir</p>
+              <p className="text-xs text-success font-medium">Bugünkü Gelir</p>
               {todayPayments.length > 0 ? (
-                <p className="text-lg font-bold text-emerald-800">₺{todayIncomeTRY.toFixed(2)}</p>
+                <p className="text-lg font-bold text-success">₺{todayIncomeTRY.toFixed(2)}</p>
               ) : (
-                <p className="text-lg font-bold text-emerald-800">—</p>
+                <p className="text-lg font-bold text-success">—</p>
               )}
             </CardContent>
           </Card>
@@ -192,12 +192,12 @@ export default async function BugunPage() {
 
       {/* Hizmet-based today's items */}
       <div>
-        <h2 className="text-lg font-semibold text-gray-900 mb-3 flex items-center gap-2">
-          <GraduationCap className="w-5 h-5 text-blue-500" />
+        <h2 className="text-lg font-semibold text-foreground mb-3 flex items-center gap-2">
+          <GraduationCap className="w-5 h-5 text-info" />
           Bugünkü Dersler & Hizmetler ({hizmetler.length})
         </h2>
         {hizmetler.length === 0 ? (
-          <p className="text-sm text-gray-400 py-2">Bugün için planlanmış hizmet yok</p>
+          <p className="text-sm text-muted-foreground/70 py-2">Bugün için planlanmış hizmet yok</p>
         ) : (
           <div className="space-y-2">
             {hizmetler.map((h) => (
@@ -205,23 +205,23 @@ export default async function BugunPage() {
                 <CardContent className="pt-3 pb-3">
                   <div className="flex items-center justify-between flex-wrap gap-2">
                     <div className="flex items-center gap-3 min-w-0">
-                      <div className="text-xs text-gray-400 w-11 flex-shrink-0">
+                      <div className="text-xs text-muted-foreground/70 w-11 flex-shrink-0">
                         {h.scheduledAt ? format(new Date(h.scheduledAt), "HH:mm") : "—"}
                       </div>
                       <div className="min-w-0">
                         {h.studentId && user.role !== "INSTRUCTOR" ? (
                           <Link
                             href={`/dashboard/musteriler/${h.studentId}`}
-                            className="font-semibold text-gray-900 hover:text-blue-600"
+                            className="font-semibold text-foreground hover:text-info"
                           >
                             {h.student?.firstName} {h.student?.lastName}
                           </Link>
                         ) : (
-                          <span className="font-semibold text-gray-900">
+                          <span className="font-semibold text-foreground">
                             {h.student ? `${h.student.firstName} ${h.student.lastName}` : "Müşteri belirtilmedi"}
                           </span>
                         )}
-                        <p className="text-xs text-gray-500 truncate">
+                        <p className="text-xs text-muted-foreground truncate">
                           {h.title}
                           {h.instructor && ` · ${h.instructor.user.name}`}
                         </p>
@@ -229,7 +229,7 @@ export default async function BugunPage() {
                     </div>
                     <div className="flex items-center gap-2 flex-shrink-0">
                       {user.role !== "INSTRUCTOR" && (
-                        <span className="text-sm font-semibold text-gray-700">{formatMoney(h.amount, h.currency)}</span>
+                        <span className="text-sm font-semibold text-foreground/85">{formatMoney(h.amount, h.currency)}</span>
                       )}
                       <Badge className={HIZMET_STATUS_BADGE[h.status]}>{HIZMET_STATUS_LABEL[h.status]}</Badge>
                       {user.role !== "INSTRUCTOR" && h.studentId && (
@@ -262,8 +262,8 @@ export default async function BugunPage() {
       {/* Legacy reservations */}
       {reservations.length > 0 && (
         <div>
-          <h2 className="text-lg font-semibold text-gray-900 mb-3 flex items-center gap-2">
-            <Waves className="w-5 h-5 text-cyan-500" />
+          <h2 className="text-lg font-semibold text-foreground mb-3 flex items-center gap-2">
+            <Waves className="w-5 h-5 text-info" />
             Bugünkü Rezervasyonlar ({reservations.length})
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
@@ -277,17 +277,17 @@ export default async function BugunPage() {
                           className="w-2.5 h-2.5 rounded-full flex-shrink-0"
                           style={{ backgroundColor: res.instructor?.color ?? "#9CA3AF" }}
                         />
-                        <p className="font-semibold text-gray-900">
+                        <p className="font-semibold text-foreground">
                           {res.student.firstName} {res.student.lastName}
                         </p>
                       </div>
-                      <p className="text-xs text-gray-500 mt-0.5 ml-4">{res.instructor?.user.name ?? "Personel atanmadı"}</p>
+                      <p className="text-xs text-muted-foreground mt-0.5 ml-4">{res.instructor?.user.name ?? "Personel atanmadı"}</p>
                     </div>
                     <Badge className={STATUS_COLORS[res.status]}>
                       {RESERVATION_STATUSES[res.status as keyof typeof RESERVATION_STATUSES]}
                     </Badge>
                   </div>
-                  <p className="text-xs text-gray-500">
+                  <p className="text-xs text-muted-foreground">
                     {format(new Date(res.startTime), "HH:mm")}–{format(new Date(res.endTime), "HH:mm")}
                     {" · "}
                     {LESSON_TYPES[res.lessonType as keyof typeof LESSON_TYPES]}
@@ -318,7 +318,7 @@ export default async function BugunPage() {
       )}
 
       {totalCount === 0 && (
-        <div className="text-center py-16 text-gray-400">
+        <div className="text-center py-16 text-muted-foreground/70">
           <CalendarClock className="w-10 h-10 mx-auto mb-3 opacity-40" />
           <p className="text-lg">Bugün için planlanmış hiçbir şey yok</p>
         </div>

@@ -23,8 +23,8 @@ export default async function EquipmentPage() {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900">Ekipman Envanteri</h1>
-          <p className="text-gray-500 text-sm mt-1">{equipment.length} ekipman</p>
+          <h1 className="text-2xl font-bold text-foreground">Ekipman Envanteri</h1>
+          <p className="text-muted-foreground text-sm mt-1">{equipment.length} ekipman</p>
         </div>
         {user.role !== "INSTRUCTOR" && <NewEquipmentForm />}
       </div>
@@ -40,23 +40,23 @@ export default async function EquipmentPage() {
             <div className="overflow-x-auto">
               <table className="w-full text-sm">
                 <thead>
-                  <tr className="border-b bg-gray-50">
-                    <th className="text-left px-3 py-2 font-medium text-gray-600">Marka</th>
-                    <th className="text-left px-3 py-2 font-medium text-gray-600">Model</th>
-                    <th className="text-left px-3 py-2 font-medium text-gray-600">Boyut</th>
-                    <th className="text-left px-3 py-2 font-medium text-gray-600">Adet</th>
-                    <th className="text-left px-3 py-2 font-medium text-gray-600">Notlar</th>
+                  <tr className="border-b bg-muted/40">
+                    <th className="text-left px-3 py-2 font-medium text-muted-foreground">Marka</th>
+                    <th className="text-left px-3 py-2 font-medium text-muted-foreground">Model</th>
+                    <th className="text-left px-3 py-2 font-medium text-muted-foreground">Boyut</th>
+                    <th className="text-left px-3 py-2 font-medium text-muted-foreground">Adet</th>
+                    <th className="text-left px-3 py-2 font-medium text-muted-foreground">Notlar</th>
                     {user.role !== "INSTRUCTOR" && <th className="px-3 py-2" />}
                   </tr>
                 </thead>
                 <tbody className="divide-y">
                   {items.map((item) => (
-                    <tr key={item.id} className="hover:bg-gray-50">
+                    <tr key={item.id} className="hover:bg-muted/40">
                       <td className="px-3 py-2 font-medium">{item.name}</td>
-                      <td className="px-3 py-2 text-gray-500">{item.brand ?? "—"}</td>
-                      <td className="px-3 py-2 text-gray-500">{item.size ?? "—"}</td>
-                      <td className="px-3 py-2 text-gray-500">{item.quantity}</td>
-                      <td className="px-3 py-2 text-gray-400 text-xs">{item.notes ?? "—"}</td>
+                      <td className="px-3 py-2 text-muted-foreground">{item.brand ?? "—"}</td>
+                      <td className="px-3 py-2 text-muted-foreground">{item.size ?? "—"}</td>
+                      <td className="px-3 py-2 text-muted-foreground">{item.quantity}</td>
+                      <td className="px-3 py-2 text-muted-foreground/70 text-xs">{item.notes ?? "—"}</td>
                       {user.role !== "INSTRUCTOR" && (
                         <td className="px-3 py-2 text-right">
                           <EditEquipmentDialog equipment={item} />
@@ -72,7 +72,7 @@ export default async function EquipmentPage() {
       ))}
 
       {equipment.length === 0 && (
-        <div className="text-center py-16 text-gray-400">
+        <div className="text-center py-16 text-muted-foreground/70">
           <p>Henüz ekipman eklenmemiş</p>
         </div>
       )}

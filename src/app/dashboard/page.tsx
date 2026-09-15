@@ -92,10 +92,10 @@ export default async function DashboardPage() {
       {stats && (
         <div className="grid grid-cols-2 lg:grid-cols-5 gap-4">
           {/* Bugünkü Gelir — signature hero stat */}
-          <div className="relative overflow-hidden rounded-xl p-5 text-white bg-primary">
+          <div className="relative overflow-hidden rounded-xl p-5 text-background bg-primary">
             <div className="relative flex items-center justify-between mb-4">
               <p className="text-xs font-semibold text-white/80 uppercase tracking-wide">Bugün Gelir</p>
-              <div className="w-8 h-8 rounded-lg bg-white/15 flex items-center justify-center">
+              <div className="w-8 h-8 rounded-lg bg-card/15 flex items-center justify-center">
                 <TrendingUp className="w-4 h-4 text-white" />
               </div>
             </div>
@@ -135,8 +135,8 @@ export default async function DashboardPage() {
           <div className="bg-card rounded-xl border border-border p-5">
             <div className="flex items-center justify-between mb-4">
               <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wide">Kasa</p>
-              <div className="w-8 h-8 rounded-lg bg-emerald-500/10 flex items-center justify-center">
-                <Wallet className="w-4 h-4 text-emerald-600" />
+              <div className="w-8 h-8 rounded-lg bg-success/10 flex items-center justify-center">
+                <Wallet className="w-4 h-4 text-success" />
               </div>
             </div>
             {stats.cashAccounts.length > 0 ? (

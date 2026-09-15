@@ -13,6 +13,9 @@
   --color-coral: var(--coral);
   --color-coral-foreground: var(--coral-foreground);
   --color-ocean: var(--ocean);
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+  --color-info: var(--info);
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -49,63 +52,92 @@
   --radius-2xl: calc(var(--radius) * 2);
 }
 
+/*
+ * Tek koyu tema — "cesur spor markası". Onaylanan taslak:
+ * https://claude.ai/artifact/FVnYR6rKxKo74TLbEkSByi
+ * Elektrik yeşili tek vurgu rengidir; üzerinde her zaman koyu metin kullanılır.
+ */
 :root {
-  /* Crisp near-white — premium SaaS surface, not corporate-gray */
-  --background: oklch(0.985 0.003 255);
-  --foreground: oklch(0.19 0.012 255);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.19 0.012 255);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.19 0.012 255);
-  /* Deep charcoal — primary CTA color (solid, no gradient) */
-  --primary: oklch(0.21 0.012 255);
-  --primary-foreground: oklch(0.99 0 0);
-  --secondary: oklch(0.965 0.003 255);
-  --secondary-foreground: oklch(0.24 0.014 255);
-  --muted: oklch(0.965 0.003 255);
-  --muted-foreground: oklch(0.51 0.014 255);
-  --accent: oklch(0.94 0.025 195);
-  --accent-foreground: oklch(0.28 0.06 195);
-  --destructive: oklch(0.57 0.22 25);
-  --border: oklch(0.912 0.005 255);
-  --input: oklch(0.912 0.005 255);
-  --ring: oklch(0.55 0.10 195);
-  /* Teal — refined secondary accent (icons, highlights, active states) */
-  --coral: oklch(0.65 0.15 40);
-  --coral-foreground: oklch(0.99 0 0);
-  --ocean: oklch(0.55 0.10 195);
-  --chart-1: oklch(0.55 0.10 195);
-  --chart-2: oklch(0.65 0.15 40);
-  --chart-3: oklch(0.60 0.13 145);
-  --chart-4: oklch(0.70 0.14 85);
-  --chart-5: oklch(0.52 0.16 300);
-  --radius: 0.55rem;
-  /* Sidebar — flat near-black, no gradient/texture */
-  --sidebar: oklch(0.15 0.008 255);
-  --sidebar-foreground: oklch(0.82 0.008 255);
-  --sidebar-primary: oklch(0.58 0.11 195);
-  --sidebar-primary-foreground: oklch(0.99 0 0);
-  --sidebar-accent: oklch(0.23 0.010 255);
-  --sidebar-accent-foreground: oklch(0.98 0.004 255);
-  --sidebar-border: oklch(1 0 0 / 8%);
-  --sidebar-ring: oklch(0.58 0.11 195);
+  --background: #0b0d10;
+  --foreground: #f3f5f2;
+  --card: #14181d;
+  --card-foreground: #f3f5f2;
+  --popover: #171b21;
+  --popover-foreground: #f3f5f2;
+  --primary: #d7ff3f;
+  --primary-foreground: #0b0d10;
+  --secondary: #1b2027;
+  --secondary-foreground: #f3f5f2;
+  --muted: #1b2027;
+  --muted-foreground: #8a929c;
+  --accent: #1e242b;
+  --accent-foreground: #f3f5f2;
+  --destructive: #ff7a66;
+  --border: #232930;
+  --input: #2c333b;
+  --ring: #d7ff3f;
+
+  /* Durum renkleri: iyi / uyarı / bilgi. Rozetlerde /15 opaklıkla zemin olarak kullanılır. */
+  --success: #d7ff3f;
+  --warning: #ffc46b;
+  --info: #6fdcff;
+
+  /* Eski kodla uyumluluk */
+  --coral: #ff7a66;
+  --coral-foreground: #0b0d10;
+  --ocean: #6fdcff;
+
+  --chart-1: #d7ff3f;
+  --chart-2: #6fdcff;
+  --chart-3: #ffc46b;
+  --chart-4: #ff7a66;
+  --chart-5: #b9a6ff;
+  --radius: 0.5rem;
+
+  --sidebar: #08090b;
+  --sidebar-foreground: #9aa2ab;
+  --sidebar-primary: #d7ff3f;
+  --sidebar-primary-foreground: #0b0d10;
+  --sidebar-accent: #161b21;
+  --sidebar-accent-foreground: #f3f5f2;
+  --sidebar-border: #15191e;
+  --sidebar-ring: #d7ff3f;
 }
 
 @layer base {
   * {
     @apply border-border outline-ring/50;
   }
+  html {
+    @apply font-sans;
+    scroll-behavior: smooth;
+    color-scheme: dark;
+  }
   body {
     @apply bg-background text-foreground antialiased;
     font-variant-numeric: tabular-nums;
     animation: page-fade-in 0.35s ease-out;
   }
-  html {
-    @apply font-sans;
-    scroll-behavior: smooth;
+  h1, h2, h3, [data-slot="card-title"] {
+    @apply font-heading uppercase;
+    letter-spacing: 0.01em;
   }
-  h1, h2, h3 {
-    @apply font-heading tracking-tight;
+}
+
+@layer utilities {
+  /* Büyük, dar, büyük harfli rakamlar (KPI, tutar) */
+  .num {
+    font-family: var(--font-heading-display);
+    font-variant-numeric: tabular-nums;
+    letter-spacing: 0;
+  }
+  /* Küçük bölüm etiketi: "BU AY GELİR" */
+  .eyebrow {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted-foreground);
   }
 }
 
@@ -114,47 +146,48 @@
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* Refined text selection */
 ::selection {
   background: var(--primary);
   color: var(--primary-foreground);
 }
 
-/* Card styling — crisp border, barely-there shadow */
 [data-slot="card"] {
-  border: 1px solid oklch(0.912 0.005 255) !important;
-  box-shadow: 0 1px 2px 0 oklch(0.2 0.01 255 / 0.04);
-  transition: box-shadow 0.15s ease, border-color 0.15s ease;
+  border: 1px solid var(--border) !important;
+  box-shadow: none;
+  transition: border-color 0.15s ease;
 }
 
-/* Elevated surfaces — real depth instead of a flat ring */
 [data-slot="dialog-content"] {
-  box-shadow:
-    0 20px 25px -8px oklch(0.15 0.01 255 / 0.14),
-    0 8px 10px -6px oklch(0.15 0.01 255 / 0.08) !important;
-  border: 1px solid oklch(0.912 0.005 255) !important;
+  box-shadow: 0 24px 48px -12px rgb(0 0 0 / 0.6) !important;
+  border: 1px solid var(--border) !important;
 }
 [data-slot="popover-content"],
 [data-slot="select-content"],
 [data-slot="dropdown-menu-content"] {
-  box-shadow:
-    0 12px 16px -6px oklch(0.15 0.01 255 / 0.10),
-    0 4px 6px -4px oklch(0.15 0.01 255 / 0.06) !important;
-  border: 1px solid oklch(0.912 0.005 255) !important;
+  box-shadow: 0 16px 32px -12px rgb(0 0 0 / 0.55) !important;
+  border: 1px solid var(--border) !important;
 }
 
-/* Buttons — subtle lift on hover for solid CTAs */
+[data-slot="sheet-overlay"] {
+  background: rgb(0 0 0 / 0.6) !important;
+}
+
 [data-slot="button"] {
-  transition: transform 0.12s ease, box-shadow 0.12s ease, background-color 0.15s ease, opacity 0.15s ease;
+  transition: transform 0.12s ease, background-color 0.15s ease, opacity 0.15s ease;
 }
 
-/* Table rows — smooth hover, no layout shift */
 [data-slot="table-row"] {
   transition: background-color 0.1s ease;
 }
 
-/* Scrollbar */
-::-webkit-scrollbar { width: 5px; height: 5px; }
+/* Tarih/saat seçicilerin simgeleri koyu zeminde görünsün */
+input[type="date"]::-webkit-calendar-picker-indicator,
+input[type="datetime-local"]::-webkit-calendar-picker-indicator,
+input[type="time"]::-webkit-calendar-picker-indicator {
+  filter: invert(1) opacity(0.6);
+}
+
+::-webkit-scrollbar { width: 6px; height: 6px; }
 ::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: oklch(0.85 0.006 255); border-radius: 99px; }
-::-webkit-scrollbar-thumb:hover { background: oklch(0.70 0.008 255); }
+::-webkit-scrollbar-thumb { background: #2c333b; border-radius: 99px; }
+::-webkit-scrollbar-thumb:hover { background: #3a424b; }

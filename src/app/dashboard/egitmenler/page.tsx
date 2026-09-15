@@ -54,8 +54,8 @@ export default async function InstructorsPage() {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900">Eğitmenler</h1>
-          <p className="text-gray-500 text-sm mt-1">{instructors.length} aktif eğitmen</p>
+          <h1 className="text-2xl font-bold text-foreground">Eğitmenler</h1>
+          <p className="text-muted-foreground text-sm mt-1">{instructors.length} aktif eğitmen</p>
         </div>
         {user.role === "ADMIN" && (
           <div className="flex items-center gap-2">
@@ -91,7 +91,7 @@ export default async function InstructorsPage() {
                   </div>
                   <div>
                     <CardTitle className="text-base">{instructor.user.name}</CardTitle>
-                    <p className="text-xs text-gray-500">
+                    <p className="text-xs text-muted-foreground">
                       {PAYMENT_MODELS[instructor.paymentModel as keyof typeof PAYMENT_MODELS]}
                     </p>
                   </div>
@@ -99,17 +99,17 @@ export default async function InstructorsPage() {
               </CardHeader>
               <CardContent className="space-y-2">
                 {instructor.user.email && (
-                  <div className="flex items-center gap-2 text-xs text-gray-500">
+                  <div className="flex items-center gap-2 text-xs text-muted-foreground">
                     <Mail className="w-3.5 h-3.5" /> {instructor.user.email}
                   </div>
                 )}
                 {instructor.phone && (
-                  <div className="flex items-center gap-2 text-xs text-gray-500">
+                  <div className="flex items-center gap-2 text-xs text-muted-foreground">
                     <Phone className="w-3.5 h-3.5" /> {instructor.phone}
                   </div>
                 )}
                 <div className="flex justify-between items-center pt-2 border-t">
-                  <span className="text-xs text-gray-500">{instructor._count.lessons} ders</span>
+                  <span className="text-xs text-muted-foreground">{instructor._count.lessons} ders</span>
                   {user.role === "ADMIN" && pendingBalance > 0 && (
                     <Badge variant="destructive" className="text-xs">
                       Bekleyen: ₺{pendingBalance.toFixed(2)}

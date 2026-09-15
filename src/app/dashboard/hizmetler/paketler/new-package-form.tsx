@@ -36,7 +36,7 @@ export function NewPackageForm() {
         </DialogHeader>
         <form action={formAction} className="space-y-4">
           {state.error && (
-            <p className="text-sm text-red-500">{state.error}</p>
+            <p className="text-sm text-destructive">{state.error}</p>
           )}
           <div className="space-y-1.5">
             <Label htmlFor="name">Paket Adı *</Label>

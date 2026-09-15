@@ -139,19 +139,19 @@ export function AssignHizmetDialog({
           <DialogTitle>Hizmet Ekle</DialogTitle>
         </DialogHeader>
 
-        {state.error && <p className="text-sm text-red-500 bg-red-50 px-3 py-2 rounded">{state.error}</p>}
+        {state.error && <p className="text-sm text-destructive bg-destructive/10 px-3 py-2 rounded">{state.error}</p>}
         {state.fieldErrors && (
-          <p className="text-sm text-red-500">{Object.values(state.fieldErrors).flat()[0]}</p>
+          <p className="text-sm text-destructive">{Object.values(state.fieldErrors).flat()[0]}</p>
         )}
 
         {/* Service picker */}
         {!selectedSablon ? (
           <div className="space-y-4">
-            <p className="text-sm text-gray-600">Hizmet türü seçin:</p>
+            <p className="text-sm text-muted-foreground">Hizmet türü seçin:</p>
             {(Object.entries(grouped) as [string, Sablon[]][]).map(([cat, items]) =>
               items.length > 0 ? (
                 <div key={cat}>
-                  <p className="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-1.5">
+                  <p className="text-xs font-semibold text-muted-foreground/70 uppercase tracking-wide mb-1.5">
                     {CAT_LABELS[cat]}
                   </p>
                   <div className="space-y-1">
@@ -160,11 +160,11 @@ export function AssignHizmetDialog({
                         key={s.id}
                         type="button"
                         onClick={() => pickSablon(s)}
-                        className="w-full flex justify-between items-center px-3 py-2.5 rounded-lg border border-gray-200 hover:border-blue-400 hover:bg-blue-50 transition-all text-left"
+                        className="w-full flex justify-between items-center px-3 py-2.5 rounded-lg border border-border hover:border-info/60 hover:bg-info/10 transition-all text-left"
                       >
-                        <span className="text-sm font-medium text-gray-800">{s.name}</span>
+                        <span className="text-sm font-medium text-foreground">{s.name}</span>
                         {s.fiyatlar[0] && (
-                          <span className="text-sm text-gray-500">{s.fiyatlar[0].currency} {s.fiyatlar[0].price.toFixed(2)}</span>
+                          <span className="text-sm text-muted-foreground">{s.fiyatlar[0].currency} {s.fiyatlar[0].price.toFixed(2)}</span>
                         )}
                       </button>
                     ))}
@@ -185,11 +185,11 @@ export function AssignHizmetDialog({
               <button
                 type="button"
                 onClick={() => setSelectedSablon(null)}
-                className="text-xs text-blue-600 hover:underline"
+                className="text-xs text-info hover:underline"
               >
                 ← Değiştir
               </button>
-              <span className="text-sm font-semibold text-gray-800 bg-gray-100 px-3 py-1 rounded-full">
+              <span className="text-sm font-semibold text-foreground bg-muted px-3 py-1 rounded-full">
                 {CAT_LABELS[selectedSablon.category]} — {selectedSablon.name}
               </span>
             </div>
@@ -206,12 +206,12 @@ export function AssignHizmetDialog({
                       onClick={() => pickFiyat(idx)}
                       className={`py-2 px-3 text-sm rounded-md border transition-all ${
                         activeFiyatIdx === idx
-                          ? "border-blue-500 bg-blue-50 text-blue-700 font-medium"
-                          : "border-gray-200 hover:border-gray-300"
+                          ? "border-info/60 bg-info/10 text-info font-medium"
+                          : "border-border hover:border-border"
                       }`}
                     >
                       <div>{ZAMAN_BIRIMLERI[f.zamanBirimi as keyof typeof ZAMAN_BIRIMLERI]}</div>
-                      <div className="text-xs text-gray-500">{f.currency} {f.price.toFixed(2)}</div>
+                      <div className="text-xs text-muted-foreground">{f.currency} {f.price.toFixed(2)}</div>
                     </button>
                   ))}
                 </div>
@@ -239,7 +239,7 @@ export function AssignHizmetDialog({
                 <Label>Ekipman</Label>
                 <select
                   name="equipmentId"
-                  className="w-full border rounded-md px-3 py-2 text-sm bg-white"
+                  className="w-full border rounded-md px-3 py-2 text-sm bg-card"
                   value={equipmentId}
                   onChange={(e) => setEquipmentId(e.target.value)}
                 >
@@ -260,7 +260,7 @@ export function AssignHizmetDialog({
                 <Label>Eğitmen *</Label>
                 <select
                   name="instructorId"
-                  className="w-full border rounded-md px-3 py-2 text-sm bg-white"
+                  className="w-full border rounded-md px-3 py-2 text-sm bg-card"
                   required
                   value={instructorId}
                   onChange={handleInstructorChange}
@@ -303,7 +303,7 @@ export function AssignHizmetDialog({
                 <Label>Para Birimi</Label>
                 <select
                   name="currency"
-                  className="w-full border rounded-md px-3 py-2 text-sm bg-white"
+                  className="w-full border rounded-md px-3 py-2 text-sm bg-card"
                   value={currency}
                   onChange={(e) => handleCurrencyChange(e.target.value)}
                 >
@@ -331,7 +331,7 @@ export function AssignHizmetDialog({
             {/* Payment method */}
             <div className="space-y-1.5">
               <Label>Ödeme Yöntemi</Label>
-              <select name="paymentMethod" className="w-full border rounded-md px-3 py-2 text-sm bg-white">
+              <select name="paymentMethod" className="w-full border rounded-md px-3 py-2 text-sm bg-card">
                 <option value="">Belirtilmedi</option>
                 {Object.entries(PAYMENT_METHODS).map(([v, l]) => (
                   <option key={v} value={v}>{l}</option>
@@ -342,7 +342,7 @@ export function AssignHizmetDialog({
             {/* Status */}
             <div className="space-y-1.5">
               <Label>Durum</Label>
-              <select name="status" className="w-full border rounded-md px-3 py-2 text-sm bg-white">
+              <select name="status" className="w-full border rounded-md px-3 py-2 text-sm bg-card">
                 <option value="BEKLIYOR">Bekliyor</option>
                 <option value="DEVAM">Devam Ediyor</option>
                 <option value="TAMAMLANDI">Tamamlandı</option>

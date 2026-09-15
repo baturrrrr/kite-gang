@@ -87,12 +87,12 @@ export function ReservationFilterSheet({
       <button
         type="button"
         onClick={openPanel}
-        className="flex items-center gap-2 px-4 py-2 text-sm font-medium border border-gray-200 rounded-lg bg-white hover:bg-gray-50 transition-colors"
+        className="flex items-center gap-2 px-4 py-2 text-sm font-medium border border-border rounded-lg bg-card hover:bg-muted/40 transition-colors"
       >
         <SlidersHorizontal className="w-4 h-4" />
         Filtrele
         {totalActive > 0 && (
-          <span className="px-1.5 py-0.5 rounded-full bg-gray-900 text-white text-[10px] font-bold">
+          <span className="px-1.5 py-0.5 rounded-full bg-secondary text-white text-[10px] font-bold">
             {totalActive}
           </span>
         )}

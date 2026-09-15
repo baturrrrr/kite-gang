@@ -11,12 +11,12 @@ import { NewReservationSheet } from "./new-reservation-sheet";
 import { Clock, User, Users, TrendingUp } from "lucide-react";
 
 const STATUS_BADGE: Record<string, { label: string; cls: string }> = {
-  PLANNED:        { label: "Bekleniyor",      cls: "bg-gray-100 text-gray-600 border-gray-200" },
-  CHECKED_IN:     { label: "Check In",         cls: "bg-yellow-100 text-yellow-700 border-yellow-200" },
-  COMPLETED:      { label: "Tamamlandı",       cls: "bg-green-100 text-green-700 border-green-200" },
-  CANCELLED:      { label: "İptal",            cls: "bg-red-100 text-red-700 border-red-200" },
-  NO_SHOW:        { label: "Gelmedi",          cls: "bg-red-100 text-red-700 border-red-200" },
-  WIND_CANCELLED: { label: "Rüzgar İptali",    cls: "bg-orange-100 text-orange-700 border-orange-200" },
+  PLANNED:        { label: "Bekleniyor",      cls: "bg-muted text-muted-foreground border-border" },
+  CHECKED_IN:     { label: "Check In",         cls: "bg-warning/15 text-warning border-warning/30" },
+  COMPLETED:      { label: "Tamamlandı",       cls: "bg-success/15 text-success border-success/30" },
+  CANCELLED:      { label: "İptal",            cls: "bg-destructive/15 text-destructive border-destructive/30" },
+  NO_SHOW:        { label: "Gelmedi",          cls: "bg-destructive/15 text-destructive border-destructive/30" },
+  WIND_CANCELLED: { label: "Rüzgar İptali",    cls: "bg-warning/15 text-warning border-warning/30" },
 };
 
 function todayStr() {
@@ -126,8 +126,8 @@ export default async function ReservationsPage({
       {/* Başlık */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900">Rezervasyonlar</h1>
-          <p className="text-sm text-gray-500 mt-0.5">
+          <h1 className="text-2xl font-bold text-foreground">Rezervasyonlar</h1>
+          <p className="text-sm text-muted-foreground mt-0.5">
             {isSingleDay
               ? format(fromDate, "d MMMM yyyy, EEEE", { locale: tr })
               : `${format(fromDate, "d MMM yyyy", { locale: tr })} — ${format(toDate, "d MMM yyyy", { locale: tr })}`}
@@ -147,59 +147,59 @@ export default async function ReservationsPage({
       </div>
 
       {/* Tarih aralığı seçici */}
-      <div className="bg-white border rounded-xl p-4 shadow-sm">
+      <div className="bg-card border rounded-xl p-4 shadow-sm">
         <DateRangeNav from={fromStr} to={toStr} />
       </div>
 
       {/* Özet kartlar */}
       {reservations.length > 0 && (
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-          <div className="bg-white border rounded-xl p-4 shadow-sm">
+          <div className="bg-card border rounded-xl p-4 shadow-sm">
             <div className="flex items-center gap-2 mb-1">
-              <div className="w-7 h-7 rounded-lg bg-blue-50 flex items-center justify-center">
-                <Users className="w-4 h-4 text-blue-600" />
+              <div className="w-7 h-7 rounded-lg bg-info/10 flex items-center justify-center">
+                <Users className="w-4 h-4 text-info" />
               </div>
-              <span className="text-xs text-gray-500 font-medium">Toplam</span>
+              <span className="text-xs text-muted-foreground font-medium">Toplam</span>
             </div>
-            <p className="text-2xl font-bold text-gray-900">{reservations.length}</p>
-            <p className="text-xs text-gray-400">rezervasyon</p>
+            <p className="text-2xl font-bold text-foreground">{reservations.length}</p>
+            <p className="text-xs text-muted-foreground/70">rezervasyon</p>
           </div>
-          <div className="bg-white border rounded-xl p-4 shadow-sm">
+          <div className="bg-card border rounded-xl p-4 shadow-sm">
             <div className="flex items-center gap-2 mb-1">
-              <div className="w-7 h-7 rounded-lg bg-green-50 flex items-center justify-center">
-                <TrendingUp className="w-4 h-4 text-green-600" />
+              <div className="w-7 h-7 rounded-lg bg-success/10 flex items-center justify-center">
+                <TrendingUp className="w-4 h-4 text-success" />
               </div>
-              <span className="text-xs text-gray-500 font-medium">Tamamlandı</span>
+              <span className="text-xs text-muted-foreground font-medium">Tamamlandı</span>
             </div>
-            <p className="text-2xl font-bold text-gray-900">{completedCount}</p>
-            <p className="text-xs text-gray-400">ders</p>
+            <p className="text-2xl font-bold text-foreground">{completedCount}</p>
+            <p className="text-xs text-muted-foreground/70">ders</p>
           </div>
-          <div className="bg-white border rounded-xl p-4 shadow-sm">
+          <div className="bg-card border rounded-xl p-4 shadow-sm">
             <div className="flex items-center gap-2 mb-1">
-              <div className="w-7 h-7 rounded-lg bg-red-50 flex items-center justify-center">
-                <Clock className="w-4 h-4 text-red-500" />
+              <div className="w-7 h-7 rounded-lg bg-destructive/10 flex items-center justify-center">
+                <Clock className="w-4 h-4 text-destructive" />
               </div>
-              <span className="text-xs text-gray-500 font-medium">İptal</span>
+              <span className="text-xs text-muted-foreground font-medium">İptal</span>
             </div>
-            <p className="text-2xl font-bold text-gray-900">{cancelledCount}</p>
-            <p className="text-xs text-gray-400">rezervasyon</p>
+            <p className="text-2xl font-bold text-foreground">{cancelledCount}</p>
+            <p className="text-xs text-muted-foreground/70">rezervasyon</p>
           </div>
-          <div className="bg-white border rounded-xl p-4 shadow-sm">
+          <div className="bg-card border rounded-xl p-4 shadow-sm">
             <div className="flex items-center gap-2 mb-1">
-              <div className="w-7 h-7 rounded-lg bg-purple-50 flex items-center justify-center">
-                <User className="w-4 h-4 text-purple-600" />
+              <div className="w-7 h-7 rounded-lg bg-info/10 flex items-center justify-center">
+                <User className="w-4 h-4 text-info" />
               </div>
-              <span className="text-xs text-gray-500 font-medium">Eğitmen</span>
+              <span className="text-xs text-muted-foreground font-medium">Eğitmen</span>
             </div>
-            <p className="text-2xl font-bold text-gray-900">{uniqueInstructors}</p>
-            <p className="text-xs text-gray-400">aktif</p>
+            <p className="text-2xl font-bold text-foreground">{uniqueInstructors}</p>
+            <p className="text-xs text-muted-foreground/70">aktif</p>
           </div>
         </div>
       )}
 
       {/* Boş durum */}
       {reservations.length === 0 && (
-        <div className="bg-white border rounded-xl text-center py-16 text-gray-400 shadow-sm">
+        <div className="bg-card border rounded-xl text-center py-16 text-muted-foreground/70 shadow-sm">
           <Clock className="w-10 h-10 mx-auto mb-3 opacity-30" />
           <p className="font-medium">Bu tarih aralığında rezervasyon bulunamadı</p>
         </div>
@@ -210,15 +210,15 @@ export default async function ReservationsPage({
         <div key={date.toISOString()} className="space-y-3">
           {/* Gün başlığı */}
           <div className="flex items-center gap-3">
-            <div className="flex flex-col items-center justify-center w-12 h-12 bg-gray-900 text-white rounded-xl flex-shrink-0">
+            <div className="flex flex-col items-center justify-center w-12 h-12 bg-secondary text-white rounded-xl flex-shrink-0">
               <span className="text-lg font-bold leading-none">{format(date, "d")}</span>
               <span className="text-[10px] uppercase tracking-wide opacity-70">{format(date, "MMM", { locale: tr })}</span>
             </div>
             <div>
-              <p className="font-semibold text-gray-900">{format(date, "EEEE", { locale: tr })}</p>
-              <p className="text-xs text-gray-400">{items.length} rezervasyon</p>
+              <p className="font-semibold text-foreground">{format(date, "EEEE", { locale: tr })}</p>
+              <p className="text-xs text-muted-foreground/70">{items.length} rezervasyon</p>
             </div>
-            <div className="flex-1 h-px bg-gray-100 ml-2" />
+            <div className="flex-1 h-px bg-muted ml-2" />
           </div>
 
           {/* Kartlar */}
@@ -232,7 +232,7 @@ export default async function ReservationsPage({
               return (
                 <div
                   key={res.id}
-                  className="bg-white border rounded-xl shadow-sm overflow-hidden flex"
+                  className="bg-card border rounded-xl shadow-sm overflow-hidden flex"
                 >
                   {/* Sol renk şeridi (eğitmen rengi) */}
                   <div className="w-1 flex-shrink-0" style={{ backgroundColor: instrColor }} />
@@ -242,24 +242,24 @@ export default async function ReservationsPage({
                       {/* Sol: müşteri + hizmet */}
                       <div className="flex-1 min-w-0">
                         <div className="flex items-center gap-2 flex-wrap">
-                          <span className="font-semibold text-gray-900">
+                          <span className="font-semibold text-foreground">
                             {res.student.firstName} {res.student.lastName}
                           </span>
-                          <span className="text-xs px-2 py-0.5 rounded-full bg-gray-100 text-gray-600 font-medium">
+                          <span className="text-xs px-2 py-0.5 rounded-full bg-muted text-muted-foreground font-medium">
                             {LESSON_TYPES[res.lessonType as keyof typeof LESSON_TYPES] ?? res.lessonType}
                           </span>
                           {res.lesson?.purchase && (
-                            <span className="text-xs px-2 py-0.5 rounded-full bg-blue-50 text-blue-600 font-medium">
+                            <span className="text-xs px-2 py-0.5 rounded-full bg-info/10 text-info font-medium">
                               Paket
                             </span>
                           )}
                         </div>
 
-                        <div className="flex items-center gap-4 mt-2 text-sm text-gray-500 flex-wrap">
+                        <div className="flex items-center gap-4 mt-2 text-sm text-muted-foreground flex-wrap">
                           <span className="flex items-center gap-1.5">
                             <Clock className="w-3.5 h-3.5" />
                             {format(new Date(res.startTime), "HH:mm")} — {format(new Date(res.endTime), "HH:mm")}
-                            <span className="text-gray-400">({hours} saat)</span>
+                            <span className="text-muted-foreground/70">({hours} saat)</span>
                           </span>
                           {res.instructor && (
                             <span className="flex items-center gap-1.5">
@@ -271,7 +271,7 @@ export default async function ReservationsPage({
                             </span>
                           )}
                           {res.notes && (
-                            <span className="text-gray-400 italic text-xs">"{res.notes}"</span>
+                            <span className="text-muted-foreground/70 italic text-xs">"{res.notes}"</span>
                           )}
                         </div>
                       </div>
@@ -283,11 +283,11 @@ export default async function ReservationsPage({
                         </span>
                         {showPrices &&
                           (price ? (
-                            <span className="text-base font-bold text-gray-900">
+                            <span className="text-base font-bold text-foreground">
                               {formatTRY(price.amount, price.currency, rates)}
                             </span>
                           ) : (
-                            <span className="text-sm text-gray-400">—</span>
+                            <span className="text-sm text-muted-foreground/70">—</span>
                           ))}
                       </div>
                     </div>
@@ -301,7 +301,7 @@ export default async function ReservationsPage({
 
       {/* Toplam gelir (aralık görünümünde) */}
       {showPrices && !isSingleDay && totalRevenue > 0 && (
-        <div className="bg-gray-900 text-white rounded-xl p-4 flex items-center justify-between">
+        <div className="bg-secondary text-white rounded-xl p-4 flex items-center justify-between">
           <span className="text-sm font-medium opacity-70">Toplam Tahminî Gelir</span>
           <span className="text-xl font-bold">{formatTRY(totalRevenue, "TRY", rates)}</span>
         </div>

@@ -16,7 +16,7 @@ export function DateNav({ currentDate }: { currentDate: string }) {
     <div className="flex items-center gap-2">
       <button
         onClick={() => router.push(`/dashboard/rezervasyonlar?date=${fmt(prev)}`)}
-        className="border rounded-md px-3 py-1.5 text-sm hover:bg-gray-50"
+        className="border rounded-md px-3 py-1.5 text-sm hover:bg-muted/40"
       >
         ←
       </button>
@@ -28,7 +28,7 @@ export function DateNav({ currentDate }: { currentDate: string }) {
       />
       <button
         onClick={() => router.push(`/dashboard/rezervasyonlar?date=${fmt(next)}`)}
-        className="border rounded-md px-3 py-1.5 text-sm hover:bg-gray-50"
+        className="border rounded-md px-3 py-1.5 text-sm hover:bg-muted/40"
       >
         →
       </button>

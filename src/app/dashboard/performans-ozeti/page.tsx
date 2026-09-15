@@ -257,15 +257,15 @@ export default async function PerformansOzetiPage({
     <div className="space-y-6">
       <div className="flex items-center justify-between flex-wrap gap-3">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900">Performans Özeti</h1>
-          <p className="text-gray-500 text-sm mt-1">Eğitmenlerin ders performansı ve ekipman kiralama gelirleri</p>
+          <h1 className="text-2xl font-bold text-foreground">Performans Özeti</h1>
+          <p className="text-muted-foreground text-sm mt-1">Eğitmenlerin ders performansı ve ekipman kiralama gelirleri</p>
         </div>
         <div className="flex items-center gap-3">
           <div className="flex border rounded-md overflow-hidden">
             <Link
               href={`/dashboard/performans-ozeti?period=gunluk&date=${format(anchorDate, "yyyy-MM-dd")}`}
               className={`px-3 py-1.5 text-sm font-medium transition-colors ${
-                period === "gunluk" ? "bg-blue-600 text-white" : "bg-white text-gray-600 hover:bg-gray-50"
+                period === "gunluk" ? "bg-info text-background" : "bg-card text-muted-foreground hover:bg-muted/40"
               }`}
             >
               Günlük
@@ -273,7 +273,7 @@ export default async function PerformansOzetiPage({
             <Link
               href={`/dashboard/performans-ozeti?period=haftalik&date=${format(anchorDate, "yyyy-MM-dd")}`}
               className={`px-3 py-1.5 text-sm font-medium transition-colors border-l ${
-                period === "haftalik" ? "bg-blue-600 text-white" : "bg-white text-gray-600 hover:bg-gray-50"
+                period === "haftalik" ? "bg-info text-background" : "bg-card text-muted-foreground hover:bg-muted/40"
               }`}
             >
               Haftalık
@@ -287,44 +287,44 @@ export default async function PerformansOzetiPage({
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
         <Card>
           <CardContent className="pt-4 pb-4">
-            <div className="flex items-center gap-2 text-gray-500 text-xs mb-1">
+            <div className="flex items-center gap-2 text-muted-foreground text-xs mb-1">
               <GraduationCap className="w-3.5 h-3.5" /> Toplam Ders
             </div>
-            <p className="text-2xl font-bold text-gray-900">{sessions.length}</p>
+            <p className="text-2xl font-bold text-foreground">{sessions.length}</p>
           </CardContent>
         </Card>
         <Card>
           <CardContent className="pt-4 pb-4">
-            <div className="flex items-center gap-2 text-gray-500 text-xs mb-1">
+            <div className="flex items-center gap-2 text-muted-foreground text-xs mb-1">
               <Users className="w-3.5 h-3.5" /> Aktif Eğitmen
             </div>
-            <p className="text-2xl font-bold text-gray-900">{activeInstructorStats.length}</p>
+            <p className="text-2xl font-bold text-foreground">{activeInstructorStats.length}</p>
           </CardContent>
         </Card>
         <Card>
           <CardContent className="pt-4 pb-4">
-            <div className="flex items-center gap-2 text-gray-500 text-xs mb-1">
+            <div className="flex items-center gap-2 text-muted-foreground text-xs mb-1">
               <Wrench className="w-3.5 h-3.5" /> Toplam Kiralama
             </div>
-            <p className="text-2xl font-bold text-gray-900">{rentals.length}</p>
+            <p className="text-2xl font-bold text-foreground">{rentals.length}</p>
           </CardContent>
         </Card>
-        <Card className="border-green-200 bg-green-50">
+        <Card className="border-success/30 bg-success/10">
           <CardContent className="pt-4 pb-4">
-            <div className="flex items-center gap-2 text-green-700 text-xs mb-1">
+            <div className="flex items-center gap-2 text-success text-xs mb-1">
               <Wallet className="w-3.5 h-3.5" /> Eğitmen Kazancı
             </div>
-            <p className="text-2xl font-bold text-green-700">
+            <p className="text-2xl font-bold text-success">
               {grandEarningsTRY > 0 ? formatMoney(grandEarningsTRY, "TRY") : "—"}
             </p>
           </CardContent>
         </Card>
-        <Card className="border-orange-200 bg-orange-50">
+        <Card className="border-warning/30 bg-warning/10">
           <CardContent className="pt-4 pb-4">
-            <div className="flex items-center gap-2 text-orange-700 text-xs mb-1">
+            <div className="flex items-center gap-2 text-warning text-xs mb-1">
               <Wallet className="w-3.5 h-3.5" /> Kiralama Geliri
             </div>
-            <p className="text-2xl font-bold text-orange-700">
+            <p className="text-2xl font-bold text-warning">
               {grandRentalRevenueTRY > 0 ? formatMoney(grandRentalRevenueTRY, "TRY") : "—"}
             </p>
           </CardContent>
@@ -333,9 +333,9 @@ export default async function PerformansOzetiPage({
 
       {/* Per-instructor breakdown */}
       <div className="space-y-3">
-        <h2 className="text-sm font-semibold text-gray-500 uppercase tracking-wide">Eğitmenler</h2>
+        <h2 className="text-sm font-semibold text-muted-foreground uppercase tracking-wide">Eğitmenler</h2>
         {activeInstructorStats.length === 0 ? (
-          <div className="text-center py-14 text-gray-400 border rounded-lg">
+          <div className="text-center py-14 text-muted-foreground/70 border rounded-lg">
             <GraduationCap className="w-8 h-8 mx-auto mb-2 opacity-50" />
             <p>Bu dönemde ders kaydı yok</p>
           </div>
@@ -353,8 +353,8 @@ export default async function PerformansOzetiPage({
                         {stat.name.charAt(0)}
                       </div>
                       <div>
-                        <p className="font-semibold text-gray-900">{stat.name}</p>
-                        <div className="flex items-center gap-3 text-xs text-gray-500 mt-0.5">
+                        <p className="font-semibold text-foreground">{stat.name}</p>
+                        <div className="flex items-center gap-3 text-xs text-muted-foreground mt-0.5">
                           <span className="flex items-center gap-1">
                             <GraduationCap className="w-3 h-3" /> {stat.sessions.length} ders
                           </span>
@@ -368,7 +368,7 @@ export default async function PerformansOzetiPage({
                     </div>
                     <div className="flex gap-2">
                       {stat.earningsTRY > 0 ? (
-                        <Badge className="bg-green-100 text-green-700 border-green-200">
+                        <Badge className="bg-success/15 text-success border-success/30">
                           {formatMoney(stat.earningsTRY, "TRY")}
                         </Badge>
                       ) : (
@@ -382,7 +382,7 @@ export default async function PerformansOzetiPage({
                     {Object.entries(stat.studentCounts).map(([student, count]) => (
                       <span
                         key={student}
-                        className="text-xs bg-gray-100 text-gray-600 rounded-full px-2.5 py-1"
+                        className="text-xs bg-muted text-muted-foreground rounded-full px-2.5 py-1"
                       >
                         {student} {count > 1 ? `×${count}` : ""}
                       </span>
@@ -393,22 +393,22 @@ export default async function PerformansOzetiPage({
                   <div className="overflow-x-auto border rounded-lg">
                     <table className="w-full text-sm">
                       <thead>
-                        <tr className="border-b bg-gray-50">
-                          <th className="text-left px-3 py-2 font-medium text-gray-600">Tarih & Saat</th>
-                          <th className="text-left px-3 py-2 font-medium text-gray-600">Öğrenci</th>
-                          <th className="text-left px-3 py-2 font-medium text-gray-600">Ders</th>
-                          <th className="text-right px-3 py-2 font-medium text-gray-600">Tutar</th>
+                        <tr className="border-b bg-muted/40">
+                          <th className="text-left px-3 py-2 font-medium text-muted-foreground">Tarih & Saat</th>
+                          <th className="text-left px-3 py-2 font-medium text-muted-foreground">Öğrenci</th>
+                          <th className="text-left px-3 py-2 font-medium text-muted-foreground">Ders</th>
+                          <th className="text-right px-3 py-2 font-medium text-muted-foreground">Tutar</th>
                         </tr>
                       </thead>
                       <tbody className="divide-y">
                         {stat.sessions.map((s, i) => (
-                          <tr key={i} className="hover:bg-gray-50">
-                            <td className="px-3 py-2 text-gray-500 whitespace-nowrap">
+                          <tr key={i} className="hover:bg-muted/40">
+                            <td className="px-3 py-2 text-muted-foreground whitespace-nowrap">
                               {format(new Date(s.date), "d MMM, HH:mm", { locale: tr })}
                             </td>
-                            <td className="px-3 py-2 font-medium text-gray-800">{s.studentName}</td>
-                            <td className="px-3 py-2 text-gray-600">{s.title}</td>
-                            <td className="px-3 py-2 text-right font-semibold text-gray-900">
+                            <td className="px-3 py-2 font-medium text-foreground">{s.studentName}</td>
+                            <td className="px-3 py-2 text-muted-foreground">{s.title}</td>
+                            <td className="px-3 py-2 text-right font-semibold text-foreground">
                               {s.earned && s.amount > 0 ? formatMoney(s.amount, s.currency) : "—"}
                             </td>
                           </tr>
@@ -421,7 +421,7 @@ export default async function PerformansOzetiPage({
             ))}
 
             {emptyInstructorStats.length > 0 && (
-              <p className="text-xs text-gray-400 px-1">
+              <p className="text-xs text-muted-foreground/70 px-1">
                 Bu dönemde dersi olmayan eğitmenler: {emptyInstructorStats.map((s) => s.name).join(", ")}
               </p>
             )}
@@ -431,9 +431,9 @@ export default async function PerformansOzetiPage({
 
       {/* Per-equipment breakdown */}
       <div className="space-y-3">
-        <h2 className="text-sm font-semibold text-gray-500 uppercase tracking-wide">Ekipman Kiralamaları</h2>
+        <h2 className="text-sm font-semibold text-muted-foreground uppercase tracking-wide">Ekipman Kiralamaları</h2>
         {activeEquipmentStats.length === 0 ? (
-          <div className="text-center py-14 text-gray-400 border rounded-lg">
+          <div className="text-center py-14 text-muted-foreground/70 border rounded-lg">
             <Wrench className="w-8 h-8 mx-auto mb-2 opacity-50" />
             <p>Bu dönemde kiralama kaydı yok</p>
           </div>
@@ -444,12 +444,12 @@ export default async function PerformansOzetiPage({
                 <CardContent className="pt-4 pb-4">
                   <div className="flex items-center justify-between flex-wrap gap-3 mb-3">
                     <div className="flex items-center gap-3">
-                      <div className="w-9 h-9 rounded-full bg-orange-100 flex items-center justify-center text-orange-600 flex-shrink-0">
+                      <div className="w-9 h-9 rounded-full bg-warning/15 flex items-center justify-center text-warning flex-shrink-0">
                         <Package className="w-4 h-4" />
                       </div>
                       <div>
-                        <p className="font-semibold text-gray-900">{stat.name}</p>
-                        <div className="flex items-center gap-3 text-xs text-gray-500 mt-0.5">
+                        <p className="font-semibold text-foreground">{stat.name}</p>
+                        <div className="flex items-center gap-3 text-xs text-muted-foreground mt-0.5">
                           <span className="flex items-center gap-1">
                             <Wrench className="w-3 h-3" /> {stat.rentals.length} kiralama
                           </span>
@@ -458,7 +458,7 @@ export default async function PerformansOzetiPage({
                     </div>
                     <div className="flex gap-2">
                       {stat.revenueTRY > 0 ? (
-                        <Badge className="bg-orange-100 text-orange-700 border-orange-200">
+                        <Badge className="bg-warning/15 text-warning border-warning/30">
                           {formatMoney(stat.revenueTRY, "TRY")}
                         </Badge>
                       ) : (
@@ -471,22 +471,22 @@ export default async function PerformansOzetiPage({
                   <div className="overflow-x-auto border rounded-lg">
                     <table className="w-full text-sm">
                       <thead>
-                        <tr className="border-b bg-gray-50">
-                          <th className="text-left px-3 py-2 font-medium text-gray-600">Tarih & Saat</th>
-                          <th className="text-left px-3 py-2 font-medium text-gray-600">Müşteri</th>
-                          <th className="text-left px-3 py-2 font-medium text-gray-600">Hizmet</th>
-                          <th className="text-right px-3 py-2 font-medium text-gray-600">Tutar</th>
+                        <tr className="border-b bg-muted/40">
+                          <th className="text-left px-3 py-2 font-medium text-muted-foreground">Tarih & Saat</th>
+                          <th className="text-left px-3 py-2 font-medium text-muted-foreground">Müşteri</th>
+                          <th className="text-left px-3 py-2 font-medium text-muted-foreground">Hizmet</th>
+                          <th className="text-right px-3 py-2 font-medium text-muted-foreground">Tutar</th>
                         </tr>
                       </thead>
                       <tbody className="divide-y">
                         {stat.rentals.map((r, i) => (
-                          <tr key={i} className="hover:bg-gray-50">
-                            <td className="px-3 py-2 text-gray-500 whitespace-nowrap">
+                          <tr key={i} className="hover:bg-muted/40">
+                            <td className="px-3 py-2 text-muted-foreground whitespace-nowrap">
                               {format(new Date(r.date), "d MMM, HH:mm", { locale: tr })}
                             </td>
-                            <td className="px-3 py-2 font-medium text-gray-800">{r.studentName}</td>
-                            <td className="px-3 py-2 text-gray-600">{r.title}</td>
-                            <td className="px-3 py-2 text-right font-semibold text-gray-900">
+                            <td className="px-3 py-2 font-medium text-foreground">{r.studentName}</td>
+                            <td className="px-3 py-2 text-muted-foreground">{r.title}</td>
+                            <td className="px-3 py-2 text-right font-semibold text-foreground">
                               {r.earned && r.amount > 0 ? formatMoney(r.amount, r.currency) : "—"}
                             </td>
                           </tr>
@@ -499,7 +499,7 @@ export default async function PerformansOzetiPage({
             ))}
 
             {emptyEquipmentStats.length > 0 && (
-              <p className="text-xs text-gray-400 px-1">
+              <p className="text-xs text-muted-foreground/70 px-1">
                 Bu dönemde kiralanmayan ekipmanlar: {emptyEquipmentStats.map((s) => s.name).join(", ")}
               </p>
             )}

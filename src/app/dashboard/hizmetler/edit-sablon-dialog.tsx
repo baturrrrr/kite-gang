@@ -83,7 +83,7 @@ export function EditSablonDialog({
           <input type="hidden" name="fiyatlarJson" value={JSON.stringify(rows)} />
 
           {state.fieldErrors && (
-            <p className="text-sm text-red-500">{Object.values(state.fieldErrors).flat()[0]}</p>
+            <p className="text-sm text-destructive">{Object.values(state.fieldErrors).flat()[0]}</p>
           )}
 
           <div className="space-y-1.5">
@@ -112,7 +112,7 @@ export function EditSablonDialog({
             <select
               name="onlineVisibility"
               defaultValue={sablon.onlineVisibility}
-              className="w-full border rounded-md px-3 py-2 text-sm bg-white"
+              className="w-full border rounded-md px-3 py-2 text-sm bg-card"
             >
               <option value="LISTED">Online listelenir</option>
               <option value="PARTNER_ONLY">Yalnızca Partner Paneli</option>
@@ -137,7 +137,7 @@ export function EditSablonDialog({
           <FiyatRowsEditor rows={rows} onChange={setRows} category={sablon.category} />
 
           <div className="flex gap-2 justify-between">
-            <Button type="button" variant="ghost" className="text-red-500 hover:bg-red-50" onClick={handleDelete}>
+            <Button type="button" variant="ghost" className="text-destructive hover:bg-destructive/10" onClick={handleDelete}>
               Pasife Al
             </Button>
             <div className="flex gap-2">

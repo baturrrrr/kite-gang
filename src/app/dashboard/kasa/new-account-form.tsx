@@ -37,7 +37,7 @@ export function NewAccountForm() {
           <DialogTitle>Yeni Kasa/Banka Hesabı</DialogTitle>
         </DialogHeader>
         <form action={formAction} className="space-y-4">
-          {state.error && <p className="text-sm text-red-500">{state.error}</p>}
+          {state.error && <p className="text-sm text-destructive">{state.error}</p>}
 
           <div className="space-y-1.5">
             <Label>Hesap Adı *</Label>
@@ -45,7 +45,7 @@ export function NewAccountForm() {
           </div>
           <div className="space-y-1.5">
             <Label>Tip</Label>
-            <select name="accountType" className="w-full border rounded-md px-3 py-2 text-sm bg-white">
+            <select name="accountType" className="w-full border rounded-md px-3 py-2 text-sm bg-card">
               <option value="CASH">Nakit</option>
               <option value="BANK">Banka</option>
             </select>

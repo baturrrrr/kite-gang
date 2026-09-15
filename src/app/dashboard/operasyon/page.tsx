@@ -53,48 +53,48 @@ export default async function OperationPage() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-2xl font-bold text-gray-900">Günlük Operasyon</h1>
-        <p className="text-gray-500 text-sm mt-1">
+        <h1 className="text-2xl font-bold text-foreground">Günlük Operasyon</h1>
+        <p className="text-muted-foreground text-sm mt-1">
           {format(new Date(), "d MMMM yyyy, EEEE", { locale: tr })}
         </p>
       </div>
 
       {/* Summary Cards */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-        <Card className="border-blue-200 bg-blue-50">
+        <Card className="border-info/30 bg-info/10">
           <CardContent className="pt-3 pb-3">
             <div className="flex items-center gap-2">
-              <Clock className="w-4 h-4 text-blue-600" />
-              <span className="text-sm text-blue-700 font-medium">Planlandı</span>
+              <Clock className="w-4 h-4 text-info" />
+              <span className="text-sm text-info font-medium">Planlandı</span>
             </div>
-            <p className="text-3xl font-bold text-blue-800 mt-1">{planned.length}</p>
+            <p className="text-3xl font-bold text-info mt-1">{planned.length}</p>
           </CardContent>
         </Card>
-        <Card className="border-yellow-200 bg-yellow-50">
+        <Card className="border-warning/30 bg-warning/10">
           <CardContent className="pt-3 pb-3">
             <div className="flex items-center gap-2">
-              <Waves className="w-4 h-4 text-yellow-600" />
-              <span className="text-sm text-yellow-700 font-medium">Suda</span>
+              <Waves className="w-4 h-4 text-warning" />
+              <span className="text-sm text-warning font-medium">Suda</span>
             </div>
-            <p className="text-3xl font-bold text-yellow-800 mt-1">{checkedIn.length}</p>
+            <p className="text-3xl font-bold text-warning mt-1">{checkedIn.length}</p>
           </CardContent>
         </Card>
-        <Card className="border-green-200 bg-green-50">
+        <Card className="border-success/30 bg-success/10">
           <CardContent className="pt-3 pb-3">
             <div className="flex items-center gap-2">
-              <CheckCircle2 className="w-4 h-4 text-green-600" />
-              <span className="text-sm text-green-700 font-medium">Tamamlandı</span>
+              <CheckCircle2 className="w-4 h-4 text-success" />
+              <span className="text-sm text-success font-medium">Tamamlandı</span>
             </div>
-            <p className="text-3xl font-bold text-green-800 mt-1">{completed.length}</p>
+            <p className="text-3xl font-bold text-success mt-1">{completed.length}</p>
           </CardContent>
         </Card>
         <Card>
           <CardContent className="pt-3 pb-3">
             <div className="flex items-center gap-2">
-              <Users className="w-4 h-4 text-gray-600" />
-              <span className="text-sm text-gray-600 font-medium">Toplam</span>
+              <Users className="w-4 h-4 text-muted-foreground" />
+              <span className="text-sm text-muted-foreground font-medium">Toplam</span>
             </div>
-            <p className="text-3xl font-bold text-gray-900 mt-1">{reservations.length}</p>
+            <p className="text-3xl font-bold text-foreground mt-1">{reservations.length}</p>
           </CardContent>
         </Card>
       </div>
@@ -102,8 +102,8 @@ export default async function OperationPage() {
       {/* Currently Checked In - Most Important */}
       {checkedIn.length > 0 && (
         <div>
-          <h2 className="text-lg font-semibold text-gray-900 mb-3 flex items-center gap-2">
-            <Waves className="w-5 h-5 text-yellow-500" />
+          <h2 className="text-lg font-semibold text-foreground mb-3 flex items-center gap-2">
+            <Waves className="w-5 h-5 text-warning" />
             Şu An Suda ({checkedIn.length})
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
@@ -117,7 +117,7 @@ export default async function OperationPage() {
       {/* Planned */}
       {planned.length > 0 && (
         <div>
-          <h2 className="text-lg font-semibold text-gray-900 mb-3">Planlandı ({planned.length})</h2>
+          <h2 className="text-lg font-semibold text-foreground mb-3">Planlandı ({planned.length})</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
             {planned.map((res) => (
               <ReservationCard key={res.id} res={res} showCheckIn showNoShow={canMarkNoShow} />
@@ -129,7 +129,7 @@ export default async function OperationPage() {
       {/* Completed */}
       {completed.length > 0 && (
         <div>
-          <h2 className="text-lg font-semibold text-gray-900 mb-3 text-gray-500">Tamamlandı ({completed.length})</h2>
+          <h2 className="text-lg font-semibold text-foreground mb-3 text-muted-foreground">Tamamlandı ({completed.length})</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3 opacity-70">
             {completed.map((res) => (
               <ReservationCard key={res.id} res={res} />
@@ -141,7 +141,7 @@ export default async function OperationPage() {
       {/* No-show */}
       {noShows.length > 0 && (
         <div>
-          <h2 className="text-lg font-semibold mb-3 text-gray-500">Gelmedi ({noShows.length})</h2>
+          <h2 className="text-lg font-semibold mb-3 text-muted-foreground">Gelmedi ({noShows.length})</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3 opacity-70">
             {noShows.map((res) => (
               <ReservationCard key={res.id} res={res} />
@@ -151,7 +151,7 @@ export default async function OperationPage() {
       )}
 
       {reservations.length === 0 && (
-        <div className="text-center py-16 text-gray-400">
+        <div className="text-center py-16 text-muted-foreground/70">
           <Clock className="w-10 h-10 mx-auto mb-3 opacity-40" />
           <p className="text-lg">Bugün için planlanmış ders yok</p>
         </div>
@@ -187,11 +187,11 @@ function ReservationCard({
                 className="w-2.5 h-2.5 rounded-full flex-shrink-0"
                 style={{ backgroundColor: res.instructor?.color ?? "#9CA3AF" }}
               />
-              <p className="font-semibold text-gray-900">
+              <p className="font-semibold text-foreground">
                 {res.student.firstName} {res.student.lastName}
               </p>
             </div>
-            <p className="text-xs text-gray-500 mt-0.5 ml-4">
+            <p className="text-xs text-muted-foreground mt-0.5 ml-4">
               {res.instructor?.user.name ?? "Personel atanmadı"}
             </p>
           </div>
@@ -200,7 +200,7 @@ function ReservationCard({
           </Badge>
         </div>
 
-        <div className="text-xs text-gray-500 space-y-1">
+        <div className="text-xs text-muted-foreground space-y-1">
           <p>
             🕐 {format(new Date(res.startTime), "HH:mm")} - {format(new Date(res.endTime), "HH:mm")}
             {" · "}

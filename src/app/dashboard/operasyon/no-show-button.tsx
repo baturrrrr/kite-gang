@@ -47,7 +47,7 @@ export function NoShowButton({
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger
-        render={<Button size="sm" variant="outline" className="w-full border-red-200 text-red-600 hover:bg-red-50" />}
+        render={<Button size="sm" variant="outline" className="w-full border-destructive/30 text-destructive hover:bg-destructive/10" />}
       >
         <UserX className="w-4 h-4 mr-2" />
         Gelmedi
@@ -61,7 +61,7 @@ export function NoShowButton({
           <input type="hidden" name="status" value="NO_SHOW" />
 
           {state.error && (
-            <p className="text-sm text-red-500 bg-red-50 px-3 py-2 rounded">{state.error}</p>
+            <p className="text-sm text-destructive bg-destructive/10 px-3 py-2 rounded">{state.error}</p>
           )}
 
           <div className="space-y-1.5">
@@ -75,7 +75,7 @@ export function NoShowButton({
             />
           </div>
 
-          <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-3 text-xs text-yellow-700">
+          <div className="bg-warning/10 border border-warning/30 rounded-lg p-3 text-xs text-warning">
             {isRental
               ? "Ekipman kiralaması olduğu için paket saati düşülmez."
               : deductedHours > 0
@@ -85,7 +85,7 @@ export function NoShowButton({
 
           <div className="flex gap-2 justify-end">
             <Button type="button" variant="outline" onClick={() => setOpen(false)}>Vazgeç</Button>
-            <Button type="submit" disabled={isPending} className="bg-red-600 hover:bg-red-700 text-white">
+            <Button type="submit" disabled={isPending} className="bg-destructive hover:bg-destructive text-background">
               {isPending ? "İşleniyor..." : "Gelmedi Olarak İşaretle"}
             </Button>
           </div>

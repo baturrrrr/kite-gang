@@ -14,10 +14,10 @@ import { NewAccountForm } from "./new-account-form";
 import { NewGelirForm } from "./new-gelir-form";
 
 const METHOD_BADGE: Record<string, string> = {
-  CASH: "bg-green-100 text-green-700 border-green-200",
-  BANK_TRANSFER: "bg-blue-100 text-blue-700 border-blue-200",
-  CREDIT_CARD: "bg-purple-100 text-purple-700 border-purple-200",
-  OTHER: "bg-gray-100 text-gray-700 border-gray-200",
+  CASH: "bg-success/15 text-success border-success/30",
+  BANK_TRANSFER: "bg-info/15 text-info border-info/30",
+  CREDIT_CARD: "bg-info/15 text-info border-info/30",
+  OTHER: "bg-muted text-foreground/85 border-border",
 };
 
 export default async function KasaPage({
@@ -106,7 +106,7 @@ export default async function KasaPage({
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-bold text-gray-900">Kasa & Muhasebe</h1>
+        <h1 className="text-2xl font-bold text-foreground">Kasa & Muhasebe</h1>
         <div className="flex gap-2">
           <NewAccountForm />
           <NewGelirForm cashAccounts={cashAccounts} />
@@ -116,33 +116,33 @@ export default async function KasaPage({
 
       {/* Monthly Summary */}
       <div className="grid grid-cols-3 gap-4">
-        <Card className="border-green-200 bg-green-50">
+        <Card className="border-success/30 bg-success/10">
           <CardContent className="pt-4 pb-4">
-            <div className="flex items-center gap-2 text-green-700 text-xs mb-1">
+            <div className="flex items-center gap-2 text-success text-xs mb-1">
               <TrendingUp className="w-3.5 h-3.5" /> Bu Ay Gelir
             </div>
-            <p className="text-2xl font-bold text-green-700">{formatMoney(thisMonthIncome, "TRY")}</p>
-            <p className="text-xs text-green-600 mt-0.5">{format(now, "MMMM yyyy", { locale: tr })}</p>
+            <p className="text-2xl font-bold text-success">{formatMoney(thisMonthIncome, "TRY")}</p>
+            <p className="text-xs text-success mt-0.5">{format(now, "MMMM yyyy", { locale: tr })}</p>
           </CardContent>
         </Card>
-        <Card className="border-red-200 bg-red-50">
+        <Card className="border-destructive/30 bg-destructive/10">
           <CardContent className="pt-4 pb-4">
-            <div className="flex items-center gap-2 text-red-700 text-xs mb-1">
+            <div className="flex items-center gap-2 text-destructive text-xs mb-1">
               <TrendingDown className="w-3.5 h-3.5" /> Bu Ay Gider
             </div>
-            <p className="text-2xl font-bold text-red-700">{formatMoney(thisMonthExpense, "TRY")}</p>
-            <p className="text-xs text-red-600 mt-0.5">{thisMonthExpenseCount} gider kalemi</p>
+            <p className="text-2xl font-bold text-destructive">{formatMoney(thisMonthExpense, "TRY")}</p>
+            <p className="text-xs text-destructive mt-0.5">{thisMonthExpenseCount} gider kalemi</p>
           </CardContent>
         </Card>
-        <Card className={thisMonthNet >= 0 ? "border-blue-200 bg-blue-50" : "border-red-200 bg-red-50"}>
+        <Card className={thisMonthNet >= 0 ? "border-info/30 bg-info/10" : "border-destructive/30 bg-destructive/10"}>
           <CardContent className="pt-4 pb-4">
-            <div className="flex items-center gap-2 text-gray-600 text-xs mb-1">
+            <div className="flex items-center gap-2 text-muted-foreground text-xs mb-1">
               <Wallet className="w-3.5 h-3.5" /> Net (Bu Ay)
             </div>
-            <p className={`text-2xl font-bold ${thisMonthNet >= 0 ? "text-blue-700" : "text-red-700"}`}>
+            <p className={`text-2xl font-bold ${thisMonthNet >= 0 ? "text-info" : "text-destructive"}`}>
               {thisMonthNet >= 0 ? "+" : ""}{formatMoney(thisMonthNet, "TRY")}
             </p>
-            <p className="text-xs text-gray-500 mt-0.5">Gelir - Gider</p>
+            <p className="text-xs text-muted-foreground mt-0.5">Gelir - Gider</p>
           </CardContent>
         </Card>
       </div>
@@ -150,16 +150,16 @@ export default async function KasaPage({
       {/* Cash Account Balances */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         {cashAccounts.map((acc) => (
-          <Card key={acc.id} className={acc.balance < 0 ? "border-red-200 bg-red-50" : ""}>
+          <Card key={acc.id} className={acc.balance < 0 ? "border-destructive/30 bg-destructive/10" : ""}>
             <CardContent className="pt-4 pb-4">
               <div className="flex items-center gap-2 mb-1">
-                <Wallet className={`w-4 h-4 ${acc.accountType === "CASH" ? "text-green-600" : "text-blue-600"}`} />
-                <span className="text-sm font-medium text-gray-700 truncate">{acc.name}</span>
+                <Wallet className={`w-4 h-4 ${acc.accountType === "CASH" ? "text-success" : "text-info"}`} />
+                <span className="text-sm font-medium text-foreground/85 truncate">{acc.name}</span>
                 <Badge variant="outline" className="text-xs ml-auto flex-shrink-0">
                   {acc.accountType === "CASH" ? "Nakit" : "Banka"}
                 </Badge>
               </div>
-              <p className={`text-2xl font-bold ${acc.balance < 0 ? "text-red-600" : "text-gray-900"}`}>
+              <p className={`text-2xl font-bold ${acc.balance < 0 ? "text-destructive" : "text-foreground"}`}>
                 {formatMoney(acc.balance, acc.currency)}
               </p>
             </CardContent>
@@ -167,7 +167,7 @@ export default async function KasaPage({
         ))}
         {cashAccounts.length === 0 && (
           <Card className="col-span-full border-dashed">
-            <CardContent className="text-center py-8 text-gray-400">
+            <CardContent className="text-center py-8 text-muted-foreground/70">
               Henüz kasa hesabı oluşturulmadı. Yukarıdan ekleyin.
             </CardContent>
           </Card>
@@ -186,8 +186,8 @@ export default async function KasaPage({
             href={`?tab=${t.key}`}
             className={`px-4 py-2 text-sm font-medium border-b-2 transition-colors ${
               tab === t.key
-                ? "border-blue-600 text-blue-600"
-                : "border-transparent text-gray-500 hover:text-gray-700"
+                ? "border-info/60 text-info"
+                : "border-transparent text-muted-foreground hover:text-foreground/85"
             }`}
           >
             {t.label}
@@ -205,20 +205,20 @@ export default async function KasaPage({
             <div className="overflow-x-auto">
               <table className="w-full text-sm">
                 <thead>
-                  <tr className="border-b bg-gray-50">
-                    <th className="text-left px-4 py-2 font-medium text-gray-500 w-12">#</th>
-                    <th className="text-left px-4 py-2 font-medium text-gray-600">Tarih</th>
-                    <th className="text-left px-4 py-2 font-medium text-gray-600">Kategori</th>
-                    <th className="text-left px-4 py-2 font-medium text-gray-600">Açıklama</th>
-                    <th className="text-left px-4 py-2 font-medium text-gray-600">Yöntem</th>
-                    <th className="text-right px-4 py-2 font-medium text-gray-600">Tutar</th>
+                  <tr className="border-b bg-muted/40">
+                    <th className="text-left px-4 py-2 font-medium text-muted-foreground w-12">#</th>
+                    <th className="text-left px-4 py-2 font-medium text-muted-foreground">Tarih</th>
+                    <th className="text-left px-4 py-2 font-medium text-muted-foreground">Kategori</th>
+                    <th className="text-left px-4 py-2 font-medium text-muted-foreground">Açıklama</th>
+                    <th className="text-left px-4 py-2 font-medium text-muted-foreground">Yöntem</th>
+                    <th className="text-right px-4 py-2 font-medium text-muted-foreground">Tutar</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y">
                   {recentExpenses.map((exp, i) => (
-                    <tr key={exp.id} className="hover:bg-gray-50">
-                      <td className="px-4 py-2.5 text-gray-400 text-xs">{recentExpenses.length - i}</td>
-                      <td className="px-4 py-2.5 text-gray-500 whitespace-nowrap">
+                    <tr key={exp.id} className="hover:bg-muted/40">
+                      <td className="px-4 py-2.5 text-muted-foreground/70 text-xs">{recentExpenses.length - i}</td>
+                      <td className="px-4 py-2.5 text-muted-foreground whitespace-nowrap">
                         {format(new Date(exp.expenseDate), "d MMM yyyy", { locale: tr })}
                       </td>
                       <td className="px-4 py-2.5">
@@ -226,13 +226,13 @@ export default async function KasaPage({
                           {EXPENSE_CATEGORIES[exp.category as keyof typeof EXPENSE_CATEGORIES]}
                         </Badge>
                       </td>
-                      <td className="px-4 py-2.5 text-gray-700">{exp.description}</td>
+                      <td className="px-4 py-2.5 text-foreground/85">{exp.description}</td>
                       <td className="px-4 py-2.5">
                         <Badge variant="outline" className={`text-xs ${METHOD_BADGE[exp.method] ?? ""}`}>
                           {PAYMENT_METHODS[exp.method as keyof typeof PAYMENT_METHODS]}
                         </Badge>
                       </td>
-                      <td className="px-4 py-2.5 text-right font-semibold text-red-600">
+                      <td className="px-4 py-2.5 text-right font-semibold text-destructive">
                         -{formatMoney(exp.amount, exp.currency)}
                       </td>
                     </tr>
@@ -254,35 +254,35 @@ export default async function KasaPage({
             <div className="overflow-x-auto">
               <table className="w-full text-sm">
                 <thead>
-                  <tr className="border-b bg-gray-50">
-                    <th className="text-left px-4 py-2 font-medium text-gray-500 w-12">#</th>
-                    <th className="text-left px-4 py-2 font-medium text-gray-600">Tarih</th>
-                    <th className="text-left px-4 py-2 font-medium text-gray-600">Müşteri / Başlık</th>
-                    <th className="text-left px-4 py-2 font-medium text-gray-600">Açıklama</th>
-                    <th className="text-left px-4 py-2 font-medium text-gray-600">Yöntem</th>
-                    <th className="text-right px-4 py-2 font-medium text-gray-600">Tutar</th>
+                  <tr className="border-b bg-muted/40">
+                    <th className="text-left px-4 py-2 font-medium text-muted-foreground w-12">#</th>
+                    <th className="text-left px-4 py-2 font-medium text-muted-foreground">Tarih</th>
+                    <th className="text-left px-4 py-2 font-medium text-muted-foreground">Müşteri / Başlık</th>
+                    <th className="text-left px-4 py-2 font-medium text-muted-foreground">Açıklama</th>
+                    <th className="text-left px-4 py-2 font-medium text-muted-foreground">Yöntem</th>
+                    <th className="text-right px-4 py-2 font-medium text-muted-foreground">Tutar</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y">
                   {recentPayments.map((pay, i) => (
-                    <tr key={pay.id} className="hover:bg-gray-50">
-                      <td className="px-4 py-2.5 text-gray-400 text-xs">{recentPayments.length - i}</td>
-                      <td className="px-4 py-2.5 text-gray-500 whitespace-nowrap">
+                    <tr key={pay.id} className="hover:bg-muted/40">
+                      <td className="px-4 py-2.5 text-muted-foreground/70 text-xs">{recentPayments.length - i}</td>
+                      <td className="px-4 py-2.5 text-muted-foreground whitespace-nowrap">
                         {format(new Date(pay.recordedAt), "d MMM yyyy", { locale: tr })}
                       </td>
                       <td className="px-4 py-2.5 font-medium">
                         {pay.student ? `${pay.student.firstName} ${pay.student.lastName}` : "Manuel Gelir"}
                       </td>
-                      <td className="px-4 py-2.5 text-gray-600">{pay.description ?? "—"}</td>
+                      <td className="px-4 py-2.5 text-muted-foreground">{pay.description ?? "—"}</td>
                       <td className="px-4 py-2.5">
                         <Badge variant="outline" className={`text-xs ${METHOD_BADGE[pay.method] ?? ""}`}>
                           {PAYMENT_METHODS[pay.method as keyof typeof PAYMENT_METHODS]}
                         </Badge>
                       </td>
-                      <td className="px-4 py-2.5 text-right font-semibold text-green-600">
+                      <td className="px-4 py-2.5 text-right font-semibold text-success">
                         +{formatMoney(pay.kasaAmount ?? pay.amount, pay.currency)}
                         {pay.kasaAmount != null && pay.kasaAmount < pay.amount && (
-                          <div className="text-xs font-normal text-amber-600">
+                          <div className="text-xs font-normal text-warning">
                             {formatMoney(pay.amount, pay.currency)} tahsilat · eğitmen payı düşüldü
                           </div>
                         )}
@@ -303,14 +303,14 @@ export default async function KasaPage({
             <div className="overflow-x-auto">
               <table className="w-full text-sm">
                 <thead>
-                  <tr className="border-b bg-gray-50">
-                    <th className="text-left px-4 py-3 font-medium text-gray-500 w-12">#</th>
-                    <th className="text-left px-4 py-3 font-medium text-gray-600">Tarih</th>
-                    <th className="text-left px-4 py-3 font-medium text-gray-600">Tür</th>
-                    <th className="text-left px-4 py-3 font-medium text-gray-600">Başlık</th>
-                    <th className="text-left px-4 py-3 font-medium text-gray-600">Açıklama</th>
-                    <th className="text-left px-4 py-3 font-medium text-gray-600">Yöntem</th>
-                    <th className="text-right px-4 py-3 font-medium text-gray-600">Tutar</th>
+                  <tr className="border-b bg-muted/40">
+                    <th className="text-left px-4 py-3 font-medium text-muted-foreground w-12">#</th>
+                    <th className="text-left px-4 py-3 font-medium text-muted-foreground">Tarih</th>
+                    <th className="text-left px-4 py-3 font-medium text-muted-foreground">Tür</th>
+                    <th className="text-left px-4 py-3 font-medium text-muted-foreground">Başlık</th>
+                    <th className="text-left px-4 py-3 font-medium text-muted-foreground">Açıklama</th>
+                    <th className="text-left px-4 py-3 font-medium text-muted-foreground">Yöntem</th>
+                    <th className="text-right px-4 py-3 font-medium text-muted-foreground">Tutar</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y">
@@ -318,24 +318,24 @@ export default async function KasaPage({
                     if (entry.type === "expense") {
                       const e = entry.item as typeof recentExpenses[0];
                       return (
-                        <tr key={`e-${e.id}`} className="hover:bg-gray-50">
-                          <td className="px-4 py-2.5 text-gray-400 text-xs">{entry.displayId}</td>
-                          <td className="px-4 py-2.5 text-gray-500 whitespace-nowrap">
+                        <tr key={`e-${e.id}`} className="hover:bg-muted/40">
+                          <td className="px-4 py-2.5 text-muted-foreground/70 text-xs">{entry.displayId}</td>
+                          <td className="px-4 py-2.5 text-muted-foreground whitespace-nowrap">
                             {format(new Date(e.expenseDate), "d MMM yyyy", { locale: tr })}
                           </td>
                           <td className="px-4 py-2.5">
-                            <Badge variant="outline" className="bg-red-100 text-red-700 border-red-200 text-xs">Gider</Badge>
+                            <Badge variant="outline" className="bg-destructive/15 text-destructive border-destructive/30 text-xs">Gider</Badge>
                           </td>
-                          <td className="px-4 py-2.5 font-medium text-gray-900">
+                          <td className="px-4 py-2.5 font-medium text-foreground">
                             {EXPENSE_CATEGORIES[e.category as keyof typeof EXPENSE_CATEGORIES]}
                           </td>
-                          <td className="px-4 py-2.5 text-gray-600">{e.description}</td>
+                          <td className="px-4 py-2.5 text-muted-foreground">{e.description}</td>
                           <td className="px-4 py-2.5">
                             <Badge variant="outline" className={`text-xs ${METHOD_BADGE[e.method] ?? ""}`}>
                               {PAYMENT_METHODS[e.method as keyof typeof PAYMENT_METHODS]}
                             </Badge>
                           </td>
-                          <td className="px-4 py-2.5 text-right font-semibold text-red-600">
+                          <td className="px-4 py-2.5 text-right font-semibold text-destructive">
                             -{formatMoney(e.amount, e.currency)}
                           </td>
                         </tr>
@@ -343,27 +343,27 @@ export default async function KasaPage({
                     } else if (entry.type === "payment") {
                       const p = entry.item as typeof recentPayments[0];
                       return (
-                        <tr key={`p-${p.id}`} className="hover:bg-gray-50">
-                          <td className="px-4 py-2.5 text-gray-400 text-xs">{entry.displayId}</td>
-                          <td className="px-4 py-2.5 text-gray-500 whitespace-nowrap">
+                        <tr key={`p-${p.id}`} className="hover:bg-muted/40">
+                          <td className="px-4 py-2.5 text-muted-foreground/70 text-xs">{entry.displayId}</td>
+                          <td className="px-4 py-2.5 text-muted-foreground whitespace-nowrap">
                             {format(new Date(p.recordedAt), "d MMM yyyy", { locale: tr })}
                           </td>
                           <td className="px-4 py-2.5">
-                            <Badge variant="outline" className="bg-green-100 text-green-700 border-green-200 text-xs">Gelir</Badge>
+                            <Badge variant="outline" className="bg-success/15 text-success border-success/30 text-xs">Gelir</Badge>
                           </td>
-                          <td className="px-4 py-2.5 font-medium text-gray-900">
+                          <td className="px-4 py-2.5 font-medium text-foreground">
                             {p.student ? `${p.student.firstName} ${p.student.lastName}` : "Manuel Gelir"}
                           </td>
-                          <td className="px-4 py-2.5 text-gray-600">{p.description ?? "—"}</td>
+                          <td className="px-4 py-2.5 text-muted-foreground">{p.description ?? "—"}</td>
                           <td className="px-4 py-2.5">
                             <Badge variant="outline" className={`text-xs ${METHOD_BADGE[p.method] ?? ""}`}>
                               {PAYMENT_METHODS[p.method as keyof typeof PAYMENT_METHODS]}
                             </Badge>
                           </td>
-                          <td className="px-4 py-2.5 text-right font-semibold text-green-600">
+                          <td className="px-4 py-2.5 text-right font-semibold text-success">
                             +{formatMoney(p.kasaAmount ?? p.amount, p.currency)}
                             {p.kasaAmount != null && p.kasaAmount < p.amount && (
-                              <div className="text-xs font-normal text-amber-600">
+                              <div className="text-xs font-normal text-warning">
                                 {formatMoney(p.amount, p.currency)} tahsilat · eğitmen payı düşüldü
                               </div>
                             )}
@@ -373,22 +373,22 @@ export default async function KasaPage({
                     } else {
                       const p = entry.item as typeof recentPayouts[0];
                       return (
-                        <tr key={`o-${p.id}`} className="hover:bg-gray-50">
-                          <td className="px-4 py-2.5 text-gray-400 text-xs">{entry.displayId}</td>
-                          <td className="px-4 py-2.5 text-gray-500 whitespace-nowrap">
+                        <tr key={`o-${p.id}`} className="hover:bg-muted/40">
+                          <td className="px-4 py-2.5 text-muted-foreground/70 text-xs">{entry.displayId}</td>
+                          <td className="px-4 py-2.5 text-muted-foreground whitespace-nowrap">
                             {format(new Date(p.paidAt), "d MMM yyyy", { locale: tr })}
                           </td>
                           <td className="px-4 py-2.5">
-                            <Badge variant="outline" className="bg-orange-100 text-orange-700 border-orange-200 text-xs">Hakediş</Badge>
+                            <Badge variant="outline" className="bg-warning/15 text-warning border-warning/30 text-xs">Hakediş</Badge>
                           </td>
-                          <td className="px-4 py-2.5 font-medium text-gray-900">{p.instructor.user.name}</td>
-                          <td className="px-4 py-2.5 text-gray-600">{p.notes ?? "Hakediş ödemesi"}</td>
+                          <td className="px-4 py-2.5 font-medium text-foreground">{p.instructor.user.name}</td>
+                          <td className="px-4 py-2.5 text-muted-foreground">{p.notes ?? "Hakediş ödemesi"}</td>
                           <td className="px-4 py-2.5">
                             <Badge variant="outline" className={`text-xs ${METHOD_BADGE[p.method] ?? ""}`}>
                               {PAYMENT_METHODS[p.method as keyof typeof PAYMENT_METHODS]}
                             </Badge>
                           </td>
-                          <td className="px-4 py-2.5 text-right font-semibold text-red-600">
+                          <td className="px-4 py-2.5 text-right font-semibold text-destructive">
                             -{formatMoney(p.amount, p.currency)}
                           </td>
                         </tr>

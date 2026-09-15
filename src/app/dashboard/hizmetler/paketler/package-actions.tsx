@@ -28,7 +28,7 @@ export function PackageActions({ pkg }: { pkg: Pkg }) {
       <EditPackageDialog pkg={pkg} />
       <button
         onClick={handleDeactivate}
-        className="text-gray-400 hover:text-red-500 transition-colors"
+        className="text-muted-foreground/70 hover:text-destructive transition-colors"
         title="Pasife Al"
       >
         <Trash2 className="w-4 h-4" />

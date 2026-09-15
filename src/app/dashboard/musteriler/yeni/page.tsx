@@ -16,10 +16,10 @@ export default async function NewStudentPage() {
             <ChevronLeft className="w-4 h-4" />
           </Button>
         </Link>
-        <div className="w-9 h-9 rounded-lg bg-gray-100 flex items-center justify-center flex-shrink-0">
-          <UserPlus className="w-4.5 h-4.5 text-gray-700" />
+        <div className="w-9 h-9 rounded-lg bg-muted flex items-center justify-center flex-shrink-0">
+          <UserPlus className="w-4.5 h-4.5 text-foreground/85" />
         </div>
-        <h1 className="text-xl font-bold text-gray-900">Müşteri Ekle</h1>
+        <h1 className="text-xl font-bold text-foreground">Müşteri Ekle</h1>
       </div>
       <StudentForm action={createStudent} />
     </div>

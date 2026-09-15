@@ -43,7 +43,7 @@ export function NewGelirForm({ cashAccounts = [] }: { cashAccounts?: CashAccount
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger render={<Button variant="outline" className="border-green-200 text-green-700 hover:bg-green-50" />}>
+      <DialogTrigger render={<Button variant="outline" className="border-success/30 text-success hover:bg-success/10" />}>
         <TrendingUp className="w-4 h-4 mr-2" />
         Gelir Ekle
       </DialogTrigger>
@@ -53,7 +53,7 @@ export function NewGelirForm({ cashAccounts = [] }: { cashAccounts?: CashAccount
         </DialogHeader>
         <form action={formAction} className="space-y-4">
           {state.fieldErrors && (
-            <p className="text-sm text-red-500">{Object.values(state.fieldErrors).flat()[0]}</p>
+            <p className="text-sm text-destructive">{Object.values(state.fieldErrors).flat()[0]}</p>
           )}
 
           <div className="space-y-1.5">
@@ -68,7 +68,7 @@ export function NewGelirForm({ cashAccounts = [] }: { cashAccounts?: CashAccount
             </div>
             <div className="space-y-1.5">
               <Label>Para Birimi</Label>
-              <select name="currency" className="w-full border rounded-md px-3 py-2 text-sm bg-white" value={currency} onChange={(e) => handleCurrencyChange(e.target.value)}>
+              <select name="currency" className="w-full border rounded-md px-3 py-2 text-sm bg-card" value={currency} onChange={(e) => handleCurrencyChange(e.target.value)}>
                 {CURRENCIES.map((c) => <option key={c} value={c}>{c}</option>)}
               </select>
             </div>
@@ -76,7 +76,7 @@ export function NewGelirForm({ cashAccounts = [] }: { cashAccounts?: CashAccount
 
           <div className="space-y-1.5">
             <Label>Ödeme Yöntemi</Label>
-            <select name="method" className="w-full border rounded-md px-3 py-2 text-sm bg-white">
+            <select name="method" className="w-full border rounded-md px-3 py-2 text-sm bg-card">
               {Object.entries(PAYMENT_METHODS).map(([v, l]) => (
                 <option key={v} value={v}>{l}</option>
               ))}
@@ -86,7 +86,7 @@ export function NewGelirForm({ cashAccounts = [] }: { cashAccounts?: CashAccount
           {cashAccounts.length > 0 && (
             <div className="space-y-1.5">
               <Label>Kasa Hesabı *</Label>
-              <select name="cashAccountId" className="w-full border rounded-md px-3 py-2 text-sm bg-white" required>
+              <select name="cashAccountId" className="w-full border rounded-md px-3 py-2 text-sm bg-card" required>
                 {cashAccounts.map((acc) => (
                   <option key={acc.id} value={acc.id}>
                     {acc.name} ({acc.currency})
@@ -98,7 +98,7 @@ export function NewGelirForm({ cashAccounts = [] }: { cashAccounts?: CashAccount
 
           <div className="flex gap-2 justify-end">
             <Button type="button" variant="outline" onClick={() => setOpen(false)}>İptal</Button>
-            <Button type="submit" disabled={isPending} className="bg-green-600 hover:bg-green-700 text-white">
+            <Button type="submit" disabled={isPending} className="bg-success hover:bg-success text-background">
               {isPending ? "Kaydediliyor..." : "Gelir Kaydet"}
             </Button>
           </div>

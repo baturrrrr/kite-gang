@@ -39,11 +39,11 @@ export function NewEquipmentForm() {
           <DialogTitle>Yeni Ekipman</DialogTitle>
         </DialogHeader>
         <form action={formAction} className="space-y-4">
-          {state.error && <p className="text-sm text-red-500">{state.error}</p>}
+          {state.error && <p className="text-sm text-destructive">{state.error}</p>}
 
           <div className="space-y-1.5">
             <Label>Tip *</Label>
-            <select name="type" className="w-full border rounded-md px-3 py-2 text-sm bg-white" required>
+            <select name="type" className="w-full border rounded-md px-3 py-2 text-sm bg-card" required>
               {Object.entries(EQUIPMENT_TYPES).map(([v, l]) => (
                 <option key={v} value={v}>{l}</option>
               ))}

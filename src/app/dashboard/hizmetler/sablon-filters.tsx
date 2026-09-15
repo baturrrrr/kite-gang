@@ -56,7 +56,7 @@ export function SablonFilters({
   return (
     <div className="flex gap-3 flex-wrap items-center justify-between">
       <div className="relative flex-1 min-w-48 max-w-sm">
-        <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+        <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground/70" />
         <Input
           value={searchValue}
           onChange={(e) => setSearchValue(e.target.value)}
@@ -67,11 +67,11 @@ export function SablonFilters({
 
       <div className="flex items-center gap-2">
         <div className="flex items-center gap-1.5 text-sm">
-          <span className="text-gray-500">Kayıtlar</span>
+          <span className="text-muted-foreground">Kayıtlar</span>
           <select
             value={aktif}
             onChange={(e) => pushParams({ aktif: e.target.value })}
-            className="border rounded-md px-2.5 py-1.5 text-sm bg-white font-medium text-gray-700"
+            className="border rounded-md px-2.5 py-1.5 text-sm bg-card font-medium text-foreground/85"
           >
             {AKTIF_OPTIONS.map((o) => (
               <option key={o.value} value={o.value}>{o.label}</option>
@@ -79,11 +79,11 @@ export function SablonFilters({
           </select>
         </div>
         <div className="flex items-center gap-1.5 text-sm">
-          <span className="text-gray-500">Görünürlük</span>
+          <span className="text-muted-foreground">Görünürlük</span>
           <select
             value={gorunurluk}
             onChange={(e) => pushParams({ gorunurluk: e.target.value })}
-            className="border rounded-md px-2.5 py-1.5 text-sm bg-white font-medium text-gray-700"
+            className="border rounded-md px-2.5 py-1.5 text-sm bg-card font-medium text-foreground/85"
           >
             {GORUNURLUK_OPTIONS.map((o) => (
               <option key={o.value} value={o.value}>{o.label}</option>

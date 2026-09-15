@@ -33,7 +33,7 @@ export function CheckInButton({ reservationId, purchaseId, plannedHours }: Check
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger render={<Button size="sm" className="w-full bg-yellow-500 hover:bg-yellow-600 text-white" />}>
+      <DialogTrigger render={<Button size="sm" className="w-full bg-warning hover:bg-warning text-background" />}>
         <LogIn className="w-4 h-4 mr-2" />
         Check-in Yap
       </DialogTrigger>
@@ -46,14 +46,14 @@ export function CheckInButton({ reservationId, purchaseId, plannedHours }: Check
           {purchaseId && <input type="hidden" name="purchaseId" value={purchaseId} />}
 
           {state.error && (
-            <p className="text-sm text-red-500 bg-red-50 px-3 py-2 rounded">{state.error}</p>
+            <p className="text-sm text-destructive bg-destructive/10 px-3 py-2 rounded">{state.error}</p>
           )}
 
           <p className="text-sm text-muted-foreground">Bu rezervasyon için check-in yapmak istediğinize emin misiniz?</p>
 
           <div className="flex gap-2 justify-end">
             <Button type="button" variant="outline" onClick={() => setOpen(false)}>İptal</Button>
-            <Button type="submit" disabled={isPending} className="bg-yellow-500 hover:bg-yellow-600">
+            <Button type="submit" disabled={isPending} className="bg-warning hover:bg-warning">
               <CheckCircle className="w-4 h-4 mr-2" />
               {isPending ? "İşleniyor..." : "Onayla"}
             </Button>

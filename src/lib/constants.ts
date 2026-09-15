@@ -111,10 +111,10 @@ export const ROLE_LABELS = {
 } as const;
 
 export const STATUS_COLORS: Record<string, string> = {
-  PLANNED: "bg-blue-100 text-blue-800",
-  CHECKED_IN: "bg-yellow-100 text-yellow-800",
-  COMPLETED: "bg-green-100 text-green-800",
-  CANCELLED: "bg-gray-100 text-gray-800",
-  NO_SHOW: "bg-red-100 text-red-800",
-  WIND_CANCELLED: "bg-purple-100 text-purple-800",
+  PLANNED: "bg-info/15 text-info",
+  CHECKED_IN: "bg-warning/15 text-warning",
+  COMPLETED: "bg-success/15 text-success",
+  CANCELLED: "bg-muted text-foreground",
+  NO_SHOW: "bg-destructive/15 text-destructive",
+  WIND_CANCELLED: "bg-info/15 text-info",
 };

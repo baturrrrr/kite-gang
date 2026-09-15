@@ -38,10 +38,10 @@ type HizmetData = {
 };
 
 const STATUS_STYLE: Record<string, string> = {
-  BEKLIYOR:   "bg-yellow-100 text-yellow-700 border-yellow-200",
-  DEVAM:      "bg-blue-100 text-blue-700 border-blue-200",
-  TAMAMLANDI: "bg-green-100 text-green-700 border-green-200",
-  IPTAL:      "bg-red-100 text-red-500 border-red-200",
+  BEKLIYOR:   "bg-warning/15 text-warning border-warning/30",
+  DEVAM:      "bg-info/15 text-info border-info/30",
+  TAMAMLANDI: "bg-success/15 text-success border-success/30",
+  IPTAL:      "bg-destructive/15 text-destructive border-destructive/30",
 };
 const STATUS_LABEL: Record<string, string> = {
   BEKLIYOR: "Bekliyor",
@@ -157,7 +157,7 @@ export function HizmetDetailDialog({
           cursor: "pointer",
           transition: "background 0.1s",
         }}
-        className="hover:bg-gray-50 last:border-0"
+        className="hover:bg-muted/40 last:border-0"
       >
         {/* İkon */}
         <div style={{ width: 32, height: 32, borderRadius: 8, background: "#f3f4f6", display: "flex", alignItems: "center", justifyContent: "center", color: "#6b7280", flexShrink: 0 }}>
@@ -405,13 +405,13 @@ export function HizmetDetailDialog({
                     Müşteriye Yansıtılan
                   </p>
                   <div className="space-y-1.5">
-                    <Label className="text-xs text-gray-500">Başlık</Label>
+                    <Label className="text-xs text-muted-foreground">Başlık</Label>
                     <Input name="title" defaultValue={hizmet.title} required className="text-sm" />
                   </div>
 
                   {/* Saat sayısı */}
                   <div className="space-y-1.5">
-                    <Label className="text-xs text-gray-500">Saat Sayısı</Label>
+                    <Label className="text-xs text-muted-foreground">Saat Sayısı</Label>
                     <Input
                       type="number"
                       step="0.5"
@@ -426,7 +426,7 @@ export function HizmetDetailDialog({
                   {/* Saatlik ücret + para birimi */}
                   <div className="grid grid-cols-3 gap-3">
                     <div className="col-span-2 space-y-1.5">
-                      <Label className="text-xs text-gray-500">Saatlik Fiyat</Label>
+                      <Label className="text-xs text-muted-foreground">Saatlik Fiyat</Label>
                       <Input
                         type="number"
                         step="0.01"
@@ -438,8 +438,8 @@ export function HizmetDetailDialog({
                       />
                     </div>
                     <div className="space-y-1.5">
-                      <Label className="text-xs text-gray-500">Para Birimi</Label>
-                      <select name="currency" defaultValue={hizmet.currency} className="w-full border rounded-md px-3 py-2 text-sm bg-white">
+                      <Label className="text-xs text-muted-foreground">Para Birimi</Label>
+                      <select name="currency" defaultValue={hizmet.currency} className="w-full border rounded-md px-3 py-2 text-sm bg-card">
                         {CURRENCIES.map((c) => <option key={c} value={c}>{c}</option>)}
                       </select>
                     </div>
@@ -466,8 +466,8 @@ export function HizmetDetailDialog({
                     Personel Hakedişi
                   </p>
                   <div className="space-y-1.5">
-                    <Label className="text-xs text-gray-500">Personel</Label>
-                    <select name="instructorId" defaultValue={hizmet.instructor?.id ?? ""} className="w-full border rounded-md px-3 py-2 text-sm bg-white">
+                    <Label className="text-xs text-muted-foreground">Personel</Label>
+                    <select name="instructorId" defaultValue={hizmet.instructor?.id ?? ""} className="w-full border rounded-md px-3 py-2 text-sm bg-card">
                       <option value="">Belirtilmedi</option>
                       {instructors.map((i) => <option key={i.id} value={i.id}>{i.user.name}</option>)}
                     </select>
@@ -475,7 +475,7 @@ export function HizmetDetailDialog({
 
                   {/* Saatlik hakediş */}
                   <div className="space-y-1.5">
-                    <Label className="text-xs text-gray-500">Saatlik Personel Ücreti</Label>
+                    <Label className="text-xs text-muted-foreground">Saatlik Personel Ücreti</Label>
                     <Input
                       type="number"
                       step="0.01"
@@ -505,7 +505,7 @@ export function HizmetDetailDialog({
 
                 {/* Tarih & Saat */}
                 <div className="space-y-1.5">
-                  <Label className="text-xs text-gray-500">Tarih / Saat</Label>
+                  <Label className="text-xs text-muted-foreground">Tarih / Saat</Label>
                   <Input
                     type="datetime-local"
                     name="scheduledAt"
@@ -516,8 +516,8 @@ export function HizmetDetailDialog({
 
                 {/* Durum */}
                 <div className="space-y-1.5">
-                  <Label className="text-xs text-gray-500">Durum</Label>
-                  <select name="status" defaultValue={hizmet.status} className="w-full border rounded-md px-3 py-2 text-sm bg-white">
+                  <Label className="text-xs text-muted-foreground">Durum</Label>
+                  <select name="status" defaultValue={hizmet.status} className="w-full border rounded-md px-3 py-2 text-sm bg-card">
                     <option value="BEKLIYOR">Bekliyor</option>
                     <option value="DEVAM">Devam Ediyor</option>
                     <option value="TAMAMLANDI">Tamamlandı</option>
@@ -527,8 +527,8 @@ export function HizmetDetailDialog({
 
                 {/* Ödeme yöntemi */}
                 <div className="space-y-1.5">
-                  <Label className="text-xs text-gray-500">Ödeme Yöntemi</Label>
-                  <select name="paymentMethod" defaultValue={hizmet.paymentMethod ?? ""} className="w-full border rounded-md px-3 py-2 text-sm bg-white">
+                  <Label className="text-xs text-muted-foreground">Ödeme Yöntemi</Label>
+                  <select name="paymentMethod" defaultValue={hizmet.paymentMethod ?? ""} className="w-full border rounded-md px-3 py-2 text-sm bg-card">
                     <option value="">Belirtilmedi</option>
                     {Object.entries(PAYMENT_METHODS).map(([v, l]) => <option key={v} value={v}>{l}</option>)}
                   </select>
@@ -536,13 +536,13 @@ export function HizmetDetailDialog({
 
                 {/* Notlar */}
                 <div className="space-y-1.5">
-                  <Label className="text-xs text-gray-500">Notlar</Label>
+                  <Label className="text-xs text-muted-foreground">Notlar</Label>
                   <textarea
                     name="notes"
                     rows={2}
                     defaultValue={hizmet.notes ?? ""}
                     placeholder="Ek notlar..."
-                    className="w-full border rounded-md px-3 py-2 text-sm resize-none focus:outline-none focus:ring-2 focus:ring-gray-900"
+                    className="w-full border rounded-md px-3 py-2 text-sm resize-none focus:outline-none focus:ring-2 focus:ring-border"
                   />
                 </div>
 

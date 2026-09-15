@@ -121,29 +121,29 @@ export default async function ReportsPage({
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between flex-wrap gap-3">
-        <h1 className="text-2xl font-bold text-gray-900">Raporlar</h1>
+        <h1 className="text-2xl font-bold text-foreground">Raporlar</h1>
         <div className="flex items-center gap-2">
           <ExportButton />
         </div>
       </div>
 
       {/* Date Filter */}
-      <form className="flex gap-3 items-center flex-wrap bg-white border rounded-lg p-3">
-        <label className="text-sm font-medium text-gray-700">Tarih Aralığı:</label>
+      <form className="flex gap-3 items-center flex-wrap bg-card border rounded-lg p-3">
+        <label className="text-sm font-medium text-foreground/85">Tarih Aralığı:</label>
         <input
           type="date"
           name="from"
           defaultValue={format(fromDate, "yyyy-MM-dd")}
           className="border rounded-md px-3 py-1.5 text-sm"
         />
-        <span className="text-gray-400">—</span>
+        <span className="text-muted-foreground/70">—</span>
         <input
           type="date"
           name="to"
           defaultValue={format(toDate, "yyyy-MM-dd")}
           className="border rounded-md px-3 py-1.5 text-sm"
         />
-        <button type="submit" className="bg-blue-600 text-white px-4 py-1.5 rounded-md text-sm">
+        <button type="submit" className="bg-info text-background px-4 py-1.5 rounded-md text-sm">
           Filtrele
         </button>
       </form>
@@ -152,15 +152,15 @@ export default async function ReportsPage({
         {/* Income Summary */}
         <Card>
           <CardHeader>
-            <CardTitle className="text-base text-green-700">Gelir Özeti</CardTitle>
+            <CardTitle className="text-base text-success">Gelir Özeti</CardTitle>
           </CardHeader>
           <CardContent>
             {payments.length === 0 ? (
-              <p className="text-sm text-gray-400">Bu dönemde gelir yok</p>
+              <p className="text-sm text-muted-foreground/70">Bu dönemde gelir yok</p>
             ) : (
               <div className="flex justify-between items-center">
-                <span className="text-sm text-gray-600">Toplam (TRY)</span>
-                <span className="font-bold text-green-600">{formatMoney(incomeTRY, "TRY")}</span>
+                <span className="text-sm text-muted-foreground">Toplam (TRY)</span>
+                <span className="font-bold text-success">{formatMoney(incomeTRY, "TRY")}</span>
               </div>
             )}
           </CardContent>
@@ -169,20 +169,20 @@ export default async function ReportsPage({
         {/* Expense Summary */}
         <Card>
           <CardHeader>
-            <CardTitle className="text-base text-red-700">Gider Özeti</CardTitle>
+            <CardTitle className="text-base text-destructive">Gider Özeti</CardTitle>
           </CardHeader>
           <CardContent>
             {expenses.length === 0 ? (
-              <p className="text-sm text-gray-400">Bu dönemde gider yok</p>
+              <p className="text-sm text-muted-foreground/70">Bu dönemde gider yok</p>
             ) : (
               <div className="space-y-2">
                 <div className="flex justify-between items-center">
-                  <span className="text-sm text-gray-600">Toplam (TRY)</span>
-                  <span className="font-bold text-red-600">-{formatMoney(totalExpensesTRY, "TRY")}</span>
+                  <span className="text-sm text-muted-foreground">Toplam (TRY)</span>
+                  <span className="font-bold text-destructive">-{formatMoney(totalExpensesTRY, "TRY")}</span>
                 </div>
                 <div className="mt-3 pt-3 border-t space-y-1">
                   {Object.entries(expenseByCategoryTRY).map(([cat, amount]) => (
-                    <div key={cat} className="flex justify-between items-center text-xs text-gray-500">
+                    <div key={cat} className="flex justify-between items-center text-xs text-muted-foreground">
                       <span>{EXPENSE_CATEGORIES[cat as keyof typeof EXPENSE_CATEGORIES]}</span>
                       <span>{formatMoney(amount, "TRY")}</span>
                     </div>
@@ -200,7 +200,7 @@ export default async function ReportsPage({
           </CardHeader>
           <CardContent>
             {Object.keys(earningsByInstructor).length === 0 ? (
-              <p className="text-sm text-gray-400">Bu dönemde hakediş yok</p>
+              <p className="text-sm text-muted-foreground/70">Bu dönemde hakediş yok</p>
             ) : (
               <div className="divide-y">
                 {Object.values(earningsByInstructor).map((e, i) => {
@@ -210,12 +210,12 @@ export default async function ReportsPage({
                       <div className="flex justify-between items-start">
                         <div>
                           <p className="text-sm font-medium">{e.name}</p>
-                          <p className="text-xs text-gray-500">{e.hours.toFixed(1)} saat</p>
+                          <p className="text-xs text-muted-foreground">{e.hours.toFixed(1)} saat</p>
                         </div>
                         <div className="text-right">
-                          <p className="text-sm font-semibold text-orange-600">{formatMoney(e.earnedTRY, "TRY")}</p>
-                          {e.paidTRY > 0 && <p className="text-xs text-green-600">Ödendi: {formatMoney(e.paidTRY, "TRY")}</p>}
-                          {remaining > 0 && <p className="text-xs text-red-500">Kalan: {formatMoney(remaining, "TRY")}</p>}
+                          <p className="text-sm font-semibold text-warning">{formatMoney(e.earnedTRY, "TRY")}</p>
+                          {e.paidTRY > 0 && <p className="text-xs text-success">Ödendi: {formatMoney(e.paidTRY, "TRY")}</p>}
+                          {remaining > 0 && <p className="text-xs text-destructive">Kalan: {formatMoney(remaining, "TRY")}</p>}
                         </div>
                       </div>
                     </div>
@@ -229,30 +229,30 @@ export default async function ReportsPage({
         {/* Instructor Payouts */}
         <Card>
           <CardHeader>
-            <CardTitle className="text-base text-blue-700">Eğitmen Ödemeleri</CardTitle>
+            <CardTitle className="text-base text-info">Eğitmen Ödemeleri</CardTitle>
           </CardHeader>
           <CardContent>
             {instructorPayouts.length === 0 ? (
-              <p className="text-sm text-gray-400">Bu dönemde eğitmen ödemesi yok</p>
+              <p className="text-sm text-muted-foreground/70">Bu dönemde eğitmen ödemesi yok</p>
             ) : (
               <div className="divide-y">
                 {instructorPayouts.map((p) => (
                   <div key={p.id} className="py-2 flex justify-between items-center">
                     <div>
                       <p className="text-sm font-medium">{p.instructor.user.name}</p>
-                      <p className="text-xs text-gray-500">
+                      <p className="text-xs text-muted-foreground">
                         {format(new Date(p.paidAt), "d MMM yyyy", { locale: tr })}
                         {p.notes && ` · ${p.notes}`}
                       </p>
                     </div>
-                    <span className="text-sm font-semibold text-blue-600">
+                    <span className="text-sm font-semibold text-info">
                       {formatMoney(toTRY(p.amount, p.currency), "TRY")}
                     </span>
                   </div>
                 ))}
                 <div className="pt-2 mt-1 border-t flex justify-between items-center">
-                  <span className="text-xs text-gray-500">Toplam ödenen (TRY)</span>
-                  <span className="text-xs font-semibold text-blue-700">{formatMoney(totalPayoutsTRY, "TRY")}</span>
+                  <span className="text-xs text-muted-foreground">Toplam ödenen (TRY)</span>
+                  <span className="text-xs font-semibold text-info">{formatMoney(totalPayoutsTRY, "TRY")}</span>
                 </div>
               </div>
             )}
@@ -262,11 +262,11 @@ export default async function ReportsPage({
         {/* Pending Receivables */}
         <Card>
           <CardHeader>
-            <CardTitle className="text-base text-orange-700">Bekleyen Alacaklar</CardTitle>
+            <CardTitle className="text-base text-warning">Bekleyen Alacaklar</CardTitle>
           </CardHeader>
           <CardContent>
             {receivables.length === 0 ? (
-              <p className="text-sm text-gray-400">Bekleyen alacak yok 🎉</p>
+              <p className="text-sm text-muted-foreground/70">Bekleyen alacak yok 🎉</p>
             ) : (
               <div className="divide-y">
                 {receivables.map((pp) => (
@@ -275,11 +275,11 @@ export default async function ReportsPage({
                       <p className="text-sm font-medium">
                         {pp.student.firstName} {pp.student.lastName}
                       </p>
-                      <p className="text-xs text-gray-500">
+                      <p className="text-xs text-muted-foreground">
                         {format(new Date(pp.purchasedAt), "d MMM", { locale: tr })}
                       </p>
                     </div>
-                    <span className="text-sm font-semibold text-orange-600">
+                    <span className="text-sm font-semibold text-warning">
                       {formatMoney(toTRY(pp.owed, pp.currency), "TRY")}
                     </span>
                   </div>
@@ -299,10 +299,10 @@ export default async function ReportsPage({
               <table className="w-full text-sm">
                 <thead>
                   <tr className="border-b">
-                    <th className="text-left py-2 font-medium text-gray-600">Eğitmen</th>
-                    <th className="text-right py-2 font-medium text-gray-600">Ders Sayısı</th>
-                    <th className="text-right py-2 font-medium text-gray-600">Toplam Saat</th>
-                    <th className="text-right py-2 font-medium text-gray-600">Öğrenci</th>
+                    <th className="text-left py-2 font-medium text-muted-foreground">Eğitmen</th>
+                    <th className="text-right py-2 font-medium text-muted-foreground">Ders Sayısı</th>
+                    <th className="text-right py-2 font-medium text-muted-foreground">Toplam Saat</th>
+                    <th className="text-right py-2 font-medium text-muted-foreground">Öğrenci</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y">
@@ -329,7 +329,7 @@ export default async function ReportsPage({
                   })()}
                   {lessons.length === 0 && (
                     <tr>
-                      <td colSpan={4} className="py-4 text-center text-gray-400">
+                      <td colSpan={4} className="py-4 text-center text-muted-foreground/70">
                         Bu dönemde tamamlanmış ders yok
                       </td>
                     </tr>

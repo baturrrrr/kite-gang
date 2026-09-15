@@ -8,18 +8,18 @@ import { formatTRY } from "@/lib/currency";
 import { getExchangeRates } from "@/lib/exchange-rates";
 
 const AVATAR_COLORS = [
-  "bg-teal-100 text-teal-700",
-  "bg-lime-100 text-lime-700",
-  "bg-slate-200 text-slate-600",
-  "bg-amber-100 text-amber-700",
-  "bg-blue-100 text-blue-700",
-  "bg-violet-100 text-violet-700",
+  "bg-info/15 text-info",
+  "bg-success/15 text-success",
+  "bg-muted text-muted-foreground",
+  "bg-warning/15 text-warning",
+  "bg-info/15 text-info",
+  "bg-info/15 text-info",
 ];
 
 const VISIBILITY_STYLE: Record<string, string> = {
-  LISTED: "bg-emerald-50 text-emerald-700",
-  PARTNER_ONLY: "bg-slate-100 text-slate-600",
-  HIDDEN: "bg-gray-100 text-gray-400",
+  LISTED: "bg-success/10 text-success",
+  PARTNER_ONLY: "bg-muted text-muted-foreground",
+  HIDDEN: "bg-muted text-muted-foreground/70",
 };
 
 const VISIBILITY_LABEL: Record<string, string> = {
@@ -72,9 +72,9 @@ export async function SablonTable({
 
       <SablonFilters q={q} aktif={aktif} gorunurluk={gorunurluk} searchPlaceholder={`${itemLabel} ara`} />
 
-      <div className="bg-white rounded-xl border overflow-hidden">
+      <div className="bg-card rounded-xl border overflow-hidden">
         {sablonlar.length === 0 ? (
-          <div className="text-center py-12 text-gray-400">
+          <div className="text-center py-12 text-muted-foreground/70">
             <Search className="w-8 h-8 mx-auto mb-2 opacity-50" />
             <p>Kayıt bulunamadı</p>
           </div>
@@ -82,15 +82,15 @@ export async function SablonTable({
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
               <thead>
-                <tr className="border-b bg-gray-50">
-                  <th className="text-left px-4 py-3 font-medium text-gray-600">{itemLabel}</th>
-                  <th className="text-left px-4 py-3 font-medium text-gray-600">Kategori</th>
-                  <th className="text-left px-4 py-3 font-medium text-gray-600">Gerekli Kişi Sayısı</th>
-                  <th className="text-left px-4 py-3 font-medium text-gray-600">Açıklama</th>
-                  <th className="text-left px-4 py-3 font-medium text-gray-600">
+                <tr className="border-b bg-muted/40">
+                  <th className="text-left px-4 py-3 font-medium text-muted-foreground">{itemLabel}</th>
+                  <th className="text-left px-4 py-3 font-medium text-muted-foreground">Kategori</th>
+                  <th className="text-left px-4 py-3 font-medium text-muted-foreground">Gerekli Kişi Sayısı</th>
+                  <th className="text-left px-4 py-3 font-medium text-muted-foreground">Açıklama</th>
+                  <th className="text-left px-4 py-3 font-medium text-muted-foreground">
                     {category === "URUN" ? "Fiyat" : "Fiyat (Kişi Başı)"}
                   </th>
-                  <th className="text-left px-4 py-3 font-medium text-gray-600">Online Uygunluk</th>
+                  <th className="text-left px-4 py-3 font-medium text-muted-foreground">Online Uygunluk</th>
                   <th className="w-10"></th>
                 </tr>
               </thead>
@@ -102,39 +102,39 @@ export async function SablonTable({
                     byUnit.get(f.zamanBirimi)!.push(f);
                   }
                   return (
-                    <tr key={s.id} className={`hover:bg-gray-50 ${!s.isActive ? "opacity-50" : ""}`}>
+                    <tr key={s.id} className={`hover:bg-muted/40 ${!s.isActive ? "opacity-50" : ""}`}>
                       <td className="px-4 py-3">
                         <div className="flex items-center gap-3">
                           <div className={`w-8 h-8 rounded-lg flex items-center justify-center text-xs font-semibold flex-shrink-0 ${AVATAR_COLORS[idx % AVATAR_COLORS.length]}`}>
                             {initialsOf(s.name)}
                           </div>
                           <div>
-                            <p className="font-medium text-gray-900">{s.name}</p>
+                            <p className="font-medium text-foreground">{s.name}</p>
                             {category === "UYELIK" && s.validityDays && (
-                              <p className="text-xs text-gray-400">{s.validityDays} gün geçerli</p>
+                              <p className="text-xs text-muted-foreground/70">{s.validityDays} gün geçerli</p>
                             )}
                             {!s.isActive && (
-                              <p className="text-xs text-gray-400">Pasif</p>
+                              <p className="text-xs text-muted-foreground/70">Pasif</p>
                             )}
                           </div>
                         </div>
                       </td>
-                      <td className="px-4 py-3 text-gray-600">{s.subCategory ?? "-"}</td>
-                      <td className="px-4 py-3 text-gray-600">{s.requiredPeople ?? "-"}</td>
-                      <td className="px-4 py-3 text-gray-500 max-w-[220px] truncate">{s.description ?? "-"}</td>
+                      <td className="px-4 py-3 text-muted-foreground">{s.subCategory ?? "-"}</td>
+                      <td className="px-4 py-3 text-muted-foreground">{s.requiredPeople ?? "-"}</td>
+                      <td className="px-4 py-3 text-muted-foreground max-w-[220px] truncate">{s.description ?? "-"}</td>
                       <td className="px-4 py-3">
                         {byUnit.size === 0 ? (
-                          <span className="text-gray-400 text-xs">Fiyat belirlenmemiş</span>
+                          <span className="text-muted-foreground/70 text-xs">Fiyat belirlenmemiş</span>
                         ) : (
                           <div className="space-y-1">
                             {[...byUnit.entries()].map(([unit, rows]) => (
                               <div key={unit}>
-                                <p className="font-semibold text-gray-900">
+                                <p className="font-semibold text-foreground">
                                   {rows
                                     .map((r) => formatTRY(r.price, r.currency, rates))
                                     .join(" · ")}
                                 </p>
-                                <p className="text-xs text-gray-400">{ZAMAN_BIRIMLERI[unit as keyof typeof ZAMAN_BIRIMLERI]}</p>
+                                <p className="text-xs text-muted-foreground/70">{ZAMAN_BIRIMLERI[unit as keyof typeof ZAMAN_BIRIMLERI]}</p>
                               </div>
                             ))}
                           </div>
@@ -156,7 +156,7 @@ export async function SablonTable({
           </div>
         )}
         {sablonlar.length > 0 && (
-          <div className="flex items-center justify-end px-4 py-2.5 border-t text-xs text-gray-400">
+          <div className="flex items-center justify-end px-4 py-2.5 border-t text-xs text-muted-foreground/70">
             1–{sablonlar.length} / {sablonlar.length} kayıt
           </div>
         )}

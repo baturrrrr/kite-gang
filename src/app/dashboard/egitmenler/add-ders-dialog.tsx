@@ -105,9 +105,9 @@ export function AddDersDialog({
           <DialogTitle>{instructorName} — Ders Ekle</DialogTitle>
         </DialogHeader>
 
-        {state.error && <p className="text-sm text-red-500 bg-red-50 px-3 py-2 rounded">{state.error}</p>}
+        {state.error && <p className="text-sm text-destructive bg-destructive/10 px-3 py-2 rounded">{state.error}</p>}
         {state.fieldErrors && (
-          <p className="text-sm text-red-500">{Object.values(state.fieldErrors).flat()[0]}</p>
+          <p className="text-sm text-destructive">{Object.values(state.fieldErrors).flat()[0]}</p>
         )}
 
         <form action={formAction} className="space-y-4">
@@ -126,7 +126,7 @@ export function AddDersDialog({
           <div className="space-y-1.5">
             <Label>Ders Tipi *</Label>
             <select
-              className="w-full border rounded-md px-3 py-2 text-sm bg-white"
+              className="w-full border rounded-md px-3 py-2 text-sm bg-card"
               required
               value={sablonId}
               onChange={(e) => handleSablonChange(e.target.value)}
@@ -148,12 +148,12 @@ export function AddDersDialog({
                     onClick={() => pickFiyat(idx)}
                     className={`py-2 px-3 text-sm rounded-md border transition-all ${
                       activeFiyatIdx === idx
-                        ? "border-blue-500 bg-blue-50 text-blue-700 font-medium"
-                        : "border-gray-200 hover:border-gray-300"
+                        ? "border-info/60 bg-info/10 text-info font-medium"
+                        : "border-border hover:border-border"
                     }`}
                   >
                     <div>{ZAMAN_BIRIMLERI[f.zamanBirimi as keyof typeof ZAMAN_BIRIMLERI]}</div>
-                    <div className="text-xs text-gray-500">{f.currency} {f.price.toFixed(2)}</div>
+                    <div className="text-xs text-muted-foreground">{f.currency} {f.price.toFixed(2)}</div>
                   </button>
                 ))}
               </div>
@@ -186,7 +186,7 @@ export function AddDersDialog({
               <Label>Para Birimi</Label>
               <select
                 name="currency"
-                className="w-full border rounded-md px-3 py-2 text-sm bg-white"
+                className="w-full border rounded-md px-3 py-2 text-sm bg-card"
                 value={currency}
                 onChange={(e) => handleCurrencyChange(e.target.value)}
               >
@@ -210,7 +210,7 @@ export function AddDersDialog({
 
           <div className="space-y-1.5">
             <Label>Ödeme Yöntemi</Label>
-            <select name="paymentMethod" className="w-full border rounded-md px-3 py-2 text-sm bg-white">
+            <select name="paymentMethod" className="w-full border rounded-md px-3 py-2 text-sm bg-card">
               <option value="">Belirtilmedi</option>
               {Object.entries(PAYMENT_METHODS).map(([v, l]) => (
                 <option key={v} value={v}>{l}</option>
@@ -220,7 +220,7 @@ export function AddDersDialog({
 
           <div className="space-y-1.5">
             <Label>Durum</Label>
-            <select name="status" className="w-full border rounded-md px-3 py-2 text-sm bg-white">
+            <select name="status" className="w-full border rounded-md px-3 py-2 text-sm bg-card">
               <option value="BEKLIYOR">Bekliyor</option>
               <option value="DEVAM">Devam Ediyor</option>
               <option value="TAMAMLANDI">Tamamlandı</option>

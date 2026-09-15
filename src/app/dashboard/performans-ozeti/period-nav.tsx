@@ -31,19 +31,19 @@ export function PeriodNav({
     <div className="flex items-center gap-2">
       <button
         onClick={() => go(-step)}
-        className="border rounded-md p-1.5 text-sm hover:bg-gray-50"
+        className="border rounded-md p-1.5 text-sm hover:bg-muted/40"
       >
         <ChevronLeft className="w-4 h-4" />
       </button>
       <button
         onClick={goToday}
-        className="border rounded-md px-3 py-1.5 text-sm hover:bg-gray-50 font-medium text-gray-700 capitalize min-w-[180px] text-center"
+        className="border rounded-md px-3 py-1.5 text-sm hover:bg-muted/40 font-medium text-foreground/85 capitalize min-w-[180px] text-center"
       >
         {label}
       </button>
       <button
         onClick={() => go(step)}
-        className="border rounded-md p-1.5 text-sm hover:bg-gray-50"
+        className="border rounded-md p-1.5 text-sm hover:bg-muted/40"
       >
         <ChevronRight className="w-4 h-4" />
       </button>

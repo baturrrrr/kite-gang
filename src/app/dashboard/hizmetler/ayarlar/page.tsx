@@ -39,17 +39,17 @@ export default async function HizmetAyarlariPage() {
                 <Link
                   key={r.category}
                   href={r.href}
-                  className="flex items-center justify-between px-4 py-3.5 hover:bg-gray-50"
+                  className="flex items-center justify-between px-4 py-3.5 hover:bg-muted/40"
                 >
                   <div className="flex items-center gap-3">
-                    <div className="w-8 h-8 rounded-lg bg-gray-100 flex items-center justify-center">
-                      <Icon className="w-4 h-4 text-gray-500" />
+                    <div className="w-8 h-8 rounded-lg bg-muted flex items-center justify-center">
+                      <Icon className="w-4 h-4 text-muted-foreground" />
                     </div>
-                    <p className="font-medium text-sm text-gray-900">{r.label}</p>
+                    <p className="font-medium text-sm text-foreground">{r.label}</p>
                   </div>
-                  <p className="text-xs text-gray-500">
-                    <span className="text-gray-700 font-medium">{r.active}</span> aktif
-                    {r.passive > 0 && <span className="text-gray-400"> · {r.passive} pasif</span>}
+                  <p className="text-xs text-muted-foreground">
+                    <span className="text-foreground/85 font-medium">{r.active}</span> aktif
+                    {r.passive > 0 && <span className="text-muted-foreground/70"> · {r.passive} pasif</span>}
                   </p>
                 </Link>
               );
@@ -62,7 +62,7 @@ export default async function HizmetAyarlariPage() {
         <CardHeader>
           <CardTitle className="text-base">Hakkında</CardTitle>
         </CardHeader>
-        <CardContent className="text-sm text-gray-600 space-y-1">
+        <CardContent className="text-sm text-muted-foreground space-y-1">
           <p>Her sekmedeki kayıtlar &quot;Kayıtlar&quot; filtresiyle aktif/pasif olarak yönetilebilir.</p>
           <p>Pasife alınan hizmetler müşteri ekranında listelenmez ama geçmiş kayıtları etkilenmez.</p>
         </CardContent>

@@ -47,7 +47,7 @@ export function PaymentDialog({
 
   return (
     <Dialog>
-      <DialogTrigger className="text-xs px-2 py-1 border border-red-200 text-red-600 rounded hover:bg-red-50 transition-colors">
+      <DialogTrigger className="text-xs px-2 py-1 border border-destructive/30 text-destructive rounded hover:bg-destructive/10 transition-colors">
         Ödeme Al
       </DialogTrigger>
       <DialogContent>
@@ -55,7 +55,7 @@ export function PaymentDialog({
           <DialogTitle>Ödeme Kaydet</DialogTitle>
         </DialogHeader>
 
-        <p className="text-sm text-gray-500 -mt-2">{packageName}</p>
+        <p className="text-sm text-muted-foreground -mt-2">{packageName}</p>
 
         <form action={formAction} className="space-y-4 mt-1">
           <input type="hidden" name="purchaseId" value={purchaseId} />
@@ -63,7 +63,7 @@ export function PaymentDialog({
           <input type="hidden" name="currency" value={currency} />
 
           {state.error && (
-            <p className="text-sm text-red-500 bg-red-50 px-3 py-2 rounded">{state.error}</p>
+            <p className="text-sm text-destructive bg-destructive/10 px-3 py-2 rounded">{state.error}</p>
           )}
 
           <div className="space-y-1.5">
@@ -78,12 +78,12 @@ export function PaymentDialog({
               onChange={(e) => setAmount(e.target.value)}
               required
             />
-            <p className="text-xs text-gray-400">Kalan borç: {symbol}{owedAmount.toFixed(2)}</p>
+            <p className="text-xs text-muted-foreground/70">Kalan borç: {symbol}{owedAmount.toFixed(2)}</p>
           </div>
 
           <div className="space-y-1.5">
             <Label>Ödeme Yöntemi *</Label>
-            <select name="method" className="w-full border rounded-md px-3 py-2 text-sm bg-white">
+            <select name="method" className="w-full border rounded-md px-3 py-2 text-sm bg-card">
               {Object.entries(PAYMENT_METHODS).map(([v, l]) => (
                 <option key={v} value={v}>{l}</option>
               ))}
@@ -93,7 +93,7 @@ export function PaymentDialog({
           {cashAccounts.length > 0 && (
             <div className="space-y-1.5">
               <Label>Kasa Hesabı *</Label>
-              <select name="cashAccountId" className="w-full border rounded-md px-3 py-2 text-sm bg-white" required>
+              <select name="cashAccountId" className="w-full border rounded-md px-3 py-2 text-sm bg-card" required>
                 {cashAccounts.map((acc) => (
                   <option key={acc.id} value={acc.id}>
                     {acc.name} ({acc.currency})

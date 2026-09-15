@@ -12,7 +12,7 @@ import { format } from "date-fns";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import { useExchangeRates } from "@/hooks/use-exchange-rates";
-import { convertAmount } from "@/lib/currency";
+import { convertAmount, formatCurrency } from "@/lib/currency";
 
 export function NewExpenseForm({ cashAccounts }: { cashAccounts: { id: string; name: string; currency: string; balance: number }[] }) {
   const [open, setOpen] = useState(false);
@@ -104,7 +104,7 @@ export function NewExpenseForm({ cashAccounts }: { cashAccounts: { id: string; n
                 <option value="">Kasa güncellenmesi (yok)</option>
                 {cashAccounts.map((acc) => (
                   <option key={acc.id} value={acc.id}>
-                    {acc.name} (Bakiye: {acc.balance.toFixed(2)} {acc.currency})
+                    {acc.name} (Bakiye: {formatCurrency(acc.balance, acc.currency)})
                   </option>
                 ))}
               </select>

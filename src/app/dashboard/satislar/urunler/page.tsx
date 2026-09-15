@@ -9,7 +9,7 @@ import { Search, ShoppingCart, TrendingUp } from "lucide-react";
 import { PAYMENT_METHODS } from "@/lib/constants";
 import { format } from "date-fns";
 import { tr } from "date-fns/locale";
-import { toTRY, formatTRY, convertAmount } from "@/lib/currency";
+import { toTRY, formatTRY, convertAmount, formatTL } from "@/lib/currency";
 import { getExchangeRates } from "@/lib/exchange-rates";
 
 const METHOD_COLORS: Record<string, string> = {
@@ -79,7 +79,7 @@ export default async function UrunSatislariPage({
                 Toplam Satış
               </div>
               <p className="text-2xl font-bold text-foreground">
-                ₺{totalTRY.toFixed(2)}
+                {formatTL(totalTRY)}
               </p>
             </CardContent>
           </Card>

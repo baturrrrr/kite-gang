@@ -11,6 +11,7 @@ import { toast } from "sonner";
 import { useEffect } from "react";
 import type { CashAccount } from "@/generated/prisma/client";
 
+import { formatCurrency } from "@/lib/currency";
 interface PayoutFormProps {
   instructorId: string;
   currencies: string[];
@@ -60,7 +61,7 @@ export function PayoutForm({ instructorId, currencies, cashAccounts }: PayoutFor
                 <option value="">Kasa güncellenmesi (yok)</option>
                 {cashAccounts.map((acc) => (
                   <option key={acc.id} value={acc.id}>
-                    {acc.name} (Bakiye: {acc.balance.toFixed(2)} {acc.currency})
+                    {acc.name} (Bakiye: {formatCurrency(acc.balance, acc.currency)})
                   </option>
                 ))}
               </select>

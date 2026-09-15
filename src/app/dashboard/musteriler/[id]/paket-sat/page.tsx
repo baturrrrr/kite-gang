@@ -30,7 +30,7 @@ export default async function SellPackagePage({
             <ChevronLeft className="w-4 h-4" />
           </Button>
         </Link>
-        <h1 className="text-xl font-bold text-foreground">
+        <h1 className="text-3xl leading-[0.95] font-extrabold lg:text-4xl">
           Paket Sat — {student.firstName} {student.lastName}
         </h1>
       </div>

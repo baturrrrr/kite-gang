@@ -6,7 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { ChevronLeft, Clock, TrendingUp, Wallet, GraduationCap } from "lucide-react";
-import { PAYMENT_MODELS, LESSON_TYPES, RESERVATION_STATUSES, STATUS_COLORS } from "@/lib/constants";
+import { PAYMENT_MODELS, LESSON_TYPES, PAYMENT_METHODS } from "@/lib/constants";
 import { format } from "date-fns";
 import { tr } from "date-fns/locale";
 import { InstructorEditForm } from "./edit-form";
@@ -110,7 +110,7 @@ export default async function InstructorDetailPage({
               {instructor.user.name.charAt(0)}
             </div>
             <div>
-              <h1 className="text-2xl font-bold text-foreground">{instructor.user.name}</h1>
+              <h1 className="text-4xl leading-[0.95] font-extrabold lg:text-[56px]">{instructor.user.name}</h1>
               <p className="text-sm text-muted-foreground">
                 {PAYMENT_MODELS[instructor.paymentModel as keyof typeof PAYMENT_MODELS]}
               </p>
@@ -323,7 +323,7 @@ export default async function InstructorDetailPage({
                       {payout.notes && ` · ${payout.notes}`}
                     </p>
                   </div>
-                  <Badge variant="outline" className="text-xs">{payout.method}</Badge>
+                  <Badge variant="outline" className="text-xs">{PAYMENT_METHODS[payout.method as keyof typeof PAYMENT_METHODS] ?? payout.method}</Badge>
                 </div>
               ))}
             </div>

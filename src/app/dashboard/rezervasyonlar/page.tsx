@@ -126,7 +126,7 @@ export default async function ReservationsPage({
       {/* Başlık */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-foreground">Rezervasyonlar</h1>
+          <h1 className="text-4xl leading-[0.95] font-extrabold lg:text-[56px]">Rezervasyonlar</h1>
           <p className="text-sm text-muted-foreground mt-0.5">
             {isSingleDay
               ? format(fromDate, "d MMMM yyyy, EEEE", { locale: tr })

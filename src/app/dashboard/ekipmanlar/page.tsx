@@ -23,7 +23,7 @@ export default async function EquipmentPage() {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-foreground">Ekipman Envanteri</h1>
+          <h1 className="text-4xl leading-[0.95] font-extrabold lg:text-[56px]">Ekipman Envanteri</h1>
           <p className="text-muted-foreground text-sm mt-1">{equipment.length} ekipman</p>
         </div>
         {user.role !== "INSTRUCTOR" && <NewEquipmentForm />}

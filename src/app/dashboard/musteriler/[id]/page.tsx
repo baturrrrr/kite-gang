@@ -31,7 +31,7 @@ import { StudentEditForm } from "./edit-form";
 import { AssignHizmetDialog } from "./assign-hizmet-dialog";
 import { HizmetDetailDialog } from "./hizmet-detail-dialog";
 import { OdemeDialog } from "./odeme-dialog";
-import { formatTRY, toTRY } from "@/lib/currency";
+import { formatTRY, toTRY, formatTL } from "@/lib/currency";
 import { getExchangeRates } from "@/lib/exchange-rates";
 
 
@@ -145,7 +145,7 @@ export default async function MusteriDetailPage({
           </Button>
         </Link>
         <div className="flex-1">
-          <h1 className="text-2xl font-bold text-foreground">
+          <h1 className="text-4xl leading-[0.95] font-extrabold lg:text-[56px]">
             {student.firstName} {student.lastName}
           </h1>
           <div className="flex items-center gap-2 mt-1">
@@ -174,7 +174,7 @@ export default async function MusteriDetailPage({
               <TrendingDown className="w-3.5 h-3.5 text-destructive" /> Toplam Borç
             </div>
             <p className="text-2xl font-bold text-foreground">
-              ₺{totalCharged.toFixed(2)}
+              {formatTL(totalCharged)}
             </p>
             <p className="text-xs text-muted-foreground/70 mt-0.5">
               {student.hizmetler.filter(h => h.status !== "IPTAL").length} hizmet
@@ -188,7 +188,7 @@ export default async function MusteriDetailPage({
               <TrendingUp className="w-3.5 h-3.5 text-success" /> Toplam Ödenen
             </div>
             <p className="text-2xl font-bold text-foreground">
-              ₺{totalPaid.toFixed(2)}
+              {formatTL(totalPaid)}
             </p>
             <p className="text-xs text-muted-foreground/70 mt-0.5">{student.payments.filter(p => p.direction === "INCOMING").length} ödeme</p>
           </CardContent>
@@ -199,7 +199,7 @@ export default async function MusteriDetailPage({
               <Wallet className="w-3.5 h-3.5" /> Net Bakiye
             </div>
             <p className={`text-2xl font-bold ${netBalance < -0.01 ? "text-destructive" : netBalance > 0.01 ? "text-info" : "text-success"}`}>
-              {netBalance >= 0 ? "+" : ""}₺{netBalance.toFixed(2)}
+              {netBalance >= 0 ? "+" : ""}{formatTL(netBalance)}
             </p>
             <p className="text-xs mt-0.5">
               {netBalance < -0.01 ? (

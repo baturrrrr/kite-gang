@@ -257,7 +257,7 @@ export default async function PerformansOzetiPage({
     <div className="space-y-6">
       <div className="flex items-center justify-between flex-wrap gap-3">
         <div>
-          <h1 className="text-2xl font-bold text-foreground">Performans Özeti</h1>
+          <h1 className="text-4xl leading-[0.95] font-extrabold lg:text-[56px]">Performans Özeti</h1>
           <p className="text-muted-foreground text-sm mt-1">Eğitmenlerin ders performansı ve ekipman kiralama gelirleri</p>
         </div>
         <div className="flex items-center gap-3">

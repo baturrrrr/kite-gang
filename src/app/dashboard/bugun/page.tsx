@@ -12,7 +12,7 @@ import { CheckInButton } from "../operasyon/checkin-button";
 import { CheckOutDialog } from "../operasyon/checkout-dialog";
 import Link from "next/link";
 import { getWindConditions } from "@/lib/weather";
-import { toTRY, formatTRY } from "@/lib/currency";
+import { toTRY, formatTRY, formatTL } from "@/lib/currency";
 import { getExchangeRates } from "@/lib/exchange-rates";
 
 function windSuitability(speedKn: number): { label: string; className: string } {
@@ -117,7 +117,7 @@ export default async function BugunPage() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-2xl font-bold text-foreground">Bugün</h1>
+        <h1 className="text-4xl leading-[0.95] font-extrabold lg:text-[56px]">Bugün</h1>
         <p className="text-muted-foreground text-sm mt-1 capitalize">
           {format(new Date(), "d MMMM yyyy, EEEE", { locale: tr })}
         </p>
@@ -181,7 +181,7 @@ export default async function BugunPage() {
             <CardContent className="pt-3 pb-3">
               <p className="text-xs text-success font-medium">Bugünkü Gelir</p>
               {todayPayments.length > 0 ? (
-                <p className="text-lg font-bold text-success">₺{todayIncomeTRY.toFixed(2)}</p>
+                <p className="text-lg font-bold text-success">{formatTL(todayIncomeTRY)}</p>
               ) : (
                 <p className="text-lg font-bold text-success">—</p>
               )}

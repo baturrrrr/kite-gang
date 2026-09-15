@@ -29,6 +29,15 @@ export function formatTL(amount: number): string {
   return `${amount < 0 ? "−" : ""}₺${trNumber.format(Math.abs(amount))}`;
 }
 
+// Tutarı kendi para biriminde gösterir: €15.000,00 · $250,00 · ₺3.000,00
+export function formatCurrency(amount: number, currency: string): string {
+  try {
+    return new Intl.NumberFormat("tr-TR", { style: "currency", currency }).format(amount);
+  } catch {
+    return `${trNumber.format(amount)} ${currency}`;
+  }
+}
+
 // Uygulama genelinde tutarlar tutarlılık için TL'ye çevrilerek gösterilir;
 // orijinal işlem para birimi veritabanında korunur, sadece ekran gösterimi TL'dir.
 export function formatTRY(amount: number, currency: string, rates: Rates | null): string {

@@ -141,9 +141,10 @@
   }
 }
 
+/* Yalnızca opaklık: body üzerindeki transform, sabit (fixed) alt gezinmeyi sayfa sonuna iter */
 @keyframes page-fade-in {
-  from { opacity: 0; transform: translateY(2px); }
-  to { opacity: 1; transform: translateY(0); }
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
 ::selection {

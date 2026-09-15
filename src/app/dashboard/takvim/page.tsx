@@ -113,7 +113,7 @@ export default async function TakvimPage({
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-xl font-bold text-foreground">Takvim</h1>
+          <h1 className="text-3xl leading-[0.95] font-extrabold lg:text-4xl">Takvim</h1>
           <p className="text-sm text-muted-foreground mt-0.5">
             {items.length > 0 ? `${items.length} seans planlanmış` : "Bu gün için seans yok"}
           </p>

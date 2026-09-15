@@ -9,7 +9,7 @@ import { Plus, Phone, Mail } from "lucide-react";
 import { PAYMENT_MODELS } from "@/lib/constants";
 import { AddDersDialog } from "./add-ders-dialog";
 import { EgitmenlerExportButton } from "./export-button";
-import { toTRY } from "@/lib/currency";
+import { toTRY, formatTL } from "@/lib/currency";
 import { getExchangeRates } from "@/lib/exchange-rates";
 
 export default async function InstructorsPage() {
@@ -54,7 +54,7 @@ export default async function InstructorsPage() {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-foreground">Eğitmenler</h1>
+          <h1 className="text-4xl leading-[0.95] font-extrabold lg:text-[56px]">Eğitmenler</h1>
           <p className="text-muted-foreground text-sm mt-1">{instructors.length} aktif eğitmen</p>
         </div>
         {user.role === "ADMIN" && (
@@ -112,7 +112,7 @@ export default async function InstructorsPage() {
                   <span className="text-xs text-muted-foreground">{instructor._count.lessons} ders</span>
                   {user.role === "ADMIN" && pendingBalance > 0 && (
                     <Badge variant="destructive" className="text-xs">
-                      Bekleyen: ₺{pendingBalance.toFixed(2)}
+                      Bekleyen: {formatTL(pendingBalance)}
                     </Badge>
                   )}
                 </div>

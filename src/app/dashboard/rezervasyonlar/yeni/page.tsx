@@ -37,7 +37,7 @@ export default async function NewReservationPage() {
         <div className="w-9 h-9 rounded-lg bg-muted flex items-center justify-center flex-shrink-0">
           <CalendarPlus className="w-4.5 h-4.5 text-foreground/85" />
         </div>
-        <h1 className="text-xl font-bold text-foreground">Rezervasyon Ekle</h1>
+        <h1 className="text-3xl leading-[0.95] font-extrabold lg:text-4xl">Rezervasyon Ekle</h1>
       </div>
       <NewReservationForm students={students} instructors={instructors} equipment={equipment} />
     </div>

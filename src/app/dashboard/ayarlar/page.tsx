@@ -14,7 +14,7 @@ export default async function SettingsPage() {
 
   return (
     <div className="max-w-3xl space-y-6">
-      <h1 className="text-2xl font-bold text-foreground">Ayarlar</h1>
+      <h1 className="text-4xl leading-[0.95] font-extrabold lg:text-[56px]">Ayarlar</h1>
 
       <Card>
         <CardHeader>

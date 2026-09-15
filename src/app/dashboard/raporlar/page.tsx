@@ -1,16 +1,15 @@
 import { requireAdmin } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { EXPENSE_CATEGORIES, PAYMENT_METHODS, LESSON_TYPES, CURRENCY_SYMBOLS } from "@/lib/constants";
+import { EXPENSE_CATEGORIES, PAYMENT_METHODS, LESSON_TYPES } from "@/lib/constants";
 import { format, startOfMonth, endOfMonth, subMonths } from "date-fns";
 import { tr } from "date-fns/locale";
 import { ExportButton } from "./export-button";
-import { convertAmount } from "@/lib/currency";
+import { convertAmount, formatCurrency } from "@/lib/currency";
 import { getExchangeRates } from "@/lib/exchange-rates";
 
 function formatMoney(amount: number, currency: string) {
-  const symbol = CURRENCY_SYMBOLS[currency as keyof typeof CURRENCY_SYMBOLS] ?? currency;
-  return `${symbol}${amount.toFixed(2)}`;
+  return formatCurrency(amount, currency);
 }
 
 export default async function ReportsPage({
@@ -121,7 +120,7 @@ export default async function ReportsPage({
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between flex-wrap gap-3">
-        <h1 className="text-2xl font-bold text-foreground">Raporlar</h1>
+        <h1 className="text-4xl leading-[0.95] font-extrabold lg:text-[56px]">Raporlar</h1>
         <div className="flex items-center gap-2">
           <ExportButton />
         </div>

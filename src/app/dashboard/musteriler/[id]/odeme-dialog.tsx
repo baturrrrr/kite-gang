@@ -7,11 +7,11 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { CreditCard } from "lucide-react";
 import { recordMusteriOdeme } from "@/app/actions/odemeler";
-import { CURRENCIES, PAYMENT_METHODS, CURRENCY_SYMBOLS } from "@/lib/constants";
+import { CURRENCIES, PAYMENT_METHODS } from "@/lib/constants";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import { useExchangeRates } from "@/hooks/use-exchange-rates";
-import { convertAmount } from "@/lib/currency";
+import { convertAmount, formatCurrency } from "@/lib/currency";
 import type { CashAccount } from "@/generated/prisma/client";
 
 type HizmetOption = {
@@ -24,8 +24,7 @@ type HizmetOption = {
 };
 
 function formatMoney(amount: number, currency: string) {
-  const symbol = CURRENCY_SYMBOLS[currency as keyof typeof CURRENCY_SYMBOLS] ?? currency;
-  return `${symbol}${amount.toFixed(2)}`;
+  return formatCurrency(amount, currency);
 }
 
 export function OdemeDialog({

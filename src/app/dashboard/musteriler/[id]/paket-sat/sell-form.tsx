@@ -9,7 +9,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { CURRENCIES, PAYMENT_METHODS, CURRENCY_SYMBOLS } from "@/lib/constants";
 import type { LessonPackage, CashAccount } from "@/generated/prisma/client";
 import { useExchangeRates } from "@/hooks/use-exchange-rates";
-import { convertAmount } from "@/lib/currency";
+import { convertAmount, formatTL } from "@/lib/currency";
 
 interface SellPackageFormProps {
   studentId: string;
@@ -76,7 +76,7 @@ export function SellPackageForm({ studentId, packages, cashAccounts }: SellPacka
             <div className="bg-info/10 border border-info/30 rounded-lg p-3 text-sm">
               <p className="font-medium text-info">{selectedPkg.name}</p>
               <p className="text-info">
-                {selectedPkg.totalHours} saat • ₺{convertAmount(selectedPkg.price, selectedPkg.currency, "TRY", rates).toFixed(2)}
+                {selectedPkg.totalHours} saat • {formatTL(convertAmount(selectedPkg.price, selectedPkg.currency, "TRY", rates))}
               </p>
             </div>
           )}

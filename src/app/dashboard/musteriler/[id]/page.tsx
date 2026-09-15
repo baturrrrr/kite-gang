@@ -145,7 +145,8 @@ export default async function MusteriDetailPage({
           </Button>
         </Link>
         <div className="flex-1">
-          <h1 className="text-4xl leading-[0.95] font-extrabold lg:text-[56px]">
+          {/* Müşteriler çoğunlukla yabancı: Türkçe büyük harf kuralı "MARİA" yazmasın diye ad büyütülmez */}
+          <h1 className="text-4xl leading-[0.95] font-extrabold normal-case lg:text-[56px]">
             {student.firstName} {student.lastName}
           </h1>
           <div className="flex items-center gap-2 mt-1">

@@ -40,7 +40,10 @@ export function CheckInButton({ reservationId, purchaseId, className }: CheckInB
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle className="text-2xl font-extrabold">Check-in</DialogTitle>
+          {/* lang="en": Türkçe büyük harf kuralı "CHECK-İN" yazmasın */}
+          <DialogTitle lang="en" className="text-2xl font-extrabold">
+            Check-in
+          </DialogTitle>
         </DialogHeader>
         <form action={formAction} className="space-y-4">
           <input type="hidden" name="reservationId" value={reservationId} />

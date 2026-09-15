@@ -65,7 +65,10 @@ export function NoShowButton({
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle className="text-2xl font-extrabold">Gelmedi — {studentName}</DialogTitle>
+          {/* Müşteriler çoğunlukla yabancı: Türkçe büyük harf kuralı "SMİTH" yazmasın diye ad büyütülmez */}
+          <DialogTitle className="text-2xl font-extrabold">
+            Gelmedi — <span className="normal-case">{studentName}</span>
+          </DialogTitle>
         </DialogHeader>
         <form action={formAction} className="space-y-4">
           <input type="hidden" name="reservationId" value={reservationId} />

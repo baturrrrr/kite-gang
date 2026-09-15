@@ -40,7 +40,10 @@ export function CheckOutDialog({ lessonId, studentName, plannedHours }: CheckOut
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle className="text-2xl font-extrabold">Check-out — {studentName}</DialogTitle>
+          {/* Müşteriler çoğunlukla yabancı: Türkçe büyük harf kuralı "SMİTH" yazmasın diye ad büyütülmez */}
+          <DialogTitle className="text-2xl font-extrabold">
+            <span lang="en">Check-out</span> — <span className="normal-case">{studentName}</span>
+          </DialogTitle>
         </DialogHeader>
         <form action={formAction} className="space-y-4">
           <input type="hidden" name="lessonId" value={lessonId} />

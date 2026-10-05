@@ -2,6 +2,7 @@
 
 import { useState, useActionState, useEffect, useRef } from "react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { FormSheet, FormSheetActions } from "@/components/ui/form-sheet";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -73,60 +74,55 @@ export function EditEquipmentDialog({ equipment }: { equipment: Equipment }) {
         </DropdownMenuContent>
       </DropdownMenu>
 
-      {/* Düzenleme dialogu */}
-      <Dialog open={editOpen} onOpenChange={setEditOpen}>
-        <DialogContent>
-          <DialogHeader>
-            <DialogTitle>Ekipmanı Düzenle</DialogTitle>
-          </DialogHeader>
-          <form action={formAction} className="space-y-4">
-            {state.error && <p className="text-sm text-destructive">{state.error}</p>}
+      {/* Düzenleme paneli */}
+      <FormSheet open={editOpen} onOpenChange={setEditOpen} icon={Pencil} title="Ekipmanı Düzenle">
+        <form action={formAction} className="space-y-4">
+          {state.error && <p className="text-sm text-destructive">{state.error}</p>}
 
+          <div className="space-y-1.5">
+            <Label>Tip *</Label>
+            <select name="type" defaultValue={equipment.type} className="w-full border rounded-md px-3 py-2 text-sm bg-card" required>
+              {Object.entries(EQUIPMENT_TYPES).map(([v, l]) => (
+                <option key={v} value={v}>{l}</option>
+              ))}
+            </select>
+          </div>
+
+          <div className="space-y-1.5">
+            <Label htmlFor="edit-name">Marka *</Label>
+            <Input id="edit-name" name="name" required defaultValue={equipment.name} placeholder="Cabrinha, North, Duotone..." />
+          </div>
+
+          <div className="grid grid-cols-2 gap-3">
             <div className="space-y-1.5">
-              <Label>Tip *</Label>
-              <select name="type" defaultValue={equipment.type} className="w-full border rounded-md px-3 py-2 text-sm bg-card" required>
-                {Object.entries(EQUIPMENT_TYPES).map(([v, l]) => (
-                  <option key={v} value={v}>{l}</option>
-                ))}
-              </select>
+              <Label>Model</Label>
+              <Input name="brand" defaultValue={equipment.brand ?? ""} placeholder="Switchblade, Dice..." />
             </div>
-
             <div className="space-y-1.5">
-              <Label htmlFor="edit-name">Marka *</Label>
-              <Input id="edit-name" name="name" required defaultValue={equipment.name} placeholder="Cabrinha, North, Duotone..." />
+              <Label>Boyut</Label>
+              <Input name="size" defaultValue={equipment.size ?? ""} placeholder="12m, L, 136cm..." />
             </div>
+          </div>
 
-            <div className="grid grid-cols-2 gap-3">
-              <div className="space-y-1.5">
-                <Label>Model</Label>
-                <Input name="brand" defaultValue={equipment.brand ?? ""} placeholder="Switchblade, Dice..." />
-              </div>
-              <div className="space-y-1.5">
-                <Label>Boyut</Label>
-                <Input name="size" defaultValue={equipment.size ?? ""} placeholder="12m, L, 136cm..." />
-              </div>
+          <div className="grid grid-cols-2 gap-3">
+            <div className="space-y-1.5">
+              <Label htmlFor="edit-quantity">Adet *</Label>
+              <Input id="edit-quantity" name="quantity" type="number" min={1} defaultValue={equipment.quantity} required />
             </div>
+            <div className="space-y-1.5">
+              <Label>Notlar</Label>
+              <Input name="notes" defaultValue={equipment.notes ?? ""} placeholder="Ekstra bilgi..." />
+            </div>
+          </div>
 
-            <div className="grid grid-cols-2 gap-3">
-              <div className="space-y-1.5">
-                <Label htmlFor="edit-quantity">Adet *</Label>
-                <Input id="edit-quantity" name="quantity" type="number" min={1} defaultValue={equipment.quantity} required />
-              </div>
-              <div className="space-y-1.5">
-                <Label>Notlar</Label>
-                <Input name="notes" defaultValue={equipment.notes ?? ""} placeholder="Ekstra bilgi..." />
-              </div>
-            </div>
-
-            <div className="flex gap-2 justify-end">
-              <Button type="button" variant="outline" onClick={() => setEditOpen(false)}>İptal</Button>
-              <Button type="submit" disabled={isPending}>
-                {isPending ? "..." : "Güncelle"}
-              </Button>
-            </div>
-          </form>
-        </DialogContent>
-      </Dialog>
+          <FormSheetActions>
+            <Button type="button" variant="outline" onClick={() => setEditOpen(false)}>İptal</Button>
+            <Button type="submit" disabled={isPending}>
+              {isPending ? "..." : "Güncelle"}
+            </Button>
+          </FormSheetActions>
+        </form>
+      </FormSheet>
 
       {/* Silme onay dialogu */}
       <Dialog open={confirmDelete} onOpenChange={setConfirmDelete}>

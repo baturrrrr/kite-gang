@@ -1,8 +1,16 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { SlidersHorizontal, X, Check } from "lucide-react";
+
+import { cn } from "@/lib/utils";
+import { Button } from "@/components/ui/button";
+import {
+  FormSheet,
+  FormSheetActions,
+  FormSheetSection,
+} from "@/components/ui/form-sheet";
 
 const TYPE_OPTIONS = [
   { key: "PRIVATE",          label: "Özel Ders"       },
@@ -21,6 +29,57 @@ const STATUS_OPTIONS = [
   { key: "WIND_CANCELLED",  label: "Rüzgar İptali" },
 ];
 
+function OptionRow({
+  label,
+  selected,
+  onClick,
+}: {
+  label: string;
+  selected: boolean;
+  onClick: () => void;
+}) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      className={cn(
+        "flex w-full items-center justify-between rounded-lg border px-3.5 py-2.5 text-left text-sm font-medium transition-colors",
+        selected
+          ? "border-primary bg-primary text-primary-foreground"
+          : "border-border bg-card text-foreground/85 hover:border-foreground/25 hover:bg-muted/40"
+      )}
+    >
+      <span>{label}</span>
+      {selected && <Check className="size-[15px]" />}
+    </button>
+  );
+}
+
+function SectionHeader({
+  title,
+  onClear,
+}: {
+  title: string;
+  onClear?: () => void;
+}) {
+  return (
+    <div className="flex items-center justify-between">
+      <span className="font-heading text-[11px] font-semibold tracking-[0.12em] text-muted-foreground uppercase">
+        {title}
+      </span>
+      {onClear && (
+        <button
+          type="button"
+          onClick={onClear}
+          className="text-xs text-muted-foreground transition-colors hover:text-foreground"
+        >
+          Temizle
+        </button>
+      )}
+    </div>
+  );
+}
+
 export function ReservationFilterSheet({
   from,
   to,
@@ -36,217 +95,112 @@ export function ReservationFilterSheet({
   const [open, setOpen] = useState(false);
   const [selTypes, setSelTypes] = useState<string[]>(activeTypes);
   const [selStatuses, setSelStatuses] = useState<string[]>(activeStatuses);
-  const panelRef = useRef<HTMLDivElement>(null);
 
-  // Dışarı tıklandığında kapat
-  useEffect(() => {
-    if (!open) return;
-    function onDown(e: MouseEvent) {
-      if (panelRef.current && !panelRef.current.contains(e.target as Node)) {
-        setOpen(false);
-      }
+  // Panel her açılışta sayfadaki güncel filtrelerle başlar
+  function handleOpenChange(next: boolean) {
+    if (next) {
+      setSelTypes([...activeTypes]);
+      setSelStatuses([...activeStatuses]);
     }
-    document.addEventListener("mousedown", onDown);
-    return () => document.removeEventListener("mousedown", onDown);
-  }, [open]);
-
-  // Panel açılınca mevcut filtreleri yükle
-  function openPanel() {
-    setSelTypes([...activeTypes]);
-    setSelStatuses([...activeStatuses]);
-    setOpen(true);
+    setOpen(next);
   }
 
-  function toggleType(key: string) {
-    setSelTypes(prev => prev.includes(key) ? prev.filter(x => x !== key) : [...prev, key]);
-  }
-
-  function toggleStatus(key: string) {
-    setSelStatuses(prev => prev.includes(key) ? prev.filter(x => x !== key) : [...prev, key]);
+  function toggle(
+    key: string,
+    setter: React.Dispatch<React.SetStateAction<string[]>>
+  ) {
+    setter((prev) =>
+      prev.includes(key) ? prev.filter((x) => x !== key) : [...prev, key]
+    );
   }
 
   function apply() {
     const params = new URLSearchParams({ from, to });
-    if (selTypes.length)    params.set("types",    selTypes.join(","));
+    if (selTypes.length) params.set("types", selTypes.join(","));
     if (selStatuses.length) params.set("statuses", selStatuses.join(","));
     router.push(`/dashboard/rezervasyonlar?${params.toString()}`);
     setOpen(false);
-  }
-
-  function clearAll() {
-    setSelTypes([]);
-    setSelStatuses([]);
   }
 
   const totalActive = activeTypes.length + activeStatuses.length;
   const pendingCount = selTypes.length + selStatuses.length;
 
   return (
-    <div ref={panelRef} style={{ position: "relative" }}>
-      {/* Filtrele tetikleyici */}
-      <button
-        type="button"
-        onClick={openPanel}
-        className="flex items-center gap-2 px-4 py-2 text-sm font-medium border border-border rounded-lg bg-card hover:bg-muted/40 transition-colors"
-      >
-        <SlidersHorizontal className="w-4 h-4" />
-        Filtrele
-        {totalActive > 0 && (
-          <span className="px-1.5 py-0.5 rounded-full bg-secondary text-white text-[10px] font-bold">
-            {totalActive}
-          </span>
-        )}
-      </button>
+    <FormSheet
+      open={open}
+      onOpenChange={handleOpenChange}
+      icon={SlidersHorizontal}
+      title="Filtrele"
+      description={pendingCount > 0 ? `${pendingCount} seçili` : undefined}
+      trigger={
+        <button
+          type="button"
+          className="flex items-center gap-2 rounded-lg border border-border bg-card px-4 py-2 text-sm font-medium transition-colors hover:bg-muted/40"
+        >
+          <SlidersHorizontal className="h-4 w-4" />
+          Filtrele
+          {totalActive > 0 && (
+            <span className="rounded-full bg-primary px-1.5 py-0.5 text-[10px] font-bold text-primary-foreground">
+              {totalActive}
+            </span>
+          )}
+        </button>
+      }
+    >
+      <div className="space-y-8">
+        <FormSheetSection>
+          <SectionHeader
+            title="Hizmet Türü"
+            onClear={selTypes.length ? () => setSelTypes([]) : undefined}
+          />
+          <div className="flex flex-col gap-2">
+            {TYPE_OPTIONS.map((opt) => (
+              <OptionRow
+                key={opt.key}
+                label={opt.label}
+                selected={selTypes.includes(opt.key)}
+                onClick={() => toggle(opt.key, setSelTypes)}
+              />
+            ))}
+          </div>
+        </FormSheetSection>
 
-      {/* Panel — Dialog/Sheet kullanmıyoruz, saf CSS dropdown */}
-      {open && (
-        <div
-          style={{
-            position: "fixed",
-            top: 0,
-            right: 0,
-            bottom: 0,
-            width: 380,
-            background: "#fff",
-            boxShadow: "-4px 0 24px rgba(0,0,0,0.12)",
-            zIndex: 9999,
-            display: "flex",
-            flexDirection: "column",
+        <FormSheetSection>
+          <SectionHeader
+            title="Katılım Durumu"
+            onClear={selStatuses.length ? () => setSelStatuses([]) : undefined}
+          />
+          <div className="flex flex-col gap-2">
+            {STATUS_OPTIONS.map((opt) => (
+              <OptionRow
+                key={opt.key}
+                label={opt.label}
+                selected={selStatuses.includes(opt.key)}
+                onClick={() => toggle(opt.key, setSelStatuses)}
+              />
+            ))}
+          </div>
+        </FormSheetSection>
+      </div>
+
+      <FormSheetActions className="gap-3">
+        <Button
+          type="button"
+          variant="outline"
+          className="flex-1"
+          onClick={() => {
+            setSelTypes([]);
+            setSelStatuses([]);
           }}
         >
-          {/* Başlık */}
-          <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "16px 20px", borderBottom: "1px solid #f0f0f0" }}>
-            <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-              <SlidersHorizontal size={16} color="#6b7280" />
-              <span style={{ fontWeight: 600, fontSize: 15 }}>Filtrele</span>
-              {pendingCount > 0 && (
-                <span style={{ background: "#f3f4f6", color: "#374151", fontSize: 11, fontWeight: 600, padding: "2px 8px", borderRadius: 20 }}>
-                  {pendingCount} seçili
-                </span>
-              )}
-            </div>
-            <button
-              type="button"
-              onClick={() => setOpen(false)}
-              style={{ width: 32, height: 32, display: "flex", alignItems: "center", justifyContent: "center", borderRadius: 8, border: "none", background: "transparent", cursor: "pointer", color: "#9ca3af" }}
-            >
-              <X size={16} />
-            </button>
-          </div>
-
-          {/* İçerik */}
-          <div style={{ flex: 1, overflowY: "auto", padding: "24px 20px" }}>
-
-            {/* Hizmet Türü */}
-            <div style={{ marginBottom: 32 }}>
-              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 12 }}>
-                <span style={{ fontSize: 11, fontWeight: 700, color: "#9ca3af", textTransform: "uppercase", letterSpacing: "0.1em" }}>Hizmet Türü</span>
-                {selTypes.length > 0 && (
-                  <button type="button" onClick={() => setSelTypes([])} style={{ fontSize: 12, color: "#9ca3af", background: "none", border: "none", cursor: "pointer" }}>Temizle</button>
-                )}
-              </div>
-              <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
-                {TYPE_OPTIONS.map(opt => {
-                  const sel = selTypes.includes(opt.key);
-                  return (
-                    <button
-                      key={opt.key}
-                      type="button"
-                      onClick={() => toggleType(opt.key)}
-                      style={{
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "space-between",
-                        width: "100%",
-                        padding: "10px 14px",
-                        borderRadius: 10,
-                        border: sel ? "1px solid #1f2937" : "1px solid #e5e7eb",
-                        background: sel ? "#1f2937" : "#fff",
-                        color: sel ? "#fff" : "#374151",
-                        fontSize: 14,
-                        fontWeight: 500,
-                        cursor: "pointer",
-                        textAlign: "left",
-                      }}
-                    >
-                      <span>{opt.label}</span>
-                      {sel && <Check size={15} />}
-                    </button>
-                  );
-                })}
-              </div>
-            </div>
-
-            {/* Katılım Durumu */}
-            <div>
-              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 12 }}>
-                <span style={{ fontSize: 11, fontWeight: 700, color: "#9ca3af", textTransform: "uppercase", letterSpacing: "0.1em" }}>Katılım Durumu</span>
-                {selStatuses.length > 0 && (
-                  <button type="button" onClick={() => setSelStatuses([])} style={{ fontSize: 12, color: "#9ca3af", background: "none", border: "none", cursor: "pointer" }}>Temizle</button>
-                )}
-              </div>
-              <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
-                {STATUS_OPTIONS.map(opt => {
-                  const sel = selStatuses.includes(opt.key);
-                  return (
-                    <button
-                      key={opt.key}
-                      type="button"
-                      onClick={() => toggleStatus(opt.key)}
-                      style={{
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "space-between",
-                        width: "100%",
-                        padding: "10px 14px",
-                        borderRadius: 10,
-                        border: sel ? "1px solid #1f2937" : "1px solid #e5e7eb",
-                        background: sel ? "#1f2937" : "#fff",
-                        color: sel ? "#fff" : "#374151",
-                        fontSize: 14,
-                        fontWeight: 500,
-                        cursor: "pointer",
-                        textAlign: "left",
-                      }}
-                    >
-                      <span>{opt.label}</span>
-                      {sel && <Check size={15} />}
-                    </button>
-                  );
-                })}
-              </div>
-            </div>
-          </div>
-
-          {/* Alt butonlar */}
-          <div style={{ padding: "16px 20px", borderTop: "1px solid #f0f0f0", background: "#fafafa", display: "flex", gap: 12 }}>
-            <button
-              type="button"
-              onClick={clearAll}
-              style={{ flex: 1, padding: "10px 0", borderRadius: 10, border: "1px solid #e5e7eb", background: "#fff", color: "#374151", fontSize: 14, fontWeight: 500, cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", gap: 6 }}
-            >
-              <X size={14} />
-              Temizle
-            </button>
-            <button
-              type="button"
-              onClick={apply}
-              style={{ flex: 2, padding: "10px 0", borderRadius: 10, border: "none", background: "#111827", color: "#fff", fontSize: 14, fontWeight: 600, cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", gap: 6 }}
-            >
-              <Check size={14} />
-              Uygula {pendingCount > 0 ? `(${pendingCount})` : ""}
-            </button>
-          </div>
-        </div>
-      )}
-
-      {/* Overlay — panelin arkası */}
-      {open && (
-        <div
-          onClick={() => setOpen(false)}
-          style={{ position: "fixed", inset: 0, background: "rgba(0,0,0,0.15)", zIndex: 9998 }}
-        />
-      )}
-    </div>
+          <X className="h-3.5 w-3.5" />
+          Temizle
+        </Button>
+        <Button type="button" className="flex-[2]" onClick={apply}>
+          <Check className="h-3.5 w-3.5" />
+          Uygula {pendingCount > 0 ? `(${pendingCount})` : ""}
+        </Button>
+      </FormSheetActions>
+    </FormSheet>
   );
 }

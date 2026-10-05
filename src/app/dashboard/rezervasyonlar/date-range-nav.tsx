@@ -3,6 +3,9 @@
 import { useRef } from "react";
 import { useRouter } from "next/navigation";
 
+import { cn } from "@/lib/utils";
+import { Button } from "@/components/ui/button";
+
 function fmt(d: Date) {
   return d.toISOString().split("T")[0];
 }
@@ -44,11 +47,12 @@ export function DateRangeNav({ from, to }: { from: string; to: string }) {
               key={p.label}
               type="button"
               onClick={() => go(r.from, r.to)}
-              style={active
-                ? { background: "#111827", color: "#fff" }
-                : { background: "#fff", color: "#6b7280", border: "1px solid #e5e7eb" }
-              }
-              className="px-3 py-1 text-xs font-medium rounded-full transition-colors"
+              className={cn(
+                "rounded-full border px-3 py-1 text-xs font-semibold transition-colors",
+                active
+                  ? "border-primary bg-primary text-primary-foreground"
+                  : "border-border bg-card text-muted-foreground hover:border-foreground/25 hover:text-foreground"
+              )}
             >
               {p.label}
             </button>
@@ -65,7 +69,7 @@ export function DateRangeNav({ from, to }: { from: string; to: string }) {
               ref={fromRef}
               type="date"
               defaultValue={from}
-              className="border border-border rounded-lg px-3 py-2 text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-border"
+              className="rounded-lg border border-border bg-card px-3 py-2 text-sm text-foreground focus:ring-2 focus:ring-border focus:outline-none"
             />
           </div>
           <div>
@@ -74,19 +78,15 @@ export function DateRangeNav({ from, to }: { from: string; to: string }) {
               ref={toRef}
               type="date"
               defaultValue={to}
-              className="border border-border rounded-lg px-3 py-2 text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-border"
+              className="rounded-lg border border-border bg-card px-3 py-2 text-sm text-foreground focus:ring-2 focus:ring-border focus:outline-none"
             />
           </div>
         </div>
 
         {/* Göster butonu — kendi satırında, hiçbir flex ile çakışmıyor */}
-        <button
-          type="button"
-          onClick={handleGoster}
-          style={{ display: "inline-block", background: "#111827", color: "#fff", padding: "8px 20px", borderRadius: "8px", fontSize: "14px", fontWeight: 600, cursor: "pointer", border: "none" }}
-        >
+        <Button type="button" onClick={handleGoster} className="px-5">
           Göster
-        </button>
+        </Button>
       </div>
     </div>
   );

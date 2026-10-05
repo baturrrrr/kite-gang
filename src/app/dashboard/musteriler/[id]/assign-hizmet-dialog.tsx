@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useActionState, useEffect, useRef } from "react";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { FormSheet, FormSheetActions } from "@/components/ui/form-sheet";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -130,245 +130,247 @@ export function AssignHizmetDialog({
   };
 
   return (
-    <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger render={<Button size="sm" />}>
-        <Plus className="w-4 h-4 mr-1" /> Hizmet Ekle
-      </DialogTrigger>
-      <DialogContent className="max-w-md max-h-[90vh] overflow-y-auto">
-        <DialogHeader>
-          <DialogTitle>Hizmet Ekle</DialogTitle>
-        </DialogHeader>
+    <FormSheet
+      open={open}
+      onOpenChange={setOpen}
+      icon={Plus}
+      title="Hizmet Ekle"
+      trigger={
+        <Button size="sm">
+          <Plus className="w-4 h-4 mr-1" /> Hizmet Ekle
+        </Button>
+      }
+    >
 
-        {state.error && <p className="text-sm text-destructive bg-destructive/10 px-3 py-2 rounded">{state.error}</p>}
-        {state.fieldErrors && (
-          <p className="text-sm text-destructive">{Object.values(state.fieldErrors).flat()[0]}</p>
-        )}
+      {state.error && <p className="text-sm text-destructive bg-destructive/10 px-3 py-2 rounded">{state.error}</p>}
+      {state.fieldErrors && (
+        <p className="text-sm text-destructive">{Object.values(state.fieldErrors).flat()[0]}</p>
+      )}
 
-        {/* Service picker */}
-        {!selectedSablon ? (
-          <div className="space-y-4">
-            <p className="text-sm text-muted-foreground">Hizmet türü seçin:</p>
-            {(Object.entries(grouped) as [string, Sablon[]][]).map(([cat, items]) =>
-              items.length > 0 ? (
-                <div key={cat}>
-                  <p className="text-xs font-semibold text-muted-foreground/70 uppercase tracking-wide mb-1.5">
-                    {CAT_LABELS[cat]}
-                  </p>
-                  <div className="space-y-1">
-                    {items.map((s) => (
-                      <button
-                        key={s.id}
-                        type="button"
-                        onClick={() => pickSablon(s)}
-                        className="w-full flex justify-between items-center px-3 py-2.5 rounded-lg border border-border hover:border-info/60 hover:bg-info/10 transition-all text-left"
-                      >
-                        <span className="text-sm font-medium text-foreground">{s.name}</span>
-                        {s.fiyatlar[0] && (
-                          <span className="text-sm text-muted-foreground">{s.fiyatlar[0].currency} {s.fiyatlar[0].price.toFixed(2)}</span>
-                        )}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-              ) : null
-            )}
-          </div>
-        ) : (
-          <form action={formAction} className="space-y-4">
-            <input type="hidden" name="studentId" value={studentId} />
-            <input type="hidden" name="sablonId" value={selectedSablon.id} />
-            <input type="hidden" name="category" value={selectedSablon.category} />
-            <input type="hidden" name="title" value={selectedSablon.name} />
-
-            {/* Selected service chip + back */}
-            <div className="flex items-center gap-2">
-              <button
-                type="button"
-                onClick={() => setSelectedSablon(null)}
-                className="text-xs text-info hover:underline"
-              >
-                ← Değiştir
-              </button>
-              <span className="text-sm font-semibold text-foreground bg-muted px-3 py-1 rounded-full">
-                {CAT_LABELS[selectedSablon.category]} — {selectedSablon.name}
-              </span>
-            </div>
-
-            {/* Fiyat satırı seçici — birden fazla zaman birimi/döviz varsa */}
-            {selectedSablon.fiyatlar.length > 1 && (
-              <div className="space-y-1.5">
-                <Label>Fiyat Seçimi</Label>
-                <div className="flex flex-wrap gap-2">
-                  {selectedSablon.fiyatlar.map((f, idx) => (
+      {/* Service picker */}
+      {!selectedSablon ? (
+        <div className="space-y-4">
+          <p className="text-sm text-muted-foreground">Hizmet türü seçin:</p>
+          {(Object.entries(grouped) as [string, Sablon[]][]).map(([cat, items]) =>
+            items.length > 0 ? (
+              <div key={cat}>
+                <p className="text-xs font-semibold text-muted-foreground/70 uppercase tracking-wide mb-1.5">
+                  {CAT_LABELS[cat]}
+                </p>
+                <div className="space-y-1">
+                  {items.map((s) => (
                     <button
-                      key={idx}
+                      key={s.id}
                       type="button"
-                      onClick={() => pickFiyat(idx)}
-                      className={`py-2 px-3 text-sm rounded-md border transition-all ${
-                        activeFiyatIdx === idx
-                          ? "border-info/60 bg-info/10 text-info font-medium"
-                          : "border-border hover:border-border"
-                      }`}
+                      onClick={() => pickSablon(s)}
+                      className="w-full flex justify-between items-center px-3 py-2.5 rounded-lg border border-border hover:border-info/60 hover:bg-info/10 transition-all text-left"
                     >
-                      <div>{ZAMAN_BIRIMLERI[f.zamanBirimi as keyof typeof ZAMAN_BIRIMLERI]}</div>
-                      <div className="text-xs text-muted-foreground">{f.currency} {f.price.toFixed(2)}</div>
+                      <span className="text-sm font-medium text-foreground">{s.name}</span>
+                      {s.fiyatlar[0] && (
+                        <span className="text-sm text-muted-foreground">{s.fiyatlar[0].currency} {s.fiyatlar[0].price.toFixed(2)}</span>
+                      )}
                     </button>
                   ))}
                 </div>
               </div>
-            )}
+            ) : null
+          )}
+        </div>
+      ) : (
+        <form action={formAction} className="space-y-4">
+          <input type="hidden" name="studentId" value={studentId} />
+          <input type="hidden" name="sablonId" value={selectedSablon.id} />
+          <input type="hidden" name="category" value={selectedSablon.category} />
+          <input type="hidden" name="title" value={selectedSablon.name} />
 
-            {/* Adet — sadece Satılabilir Ürün */}
-            {selectedSablon.category === "URUN" && (
-              <div className="space-y-1.5">
-                <Label>Adet</Label>
-                <Input
-                  name="quantity"
-                  type="number"
-                  min="1"
-                  step="1"
-                  value={quantity}
-                  onChange={(e) => handleQuantityChange(e.target.value)}
-                />
-              </div>
-            )}
+          {/* Selected service chip + back */}
+          <div className="flex items-center gap-2">
+            <button
+              type="button"
+              onClick={() => setSelectedSablon(null)}
+              className="text-xs text-info hover:underline"
+            >
+              ← Değiştir
+            </button>
+            <span className="text-sm font-semibold text-foreground bg-muted px-3 py-1 rounded-full">
+              {CAT_LABELS[selectedSablon.category]} — {selectedSablon.name}
+            </span>
+          </div>
 
-            {/* Equipment — only for KIRALAMA */}
-            {selectedSablon.category === "KIRALAMA" && (
-              <div className="space-y-1.5">
-                <Label>Ekipman</Label>
-                <select
-                  name="equipmentId"
-                  className="w-full border rounded-md px-3 py-2 text-sm bg-card"
-                  value={equipmentId}
-                  onChange={(e) => setEquipmentId(e.target.value)}
-                >
-                  <option value="">Belirtilmedi</option>
-                  {equipment.map((e) => (
-                    <option key={e.id} value={e.id}>
-                      {EQUIPMENT_TYPES[e.type as keyof typeof EQUIPMENT_TYPES] ?? e.type} — {e.name}
-                      {e.size ? ` (${e.size})` : ""}
-                    </option>
-                  ))}
-                </select>
-              </div>
-            )}
-
-            {/* Instructor — only for EGITIM */}
-            {selectedSablon.category === "EGITIM" && (
-              <div className="space-y-1.5">
-                <Label>Eğitmen *</Label>
-                <select
-                  name="instructorId"
-                  className="w-full border rounded-md px-3 py-2 text-sm bg-card"
-                  required
-                  value={instructorId}
-                  onChange={handleInstructorChange}
-                >
-                  <option value="">Eğitmen seçin...</option>
-                  {instructors.map((i) => (
-                    <option key={i.id} value={i.id}>
-                      {i.user.name}{i.hourlyRate ? ` — ${i.hourlyRateCurrency} ${i.hourlyRate}/saat` : ""}
-                    </option>
-                  ))}
-                </select>
-              </div>
-            )}
-
-            {/* Date/Time */}
+          {/* Fiyat satırı seçici — birden fazla zaman birimi/döviz varsa */}
+          {selectedSablon.fiyatlar.length > 1 && (
             <div className="space-y-1.5">
-              <Label>Tarih / Saat</Label>
+              <Label>Fiyat Seçimi</Label>
+              <div className="flex flex-wrap gap-2">
+                {selectedSablon.fiyatlar.map((f, idx) => (
+                  <button
+                    key={idx}
+                    type="button"
+                    onClick={() => pickFiyat(idx)}
+                    className={`py-2 px-3 text-sm rounded-md border transition-all ${
+                      activeFiyatIdx === idx
+                        ? "border-info/60 bg-info/10 text-info font-medium"
+                        : "border-border hover:border-border"
+                    }`}
+                  >
+                    <div>{ZAMAN_BIRIMLERI[f.zamanBirimi as keyof typeof ZAMAN_BIRIMLERI]}</div>
+                    <div className="text-xs text-muted-foreground">{f.currency} {f.price.toFixed(2)}</div>
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* Adet — sadece Satılabilir Ürün */}
+          {selectedSablon.category === "URUN" && (
+            <div className="space-y-1.5">
+              <Label>Adet</Label>
               <Input
-                type="datetime-local"
-                name="scheduledAt"
-                value={scheduledAt}
-                onChange={(e) => setScheduledAt(e.target.value)}
+                name="quantity"
+                type="number"
+                min="1"
+                step="1"
+                value={quantity}
+                onChange={(e) => handleQuantityChange(e.target.value)}
               />
             </div>
+          )}
 
-            {/* Price + Currency */}
-            <div className="grid grid-cols-3 gap-3">
-              <div className="col-span-2 space-y-1.5">
-                <Label>Tutar</Label>
-                <Input
-                  name="amount"
-                  type="number"
-                  step="0.01"
-                  min="0"
-                  value={price}
-                  onChange={(e) => setPrice(e.target.value)}
-                />
-              </div>
-              <div className="space-y-1.5">
-                <Label>Para Birimi</Label>
-                <select
-                  name="currency"
-                  className="w-full border rounded-md px-3 py-2 text-sm bg-card"
-                  value={currency}
-                  onChange={(e) => handleCurrencyChange(e.target.value)}
-                >
-                  {CURRENCIES.map((c) => <option key={c} value={c}>{c}</option>)}
-                </select>
-              </div>
-            </div>
-
-            {/* Instructor earning override */}
-            {selectedSablon.category === "EGITIM" && (
-              <div className="space-y-1.5">
-                <Label>Eğitmen Hakediş (Bu Seans)</Label>
-                <Input
-                  name="instructorEarning"
-                  type="number"
-                  step="0.01"
-                  min="0"
-                  value={instructorEarning}
-                  onChange={(e) => setInstructorEarning(e.target.value)}
-                  placeholder="Boş = profil saatlik ücreti"
-                />
-              </div>
-            )}
-
-            {/* Payment method */}
+          {/* Equipment — only for KIRALAMA */}
+          {selectedSablon.category === "KIRALAMA" && (
             <div className="space-y-1.5">
-              <Label>Ödeme Yöntemi</Label>
-              <select name="paymentMethod" className="w-full border rounded-md px-3 py-2 text-sm bg-card">
+              <Label>Ekipman</Label>
+              <select
+                name="equipmentId"
+                className="w-full border rounded-md px-3 py-2 text-sm bg-card"
+                value={equipmentId}
+                onChange={(e) => setEquipmentId(e.target.value)}
+              >
                 <option value="">Belirtilmedi</option>
-                {Object.entries(PAYMENT_METHODS).map(([v, l]) => (
-                  <option key={v} value={v}>{l}</option>
+                {equipment.map((e) => (
+                  <option key={e.id} value={e.id}>
+                    {EQUIPMENT_TYPES[e.type as keyof typeof EQUIPMENT_TYPES] ?? e.type} — {e.name}
+                    {e.size ? ` (${e.size})` : ""}
+                  </option>
                 ))}
               </select>
             </div>
+          )}
 
-            {/* Status */}
+          {/* Instructor — only for EGITIM */}
+          {selectedSablon.category === "EGITIM" && (
             <div className="space-y-1.5">
-              <Label>Durum</Label>
-              <select name="status" className="w-full border rounded-md px-3 py-2 text-sm bg-card">
-                <option value="BEKLIYOR">Bekliyor</option>
-                <option value="DEVAM">Devam Ediyor</option>
-                <option value="TAMAMLANDI">Tamamlandı</option>
+              <Label>Eğitmen *</Label>
+              <select
+                name="instructorId"
+                className="w-full border rounded-md px-3 py-2 text-sm bg-card"
+                required
+                value={instructorId}
+                onChange={handleInstructorChange}
+              >
+                <option value="">Eğitmen seçin...</option>
+                {instructors.map((i) => (
+                  <option key={i.id} value={i.id}>
+                    {i.user.name}{i.hourlyRate ? ` — ${i.hourlyRateCurrency} ${i.hourlyRate}/saat` : ""}
+                  </option>
+                ))}
               </select>
             </div>
+          )}
 
-            {/* Notes */}
-            <div className="space-y-1.5">
-              <Label>Notlar</Label>
-              <textarea
-                name="notes"
-                rows={2}
-                className="w-full border rounded-md px-3 py-2 text-sm resize-none"
-                placeholder="Ek notlar..."
+          {/* Date/Time */}
+          <div className="space-y-1.5">
+            <Label>Tarih / Saat</Label>
+            <Input
+              type="datetime-local"
+              name="scheduledAt"
+              value={scheduledAt}
+              onChange={(e) => setScheduledAt(e.target.value)}
+            />
+          </div>
+
+          {/* Price + Currency */}
+          <div className="grid grid-cols-3 gap-3">
+            <div className="col-span-2 space-y-1.5">
+              <Label>Tutar</Label>
+              <Input
+                name="amount"
+                type="number"
+                step="0.01"
+                min="0"
+                value={price}
+                onChange={(e) => setPrice(e.target.value)}
               />
             </div>
-
-            <div className="flex gap-2 justify-end pt-1">
-              <Button type="button" variant="outline" onClick={() => setOpen(false)}>İptal</Button>
-              <Button type="submit" disabled={isPending}>
-                {isPending ? "Kaydediliyor..." : "Hizmet Ekle"}
-              </Button>
+            <div className="space-y-1.5">
+              <Label>Para Birimi</Label>
+              <select
+                name="currency"
+                className="w-full border rounded-md px-3 py-2 text-sm bg-card"
+                value={currency}
+                onChange={(e) => handleCurrencyChange(e.target.value)}
+              >
+                {CURRENCIES.map((c) => <option key={c} value={c}>{c}</option>)}
+              </select>
             </div>
-          </form>
-        )}
-      </DialogContent>
-    </Dialog>
+          </div>
+
+          {/* Instructor earning override */}
+          {selectedSablon.category === "EGITIM" && (
+            <div className="space-y-1.5">
+              <Label>Eğitmen Hakediş (Bu Seans)</Label>
+              <Input
+                name="instructorEarning"
+                type="number"
+                step="0.01"
+                min="0"
+                value={instructorEarning}
+                onChange={(e) => setInstructorEarning(e.target.value)}
+                placeholder="Boş = profil saatlik ücreti"
+              />
+            </div>
+          )}
+
+          {/* Payment method */}
+          <div className="space-y-1.5">
+            <Label>Ödeme Yöntemi</Label>
+            <select name="paymentMethod" className="w-full border rounded-md px-3 py-2 text-sm bg-card">
+              <option value="">Belirtilmedi</option>
+              {Object.entries(PAYMENT_METHODS).map(([v, l]) => (
+                <option key={v} value={v}>{l}</option>
+              ))}
+            </select>
+          </div>
+
+          {/* Status */}
+          <div className="space-y-1.5">
+            <Label>Durum</Label>
+            <select name="status" className="w-full border rounded-md px-3 py-2 text-sm bg-card">
+              <option value="BEKLIYOR">Bekliyor</option>
+              <option value="DEVAM">Devam Ediyor</option>
+              <option value="TAMAMLANDI">Tamamlandı</option>
+            </select>
+          </div>
+
+          {/* Notes */}
+          <div className="space-y-1.5">
+            <Label>Notlar</Label>
+            <textarea
+              name="notes"
+              rows={2}
+              className="w-full border rounded-md px-3 py-2 text-sm resize-none"
+              placeholder="Ek notlar..."
+            />
+          </div>
+
+          <FormSheetActions>
+            <Button type="button" variant="outline" onClick={() => setOpen(false)}>İptal</Button>
+            <Button type="submit" disabled={isPending}>
+              {isPending ? "Kaydediliyor..." : "Hizmet Ekle"}
+            </Button>
+          </FormSheetActions>
+        </form>
+      )}
+    </FormSheet>
   );
 }

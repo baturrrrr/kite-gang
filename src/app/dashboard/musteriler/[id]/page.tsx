@@ -300,15 +300,15 @@ export default async function MusteriDetailPage({
                       alignItems: "center",
                       gap: 12,
                       padding: "8px 16px",
-                      borderBottom: "1px solid #f3f4f6",
-                      background: "#f9fafb",
+                      borderBottom: "1px solid var(--border)",
+                      background: "var(--muted)",
                     }}
                   >
                     <div />
-                    <span style={{ fontSize: 11, fontWeight: 600, color: "#9ca3af", textTransform: "uppercase", letterSpacing: "0.08em" }}>Hizmet</span>
-                    <span style={{ fontSize: 11, fontWeight: 600, color: "#9ca3af", textTransform: "uppercase", letterSpacing: "0.08em" }}>Kategori</span>
-                    <span style={{ fontSize: 11, fontWeight: 600, color: "#9ca3af", textTransform: "uppercase", letterSpacing: "0.08em" }}>Durum</span>
-                    <span style={{ fontSize: 11, fontWeight: 600, color: "#9ca3af", textTransform: "uppercase", letterSpacing: "0.08em", textAlign: "right" }}>Tutar</span>
+                    <span style={{ fontSize: 11, fontWeight: 600, color: "var(--muted-foreground)", textTransform: "uppercase", letterSpacing: "0.08em" }}>Hizmet</span>
+                    <span style={{ fontSize: 11, fontWeight: 600, color: "var(--muted-foreground)", textTransform: "uppercase", letterSpacing: "0.08em" }}>Kategori</span>
+                    <span style={{ fontSize: 11, fontWeight: 600, color: "var(--muted-foreground)", textTransform: "uppercase", letterSpacing: "0.08em" }}>Durum</span>
+                    <span style={{ fontSize: 11, fontWeight: 600, color: "var(--muted-foreground)", textTransform: "uppercase", letterSpacing: "0.08em", textAlign: "right" }}>Tutar</span>
                   </div>
                   {/* Satırlar */}
                   {student.hizmetler.map((h) => (

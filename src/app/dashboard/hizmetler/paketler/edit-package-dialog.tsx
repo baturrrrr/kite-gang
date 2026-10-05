@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useActionState, useEffect, useRef } from "react";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { FormSheet, FormSheetActions } from "@/components/ui/form-sheet";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -69,67 +69,69 @@ export function EditPackageDialog({
   }, [isPending, state.error, state.fieldErrors]);
 
   return (
-    <Dialog open={open} onOpenChange={setOpen}>
-      {showTrigger && (
-        <DialogTrigger render={<button className="text-muted-foreground/70 hover:text-foreground/85 transition-colors" title="Düzenle" />}>
-          <Pencil className="w-4 h-4" />
-        </DialogTrigger>
-      )}
-      <DialogContent className="max-w-md">
-        <DialogHeader>
-          <DialogTitle>Paketi Düzenle</DialogTitle>
-        </DialogHeader>
-        <form action={formAction} className="space-y-4">
-          {state.error && <p className="text-sm text-destructive">{state.error}</p>}
-          {state.fieldErrors && (
-            <p className="text-sm text-destructive">{Object.values(state.fieldErrors).flat()[0]}</p>
-          )}
+    <FormSheet
+      open={open}
+      onOpenChange={setOpen}
+      icon={Pencil}
+      title="Paketi Düzenle"
+      trigger={
+        showTrigger ? (
+          <button className="text-muted-foreground/70 hover:text-foreground/85 transition-colors" title="Düzenle">
+            <Pencil className="w-4 h-4" />
+          </button>
+        ) : undefined
+      }
+    >
+      <form action={formAction} className="space-y-4">
+        {state.error && <p className="text-sm text-destructive">{state.error}</p>}
+        {state.fieldErrors && (
+          <p className="text-sm text-destructive">{Object.values(state.fieldErrors).flat()[0]}</p>
+        )}
+        <div className="space-y-1.5">
+          <Label htmlFor="name">Paket Adı *</Label>
+          <Input id="name" name="name" required value={name} onChange={(e) => setName(e.target.value)} />
+        </div>
+        <div className="space-y-1.5">
+          <Label>Ders Tipi *</Label>
+          <select name="lessonType" className="w-full border rounded-md px-3 py-2 text-sm" required value={lessonType} onChange={(e) => setLessonType(e.target.value)}>
+            {Object.entries(LESSON_TYPES).map(([v, l]) => (
+              <option key={v} value={v}>{l}</option>
+            ))}
+          </select>
+        </div>
+        <div className="grid grid-cols-2 gap-3">
           <div className="space-y-1.5">
-            <Label htmlFor="name">Paket Adı *</Label>
-            <Input id="name" name="name" required value={name} onChange={(e) => setName(e.target.value)} />
+            <Label htmlFor="totalHours">Toplam Saat *</Label>
+            <Input id="totalHours" name="totalHours" type="number" step="0.5" min="0.5" value={totalHours} onChange={(e) => setTotalHours(e.target.value)} required />
           </div>
           <div className="space-y-1.5">
-            <Label>Ders Tipi *</Label>
-            <select name="lessonType" className="w-full border rounded-md px-3 py-2 text-sm" required value={lessonType} onChange={(e) => setLessonType(e.target.value)}>
-              {Object.entries(LESSON_TYPES).map(([v, l]) => (
-                <option key={v} value={v}>{l}</option>
-              ))}
+            <Label htmlFor="validityDays">Geçerlilik (Gün)</Label>
+            <Input id="validityDays" name="validityDays" type="number" min="1" value={validityDays} onChange={(e) => setValidityDays(e.target.value)} placeholder="365" />
+          </div>
+        </div>
+        <div className="grid grid-cols-2 gap-3">
+          <div className="space-y-1.5">
+            <Label htmlFor="price">Fiyat *</Label>
+            <Input id="price" name="price" type="number" step="0.01" min="0" required value={price} onChange={(e) => setPrice(e.target.value)} />
+          </div>
+          <div className="space-y-1.5">
+            <Label>Para Birimi</Label>
+            <select name="currency" className="w-full border rounded-md px-3 py-2 text-sm" value={currency} onChange={(e) => handleCurrencyChange(e.target.value)}>
+              {CURRENCIES.map((c) => <option key={c} value={c}>{c}</option>)}
             </select>
           </div>
-          <div className="grid grid-cols-2 gap-3">
-            <div className="space-y-1.5">
-              <Label htmlFor="totalHours">Toplam Saat *</Label>
-              <Input id="totalHours" name="totalHours" type="number" step="0.5" min="0.5" value={totalHours} onChange={(e) => setTotalHours(e.target.value)} required />
-            </div>
-            <div className="space-y-1.5">
-              <Label htmlFor="validityDays">Geçerlilik (Gün)</Label>
-              <Input id="validityDays" name="validityDays" type="number" min="1" value={validityDays} onChange={(e) => setValidityDays(e.target.value)} placeholder="365" />
-            </div>
-          </div>
-          <div className="grid grid-cols-2 gap-3">
-            <div className="space-y-1.5">
-              <Label htmlFor="price">Fiyat *</Label>
-              <Input id="price" name="price" type="number" step="0.01" min="0" required value={price} onChange={(e) => setPrice(e.target.value)} />
-            </div>
-            <div className="space-y-1.5">
-              <Label>Para Birimi</Label>
-              <select name="currency" className="w-full border rounded-md px-3 py-2 text-sm" value={currency} onChange={(e) => handleCurrencyChange(e.target.value)}>
-                {CURRENCIES.map((c) => <option key={c} value={c}>{c}</option>)}
-              </select>
-            </div>
-          </div>
-          <div className="space-y-1.5">
-            <Label htmlFor="description">Açıklama</Label>
-            <Input id="description" name="description" value={description} onChange={(e) => setDescription(e.target.value)} placeholder="Kısa açıklama..." />
-          </div>
-          <div className="flex gap-2 justify-end pt-2">
-            <Button type="button" variant="outline" onClick={() => setOpen(false)}>İptal</Button>
-            <Button type="submit" disabled={isPending}>
-              {isPending ? "Kaydediliyor..." : "Kaydet"}
-            </Button>
-          </div>
-        </form>
-      </DialogContent>
-    </Dialog>
+        </div>
+        <div className="space-y-1.5">
+          <Label htmlFor="description">Açıklama</Label>
+          <Input id="description" name="description" value={description} onChange={(e) => setDescription(e.target.value)} placeholder="Kısa açıklama..." />
+        </div>
+        <FormSheetActions>
+          <Button type="button" variant="outline" onClick={() => setOpen(false)}>İptal</Button>
+          <Button type="submit" disabled={isPending}>
+            {isPending ? "Kaydediliyor..." : "Kaydet"}
+          </Button>
+        </FormSheetActions>
+      </form>
+    </FormSheet>
   );
 }

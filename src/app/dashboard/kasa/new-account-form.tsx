@@ -1,11 +1,11 @@
 "use client";
 
 import { useState, useActionState, useEffect, useRef } from "react";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { FormSheet, FormSheetActions } from "@/components/ui/form-sheet";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Plus } from "lucide-react";
+import { Plus, Wallet } from "lucide-react";
 import { createCashAccount } from "@/app/actions/expenses";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
@@ -28,40 +28,42 @@ export function NewAccountForm() {
   }, [isPending, state.error]);
 
   return (
-    <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger render={<Button variant="outline" size="sm" />}>
-        <Plus className="w-4 h-4 mr-1" /> Kasa Ekle
-      </DialogTrigger>
-      <DialogContent className="max-w-sm">
-        <DialogHeader>
-          <DialogTitle>Yeni Kasa/Banka Hesabı</DialogTitle>
-        </DialogHeader>
-        <form action={formAction} className="space-y-4">
-          {state.error && <p className="text-sm text-destructive">{state.error}</p>}
+    <FormSheet
+      open={open}
+      onOpenChange={setOpen}
+      icon={Wallet}
+      title="Yeni Kasa/Banka Hesabı"
+      trigger={
+        <Button variant="outline" size="sm">
+          <Plus className="w-4 h-4 mr-1" /> Kasa Ekle
+        </Button>
+      }
+    >
+      <form action={formAction} className="space-y-4">
+        {state.error && <p className="text-sm text-destructive">{state.error}</p>}
 
-          <div className="space-y-1.5">
-            <Label>Hesap Adı *</Label>
-            <Input name="name" required placeholder="Nakit Kasa" />
-          </div>
-          <div className="space-y-1.5">
-            <Label>Tip</Label>
-            <select name="accountType" className="w-full border rounded-md px-3 py-2 text-sm bg-card">
-              <option value="CASH">Nakit</option>
-              <option value="BANK">Banka</option>
-            </select>
-          </div>
-          <div className="space-y-1.5">
-            <Label>Başlangıç Bakiyesi (₺)</Label>
-            <Input name="initialBalance" type="number" step="0.01" defaultValue="0" />
-          </div>
-          <div className="flex gap-2 justify-end">
-            <Button type="button" variant="outline" onClick={() => setOpen(false)}>İptal</Button>
-            <Button type="submit" disabled={isPending}>
-              {isPending ? "..." : "Oluştur"}
-            </Button>
-          </div>
-        </form>
-      </DialogContent>
-    </Dialog>
+        <div className="space-y-1.5">
+          <Label>Hesap Adı *</Label>
+          <Input name="name" required placeholder="Nakit Kasa" />
+        </div>
+        <div className="space-y-1.5">
+          <Label>Tip</Label>
+          <select name="accountType" className="w-full border rounded-md px-3 py-2 text-sm bg-card">
+            <option value="CASH">Nakit</option>
+            <option value="BANK">Banka</option>
+          </select>
+        </div>
+        <div className="space-y-1.5">
+          <Label>Başlangıç Bakiyesi (₺)</Label>
+          <Input name="initialBalance" type="number" step="0.01" defaultValue="0" />
+        </div>
+        <FormSheetActions>
+          <Button type="button" variant="outline" onClick={() => setOpen(false)}>İptal</Button>
+          <Button type="submit" disabled={isPending}>
+            {isPending ? "..." : "Oluştur"}
+          </Button>
+        </FormSheetActions>
+      </form>
+    </FormSheet>
   );
 }

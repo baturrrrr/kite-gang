@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useActionState, useEffect, useRef, useTransition } from "react";
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Badge } from "@/components/ui/badge";
@@ -153,31 +153,31 @@ export function HizmetDetailDialog({
           alignItems: "center",
           gap: 12,
           padding: "12px 16px",
-          borderBottom: "1px solid #f3f4f6",
+          borderBottom: "1px solid var(--border)",
           cursor: "pointer",
           transition: "background 0.1s",
         }}
         className="hover:bg-muted/40 last:border-0"
       >
         {/* İkon */}
-        <div style={{ width: 32, height: 32, borderRadius: 8, background: "#f3f4f6", display: "flex", alignItems: "center", justifyContent: "center", color: "#6b7280", flexShrink: 0 }}>
+        <div style={{ width: 32, height: 32, borderRadius: 8, background: "var(--muted)", display: "flex", alignItems: "center", justifyContent: "center", color: "var(--muted-foreground)", flexShrink: 0 }}>
           <Icon size={15} />
         </div>
 
         {/* Başlık + tarih */}
         <div style={{ minWidth: 0 }}>
-          <p style={{ fontSize: 14, fontWeight: 500, color: "#111827", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
+          <p style={{ fontSize: 14, fontWeight: 500, color: "var(--foreground)", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
             {hizmet.title}
           </p>
           <div style={{ display: "flex", alignItems: "center", gap: 8, marginTop: 2 }}>
             {hizmet.scheduledAt && (
-              <span style={{ fontSize: 12, color: "#9ca3af", display: "flex", alignItems: "center", gap: 4 }}>
+              <span style={{ fontSize: 12, color: "var(--muted-foreground)", display: "flex", alignItems: "center", gap: 4 }}>
                 <Calendar size={11} />
                 {format(new Date(hizmet.scheduledAt), "d MMM HH:mm", { locale: tr })}
               </span>
             )}
             {hizmet.instructor && (
-              <span style={{ fontSize: 12, color: "#9ca3af", display: "flex", alignItems: "center", gap: 4 }}>
+              <span style={{ fontSize: 12, color: "var(--muted-foreground)", display: "flex", alignItems: "center", gap: 4 }}>
                 <User size={11} />
                 {hizmet.instructor.user.name}
               </span>
@@ -186,7 +186,7 @@ export function HizmetDetailDialog({
         </div>
 
         {/* Kategori */}
-        <span style={{ fontSize: 12, color: "#6b7280", whiteSpace: "nowrap" }}>
+        <span style={{ fontSize: 12, color: "var(--muted-foreground)", whiteSpace: "nowrap" }}>
           {HIZMET_CATEGORIES[hizmet.category as keyof typeof HIZMET_CATEGORIES] ?? hizmet.category}
         </span>
 
@@ -196,27 +196,27 @@ export function HizmetDetailDialog({
         </Badge>
 
         {/* Tutar */}
-        <span style={{ fontSize: 14, fontWeight: 600, color: "#111827", textAlign: "right", whiteSpace: "nowrap" }}>
+        <span style={{ fontSize: 14, fontWeight: 600, color: "var(--foreground)", textAlign: "right", whiteSpace: "nowrap" }}>
           {hizmet.amount > 0 ? formatTRY(hizmet.amount, hizmet.currency, rates) : "—"}
         </span>
       </div>
 
       {/* Detail / Edit Dialog */}
-      <Dialog open={open} onOpenChange={(v) => { setOpen(v); if (!v) setEditMode(false); }}>
-        <DialogContent className="max-w-md max-h-[90vh] overflow-y-auto">
+      <Sheet open={open} onOpenChange={(v) => { setOpen(v); if (!v) setEditMode(false); }}>
+        <SheetContent side="right" className="w-full gap-0 overflow-y-auto sm:max-w-lg">
           {!editMode ? (
             /* ── DETAIL VIEW ──────────────────────────────────── */
             <>
-              <DialogHeader>
-                <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: 12 }}>
+              <SheetHeader className="sticky top-0 z-10 shrink-0 border-b bg-popover">
+                <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: 12, paddingRight: 34 }}>
                   <div style={{ flex: 1 }}>
                     <div style={{ display: "flex", alignItems: "center", gap: 8, flexWrap: "wrap" }}>
-                      <DialogTitle style={{ fontSize: 16 }}>{hizmet.title}</DialogTitle>
+                      <SheetTitle style={{ fontSize: 16 }}>{hizmet.title}</SheetTitle>
                       <Badge variant="outline" className={`text-xs ${STATUS_STYLE[hizmet.status] ?? ""}`}>
                         {STATUS_LABEL[hizmet.status] ?? hizmet.status}
                       </Badge>
                     </div>
-                    <p style={{ fontSize: 12, color: "#9ca3af", marginTop: 2 }}>
+                    <p style={{ fontSize: 12, color: "var(--muted-foreground)", marginTop: 2 }}>
                       {HIZMET_CATEGORIES[hizmet.category as keyof typeof HIZMET_CATEGORIES] ?? hizmet.category}
                     </p>
                   </div>
@@ -229,11 +229,11 @@ export function HizmetDetailDialog({
                         alignItems: "center",
                         gap: 6,
                         fontSize: 13,
-                        color: "#374151",
-                        border: "1px solid #e5e7eb",
+                        color: "var(--foreground)",
+                        border: "1px solid var(--border)",
                         borderRadius: 8,
                         padding: "6px 12px",
-                        background: "#fff",
+                        background: "var(--card)",
                         cursor: "pointer",
                         flexShrink: 0,
                       }}
@@ -243,19 +243,20 @@ export function HizmetDetailDialog({
                     </button>
                   )}
                 </div>
-              </DialogHeader>
+              </SheetHeader>
+              <div className="px-4 py-4">
 
               <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
                 {/* Tutar kutusu */}
-                <div style={{ background: "#f9fafb", border: "1px solid #f0f0f0", borderRadius: 12, padding: 16 }}>
-                  <p style={{ fontSize: 11, color: "#9ca3af", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 4 }}>
+                <div style={{ background: "var(--muted)", border: "1px solid var(--border)", borderRadius: 12, padding: 16 }}>
+                  <p style={{ fontSize: 11, color: "var(--muted-foreground)", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 4 }}>
                     Müşteriye Yansıtılan
                   </p>
-                  <p style={{ fontSize: 24, fontWeight: 700, color: "#111827" }}>
+                  <p style={{ fontSize: 24, fontWeight: 700, color: "var(--foreground)" }}>
                     {formatTRY(hizmet.amount, hizmet.currency, rates)}
                   </p>
                   {hizmet.paymentMethod && (
-                    <p style={{ fontSize: 12, color: "#9ca3af", marginTop: 4 }}>
+                    <p style={{ fontSize: 12, color: "var(--muted-foreground)", marginTop: 4 }}>
                       {PAYMENT_METHODS[hizmet.paymentMethod as keyof typeof PAYMENT_METHODS] ?? hizmet.paymentMethod}
                     </p>
                   )}
@@ -264,26 +265,26 @@ export function HizmetDetailDialog({
                 {/* Tarih / Personel */}
                 <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
                   {hizmet.scheduledAt && (
-                    <div style={{ display: "flex", alignItems: "center", gap: 10, fontSize: 14, color: "#4b5563" }}>
-                      <Calendar size={15} color="#9ca3af" />
+                    <div style={{ display: "flex", alignItems: "center", gap: 10, fontSize: 14, color: "var(--foreground)" }}>
+                      <Calendar size={15} color="var(--muted-foreground)" />
                       {format(new Date(hizmet.scheduledAt), "d MMMM yyyy, EEEE · HH:mm", { locale: tr })}
                     </div>
                   )}
                   {hizmet.instructor && (
-                    <div style={{ display: "flex", alignItems: "center", gap: 10, fontSize: 14, color: "#4b5563" }}>
-                      <User size={15} color="#9ca3af" />
+                    <div style={{ display: "flex", alignItems: "center", gap: 10, fontSize: 14, color: "var(--foreground)" }}>
+                      <User size={15} color="var(--muted-foreground)" />
                       {hizmet.instructor.user.name}
                     </div>
                   )}
                   {(hizmet.checkedInAt || hizmet.checkedOutAt) && (
                     <div style={{ display: "flex", gap: 16, fontSize: 12 }}>
                       {hizmet.checkedInAt && (
-                        <span style={{ color: "#2563eb", display: "flex", alignItems: "center", gap: 4 }}>
+                        <span style={{ color: "var(--info)", display: "flex", alignItems: "center", gap: 4 }}>
                           <Clock size={13} /> Giriş: {format(new Date(hizmet.checkedInAt), "HH:mm")}
                         </span>
                       )}
                       {hizmet.checkedOutAt && (
-                        <span style={{ color: "#16a34a", display: "flex", alignItems: "center", gap: 4 }}>
+                        <span style={{ color: "var(--success)", display: "flex", alignItems: "center", gap: 4 }}>
                           <Check size={13} /> Çıkış: {format(new Date(hizmet.checkedOutAt), "HH:mm")}
                         </span>
                       )}
@@ -292,22 +293,22 @@ export function HizmetDetailDialog({
                 </div>
 
                 {hizmet.notes && (
-                  <div style={{ background: "#f9fafb", borderRadius: 10, padding: "10px 14px", fontSize: 13, color: "#6b7280", fontStyle: "italic" }}>
+                  <div style={{ background: "var(--muted)", borderRadius: 10, padding: "10px 14px", fontSize: 13, color: "var(--muted-foreground)", fontStyle: "italic" }}>
                     "{hizmet.notes}"
                   </div>
                 )}
 
                 {/* Personel hakedişi */}
                 {hizmet.instructorEarning != null && hizmet.instructorEarning > 0 && (
-                  <div style={{ border: "1px solid #f0f0f0", borderRadius: 10, padding: "12px 16px" }}>
-                    <p style={{ fontSize: 11, color: "#9ca3af", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 8 }}>
+                  <div style={{ border: "1px solid var(--border)", borderRadius: 10, padding: "12px 16px" }}>
+                    <p style={{ fontSize: 11, color: "var(--muted-foreground)", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 8 }}>
                       Personel Hakedişi
                     </p>
                     <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-                      <span style={{ fontSize: 14, color: "#6b7280" }}>
+                      <span style={{ fontSize: 14, color: "var(--muted-foreground)" }}>
                         {hizmet.instructor?.user.name ?? "Personel"}
                       </span>
-                      <span style={{ fontSize: 14, fontWeight: 600, color: "#111827" }}>
+                      <span style={{ fontSize: 14, fontWeight: 600, color: "var(--foreground)" }}>
                         {formatTRY(hizmet.instructorEarning, hizmet.currency, rates)}
                       </span>
                     </div>
@@ -316,7 +317,7 @@ export function HizmetDetailDialog({
 
                 {/* Aksiyon butonları */}
                 {hizmet.status !== "IPTAL" && hizmet.status !== "TAMAMLANDI" && (
-                  <div style={{ borderTop: "1px solid #f0f0f0", paddingTop: 16, display: "flex", gap: 8 }}>
+                  <div style={{ borderTop: "1px solid var(--border)", paddingTop: 16, display: "flex", gap: 8 }}>
                     {nextLabel && (
                       <button
                         type="button"
@@ -324,7 +325,7 @@ export function HizmetDetailDialog({
                         disabled={advancing}
                         style={{
                           flex: 2, padding: "10px 0", borderRadius: 10, border: "none",
-                          background: advancing ? "#9ca3af" : "#111827", color: "#fff",
+                          background: advancing ? "var(--muted)" : "var(--primary)", color: "var(--primary-foreground)",
                           fontSize: 14, fontWeight: 600, cursor: advancing ? "not-allowed" : "pointer",
                           display: "flex", alignItems: "center", justifyContent: "center", gap: 6,
                         }}
@@ -339,7 +340,7 @@ export function HizmetDetailDialog({
                         onClick={() => setConfirmCancel(true)}
                         style={{
                           flex: 1, padding: "10px 0", borderRadius: 10,
-                          border: "1px solid #fca5a5", background: "#fff", color: "#ef4444",
+                          border: "1px solid var(--destructive)", background: "var(--card)", color: "var(--destructive)",
                           fontSize: 14, fontWeight: 500, cursor: "pointer",
                           display: "flex", alignItems: "center", justifyContent: "center", gap: 6,
                         }}
@@ -354,7 +355,7 @@ export function HizmetDetailDialog({
                           disabled={cancelling}
                           style={{
                             flex: 1, padding: "10px 0", borderRadius: 10, border: "none",
-                            background: "#ef4444", color: "#fff", fontSize: 13, fontWeight: 600, cursor: "pointer",
+                            background: "var(--destructive)", color: "var(--primary-foreground)", fontSize: 13, fontWeight: 600, cursor: "pointer",
                           }}
                         >
                           {cancelling ? "..." : "Onayla"}
@@ -364,7 +365,7 @@ export function HizmetDetailDialog({
                           onClick={() => setConfirmCancel(false)}
                           style={{
                             flex: 1, padding: "10px 0", borderRadius: 10,
-                            border: "1px solid #e5e7eb", background: "#fff", color: "#6b7280",
+                            border: "1px solid var(--border)", background: "var(--card)", color: "var(--muted-foreground)",
                             fontSize: 13, fontWeight: 500, cursor: "pointer",
                           }}
                         >
@@ -375,33 +376,35 @@ export function HizmetDetailDialog({
                   </div>
                 )}
               </div>
+              </div>
             </>
           ) : (
             /* ── EDIT FORM ────────────────────────────────────── */
             <>
-              <DialogHeader>
-                <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+              <SheetHeader className="sticky top-0 z-10 shrink-0 border-b bg-popover">
+                <div style={{ display: "flex", alignItems: "center", gap: 8, paddingRight: 34 }}>
                   <button
                     type="button"
                     onClick={() => setEditMode(false)}
-                    style={{ fontSize: 12, color: "#9ca3af", cursor: "pointer", background: "none", border: "none" }}
+                    style={{ fontSize: 12, color: "var(--muted-foreground)", cursor: "pointer", background: "none", border: "none" }}
                   >
                     ← Geri
                   </button>
-                  <DialogTitle style={{ fontSize: 16 }}>Hizmeti Düzenle</DialogTitle>
+                  <SheetTitle style={{ fontSize: 16 }}>Hizmeti Düzenle</SheetTitle>
                 </div>
-              </DialogHeader>
+              </SheetHeader>
+              <div className="px-4 py-4">
 
               <form action={formAction} style={{ display: "flex", flexDirection: "column", gap: 16 }}>
                 {state.error && (
-                  <p style={{ fontSize: 13, color: "#ef4444", background: "#fef2f2", padding: "10px 14px", borderRadius: 8 }}>
+                  <p style={{ fontSize: 13, color: "var(--destructive)", background: "color-mix(in srgb, var(--destructive) 12%, transparent)", padding: "10px 14px", borderRadius: 8 }}>
                     {state.error}
                   </p>
                 )}
 
                 {/* MÜŞTERİYE YANSITILAN */}
-                <div style={{ border: "1px solid #e5e7eb", borderRadius: 12, padding: 16, display: "flex", flexDirection: "column", gap: 12 }}>
-                  <p style={{ fontSize: 11, color: "#9ca3af", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.08em" }}>
+                <div style={{ border: "1px solid var(--border)", borderRadius: 12, padding: 16, display: "flex", flexDirection: "column", gap: 12 }}>
+                  <p style={{ fontSize: 11, color: "var(--muted-foreground)", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.08em" }}>
                     Müşteriye Yansıtılan
                   </p>
                   <div className="space-y-1.5">
@@ -446,11 +449,11 @@ export function HizmetDetailDialog({
                   </div>
 
                   {/* Toplam (otomatik hesaplı) */}
-                  <div style={{ background: "#f9fafb", borderRadius: 8, padding: "10px 14px", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-                    <span style={{ fontSize: 12, color: "#9ca3af" }}>
+                  <div style={{ background: "var(--muted)", borderRadius: 8, padding: "10px 14px", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                    <span style={{ fontSize: 12, color: "var(--muted-foreground)" }}>
                       {h > 0 ? `${h} saat × ${parseFloat(custHourly) || 0} =` : "Toplam Tutar"}
                     </span>
-                    <span style={{ fontSize: 16, fontWeight: 700, color: "#111827" }}>
+                    <span style={{ fontSize: 16, fontWeight: 700, color: "var(--foreground)" }}>
                       {parseFloat(custTotal) > 0 ? `${parseFloat(custTotal).toLocaleString("tr-TR")} ${hizmet.currency}` : "—"}
                     </span>
                   </div>
@@ -461,8 +464,8 @@ export function HizmetDetailDialog({
                 </div>
 
                 {/* PERSONEL HAKEDİŞİ */}
-                <div style={{ border: "1px solid #e5e7eb", borderRadius: 12, padding: 16, display: "flex", flexDirection: "column", gap: 12 }}>
-                  <p style={{ fontSize: 11, color: "#9ca3af", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.08em" }}>
+                <div style={{ border: "1px solid var(--border)", borderRadius: 12, padding: 16, display: "flex", flexDirection: "column", gap: 12 }}>
+                  <p style={{ fontSize: 11, color: "var(--muted-foreground)", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.08em" }}>
                     Personel Hakedişi
                   </p>
                   <div className="space-y-1.5">
@@ -489,11 +492,11 @@ export function HizmetDetailDialog({
 
                   {/* Toplam hakediş (otomatik) */}
                   {instrHourly !== "" && (
-                    <div style={{ background: "#f9fafb", borderRadius: 8, padding: "10px 14px", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-                      <span style={{ fontSize: 12, color: "#9ca3af" }}>
+                    <div style={{ background: "var(--muted)", borderRadius: 8, padding: "10px 14px", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                      <span style={{ fontSize: 12, color: "var(--muted-foreground)" }}>
                         {h > 0 ? `${h} saat × ${parseFloat(instrHourly) || 0} =` : "Toplam Hakediş"}
                       </span>
-                      <span style={{ fontSize: 16, fontWeight: 700, color: "#111827" }}>
+                      <span style={{ fontSize: 16, fontWeight: 700, color: "var(--foreground)" }}>
                         {parseFloat(instrTotal) > 0 ? `${parseFloat(instrTotal).toLocaleString("tr-TR")} ${hizmet.currency}` : "—"}
                       </span>
                     </div>
@@ -551,7 +554,7 @@ export function HizmetDetailDialog({
                   <button
                     type="button"
                     onClick={() => setEditMode(false)}
-                    style={{ padding: "10px 20px", borderRadius: 10, border: "1px solid #e5e7eb", background: "#fff", color: "#374151", fontSize: 14, fontWeight: 500, cursor: "pointer" }}
+                    style={{ padding: "10px 20px", borderRadius: 10, border: "1px solid var(--border)", background: "var(--card)", color: "var(--foreground)", fontSize: 14, fontWeight: 500, cursor: "pointer" }}
                   >
                     Vazgeç
                   </button>
@@ -560,7 +563,7 @@ export function HizmetDetailDialog({
                     disabled={isPending}
                     style={{
                       padding: "10px 24px", borderRadius: 10, border: "none",
-                      background: isPending ? "#9ca3af" : "#111827", color: "#fff",
+                      background: isPending ? "var(--muted)" : "var(--primary)", color: "var(--primary-foreground)",
                       fontSize: 14, fontWeight: 600, cursor: isPending ? "not-allowed" : "pointer",
                     }}
                   >
@@ -568,10 +571,11 @@ export function HizmetDetailDialog({
                   </button>
                 </div>
               </form>
+              </div>
             </>
           )}
-        </DialogContent>
-      </Dialog>
+        </SheetContent>
+      </Sheet>
     </>
   );
 }

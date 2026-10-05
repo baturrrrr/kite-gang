@@ -173,6 +173,23 @@
   background: rgb(0 0 0 / 0.6) !important;
 }
 
+[data-slot="sheet-content"] {
+  box-shadow: -24px 0 48px -12px rgb(0 0 0 / 0.6) !important;
+  border-color: var(--border) !important;
+}
+
+/* Yerel <select>'ler tarayıcı varsayılanıyla beyaz kalıyordu; koyu temaya bağlandı.
+   Açılır listenin kendisini yalnızca option renkleri etkiler. */
+select {
+  background-color: var(--card);
+  color: var(--foreground);
+  border-color: var(--border);
+}
+select option {
+  background-color: var(--card);
+  color: var(--foreground);
+}
+
 [data-slot="button"] {
   transition: transform 0.12s ease, background-color 0.15s ease, opacity 0.15s ease;
 }

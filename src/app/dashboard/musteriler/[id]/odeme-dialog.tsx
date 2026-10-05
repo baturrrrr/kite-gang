@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useActionState, useEffect, useRef } from "react";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { FormSheet, FormSheetActions } from "@/components/ui/form-sheet";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -74,89 +74,91 @@ export function OdemeDialog({
   }, [isPending, state.error, state.fieldErrors]);
 
   return (
-    <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger render={<Button variant="outline" size="sm" />}>
-        <CreditCard className="w-4 h-4 mr-1" /> Ödeme Al
-      </DialogTrigger>
-      <DialogContent className="max-w-sm">
-        <DialogHeader>
-          <DialogTitle>Müşteri Ödemesi</DialogTitle>
-        </DialogHeader>
-        <form action={formAction} className="space-y-4">
-          <input type="hidden" name="studentId" value={studentId} />
-          <input type="hidden" name="hizmetId" value={hizmetId} />
+    <FormSheet
+      open={open}
+      onOpenChange={setOpen}
+      icon={CreditCard}
+      title="Müşteri Ödemesi"
+      trigger={
+        <Button variant="outline" size="sm">
+          <CreditCard className="w-4 h-4 mr-1" /> Ödeme Al
+        </Button>
+      }
+    >
+    <form action={formAction} className="space-y-4">
+        <input type="hidden" name="studentId" value={studentId} />
+        <input type="hidden" name="hizmetId" value={hizmetId} />
 
-          {state.fieldErrors && (
-            <p className="text-sm text-destructive">{Object.values(state.fieldErrors).flat()[0]}</p>
-          )}
+        {state.fieldErrors && (
+          <p className="text-sm text-destructive">{Object.values(state.fieldErrors).flat()[0]}</p>
+        )}
 
-          {hizmetler.length > 0 && (
-            <div className="space-y-1.5">
-              <Label>Hangi Ders / Hizmet İçin</Label>
-              <select
-                className="w-full border rounded-md px-3 py-2 text-sm bg-card"
-                value={hizmetId}
-                onChange={(e) => handleHizmetChange(e.target.value)}
-              >
-                <option value="">Genel / belirtilmeden</option>
-                {hizmetler.map((h) => (
-                  <option key={h.id} value={h.id}>
-                    {h.title} — {formatMoney(h.amount, h.currency)}
-                    {h.instructorName ? ` (${h.instructorName})` : ""}
-                  </option>
-                ))}
-              </select>
-            </div>
-          )}
-
-          <div className="grid grid-cols-3 gap-3">
-            <div className="col-span-2 space-y-1.5">
-              <Label>Tutar *</Label>
-              <Input name="amount" type="number" step="0.01" min="0.01" required placeholder="0.00" value={amount} onChange={(e) => setAmount(e.target.value)} />
-            </div>
-            <div className="space-y-1.5">
-              <Label>Para Birimi</Label>
-              <select name="currency" className="w-full border rounded-md px-3 py-2 text-sm bg-card" value={currency} onChange={(e) => handleCurrencyChange(e.target.value)}>
-                {CURRENCIES.map((c) => <option key={c} value={c}>{c}</option>)}
-              </select>
-            </div>
-          </div>
-
+        {hizmetler.length > 0 && (
           <div className="space-y-1.5">
-            <Label>Ödeme Yöntemi *</Label>
-            <select name="method" className="w-full border rounded-md px-3 py-2 text-sm bg-card" required>
-              {Object.entries(PAYMENT_METHODS).map(([v, l]) => (
-                <option key={v} value={v}>{l}</option>
+            <Label>Hangi Ders / Hizmet İçin</Label>
+            <select
+              className="w-full border rounded-md px-3 py-2 text-sm bg-card"
+              value={hizmetId}
+              onChange={(e) => handleHizmetChange(e.target.value)}
+            >
+              <option value="">Genel / belirtilmeden</option>
+              {hizmetler.map((h) => (
+                <option key={h.id} value={h.id}>
+                  {h.title} — {formatMoney(h.amount, h.currency)}
+                  {h.instructorName ? ` (${h.instructorName})` : ""}
+                </option>
               ))}
             </select>
           </div>
+        )}
 
-          {cashAccounts.length > 0 && (
-            <div className="space-y-1.5">
-              <Label>Kasa Hesabı *</Label>
-              <select name="cashAccountId" className="w-full border rounded-md px-3 py-2 text-sm bg-card" required>
-                {cashAccounts.map((acc) => (
-                  <option key={acc.id} value={acc.id}>
-                    {acc.name} ({acc.currency})
-                  </option>
-                ))}
-              </select>
-            </div>
-          )}
-
+        <div className="grid grid-cols-3 gap-3">
+          <div className="col-span-2 space-y-1.5">
+            <Label>Tutar *</Label>
+            <Input name="amount" type="number" step="0.01" min="0.01" required placeholder="0.00" value={amount} onChange={(e) => setAmount(e.target.value)} />
+          </div>
           <div className="space-y-1.5">
-            <Label>Açıklama</Label>
-            <Input name="description" placeholder="Hangi hizmet için..." />
+            <Label>Para Birimi</Label>
+            <select name="currency" className="w-full border rounded-md px-3 py-2 text-sm bg-card" value={currency} onChange={(e) => handleCurrencyChange(e.target.value)}>
+              {CURRENCIES.map((c) => <option key={c} value={c}>{c}</option>)}
+            </select>
           </div>
+        </div>
 
-          <div className="flex gap-2 justify-end">
-            <Button type="button" variant="outline" onClick={() => setOpen(false)}>İptal</Button>
-            <Button type="submit" disabled={isPending}>
-              {isPending ? "Kaydediliyor..." : "Ödeme Kaydet"}
-            </Button>
+        <div className="space-y-1.5">
+          <Label>Ödeme Yöntemi *</Label>
+          <select name="method" className="w-full border rounded-md px-3 py-2 text-sm bg-card" required>
+            {Object.entries(PAYMENT_METHODS).map(([v, l]) => (
+              <option key={v} value={v}>{l}</option>
+            ))}
+          </select>
+        </div>
+
+        {cashAccounts.length > 0 && (
+          <div className="space-y-1.5">
+            <Label>Kasa Hesabı *</Label>
+            <select name="cashAccountId" className="w-full border rounded-md px-3 py-2 text-sm bg-card" required>
+              {cashAccounts.map((acc) => (
+                <option key={acc.id} value={acc.id}>
+                  {acc.name} ({acc.currency})
+                </option>
+              ))}
+            </select>
           </div>
-        </form>
-      </DialogContent>
-    </Dialog>
+        )}
+
+        <div className="space-y-1.5">
+          <Label>Açıklama</Label>
+          <Input name="description" placeholder="Hangi hizmet için..." />
+        </div>
+
+      <FormSheetActions>
+        <Button type="button" variant="outline" onClick={() => setOpen(false)}>İptal</Button>
+        <Button type="submit" disabled={isPending}>
+          {isPending ? "Kaydediliyor..." : "Ödeme Kaydet"}
+        </Button>
+      </FormSheetActions>
+    </form>
+    </FormSheet>
   );
 }

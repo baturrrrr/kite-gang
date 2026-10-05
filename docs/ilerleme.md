@@ -1,6 +1,6 @@
 # Kite Gang Corner — ilerleme notu
 
-Son güncelleme: 15 Eylül 2026. Bir sonraki oturum buradan devam eder.
+Son güncelleme: 17 Eylül 2026. Bir sonraki oturum buradan devam eder.
 
 ## Ürün kararları
 
@@ -35,6 +35,36 @@ Hiçbir şey `main`'e birleştirilmedi ve GitHub'a gönderilmedi.
 - Para formatı `src/lib/currency.ts`: `formatTL` (₺842.454,00 · −₺3.000,00), `formatCurrency` (€15.000,00).
 - Türkçe büyük harf tuzağı: İngilizce kelimeler ve marka adı `lang="en"`, yabancı müşteri adları `normal-case`.
 
+## Açılır pencere tasarımı (17 Eylül)
+
+Tüm açılır pencereler tek dile getirildi. Kural: **form/detay = sağdan panel, kısa onay = ortada kutu.**
+
+- Ortak bileşen `src/components/ui/form-sheet.tsx`: `FormSheet` (sağdan, tam boy, sabit başlık + ikon),
+  `FormSheetSection` (bölüm başlığı), `FormSheetActions` (alta yapışan aksiyon satırı).
+  Yeni bir form penceresi eklenirken doğrudan `Dialog`/`Sheet` kurulmaz, bu bileşen kullanılır.
+- Panele taşınanlar (15): yeni/düzenle hizmet, yeni/düzenle paket, yeni/düzenle ekipman, kasa hesabı,
+  gelir, gider, müşteri ödemesi, paket ödemesi, eğitmen ders ekle, hizmet ata, hizmet detay/düzenle,
+  rezervasyon filtresi; müşteri ve rezervasyon panelleri de aynı bileşene geçirildi.
+- Ortada kalanlar (kısa onaylar): check-in, check-out, gelmedi, ekipman silme.
+  `DialogHeader` panellerle aynı başlık çizgisini kullanıyor.
+
+Koyu temada kalan açık tema artıkları temizlendi:
+
+- `date-range-nav.tsx` hızlı tarih rozetleri ve "Göster" butonu beyazdı → tema renkleri.
+- `reservation-filters.tsx` elle yazılmış beyaz yan panel → `FormSheet` ile yeniden yazıldı.
+- `hizmet-detail-dialog.tsx` (38 yer) ve `musteriler/[id]/page.tsx` (6 yer) sabit hex renkleri
+  `var(--foreground)` / `var(--muted-foreground)` / `var(--border)` gibi değişkenlere bağlandı.
+- `globals.css`: yerel `<select>` ve `option` öğeleri tarayıcı varsayılanıyla beyaz kalıyordu,
+  koyu temaya bağlandı (60 kadar select tek seferde düzeldi). Panele gölge eklendi.
+
+## İki sekme / iki rol notu
+
+Oturum tek `session` çerezinde ve `path: "/"` ile tutuluyor; çerez sekmeye değil tarayıcıya ait.
+İkinci sekmede başka rolle giriş yapılınca ilk sekmenin çerezi eziliyor, eski menüdeki linkler
+`requireAdmin` / `performansim` kontrollerine takılıp sessizce `/dashboard`'a düşüyor —
+"dashboard'dan çıkamıyorum" belirtisi bu. Kod hatası değil; test ederken ikinci rol için gizli
+pencere kullanılmalı. İstenirse `requireAdmin` düz yönlendirme yerine "yetkiniz yok" mesajı gösterebilir.
+
 ## Test durumu (15 Eylül)
 
 - 33 test geçiyor, TypeScript temiz.
@@ -58,7 +88,7 @@ Kullanıcı müşteri/eğitmen verilerinin gerçek kişiler olmadığını söyl
 1. Deneme verisi kararı (yukarıda).
 2. **Müşteri portalı** (ödemesiz) — sıradaki büyük iş.
 3. Önceden var olan lint hataları: ödeme/paket satış diyaloglarında effect içinde setState, `rezervasyonlar/page.tsx` tırnak işaretleri, kullanılmayan importlar.
-4. Diyalog ve form içlerinin yeni tasarıma göre elden geçirilmesi.
+4. ~~Diyalog ve form içlerinin yeni tasarıma göre elden geçirilmesi.~~ (17 Eylül'de yapıldı, yukarı bak.)
 5. Dalların `main`'e birleştirilmesi (kullanıcı onayıyla).
 6. Bilinen sınır: farklı para birimindeki ödemeler borç hesabında güncel kurla çevriliyor (ödeme anındaki kur saklanmıyor); süresi dolmuş paketler hâlâ kullanılabiliyor (iş kuralı kararı bekliyor).
 
